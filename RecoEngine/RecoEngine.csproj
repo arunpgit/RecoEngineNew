@@ -1,0 +1,485 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{FDFB24C8-331E-45CC-AD42-0D2078E1A8B9}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>RecoEngine</RootNamespace>
+    <AssemblyName>RecoEngine</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <TargetFrameworkProfile>
+    </TargetFrameworkProfile>
+    <FileAlignment>512</FileAlignment>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <PublishUrl>D:\Users\arun.p.ETGGS\Desktop\New folder\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <ApplicationRevision>2</ApplicationRevision>
+    <ApplicationVersion>1.0.0.2</ApplicationVersion>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <PublishWizardCompleted>true</PublishWizardCompleted>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
+    <PlatformTarget>x86</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject>RecoEngine.Program</StartupObject>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ManifestCertificateThumbprint>772125A4C546563EB0CB27C5D098B8B16D6F25C5</ManifestCertificateThumbprint>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ManifestKeyFile>RecoEngine_TemporaryKey.pfx</ManifestKeyFile>
+  </PropertyGroup>
+  <PropertyGroup>
+    <GenerateManifests>true</GenerateManifests>
+  </PropertyGroup>
+  <PropertyGroup>
+    <SignManifests>false</SignManifests>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.Composition" />
+    <Reference Include="System.configuration" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data.Entity" />
+    <Reference Include="System.Data.OracleClient" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Windows.Forms.DataVisualization" />
+    <Reference Include="System.Windows.Presentation" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+    <Reference Include="Telerik.WinControls, Version=2012.2.608.40, Culture=neutral, PublicKeyToken=5bb2a467cbec794e" />
+    <Reference Include="Telerik.WinControls.ChartView, Version=2012.2.608.40, Culture=neutral, PublicKeyToken=5bb2a467cbec794e" />
+    <Reference Include="Telerik.WinControls.GridView, Version=2012.2.608.40, Culture=neutral, PublicKeyToken=5bb2a467cbec794e" />
+    <Reference Include="Telerik.WinControls.RadDock, Version=2012.2.608.40, Culture=neutral, PublicKeyToken=5bb2a467cbec794e" />
+    <Reference Include="Telerik.WinControls.RichTextBox, Version=2012.2.608.40, Culture=neutral, PublicKeyToken=5bb2a467cbec794e" />
+    <Reference Include="Telerik.WinControls.Themes.Office2010Black, Version=2012.2.608.40, Culture=neutral, PublicKeyToken=5bb2a467cbec794e" />
+    <Reference Include="Telerik.WinControls.Themes.Office2010Blue, Version=2012.2.608.40, Culture=neutral, PublicKeyToken=5bb2a467cbec794e" />
+    <Reference Include="Telerik.WinControls.UI, Version=2012.2.608.40, Culture=neutral, PublicKeyToken=5bb2a467cbec794e, processorArchitecture=MSIL" />
+    <Reference Include="TelerikCommon, Version=2012.2.608.40, Culture=neutral, PublicKeyToken=5bb2a467cbec794e" />
+    <Reference Include="WindowsBase" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="AlertForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AlertForm.designer.cs">
+      <DependentUpon>AlertForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="CntrlchkDropDown.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="cntrlDataConenction.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="cntrlDataConenction.Designer.cs">
+      <DependentUpon>cntrlDataConenction.cs</DependentUpon>
+    </Compile>
+    <Compile Include="CntrlDatafields.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="CntrlDatafields.Designer.cs">
+      <DependentUpon>CntrlDatafields.cs</DependentUpon>
+    </Compile>
+    <Compile Include="CntrlDataSource.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="CntrlDataSource.designer.cs">
+      <DependentUpon>CntrlDataSource.cs</DependentUpon>
+    </Compile>
+    <Compile Include="CntrlExport.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="CntrlExport.designer.cs">
+      <DependentUpon>CntrlExport.cs</DependentUpon>
+    </Compile>
+    <Compile Include="CntrlOfferLibrary.Campaign.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="CntrlOfferLibrary.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="CntrlOfferLibrary.designer.cs">
+      <DependentUpon>CntrlOfferLibrary.cs</DependentUpon>
+    </Compile>
+    <Compile Include="CntrlOpportunityList.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="CntrlOpportunityList.Designer.cs">
+      <DependentUpon>CntrlOpportunityList.cs</DependentUpon>
+    </Compile>
+    <Compile Include="CntrlPreviewExpression.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="CntrlPreviewExpression.Designer.cs">
+      <DependentUpon>CntrlPreviewExpression.cs</DependentUpon>
+    </Compile>
+    <Compile Include="CntrlRecommendation.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="CntrlRecommendation.designer.cs">
+      <DependentUpon>CntrlRecommendation.cs</DependentUpon>
+    </Compile>
+    <Compile Include="CntrlRecommendation.OppDetails.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="CntrlRecommendation.OpportunityMapping.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="CntrlRecommendation.OPPRanking.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="cntrlRecommendation.RSettings.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="CntrlReports.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="CntrlReports.designer.cs">
+      <DependentUpon>CntrlReports.cs</DependentUpon>
+    </Compile>
+    <Compile Include="CntrlSetup.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="CntrlSetup.designer.cs">
+      <DependentUpon>CntrlSetup.cs</DependentUpon>
+    </Compile>
+    <Compile Include="cntrlUsers.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="cntrlUsers.Designer.cs">
+      <DependentUpon>cntrlUsers.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Common.cs" />
+    <Compile Include="ctrlThreshold.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ctrlThreshold.Designer.cs">
+      <DependentUpon>ctrlThreshold.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmDatsource.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmDatsource.Designer.cs">
+      <DependentUpon>frmDatsource.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmExpressEditor.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmExpressEditor.Designer.cs">
+      <DependentUpon>frmExpressEditor.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmLogin.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmLogin.Designer.cs">
+      <DependentUpon>frmLogin.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmOriginal.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmOriginal.designer.cs">
+      <DependentUpon>frmOriginal.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmProject.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmProject.Designer.cs">
+      <DependentUpon>frmProject.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmUsers.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmUsers.Designer.cs">
+      <DependentUpon>frmUsers.cs</DependentUpon>
+    </Compile>
+    <Compile Include="NativeMethods.cs" />
+    <Compile Include="NhibernateClass\ApplicationController.cs" />
+    <Compile Include="NhibernateClass\ApplicationPreference.cs" />
+    <Compile Include="NhibernateClass\Applicationsettings.cs" />
+    <Compile Include="NhibernateClass\DataTypeMapper.cs" />
+    <Compile Include="NhibernateClass\Domain\Language.cs" />
+    <Compile Include="NhibernateClass\Domain\PrimaryKeyType.cs" />
+    <Compile Include="NhibernateClass\Domain\ServerType.cs" />
+    <Compile Include="NhibernateClass\Domain\Table.cs" />
+    <Compile Include="NhibernateClass\FieldConvention.cs" />
+    <Compile Include="NhibernateClass\Generator\AbstractGenerator.cs" />
+    <Compile Include="NhibernateClass\Generator\CodeGenerationhelper.cs" />
+    <Compile Include="NhibernateClass\Generator\CodeGenerator.cs" />
+    <Compile Include="NhibernateClass\Generator\Igenerator.cs" />
+    <Compile Include="NhibernateClass\MetaDataFactory.cs" />
+    <Compile Include="NhibernateClass\Reader\IMetaReader.cs" />
+    <Compile Include="NhibernateClass\Reader\OracleConstraintType.cs" />
+    <Compile Include="NhibernateClass\Reader\OracleMetaReader.cs" />
+    <Compile Include="NhibernateClass\Reader\Sqlservermetareader.cs" />
+    <Compile Include="NhibernateClass\Textformatter\Inflector.cs" />
+    <Compile Include="NhibernateClass\Textformatter\Textformatter.cs" />
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="AlertForm.resx">
+      <DependentUpon>AlertForm.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CntrlchkDropDown.resx">
+      <DependentUpon>CntrlchkDropDown.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="cntrlDataConenction.resx">
+      <DependentUpon>cntrlDataConenction.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CntrlDatafields.resx">
+      <DependentUpon>CntrlDatafields.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CntrlDataSource.resx">
+      <DependentUpon>CntrlDataSource.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CntrlExport.resx">
+      <DependentUpon>CntrlExport.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CntrlOfferLibrary.resx">
+      <DependentUpon>CntrlOfferLibrary.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CntrlOpportunityList.resx">
+      <DependentUpon>CntrlOpportunityList.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CntrlPreviewExpression.resx">
+      <DependentUpon>CntrlPreviewExpression.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CntrlRecommendation.resx">
+      <DependentUpon>CntrlRecommendation.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CntrlReports.resx">
+      <DependentUpon>CntrlReports.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CntrlSetup.resx">
+      <DependentUpon>CntrlSetup.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="cntrlUsers.resx">
+      <DependentUpon>cntrlUsers.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ctrlThreshold.resx">
+      <DependentUpon>ctrlThreshold.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmDatsource.resx">
+      <DependentUpon>frmDatsource.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmExpressEditor.resx">
+      <DependentUpon>frmExpressEditor.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmLogin.resx">
+      <DependentUpon>frmLogin.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmOriginal.resx">
+      <DependentUpon>frmOriginal.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmProject.resx">
+      <DependentUpon>frmProject.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmUsers.resx">
+      <DependentUpon>frmUsers.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <SubType>Designer</SubType>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Themes\Office2007Black.tssp" />
+    <EmbeddedResource Include="Themes\Office2007Silver.tssp" />
+    <None Include="App.config">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include=".NETFramework,Version=v4.0">
+      <Visible>False</Visible>
+      <ProductName>Microsoft .NET Framework 4 %28x86 and x64%29</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Client.3.5">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1 Client Profile</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Windows.Installer.3.1">
+      <Visible>False</Visible>
+      <ProductName>Windows Installer 3.1</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\CustomColumns\CustomColumns.csproj">
+      <Project>{413C481F-44B5-4406-8F23-3019E9AC41AA}</Project>
+      <Name>CustomColumns</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\RecoEngine_BI\RecoEngine_BI.csproj">
+      <Project>{15D61C36-12A3-4DBB-BBA4-ADD2F7AD688E}</Project>
+      <Name>RecoEngine_BI</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\RecoEngine_DataLayer\RecoEngine_DataLayer.csproj">
+      <Project>{BA0D6EDC-2D36-4784-9626-21A8737D083B}</Project>
+      <Name>RecoEngine_DataLayer</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Properties\Resources\Campaigns.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Properties\Resources\Offers.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Properties\Resources\Segments.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="images\customers.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Image1.bmp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Arrow %281%29.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\undo.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Arrow.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\oppmapping.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\oppmapping1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\chooseproject.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\oppmapping2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ranking.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\35.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Segments.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Chart-Icon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\campaign-reports.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Offers.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Campaigns.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\50x50.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\datafields.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Arrow.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\chooseproject1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\preview-icon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Add.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Choose.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Recommendation Settings.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\arrow-ar.jpg" />
+    <None Include="Resources\ajax-loader.gif" />
+    <Content Include="Resources\dataconnection.png" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
