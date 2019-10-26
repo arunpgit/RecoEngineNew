@@ -66,6 +66,12 @@
     <SignManifests>false</SignManifests>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="CalithaLib">
+      <HintPath>ExternallDlls\CalithaLib.dll</HintPath>
+    </Reference>
+    <Reference Include="GoldParserEngine">
+      <HintPath>ExternallDlls\GoldParserEngine.dll</HintPath>
+    </Reference>
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
     <Reference Include="System" />
@@ -472,8 +478,17 @@
   <ItemGroup>
     <None Include="Resources\arrow-ar.jpg" />
     <None Include="Resources\ajax-loader.gif" />
+    <Content Include="ExternallDlls\CalithaLib.dll" />
+    <Content Include="ExternallDlls\GoldParserEngine.dll" />
+    <Content Include="ExternallDlls\Telerik.WinControls.ChartView.dll" />
+    <Content Include="ExternallDlls\Telerik.WinControls.dll" />
+    <Content Include="ExternallDlls\Telerik.WinControls.GridView.dll" />
+    <Content Include="ExternallDlls\Telerik.WinControls.Themes.Office2010Blue.dll" />
+    <Content Include="ExternallDlls\Telerik.WinControls.UI.dll" />
+    <Content Include="ExternallDlls\TelerikCommon.dll" />
     <Content Include="Resources\dataconnection.png" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
