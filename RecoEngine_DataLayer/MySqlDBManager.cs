@@ -2,16 +2,17 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using System.Data.OracleClient;
+using MySql.Data.MySqlClient;
 using System.Data;
+using System.Threading.Tasks;
 
 namespace RecoEngine_DataLayer
 {
-    public class OraDBManager
+   public class MySqlDBManager
     {
         #region "Variable & Declaration"
 
-        private OracleConnection _cn;
+         MySqlConnection _cn;
         private string sConnectionString = "";
         public string strProductName = "";
 
@@ -22,20 +23,22 @@ namespace RecoEngine_DataLayer
             bDebugOn = bValue;
         }
 
-        private OracleTransaction _Transaction;
+        private MySqlTransaction _Transaction;
         public bool bInTransaction = false;
         #endregion "Variable & Declaration"
 
         # region "Constructor"
 
-        public OraDBManager(string sConStr)
+        public MySqlDBManager(string sConStr)
         {
             sConnectionString = sConStr;
         }
 
         #endregion "Constructor"
 
-        # region "Begin Commit Rollback"
+
+
+        #region "Begin Commit Rollback"
         public bool BeginTrans()
         {
             try
@@ -83,7 +86,7 @@ namespace RecoEngine_DataLayer
 
         # endregion "Begin Commit Rollback"
 
-        private OracleConnection Con
+        private MySqlConnection Con
         {
             get { return _cn; }
             set
@@ -134,7 +137,7 @@ namespace RecoEngine_DataLayer
 
         private void OpenConnection()
         {
-            _cn = new OracleConnection(sConnectionString);
+            _cn = new MySqlConnection(sConnectionString);
             if ((_cn != null))
             {
                 _cn.Open();
@@ -142,7 +145,7 @@ namespace RecoEngine_DataLayer
         }
 
 
-        private void AttachParameters(OracleCommand Cmd, OracleParameter[] Param)
+        private void AttachParameters(MySqlCommand Cmd, MySqlParameter[] Param)
         {
 
             if (Cmd == null)
@@ -150,7 +153,7 @@ namespace RecoEngine_DataLayer
 
             if (Param == null)
             {
-                foreach (OracleParameter p in Param)
+                foreach (MySqlParameter p in Param)
                 {
                     if ((p != null))
                     {
@@ -164,7 +167,7 @@ namespace RecoEngine_DataLayer
             }
             else
             {
-                foreach (OracleParameter p in Param)
+                foreach (MySqlParameter p in Param)
                 {
                     Cmd.Parameters.Add(p);
 
@@ -172,7 +175,7 @@ namespace RecoEngine_DataLayer
             }
         }
 
-        private void PrepareCommand(ref OracleCommand Cmd, CommandType CmdType, string CmdText, OracleParameter[] Params)
+        private void PrepareCommand(ref MySqlCommand Cmd, CommandType CmdType, string CmdText, MySqlParameter[] Params)
         {
 
             if (Cmd == null)
@@ -209,10 +212,10 @@ namespace RecoEngine_DataLayer
 
         public int ExecuteNonQuery(CommandType CmdType, string CmdText)
         {
-            return ExecuteNonQuery(CmdType, CmdText, (OracleParameter[])null);
+            return ExecuteNonQuery(CmdType, CmdText, (MySqlParameter[])null);
         }
 
-        public int ExecuteNonQuery(OracleCommand cmd)
+        public int ExecuteNonQuery(MySqlCommand cmd)
         {
             if (!bInTransaction)
                 OpenConnection();
@@ -231,7 +234,7 @@ namespace RecoEngine_DataLayer
 
         }
 
-        public int ExecuteNonQuery(CommandType CmdType, string CmdText, OracleParameter[] Params)
+        public int ExecuteNonQuery(CommandType CmdType, string CmdText, MySqlParameter[] Params)
         {
 
             if (bDebugOn == true)
@@ -239,7 +242,7 @@ namespace RecoEngine_DataLayer
 
             try
             {
-                OracleCommand cmd = new OracleCommand();
+                MySqlCommand cmd = new MySqlCommand();
                 int retVal;
 
                 if (!bInTransaction)
@@ -264,7 +267,7 @@ namespace RecoEngine_DataLayer
             }
         }
 
-        public int ExecuteNonQuery(CommandType CmdType, string CmdText, OracleParameter[] Params, bool bIsOutParms)
+        public int ExecuteNonQuery(CommandType CmdType, string CmdText, MySqlParameter[] Params, bool bIsOutParms)
         {
 
             if (bDebugOn == true)
@@ -272,7 +275,7 @@ namespace RecoEngine_DataLayer
 
             try
             {
-                OracleCommand cmd = new OracleCommand();
+                MySqlCommand cmd = new MySqlCommand();
                 int retVal;
 
                 if (!bInTransaction)
@@ -299,17 +302,17 @@ namespace RecoEngine_DataLayer
         }
         public DataSet ExecuteDataSet(CommandType CmdType, string CmdText)
         {
-            return ExecuteDataSet(CmdType, CmdText, (OracleParameter[])null);
+            return ExecuteDataSet(CmdType, CmdText, (MySqlParameter[])null);
         }
 
-        public DataSet ExecuteDataSet(CommandType CmdType, string CmdText, OracleParameter[] Params)
+        public DataSet ExecuteDataSet(CommandType CmdType, string CmdText, MySqlParameter[] Params)
         {
             try
             {
                 if (bDebugOn == true)
                     System.Windows.Forms.MessageBox.Show(CmdText, strProductName, System.Windows.Forms.MessageBoxButtons.OK, System.Windows.Forms.MessageBoxIcon.Information);
 
-                OracleCommand cmd = new OracleCommand();
+                MySqlCommand cmd = new MySqlCommand();
 
                 if (!bInTransaction)
                     OpenConnection();
@@ -319,7 +322,7 @@ namespace RecoEngine_DataLayer
                 if (bInTransaction)
                     cmd.Transaction = _Transaction;
 
-                OracleDataAdapter da = new OracleDataAdapter(cmd);
+                MySqlDataAdapter da = new MySqlDataAdapter(cmd);
                 DataSet ds = new DataSet();
                 da.Fill(ds);
 
@@ -337,16 +340,16 @@ namespace RecoEngine_DataLayer
 
         public DataTable ExecuteDataTable(CommandType CmdType, string CmdText)
         {
-            return ExecuteDataTable(CmdType, CmdText, (OracleParameter[])null);
+            return ExecuteDataTable(CmdType, CmdText, (MySqlParameter[])null);
         }
 
-        public DataTable ExecuteDataTable(CommandType CmdType, string CmdText, OracleParameter[] Params)
+        public DataTable ExecuteDataTable(CommandType CmdType, string CmdText, MySqlParameter[] Params)
         {
 
             if (bDebugOn == true)
                 System.Windows.Forms.MessageBox.Show(CmdText, strProductName, System.Windows.Forms.MessageBoxButtons.OK, System.Windows.Forms.MessageBoxIcon.Information);
 
-            OracleCommand cmd = new OracleCommand();
+            MySqlCommand cmd = new MySqlCommand();
             if (!bInTransaction)
                 OpenConnection();
 
@@ -355,7 +358,7 @@ namespace RecoEngine_DataLayer
             if (bInTransaction)
                 cmd.Transaction = _Transaction;
 
-            OracleDataAdapter da = new OracleDataAdapter(cmd);
+            MySqlDataAdapter da = new MySqlDataAdapter(cmd);
             DataTable dt = new DataTable();
             da.Fill(dt);
 
@@ -365,14 +368,14 @@ namespace RecoEngine_DataLayer
             cmd.Parameters.Clear();
             return dt;
         }
-        public OracleDataReader ExecuteReader(CommandType CmdType, string CmdText, OracleParameter[] Params)
+        public MySqlDataReader ExecuteReader(CommandType CmdType, string CmdText, MySqlParameter[] Params)
         {
 
             if (bDebugOn == true)
                 System.Windows.Forms.MessageBox.Show(CmdText, strProductName, System.Windows.Forms.MessageBoxButtons.OK, System.Windows.Forms.MessageBoxIcon.Information);
 
-            OracleCommand cmd = new OracleCommand();
-            OracleDataReader dr;
+            MySqlCommand cmd = new MySqlCommand();
+            MySqlDataReader dr;
 
             if (!bInTransaction)
                 OpenConnection();
@@ -394,16 +397,16 @@ namespace RecoEngine_DataLayer
 
         public string ExecuteScalar(CommandType CmdType, string CmdText)
         {
-            return ExecuteScalar(CmdType, CmdText, (OracleParameter[])null);
+            return ExecuteScalar(CmdType, CmdText, (MySqlParameter[])null);
         }
 
-        public string ExecuteScalar(CommandType CmdType, string CmdText, OracleParameter[] Params)
+        public string ExecuteScalar(CommandType CmdType, string CmdText, MySqlParameter[] Params)
         {
             Object rValue;
             if (bDebugOn == true)
                 System.Windows.Forms.MessageBox.Show(CmdText, strProductName, System.Windows.Forms.MessageBoxButtons.OK, System.Windows.Forms.MessageBoxIcon.Information);
 
-            OracleCommand cmd = new OracleCommand();
+            MySqlCommand cmd = new MySqlCommand();
 
             if (!bInTransaction)
                 OpenConnection();
@@ -428,55 +431,55 @@ namespace RecoEngine_DataLayer
 
         public int GetInsertedMasterProject(int P_EPM_PROJECT_ID, int P_VENDOR_ID, string P_PROJECT_DESC, DateTime P_PROJECT_START_DATE, int P_CURRENCY_ID, int P_EXCHANGE_RATE, int P_DEPT_UNIT_ID, string P_CONTRACT_NO)
         {
-            OracleCommand cmd = new OracleCommand();
+            MySqlCommand cmd = new MySqlCommand();
             OpenConnection();
             cmd.Connection = _cn;
             cmd.CommandText = "TESTEPM.INS_PROJECT_MASTER";
             cmd.CommandType = CommandType.StoredProcedure;
 
-            OracleParameter par;
+            MySqlParameter par;
 
-            par = new OracleParameter("P_EPM_PROJECT_ID", OracleType.Number);
+            par = new MySqlParameter("P_EPM_PROJECT_ID", MySqlDbType.Int32);
             par.Value = P_EPM_PROJECT_ID;
             par.Direction = ParameterDirection.Input;
             cmd.Parameters.Add(par);
 
-            par = new OracleParameter("P_VENDOR_ID", OracleType.Number);
+            par = new MySqlParameter("P_VENDOR_ID", MySqlDbType.Int32);
             par.Value = P_VENDOR_ID;
             par.Direction = ParameterDirection.Input;
             cmd.Parameters.Add(par);
 
-            par = new OracleParameter("P_PROJECT_DESC", OracleType.VarChar);
+            par = new MySqlParameter("P_PROJECT_DESC", MySqlDbType.VarChar);
             par.Value = P_PROJECT_DESC;
             par.Direction = ParameterDirection.Input;
             cmd.Parameters.Add(par);
 
-            par = new OracleParameter("P_PROJECT_START_DATE", OracleType.DateTime);
+            par = new MySqlParameter("P_PROJECT_START_DATE", MySqlDbType.DateTime);
             par.Value = P_PROJECT_START_DATE;
             par.Direction = ParameterDirection.Input;
             cmd.Parameters.Add(par);
 
-            par = new OracleParameter("P_CURRENCY_ID", OracleType.Number);
+            par = new MySqlParameter("P_CURRENCY_ID", MySqlDbType.Int32);
             par.Value = P_CURRENCY_ID;
             par.Direction = ParameterDirection.Input;
             cmd.Parameters.Add(par);
 
-            par = new OracleParameter("P_EXCHANGE_RATE", OracleType.Number);
+            par = new MySqlParameter("P_EXCHANGE_RATE", MySqlDbType.Int32);
             par.Value = P_EXCHANGE_RATE;
             par.Direction = ParameterDirection.Input;
             cmd.Parameters.Add(par);
 
-            par = new OracleParameter("P_DEPT_UNIT_ID", OracleType.Number);
+            par = new MySqlParameter("P_DEPT_UNIT_ID", MySqlDbType.Int32);
             par.Value = P_DEPT_UNIT_ID;
             par.Direction = ParameterDirection.Input;
             cmd.Parameters.Add(par);
 
-            par = new OracleParameter("P_CONTRACT_NO", OracleType.VarChar);
+            par = new MySqlParameter("P_CONTRACT_NO", MySqlDbType.VarChar);
             par.Value = P_CONTRACT_NO;
             par.Direction = ParameterDirection.Input;
             cmd.Parameters.Add(par);
 
-            par = new OracleParameter("RETURN_VALUE", OracleType.Number);
+            par = new MySqlParameter("RETURN_VALUE", MySqlDbType.Int32);
             par.Direction = ParameterDirection.ReturnValue;
             cmd.Parameters.Add(par);
 
@@ -487,48 +490,48 @@ namespace RecoEngine_DataLayer
 
         public int GetInsertedProjectMilestone(int p_project_id, int p_epm_milestone_id, string p_milestone_code, string p_milestone_desc, int p_milestone_amount, int p_currency_id, int p_exchange_rate)
         {
-            OracleCommand cmd = new OracleCommand();
+            MySqlCommand cmd = new MySqlCommand();
             OpenConnection();
             cmd.Connection = _cn;
             cmd.CommandText = "<sd$epm.insert_project_milestone>";
             cmd.CommandType = CommandType.StoredProcedure;
 
-            OracleParameter par =
-            new OracleParameter("RETURN_VALUE", OracleType.Number);
+            MySqlParameter par =
+            new MySqlParameter("RETURN_VALUE", MySqlDbType.Int32);
             par.Direction = ParameterDirection.ReturnValue;
             cmd.Parameters.Add(par);
 
-            par = new OracleParameter("p_project_id", OracleType.Number);
+            par = new MySqlParameter("p_project_id", MySqlDbType.Int32);
             par.Value = p_project_id;
             par.Direction = ParameterDirection.Input;
             cmd.Parameters.Add(par);
 
-            par = new OracleParameter("p_epm_milestone_id", OracleType.Number);
+            par = new MySqlParameter("p_epm_milestone_id", MySqlDbType.Int32);
             par.Value = p_epm_milestone_id;
             par.Direction = ParameterDirection.Input;
             cmd.Parameters.Add(par);
 
-            par = new OracleParameter("p_milestone_code", OracleType.VarChar);
+            par = new MySqlParameter("p_milestone_code", MySqlDbType.VarChar);
             par.Value = p_milestone_code;
             par.Direction = ParameterDirection.Input;
             cmd.Parameters.Add(par);
 
-            par = new OracleParameter("p_milestone_desc", OracleType.VarChar);
+            par = new MySqlParameter("p_milestone_desc", MySqlDbType.VarChar);
             par.Value = p_milestone_desc;
             par.Direction = ParameterDirection.Input;
             cmd.Parameters.Add(par);
 
-            par = new OracleParameter("p_milestone_amount", OracleType.Number);
+            par = new MySqlParameter("p_milestone_amount", MySqlDbType.Int32);
             par.Value = p_milestone_amount;
             par.Direction = ParameterDirection.Input;
             cmd.Parameters.Add(par);
 
-            par = new OracleParameter("p_currency_id", OracleType.Number);
+            par = new MySqlParameter("p_currency_id", MySqlDbType.Int32);
             par.Value = p_currency_id;
             par.Direction = ParameterDirection.Input;
             cmd.Parameters.Add(par);
 
-            par = new OracleParameter("p_exchange_rate", OracleType.Number);
+            par = new MySqlParameter("p_exchange_rate", MySqlDbType.Int32);
             par.Value = p_exchange_rate;
             par.Direction = ParameterDirection.Input;
             cmd.Parameters.Add(par);
@@ -540,73 +543,73 @@ namespace RecoEngine_DataLayer
 
         public int GetInsertedMilestoneInvoice(int p_milestone_id, int p_epm_invoice_id, int p_vendor_id, string p_desc_n, DateTime p_invoice_date, string p_invoice_no, int p_invoice_amount, int p_penalty_amount, string p_penalty_desc, int p_currency_id, int p_exchange_rate, string p_file_name)
         {
-            OracleCommand cmd = new OracleCommand();
+            MySqlCommand cmd = new MySqlCommand();
             OpenConnection();
             cmd.Connection = _cn;
             cmd.CommandText = "<sd$epm.insert_milestone_invoice>";
             cmd.CommandType = CommandType.StoredProcedure;
 
-            OracleParameter par =
-            new OracleParameter("RETURN_VALUE", OracleType.Number);
+            MySqlParameter par =
+            new MySqlParameter("RETURN_VALUE", MySqlDbType.Int32);
             par.Direction = ParameterDirection.ReturnValue;
             cmd.Parameters.Add(par);
 
-            par = new OracleParameter("p_milestone_id", OracleType.Number);
+            par = new MySqlParameter("p_milestone_id", MySqlDbType.Int32);
             par.Value = p_milestone_id;
             par.Direction = ParameterDirection.Input;
             cmd.Parameters.Add(par);
 
-            par = new OracleParameter("p_epm_invoice_id", OracleType.Number);
+            par = new MySqlParameter("p_epm_invoice_id", MySqlDbType.Int32);
             par.Value = p_epm_invoice_id;
             par.Direction = ParameterDirection.Input;
             cmd.Parameters.Add(par);
 
-            par = new OracleParameter("p_vendor_id", OracleType.Number);
+            par = new MySqlParameter("p_vendor_id", MySqlDbType.Int32);
             par.Value = p_vendor_id;
             par.Direction = ParameterDirection.Input;
             cmd.Parameters.Add(par);
 
-            par = new OracleParameter("p_desc_n", OracleType.VarChar);
+            par = new MySqlParameter("p_desc_n", MySqlDbType.VarChar);
             par.Value = p_desc_n;
             par.Direction = ParameterDirection.Input;
             cmd.Parameters.Add(par);
 
-            par = new OracleParameter("p_invoice_date", OracleType.DateTime);
+            par = new MySqlParameter("p_invoice_date", MySqlDbType.DateTime);
             par.Value = p_invoice_date;
             par.Direction = ParameterDirection.Input;
             cmd.Parameters.Add(par);
 
-            par = new OracleParameter("p_invoice_no", OracleType.VarChar);
+            par = new MySqlParameter("p_invoice_no", MySqlDbType.VarChar);
             par.Value = p_invoice_no;
             par.Direction = ParameterDirection.Input;
             cmd.Parameters.Add(par);
 
-            par = new OracleParameter("p_invoice_amount", OracleType.Number);
+            par = new MySqlParameter("p_invoice_amount", MySqlDbType.Int32);
             par.Value = p_invoice_amount;
             par.Direction = ParameterDirection.Input;
             cmd.Parameters.Add(par);
 
-            par = new OracleParameter("p_penalty_amount", OracleType.Number);
+            par = new MySqlParameter("p_penalty_amount", MySqlDbType.Int32);
             par.Value = p_penalty_amount;
             par.Direction = ParameterDirection.Input;
             cmd.Parameters.Add(par);
 
-            par = new OracleParameter("p_penalty_desc", OracleType.VarChar);
+            par = new MySqlParameter("p_penalty_desc", MySqlDbType.VarChar);
             par.Value = p_penalty_desc;
             par.Direction = ParameterDirection.Input;
             cmd.Parameters.Add(par);
 
-            par = new OracleParameter("p_currency_id", OracleType.Number);
+            par = new MySqlParameter("p_currency_id", MySqlDbType.Int32);
             par.Value = p_currency_id;
             par.Direction = ParameterDirection.Input;
             cmd.Parameters.Add(par);
 
-            par = new OracleParameter("p_exchange_rate", OracleType.Number);
+            par = new MySqlParameter("p_exchange_rate", MySqlDbType.Int32);
             par.Value = p_exchange_rate;
             par.Direction = ParameterDirection.Input;
             cmd.Parameters.Add(par);
 
-            par = new OracleParameter("p_file_name", OracleType.VarChar);
+            par = new MySqlParameter("p_file_name", MySqlDbType.VarChar);
             par.Value = p_file_name;
             par.Direction = ParameterDirection.Input;
             cmd.Parameters.Add(par);
@@ -617,4 +620,6 @@ namespace RecoEngine_DataLayer
         }
 
     }
+
 }
+
