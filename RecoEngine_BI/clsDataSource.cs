@@ -10,6 +10,7 @@ namespace RecoEngine_BI
 {
     public class clsDataSource
     {
+
         public DataTable fnGetTreDetailsSchema(string strTabName)
         {
             try
@@ -21,6 +22,11 @@ namespace RecoEngine_BI
                 {
                     strSql = "select * from " + strTabName + " where ROWNUM <= 2";
                     dt = ((OraDBManager)Common.dbMgr).ExecuteDataTable(CommandType.Text, strSql);
+                }
+               else if (Common.iDBType == (int)Enums.DBType.Mysql)
+                {
+                    strSql = "select * from recousr."+strTabName + " limit 2";
+                    dt = ((MySqlDBManager)Common.dbMgr).ExecuteDataTable(CommandType.Text, strSql);
                 }
                 else
                 {
@@ -221,6 +227,8 @@ namespace RecoEngine_BI
                 string strSql = "Select * from  TRE_CALCULATED_COLUMNS WHERE TABLENAME= '"+strTabName + "' AND  PROJECT_ID=" + ProjectId;
                 if (Common.iDBType == (int)Enums.DBType.Oracle)
                     dt = ((OraDBManager)Common.dbMgr).ExecuteDataTable(CommandType.Text, strSql);
+                else if (Common.iDBType == (int)Enums.DBType.Mysql)
+                    dt = ((MySqlDBManager)Common.dbMgr).ExecuteDataTable(CommandType.Text, strSql);
                 else
                     dt = ((DBManager)Common.dbMgr).ExecuteDataTable(CommandType.Text, strSql);
 
@@ -1327,6 +1335,11 @@ namespace RecoEngine_BI
                 {
                     strSql = "select TName from tab WHERE TABTYPE = 'TABLE' AND  TName not like 'APEX%' AND TName not like 'BIN%' AND TName not like 'DEMO%'";
                     dt = ((OraDBManager)Common.dbMgr).ExecuteDataTable(CommandType.Text, strSql);
+                }
+                else if (Common.iDBType == (int)Enums.DBType.Mysql)
+                {
+                    strSql = "select TABLE_NAME as TName FROM information_schema.TABLES WHERE  TABLE_SCHEMA = 'recousr'";
+                    dt = ((MySqlDBManager)Common.dbMgr).ExecuteDataTable(CommandType.Text, strSql);
                 }
                 else
                 {
