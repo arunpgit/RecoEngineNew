@@ -52,7 +52,8 @@ namespace RecoEngine_BI
         public enum DBType : int
         {
             Oracle = 1,
-            SQl = 2
+            SQl = 2,
+            Mysql=3
         }
         public enum ColType : int
         {

@@ -61,6 +61,34 @@ namespace RecoEngine
                             Common.SetRunningStatus(true);
                         }
                     }
+                    else if (ConfigurationManager.AppSettings["MysqlConnectionString"] != null && ConfigurationManager.AppSettings["MysqlConnectionString"].ToString() != "")
+                    { 
+                        RecoEngine_BI.Common.iDBType = 3;
+                        RecoEngine_BI.Common.SetConnectionString(ConfigurationManager.AppSettings["MysqlConnectionString"].ToString());
+
+                        Common.bIsConnectionStringEstablish = true;
+
+                        if (fnCheckDBUpdate())
+                        {
+
+                            Common.SetRunningStatus(false);
+                            bool bIsExitTheApplication = false;
+                            if (bIsExitTheApplication)
+                                return;
+
+                            if (fnCheckLicense() == false)
+                                return;
+                            // fnFixColumnRename();
+
+                            Application.Run(new frmLogin());
+                            Common.SetRunningStatus(true);
+                            m.ReleaseMutex();
+                        }
+                        else
+                        {
+                            Common.SetRunningStatus(true);
+                        }
+                    }
                     else
                     {                       
                         Common.bIsConnectionStringEstablish = false;                       

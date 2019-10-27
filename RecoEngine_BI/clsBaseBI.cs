@@ -11,8 +11,10 @@ namespace RecoEngine_BI
 
         public bool BeginTrans()
         {
-            if(Common.iDBType==1)
+            if (Common.iDBType == (int)Enums.DBType.Oracle)
                 return  ((OraDBManager)Common.dbMgr).BeginTrans();
+            else if(Common.iDBType == (int)Enums.DBType.Mysql)
+                return ((MySqlDBManager)Common.dbMgr).BeginTrans();
 
             return ((DBManager)Common.dbMgr).BeginTrans();
         }
@@ -20,6 +22,8 @@ namespace RecoEngine_BI
         {
             if (Common.iDBType == (int)Enums.DBType.Oracle)
                 return ((OraDBManager)Common.dbMgr).CommitTrans();
+            if (Common.iDBType == (int)Enums.DBType.Oracle)
+                return ((MySqlDBManager)Common.dbMgr).CommitTrans();
 
             return ((DBManager)Common.dbMgr).CommitTrans();
             
@@ -28,6 +32,8 @@ namespace RecoEngine_BI
         {
             if (Common.iDBType == (int)Enums.DBType.Oracle)
                 return ((OraDBManager)Common.dbMgr).RollbackTrans();
+           else if (Common.iDBType == (int)Enums.DBType.Mysql)
+                return ((MySqlDBManager)Common.dbMgr).RollbackTrans();
 
             return ((DBManager)Common.dbMgr).RoolbackTrans();            
         }
