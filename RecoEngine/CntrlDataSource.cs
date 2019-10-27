@@ -94,6 +94,30 @@ namespace RecoEngine
                 Telerik.WinControls.RadMessageBox.Show(this, ex.Message, ex.TargetSite.Name.ToString(), MessageBoxButtons.OK, RadMessageIcon.Error, MessageBoxDefaultButton.Button1);
             }
         }
+        void fnLoadSource()
+        {
+            try
+            {
+                DataTable dtTypes = new DataTable();
+                dtTypes.Columns.Add(new DataColumn("Id", typeof(int)));
+                dtTypes.Columns.Add(new DataColumn("Type", typeof(string)));
+               
+                    dtTypes.Rows.Add(((int)Enums.DBType.Oracle).ToString(), "Oracle");
+                
+                //  dtTypes.Rows.Add(((int)Enums.DBType.SQl).ToString(), "SQL Server");
+
+
+                ddlSource.DataSource = dtTypes;
+                ddlSource.ValueMember = "Id";
+                ddlSource.DisplayMember = "Type";
+
+                ddlSource.SelectedIndex = 0;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
         private void fnLoadDataFeilds()
         {
             try
@@ -142,28 +166,7 @@ namespace RecoEngine
                 Telerik.WinControls.RadMessageBox.Show(this, ex.Message, ex.TargetSite.Name.ToString(), MessageBoxButtons.OK, RadMessageIcon.Error, MessageBoxDefaultButton.Button1);
             }
         }
-        void fnLoadSource()
-        {
-            try
-            {
-                DataTable dtTypes = new DataTable();
-                dtTypes.Columns.Add(new DataColumn("Id", typeof(int)));
-                dtTypes.Columns.Add(new DataColumn("Type", typeof(string)));
-                dtTypes.Rows.Add(((int)Enums.DBType.Oracle).ToString(), "Oracle");
-                //  dtTypes.Rows.Add(((int)Enums.DBType.SQl).ToString(), "SQL Server");
-
-
-                ddlSource.DataSource = dtTypes;
-                ddlSource.ValueMember = "Id";
-                ddlSource.DisplayMember = "Type";
-
-                ddlSource.SelectedIndex = 0;
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
-        }
+        
         private bool fnValidateConenctionString(ref string strConenctionstring)
         {
             try

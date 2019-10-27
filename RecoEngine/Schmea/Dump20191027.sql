@@ -128,6 +128,35 @@ LOCK TABLES `ets_tre_base` WRITE;
 UNLOCK TABLES;
 
 --
+-- Table structure for table `opportunity`
+--
+
+DROP TABLE IF EXISTS `opportunity`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `opportunity` (
+  `OPPORTUNITY_ID` bigint(20) NOT NULL AUTO_INCREMENT,
+  `OPP_NAME` varchar(100) DEFAULT NULL,
+  `DESCRIPTION` varchar(500) DEFAULT NULL,
+  `FORMULA` varchar(500) DEFAULT NULL,
+  `CREATEDDATE` date DEFAULT NULL,
+  `CREATEDBY` int(11) DEFAULT NULL,
+  `PROJECT_ID` int(11) DEFAULT NULL,
+  `PTNL_FORMULA` varchar(200) DEFAULT NULL,
+  PRIMARY KEY (`OPPORTUNITY_ID`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `opportunity`
+--
+
+LOCK TABLES `opportunity` WRITE;
+/*!40000 ALTER TABLE `opportunity` DISABLE KEYS */;
+/*!40000 ALTER TABLE `opportunity` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `projects`
 --
 
@@ -141,7 +170,7 @@ CREATE TABLE `projects` (
   `CREATEDBY` varchar(50) DEFAULT NULL,
   `CREATEDON` date DEFAULT NULL,
   PRIMARY KEY (`project_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -152,6 +181,31 @@ LOCK TABLES `projects` WRITE;
 /*!40000 ALTER TABLE `projects` DISABLE KEYS */;
 INSERT INTO `projects` VALUES (1,'xyz','Recousr','1','2019-10-27'),(2,'s','Recousr','1','2019-10-27'),(3,'ssss','ee','1','2019-10-27');
 /*!40000 ALTER TABLE `projects` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `tre_calculated_columns`
+--
+
+DROP TABLE IF EXISTS `tre_calculated_columns`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `tre_calculated_columns` (
+  `COLNAME` varchar(50) DEFAULT NULL,
+  `COMBINE_COLUMNS` varchar(100) DEFAULT NULL,
+  `TABLENAME` varchar(100) DEFAULT NULL,
+  `COLDATATYPE` varchar(100) DEFAULT NULL,
+  `PROJECT_ID` bigint(50) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `tre_calculated_columns`
+--
+
+LOCK TABLES `tre_calculated_columns` WRITE;
+/*!40000 ALTER TABLE `tre_calculated_columns` DISABLE KEYS */;
+/*!40000 ALTER TABLE `tre_calculated_columns` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -166,7 +220,9 @@ CREATE TABLE `tre_mapping` (
   `ISREQUIRED` int(11) DEFAULT '0',
   `TYPE` int(11) DEFAULT '0',
   `COLDATATYPE` varchar(50) DEFAULT NULL,
-  `TABLENAME` varchar(50) DEFAULT NULL
+  `TABLENAME` varchar(50) DEFAULT NULL,
+  `ProjectId` bigint(20) NOT NULL AUTO_INCREMENT,
+  PRIMARY KEY (`ProjectId`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -187,7 +243,7 @@ DROP TABLE IF EXISTS `users`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `users` (
-  `comment` bigint(20) NOT NULL,
+  `User_ID` bigint(20) NOT NULL,
   `FIRST_NAME` varchar(50) DEFAULT NULL,
   `LAST_NAME` varchar(50) DEFAULT NULL,
   `USERTYPE_ID` int(11) DEFAULT NULL,
@@ -197,7 +253,7 @@ CREATE TABLE `users` (
   `USERNAME` varchar(20) DEFAULT NULL,
   `ISACTIVE` int(11) DEFAULT NULL,
   `USEWINDOWSPASSWORD` int(11) DEFAULT NULL,
-  PRIMARY KEY (`comment`)
+  PRIMARY KEY (`User_ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -220,4 +276,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2019-10-27 14:11:58
+-- Dump completed on 2019-10-27 23:50:19
