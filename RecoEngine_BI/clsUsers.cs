@@ -27,6 +27,8 @@ namespace RecoEngine_BI
 
                 if (Common.iDBType == (int)Enums.DBType.Oracle)
                     ds = ((OraDBManager)Common.dbMgr).ExecuteDataSet(CommandType.Text, strSql);
+                else if (Common.iDBType == (int)Enums.DBType.Mysql)
+                    ds = ((MySqlDBManager)Common.dbMgr).ExecuteDataSet(CommandType.Text, strSql);
                 else
                     ds = ((DBManager)Common.dbMgr).ExecuteDataSet(CommandType.Text, strSql);
 
@@ -68,6 +70,8 @@ namespace RecoEngine_BI
 
                 if (Common.iDBType == (int)Enums.DBType.Oracle)
                     ds = ((OraDBManager)Common.dbMgr).ExecuteDataSet(CommandType.Text, strSql);
+                else if (Common.iDBType == (int)Enums.DBType.Mysql)
+                    ds = ((MySqlDBManager)Common.dbMgr).ExecuteDataSet(CommandType.Text, strSql);
                 else
                     ds = ((DBManager)Common.dbMgr).ExecuteDataSet(CommandType.Text, strSql);
 
@@ -94,6 +98,8 @@ namespace RecoEngine_BI
 
                 if (Common.iDBType == (int)Enums.DBType.Oracle)
                     dt = ((OraDBManager)Common.dbMgr).ExecuteDataTable(CommandType.Text, strSql);
+                else if (Common.iDBType == (int)Enums.DBType.Mysql)
+                    dt = ((MySqlDBManager)Common.dbMgr).ExecuteDataTable(CommandType.Text, strSql);
                 else
                 {
                     dt = ((DBManager)Common.dbMgr).ExecuteDataTable(CommandType.Text, strSql);
@@ -116,6 +122,8 @@ namespace RecoEngine_BI
 
                 if (Common.iDBType == (int)Enums.DBType.Oracle)
                     ((OraDBManager)Common.dbMgr).ExecuteNonQuery(CommandType.Text, strSql);
+               else if (Common.iDBType == (int)Enums.DBType.Mysql)
+                    ((MySqlDBManager)Common.dbMgr).ExecuteNonQuery(CommandType.Text, strSql);
                 else
                 {
                     ((DBManager)Common.dbMgr).ExecuteNonQuery(CommandType.Text, strSql);
@@ -142,6 +150,8 @@ namespace RecoEngine_BI
 
                 if (Common.iDBType == (int)Enums.DBType.Oracle)
                     dt = ((OraDBManager)Common.dbMgr).ExecuteDataTable(CommandType.Text, strSql);
+                else if (Common.iDBType == (int)Enums.DBType.Mysql)
+                    dt = ((MySqlDBManager)Common.dbMgr).ExecuteDataTable(CommandType.Text, strSql);
                 else
                 {
                     dt = ((DBManager)Common.dbMgr).ExecuteDataTable(CommandType.Text, strSql);
@@ -181,6 +191,8 @@ namespace RecoEngine_BI
 
                 if (Common.iDBType == (int)Enums.DBType.Oracle)
                     ((OraDBManager)Common.dbMgr).ExecuteScalar(CommandType.Text, strSql);
+                else if (Common.iDBType == (int)Enums.DBType.Mysql)
+                    ((MySqlDBManager)Common.dbMgr).ExecuteScalar(CommandType.Text, strSql);
                 else
                 {
                     ((DBManager)Common.dbMgr).ExecuteScalar(CommandType.Text, strSql);
@@ -204,8 +216,12 @@ namespace RecoEngine_BI
                 {
 
                     string strSql = "UPDATE Users SET  ISACTIVE = " + str[1] + " WHERE  USER_ID = " + str[0];
-                    ((OraDBManager)Common.dbMgr).ExecuteNonQuery(CommandType.Text, strSql);
-                   
+
+                    if (Common.iDBType == (int)Enums.DBType.Oracle)
+                        ((OraDBManager)Common.dbMgr).ExecuteNonQuery(CommandType.Text, strSql);
+                    if (Common.iDBType == (int)Enums.DBType.Mysql)
+                        ((MySqlDBManager)Common.dbMgr).ExecuteNonQuery(CommandType.Text, strSql);
+
                 }
                 return true;
             }

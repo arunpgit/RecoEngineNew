@@ -426,6 +426,7 @@ namespace RecoEngine
             }
             catch (Exception ex)
             {
+                //oracle  starting message box
                 MessageBox.Show(ex.Message, ex.TargetSite.Name.ToString(), MessageBoxButtons.OK, MessageBoxIcon.Information);
                 Common.LogMessage(ex);
                 return false;

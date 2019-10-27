@@ -475,6 +475,7 @@
     <None Include="Resources\Recommendation Settings.png" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Schmea\Dump20191027.sql" />
     <None Include="Resources\arrow-ar.jpg" />
     <None Include="Resources\ajax-loader.gif" />
     <Content Include="ExternallDlls\CalithaLib.dll" />

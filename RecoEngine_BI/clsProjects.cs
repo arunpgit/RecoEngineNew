@@ -47,7 +47,9 @@ namespace RecoEngine_BI
 
                 if (Common.iDBType == (int)Enums.DBType.Oracle)
                     strSql += " ,U.First_name || ' ' || U.last_name as UName ";
-                else if (Common.iDBType == (int)Enums.DBType.SQl)
+                else if (Common.iDBType == (int)Enums.DBType.Mysql)
+                    strSql += " ,U.First_name || ' ' || U.last_name as UName ";
+                else if(Common.iDBType == (int)Enums.DBType.SQl)
                     strSql += " ,U.First_name + ' ' + U.last_name as UName ";
                 strSql += " From Projects P Left join Users U on U.USER_ID=P.CREATEDBY ";
                 if (iUserId != 0)
@@ -60,6 +62,8 @@ namespace RecoEngine_BI
 
                 if (Common.iDBType == (int)Enums.DBType.Oracle)
                     dt = ((OraDBManager)Common.dbMgr).ExecuteDataTable(CommandType.Text, strSql);
+               else if (Common.iDBType == (int)Enums.DBType.Mysql)
+                    dt = ((MySqlDBManager)Common.dbMgr).ExecuteDataTable(CommandType.Text, strSql);
                 else
                 {
                     dt = ((DBManager)Common.dbMgr).ExecuteDataTable(CommandType.Text, strSql);
@@ -146,6 +150,8 @@ namespace RecoEngine_BI
                     strSql += "'" + strPName.Replace("'", "''") + "','" + strDescription + "',";
                     if (Common.iDBType == (int)Enums.DBType.Oracle)
                         strSql += " sysdate," + iLoginUserID + ")";
+                   else if (Common.iDBType == (int)Enums.DBType.Mysql)
+                        strSql += " CURDATE()," + iLoginUserID + ")";
                     else
                         strSql += " Getdate()," + iLoginUserID + ")";
                 }
@@ -157,6 +163,8 @@ namespace RecoEngine_BI
                 }
                 if (Common.iDBType == (int)Enums.DBType.Oracle)
                     ((OraDBManager)Common.dbMgr).ExecuteScalar(CommandType.Text, strSql);
+                else if (Common.iDBType == (int)Enums.DBType.Mysql)
+                    ((MySqlDBManager)Common.dbMgr).ExecuteScalar(CommandType.Text, strSql);
                 else
                     ((DBManager)Common.dbMgr).ExecuteScalar(CommandType.Text, strSql);
 
