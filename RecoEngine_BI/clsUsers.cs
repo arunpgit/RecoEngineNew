@@ -122,9 +122,7 @@ namespace RecoEngine_BI
 
                 if (Common.iDBType == (int)Enums.DBType.Oracle)
                     ((OraDBManager)Common.dbMgr).ExecuteNonQuery(CommandType.Text, strSql);
-                else if (Common.iDBType == (int)Enums.DBType.Mysql)
-                    ((MySqlDBManager)Common.dbMgr).ExecuteNonQuery(CommandType.Text, strSql);
-                else if (Common.iDBType == (int)Enums.DBType.Mysql)
+               else if (Common.iDBType == (int)Enums.DBType.Mysql)
                     ((MySqlDBManager)Common.dbMgr).ExecuteNonQuery(CommandType.Text, strSql);
                 else
                 {
