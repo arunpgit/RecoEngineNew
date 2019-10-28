@@ -103,7 +103,9 @@ namespace RecoEngine
                 dtTypes.Columns.Add(new DataColumn("Type", typeof(string)));
                
                     dtTypes.Rows.Add(((int)Enums.DBType.Oracle).ToString(), "Oracle");
-                
+
+                dtTypes.Rows.Add(((int)Enums.DBType.Mysql).ToString(), "MySql");
+
                 //  dtTypes.Rows.Add(((int)Enums.DBType.SQl).ToString(), "SQL Server");
 
 

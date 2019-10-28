@@ -9,5 +9,6 @@ namespace NhibernateclassGeneration.Domain
     {
         Oracle,
         SqlServer,
+        Mysql
     }
 }

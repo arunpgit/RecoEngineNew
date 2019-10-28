@@ -96,130 +96,121 @@ namespace RecoEngine
                 throw ex;
             }
         }
-        void dataschemaGridbinding()
+        private void dataschemaGridbinding()
         {
+            object obj;
             try
             {
-                DataTable dt = clsDSOBJ.fnGetTreDetailsSchema(ddlTableName.SelectedValue.ToString());
-                DataTable dtcalaculated = clsDSOBJ.fnGetCalaculatedColMappingData(Common.iProjectID,Common.strTableName);
-                DataTable dt1 = clsDSOBJ.fnGetColMappingData(Common.iProjectID);
-                DataRow row;
-             
-                dt.Columns.Add(new DataColumn("Table", typeof(string)));
-                dt.Columns.Add(new DataColumn("Type", typeof(int)));
-                dt.Columns.Add(new DataColumn("Required", typeof(bool)));
-                foreach (DataRow drcal in dtcalaculated.Rows)
-                { 
-                    row = dt.NewRow();
-                    row["ColumnName"] = drcal["COLNAME"].ToString();
-                    row["Table"] = "C";
-                    //if (drcal["COLDATATYPE"].ToString() == "NUMBER")
-                    //{
-                    //    row["DataType"] = typeof(decimal);
-                    //}
-                    row["DataType"] = drcal["COLDATATYPE"].ToString() == "NUMBER" ? typeof(Decimal) : drcal["COLDATATYPE"].ToString() == "DATE" ? typeof(DateTime) : typeof(String);
-                    dt.Rows.Add(row);
-                }
-               
-                for (int i = 0; i < dt.Rows.Count; i++)
+                DataTable item = this.clsDSOBJ.fnGetTreDetailsSchema(this.ddlTableName.SelectedValue.ToString());
+                DataTable dataTable = this.clsDSOBJ.fnGetCalaculatedColMappingData(Common.iProjectID, Common.strTableName);
+                DataTable dataTable1 = this.clsDSOBJ.fnGetColMappingData(Common.iProjectID);
+                item.Columns.Add(new DataColumn("Table", typeof(string)));
+                item.Columns.Add(new DataColumn("Type", typeof(int)));
+                item.Columns.Add(new DataColumn("Required", typeof(bool)));
+                foreach (DataRow row in dataTable.Rows)
                 {
-                    if (dt1.Rows.Count > 0)
+                    DataRow str = item.NewRow();
+                    str["ColumnName"] = row["COLNAME"].ToString();
+                    str["Table"] = "C";
+                    DataRow dataRow = str;
+                    if (row["COLDATATYPE"].ToString() == "NUMBER")
                     {
-                        DataRow[] dr = dt1.Select("COLNAME='" + dt.Rows[i][0].ToString() + "'");
-                        if (dr.Length > 0 && dr[0]["TABLENAME"].ToString().ToLower() == ddlTableName.SelectedValue.ToString().ToLower())
-                        {
-                            dt.Rows[i]["Type"] = dr[0]["Type"];
-                            dt.Rows[i]["Required"] = dr[0]["ISREQUIRED"];
-                            if (dt.Rows[i]["Table"].ToString() != "C")
-                            dt.Rows[i]["Table"] = "M";
-                        }
-                        else
-                        {
-                            dt.Rows[i]["Type"] = (int)Enums.ColType.None;
-                            if (dt.Rows[i]["Table"] != "C")
-                               dt.Rows[i]["Table"] = "M";
-                            dt.Rows[i]["Required"] = false;
-                        }
+                        obj = typeof(decimal);
                     }
                     else
                     {
-                        dt.Rows[i]["Type"] = (int)Enums.ColType.None;
-                        if (dt.Rows[i]["Table"] != "C")
-                            dt.Rows[i]["Table"] = "M";
-                        dt.Rows[i]["Required"] = false;
+                        obj = (row["COLDATATYPE"].ToString() == "DATE" ? typeof(DateTime) : typeof(string));
+                    }
+                    dataRow["DataType"] = obj;
+                    item.Rows.Add(str);
+                }
+                for (int i = 0; i < item.Rows.Count; i++)
+                {
+                    if (dataTable1.Rows.Count <= 0)
+                    {
+                        item.Rows[i]["Type"] = 5;
+                        if (item.Rows[i]["Table"] != null)
+                        {
+                            item.Rows[i]["Table"] = "M";
+                        }
+                        item.Rows[i]["Required"] = false;
+                    }
+                    else
+                    {
+                        DataRow[] dataRowArray = dataTable1.Select(string.Concat("COLNAME='", item.Rows[i][0].ToString(), "'"));
+                        if ((int)dataRowArray.Length <= 0 || !(dataRowArray[0]["TABLENAME"].ToString().ToLower() == this.ddlTableName.SelectedValue.ToString().ToLower()))
+                        {
+                            item.Rows[i]["Type"] = 5;
+                            if (item.Rows[i]["Table"] != null)
+                            {
+                                item.Rows[i]["Table"] = "M";
+                            }
+                            item.Rows[i]["Required"] = false;
+                        }
+                        else
+                        {
+                            item.Rows[i]["Type"] = dataRowArray[0]["Type"];
+                            item.Rows[i]["Required"] = dataRowArray[0]["ISREQUIRED"];
+                            if (item.Rows[i]["Table"].ToString() != "C")
+                            {
+                                item.Rows[i]["Table"] = "M";
+                            }
+                        }
                     }
                 }
-
-                dataschemaGrid.DataSource = dt;
-             ////   DataTable dtmain = (DataTable)dataschemaGrid.DataSource;
-             //   if (dtmain.Rows.Count > 0)
-             //   {
-             //       //dtmain.Merge(dt, true);
-             //       if (dtmain.Rows.Count != dt.Rows.Count)
-             //       {
-             //           DataRow dr = dtmain.NewRow();
-             //         dr = dt.Rows[dt.Rows.Count - 1] as DataRow;
-             //           dt.Rows[dt.Rows.Count - 1].Delete();
-             //           dtmain.Rows.Add(dr.ItemArray);
-             //           dataschemaGrid.DataSource = dtmain;
-             //           dtmain = null;
-             //       }
-             //   }
-             //   else
-             //   {
-             //       dataschemaGrid.DataSource = dt;
-             //   }
-                GridViewComboBoxColumn categoryColumn = new GridViewComboBoxColumn();
-                categoryColumn.HeaderText = "Type";
-                categoryColumn.ValueMember = "TypeId";
-                categoryColumn.DisplayMember = "Type";
-                categoryColumn.FieldName = "Type";
-                categoryColumn.DataSource = clsDSOBJ.fnCreateColTypes();
-                categoryColumn.Width = 200;
-                if (dataschemaGrid.MasterTemplate.Columns.Contains("Type1"))
-                 dataschemaGrid.MasterTemplate.Columns.Remove("Type1");
-                dataschemaGrid.MasterTemplate.Columns.Add(categoryColumn);
-                dataschemaGrid.Columns["ColumnName"].ReadOnly = true;
-                dataschemaGrid.Columns["DataType"].ReadOnly = true;
-                dataschemaGrid.Columns["Type"].ReadOnly = true;
-                dataschemaGrid.Columns["Type"].IsVisible = false;
-                dataschemaGrid.Columns["Table"].IsVisible = true;
-                dataschemaGrid.Columns[0].Width = 200;
-               // dataschemaGrid.Columns[1].AutoSizeMode = BestFitColumnMode.DisplayedDataCells;
-                dataschemaGrid.Columns["DataType"].Width = 300;
-                dataschemaGrid.Columns["Required"].Width = 50;
-                dataschemaGrid.Columns["Table"].Width = 30;
-                dataschemaGrid.Columns.Remove("NumericPrecision");
-                dataschemaGrid.Columns.Remove("NumericScale");
-                dataschemaGrid.Columns.Remove("ProviderType");
-                dataschemaGrid.Columns.Remove("IsLong");
-                dataschemaGrid.Columns.Remove("AllowDBNull");
-                dataschemaGrid.Columns.Remove("IsReadOnly");
-                dataschemaGrid.Columns.Remove("IsUnique");
-                dataschemaGrid.Columns.Remove("IsKey");
-                dataschemaGrid.Columns.Remove("IsAutoIncrement");
-                dataschemaGrid.Columns.Remove("IsRowVersion");
-                dataschemaGrid.Columns.Remove("ColumnMapping");
-                dataschemaGrid.Columns.Remove("AutoIncrementSeed");
-                dataschemaGrid.Columns.Remove("AutoIncrementStep");
-                dataschemaGrid.Columns.Remove("BaseCatalogName");
-                dataschemaGrid.Columns.Remove("BaseSchemaName");
-                dataschemaGrid.Columns.Remove("BaseTableName");
-                dataschemaGrid.Columns.Remove("BaseTableNameSpace");
-                dataschemaGrid.Columns.Remove("BaseColumnName");
-                dataschemaGrid.Columns.Remove("BaseColumnNameSpace");
-                dataschemaGrid.Columns.Remove("Expression");
-                dataschemaGrid.Columns.Remove("DefaultValue");
-                dataschemaGrid.Columns.Remove("ColumnOrdinal");
-                dataschemaGrid.Columns.Remove("ColumnSize");
-                dataschemaGrid.MasterTemplate.AutoSizeColumnsMode = GridViewAutoSizeColumnsMode.Fill;
-                //dataschemaGrid.MasterTemplate.BestFitColumns(); 
-                dataschemaGrid.CellValueChanged += new GridViewCellEventHandler(dataschemaGrid_CellValueChanged);
-
+                this.dataschemaGrid.DataSource = item;
+                GridViewComboBoxColumn gridViewComboBoxColumn = new GridViewComboBoxColumn()
+                {
+                    HeaderText = "Type",
+                    ValueMember = "TypeId",
+                    DisplayMember = "Type",
+                    FieldName = "Type",
+                    DataSource = this.clsDSOBJ.fnCreateColTypes(),
+                    Width = 200
+                };
+                if (this.dataschemaGrid.MasterTemplate.Columns.Contains("Type1"))
+                {
+                    this.dataschemaGrid.MasterTemplate.Columns.Remove("Type1");
+                }
+                this.dataschemaGrid.MasterTemplate.Columns.Add(gridViewComboBoxColumn);
+                this.dataschemaGrid.Columns["ColumnName"].ReadOnly = true;
+                this.dataschemaGrid.Columns["DataType"].ReadOnly = true;
+                this.dataschemaGrid.Columns["Type"].ReadOnly = true;
+                this.dataschemaGrid.Columns["Type"].IsVisible = false;
+                this.dataschemaGrid.Columns["Table"].IsVisible = true;
+                this.dataschemaGrid.Columns[0].Width = 200;
+                this.dataschemaGrid.Columns["DataType"].Width = 300;
+                this.dataschemaGrid.Columns["Required"].Width = 50;
+                this.dataschemaGrid.Columns["Table"].Width = 30;
+                this.dataschemaGrid.Columns.Remove("NumericPrecision");
+                this.dataschemaGrid.Columns.Remove("NumericScale");
+                this.dataschemaGrid.Columns.Remove("ProviderType");
+                this.dataschemaGrid.Columns.Remove("IsLong");
+                this.dataschemaGrid.Columns.Remove("AllowDBNull");
+                this.dataschemaGrid.Columns.Remove("IsReadOnly");
+                this.dataschemaGrid.Columns.Remove("IsUnique");
+                this.dataschemaGrid.Columns.Remove("IsKey");
+                this.dataschemaGrid.Columns.Remove("IsAutoIncrement");
+                this.dataschemaGrid.Columns.Remove("IsRowVersion");
+                this.dataschemaGrid.Columns.Remove("ColumnMapping");
+                this.dataschemaGrid.Columns.Remove("AutoIncrementSeed");
+                this.dataschemaGrid.Columns.Remove("AutoIncrementStep");
+                this.dataschemaGrid.Columns.Remove("BaseCatalogName");
+                this.dataschemaGrid.Columns.Remove("BaseSchemaName");
+                this.dataschemaGrid.Columns.Remove("BaseTableName");
+                this.dataschemaGrid.Columns.Remove("BaseTableNameSpace");
+                this.dataschemaGrid.Columns.Remove("BaseColumnName");
+                this.dataschemaGrid.Columns.Remove("BaseColumnNameSpace");
+                this.dataschemaGrid.Columns.Remove("Expression");
+                this.dataschemaGrid.Columns.Remove("DefaultValue");
+                this.dataschemaGrid.Columns.Remove("ColumnOrdinal");
+                this.dataschemaGrid.Columns.Remove("ColumnSize");
+                this.dataschemaGrid.MasterTemplate.AutoSizeColumnsMode = GridViewAutoSizeColumnsMode.Fill;
+                this.dataschemaGrid.CellValueChanged += new GridViewCellEventHandler(this.dataschemaGrid_CellValueChanged);
             }
-            catch (Exception ex)
+            catch (Exception exception)
             {
-                throw ex;
+                throw exception;
             }
         }
         void dataschemaGrid_CellValueChanged(object sender, GridViewCellEventArgs e)
@@ -267,7 +258,7 @@ namespace RecoEngine
 
             try
             {
-                generateMapclass();
+               // generateMapclass();
                 string strTabName = ddlTableName.SelectedValue.ToString().ToUpper();
                 //strTabName = "tre_random".ToUpper();;
                 dataschemaGrid.Refresh();
@@ -343,13 +334,20 @@ namespace RecoEngine
                Directory.CreateDirectory(mapTempPath);
            }
             Mapclasssettings.Domainfolderpath = mapTempPath;
-            Mapclasssettings.ConnectionString = ConfigurationManager.AppSettings["ConnectionString"]; 
+           
             Mapclasssettings.EntityName = "Entity";
             if ((RecoEngine_BI.Common.iDBType) == (int)Enums.DBType.Oracle)
             {
+                Mapclasssettings.ConnectionString = ConfigurationManager.AppSettings["ConnectionString"];
                 Mapclasssettings.Type = ServerType.Oracle;
             }
-            metadataReader = MetadataFactory.GetReader(Mapclasssettings.Type, Mapclasssettings.ConnectionString);
+           else if ((RecoEngine_BI.Common.iDBType) == (int)Enums.DBType.Mysql)
+            {
+                Mapclasssettings.ConnectionString = ConfigurationManager.AppSettings["MysqlConnectionString"];
+                Mapclasssettings.Type = ServerType.Mysql;
+            }
+
+          //  metadataReader = MetadataFactory.GetReader(Mapclasssettings.Type, Mapclasssettings.ConnectionString);
             var owners = metadataReader.GetOwners();
             IList<Table> tblList = metadataReader.GetTables("RECOUSR");
             int tableindex = 0;
