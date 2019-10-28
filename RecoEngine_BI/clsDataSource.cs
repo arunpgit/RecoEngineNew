@@ -1641,7 +1641,7 @@ namespace RecoEngine_BI
                         {
                             str = string.Concat(str, " Where ", strFilerCondition);
                         }
-                        str = string.Concat(str, " ORDER BY DBMS_RANDOM.RANDOM) WHERE  rownum < 5000)K WHERE C.CUSTOMER=K.RNDMCUSTOMER ");
+                        str = string.Concat(str, " ORDER BY Rand() Limit 5000)K WHERE C.CUSTOMER=K.RNDMCUSTOMER ");
                         ((MySqlDBManager)Common.dbMgr).ExecuteNonQuery(CommandType.Text, str);
                     }
                     else
@@ -1653,7 +1653,7 @@ namespace RecoEngine_BI
                         {
                             str = string.Concat(str, " Where ", strFilerCondition);
                         }
-                        str = string.Concat(str, " ORDER BY DBMS_RANDOM.RANDOM) WHERE  rownum < 5000)K WHERE C.CUSTOMER=K.RNDMCUSTOMER ");
+                        str = string.Concat(str, " ORDER BY rand() Limit 5000) K WHERE C.CUSTOMER=K.RNDMCUSTOMER ");
                         ((MySqlDBManager)Common.dbMgr).ExecuteNonQuery(CommandType.Text, str);
                     }
                     if (num == 0 && str5 != "")
@@ -1767,7 +1767,15 @@ namespace RecoEngine_BI
             string str1 = "";
             DataTable dataTable = new DataTable();
             str = string.Concat("Select FILTER FROM FILTER_MAIN WHERE PROJECT_ID=", iProjectid);
-            dataTable = ((OraDBManager)Common.dbMgr).ExecuteDataTable(CommandType.Text, str);
+            if (Common.iDBType == 1)
+            { 
+                dataTable = ((OraDBManager)Common.dbMgr).ExecuteDataTable(CommandType.Text, str);
+             }
+            else if(Common.iDBType == 3)
+            {
+                dataTable = ((MySqlDBManager)Common.dbMgr).ExecuteDataTable(CommandType.Text, str);
+            }
+
             if (dataTable.Rows.Count > 0)
             {
                 str1 = dataTable.Rows[0]["FILTER"].ToString();

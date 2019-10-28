@@ -14,9 +14,13 @@ namespace RecoEngine_BI
             try
             {
                 DataTable dt;
+                string strsql1 = string.Empty;
+                strsql1 = "select distinct concat(ifnull(DATE_FORMAT (sysdate(), year), '') , '-' , ifnull(DATE_FORMAT (sysdate(),week), '')) as timeperiod,year,week  from " +  strTableName + "  where year is not null  and week is not null  order by year desc, week desc";
                 string strSQl = "select distinct to_char(YEAR) || '-' || to_char(WEEK) as timeperiod,year,week  from " + strTableName + "  where YEAR is not null  and WEEK is not null  order by year desc, week desc";
                 if (Common.iDBType == (int)Enums.DBType.Oracle)
                     dt = ((OraDBManager)Common.dbMgr).ExecuteDataTable(CommandType.Text, strSQl);
+                else if (Common.iDBType == (int)Enums.DBType.Mysql)
+                dt = ((MySqlDBManager)Common.dbMgr).ExecuteDataTable(CommandType.Text, strsql1);
                 else
                 {
                     dt = ((DBManager)Common.dbMgr).ExecuteDataTable(CommandType.Text, strSQl);
@@ -862,6 +866,10 @@ namespace RecoEngine_BI
                     {
                         ((OraDBManager)Common.dbMgr).ExecuteScalar(CommandType.Text, strSql);
                     }
+                   else if (Common.iDBType == (int)Enums.DBType.Oracle)
+                    {
+                        ((MySqlDBManager)Common.dbMgr).ExecuteScalar(CommandType.Text, strSql);
+                    }
                     else
                     {
                         ((DBManager)Common.dbMgr).ExecuteScalar(CommandType.Text, strSql);
@@ -871,6 +879,10 @@ namespace RecoEngine_BI
                     if (Common.iDBType == (int)Enums.DBType.Oracle)
                     {
                         ((OraDBManager)Common.dbMgr).ExecuteScalar(CommandType.Text, strSql);
+                    }
+                    if (Common.iDBType == (int)Enums.DBType.Mysql)
+                    {
+                        ((MySqlDBManager)Common.dbMgr).ExecuteScalar(CommandType.Text, strSql);
                     }
                     else
                     {
@@ -905,6 +917,15 @@ namespace RecoEngine_BI
                             //((OraDBManager)Common.dbMgr).BeginTrans();
                         }
                     }
+                   else if (Common.iDBType == (int)Enums.DBType.Mysql)
+                    {
+                        ((MySqlDBManager)Common.dbMgr).ExecuteScalar(CommandType.Text, strInsertATable);
+                        if (bIsONMain)
+                        {
+                            //((OraDBManager)Common.dbMgr).CommitTrans();
+                            //((OraDBManager)Common.dbMgr).BeginTrans();
+                        }
+                    }
                     else
                     {
                         ((DBManager)Common.dbMgr).ExecuteScalar(CommandType.Text, strInsertATable);
@@ -931,6 +952,15 @@ namespace RecoEngine_BI
                     if (Common.iDBType == (int)Enums.DBType.Oracle)
                     {
                         ((OraDBManager)Common.dbMgr).ExecuteScalar(CommandType.Text, strInsertBTable);
+                        if (bIsONMain)
+                        {
+                            //((OraDBManager)Common.dbMgr).CommitTrans();
+                            //((OraDBManager)Common.dbMgr).BeginTrans();
+                        }
+                    }
+                    else if (Common.iDBType == (int)Enums.DBType.Mysql)
+                    {
+                        ((MySqlDBManager)Common.dbMgr).ExecuteScalar(CommandType.Text, strInsertBTable);
                         if (bIsONMain)
                         {
                             //((OraDBManager)Common.dbMgr).CommitTrans();
@@ -1069,6 +1099,8 @@ namespace RecoEngine_BI
                 string strSql = "Select TIMEPERIOD_ID from TRE_TIMEPERIOD WHERE T1='" + strT1String + "' And T2='" + strT2String + "'";
                 if (Common.iDBType == (int)Enums.DBType.Oracle)
                     dt = ((OraDBManager)Common.dbMgr).ExecuteDataTable(CommandType.Text, strSql);
+                else if (Common.iDBType == (int)Enums.DBType.Mysql)
+                    dt = ((MySqlDBManager)Common.dbMgr).ExecuteDataTable(CommandType.Text, strSql);
                 else if (Common.iDBType == (int)Enums.DBType.SQl)
                     dt = ((DBManager)Common.dbMgr).ExecuteDataTable(CommandType.Text, strSql);
 
@@ -1083,12 +1115,16 @@ namespace RecoEngine_BI
 
                     if (Common.iDBType == (int)Enums.DBType.Oracle)
                         ((OraDBManager)Common.dbMgr).ExecuteScalar(CommandType.Text, strSql);
+                    else if (Common.iDBType == (int)Enums.DBType.Mysql)
+                        ((MySqlDBManager)Common.dbMgr).ExecuteScalar(CommandType.Text, strSql);
                     else
                         ((DBManager)Common.dbMgr).ExecuteScalar(CommandType.Text, strSql);
 
                     strSql = "Select NVL(MAX(TIMEPERIOD_ID), 0) AS TIMEPERIOD_ID from TRE_TIMEPERIOD";
                     if (Common.iDBType == (int)Enums.DBType.Oracle)
                         iTimePeriodID = int.Parse(((OraDBManager)Common.dbMgr).ExecuteScalar(CommandType.Text, strSql));
+                    else if (Common.iDBType == (int)Enums.DBType.Mysql)
+                        iTimePeriodID = int.Parse(((MySqlDBManager)Common.dbMgr).ExecuteScalar(CommandType.Text, strSql));
                     else
                         iTimePeriodID = int.Parse(((DBManager)Common.dbMgr).ExecuteScalar(CommandType.Text, strSql));
                 }
@@ -1098,6 +1134,8 @@ namespace RecoEngine_BI
 
                 if (Common.iDBType == (int)Enums.DBType.Oracle)
                     dt = ((OraDBManager)Common.dbMgr).ExecuteDataTable(CommandType.Text, strSql);
+                if (Common.iDBType == (int)Enums.DBType.Mysql)
+                    dt = ((MySqlDBManager)Common.dbMgr).ExecuteDataTable(CommandType.Text, strSql);
                 else if (Common.iDBType == (int)Enums.DBType.SQl)
                     dt = ((DBManager)Common.dbMgr).ExecuteDataTable(CommandType.Text, strSql);
 
@@ -1117,6 +1155,8 @@ namespace RecoEngine_BI
 
                 if (Common.iDBType == (int)Enums.DBType.Oracle)
                     dt = ((OraDBManager)Common.dbMgr).ExecuteDataTable(CommandType.Text, strSql);
+                if (Common.iDBType == (int)Enums.DBType.Mysql)
+                    dt = ((MySqlDBManager)Common.dbMgr).ExecuteDataTable(CommandType.Text, strSql);
                 else if (Common.iDBType == (int)Enums.DBType.SQl)
                     dt = ((DBManager)Common.dbMgr).ExecuteDataTable(CommandType.Text, strSql);
 
