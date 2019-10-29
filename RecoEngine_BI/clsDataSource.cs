@@ -246,10 +246,15 @@ namespace RecoEngine_BI
             {
                 DataTable dataTable1 = new DataTable();
                 string str = "";
-                if (Common.iDBType != 1)
+                if (Common.iDBType == 1)
                 {
-                    str = string.Concat("select top 100 * from ", strTabName);
-                    dataTable1 = ((DBManager)Common.dbMgr).ExecuteDataTable(CommandType.Text, str);
+                    str = (strTabName != "Tre_Random" ? string.Concat("Select * from ", strTabName, "  where ROWNUM <= 100") : string.Concat("Select * from ", strTabName));
+                    dataTable1 = ((OraDBManager)Common.dbMgr).ExecuteDataTable(CommandType.Text, str);
+                }
+                else if (Common.iDBType == 3)
+                {
+                    str = (strTabName != "Tre_Random" ? string.Concat("Select * from ", strTabName, "  where ROWNUM <= 100") : string.Concat("Select * from ", strTabName));
+                    dataTable1 = ((MySqlDBManager)Common.dbMgr).ExecuteDataTable(CommandType.Text, str);
                 }
                 else
                 {
@@ -1340,11 +1345,11 @@ namespace RecoEngine_BI
                             }
                             else if (dataRow["dataType"].ToString() != "System.Decimal")
                             {
-                                str17 = (dataRow["dataType"].ToString() != "System.DateTime" ? " Number (18,2)" : " Date ");
+                                str17 = (dataRow["dataType"].ToString() != "System.DateTime" ? " bigint" : " Date ");
                             }
                             else
                             {
-                                str17 = " Number (18,2)";
+                                str17 = " Double ";
                             }
                             if (dataRow["type"].ToString() == 2.ToString())
                             {
@@ -1641,7 +1646,7 @@ namespace RecoEngine_BI
                         {
                             str = string.Concat(str, " Where ", strFilerCondition);
                         }
-                        str = string.Concat(str, " ORDER BY Rand() Limit 5000)K WHERE C.CUSTOMER=K.RNDMCUSTOMER ");
+                        str = string.Concat(str, " ORDER BY Rand() Limit 5000)R)K WHERE C.CUSTOMER=K.RNDMCUSTOMER ");
                         ((MySqlDBManager)Common.dbMgr).ExecuteNonQuery(CommandType.Text, str);
                     }
                     else
@@ -1658,7 +1663,7 @@ namespace RecoEngine_BI
                     }
                     if (num == 0 && str5 != "")
                     {
-                        str1 = string.Concat(str1, "TIMEPERIOD_ID number");
+                        str1 = string.Concat(str1, "TIMEPERIOD_ID int");
                         if (str3 != "")
                         {
                             str1 = string.Concat(str1, ",", str3);
@@ -1667,13 +1672,13 @@ namespace RecoEngine_BI
                         {
                             str1 = string.Concat(str1, ",", str4);
                         }
-                        str1 = string.Concat(str1, ",", str5, ") NOLOGGING");
-                        str2 = string.Concat(str2, "TIMEPERIOD_ID number");
+                        str1 = string.Concat(str1, ",", str5, ") ");
+                        str2 = string.Concat(str2, "TIMEPERIOD_ID int");
                         if (str3 != "")
                         {
                             str2 = string.Concat(str2, ",", str3);
                         }
-                        str2 = string.Concat(str2, ",", str6, ") NOLOGGING");
+                        str2 = string.Concat(str2, ",", str6, ") ");
                         
                             ((MySqlDBManager)Common.dbMgr).ExecuteScalar(CommandType.Text, str1);
                             ((MySqlDBManager)Common.dbMgr).ExecuteScalar(CommandType.Text, str2);
@@ -1691,29 +1696,22 @@ namespace RecoEngine_BI
                             str21 = string.Concat(str21, ",", str4);
                         }
                         string str22 = str9;
-                        string[] strArrays6 = new string[] { str22, str21, ",", str12, ") NOLOGGING" };
+                        string[] strArrays6 = new string[] { str22, str21, ",", str12, ") " };
                         str9 = string.Concat(strArrays6);
                         string str23 = str10;
-                        string[] strArrays7 = new string[] { str23, str21, ",", str13, ") NOLOGGING" };
+                        string[] strArrays7 = new string[] { str23, str21, ",", str13, ") " };
                         str10 = string.Concat(strArrays7);
                         string str24 = str11;
-                        string[] strArrays8 = new string[] { str24, str21, ",", str14, ") NOLOGGING" };
+                        string[] strArrays8 = new string[] { str24, str21, ",", str14, ") " };
                         str11 = string.Concat(strArrays8);
-                        str = "CREATE TABLE TRE_OPPORTUNITY ( CUSTOMER varchar2(50)  NULL,";
-                        str = string.Concat(str, "WEEK number(2)  NULL )  NOLOGGING");
-                        if (Common.iDBType != 1)
-                        {
-                            ((DBManager)Common.dbMgr).ExecuteScalar(CommandType.Text, str9);
-                            ((DBManager)Common.dbMgr).ExecuteScalar(CommandType.Text, str10);
-                            ((DBManager)Common.dbMgr).ExecuteScalar(CommandType.Text, str11);
-                        }
-                        else
-                        {
+                        str = "CREATE TABLE TRE_OPPORTUNITY ( CUSTOMER varchar(50) ,";
+                        str = string.Concat(str, "WEEK int   )  ");
+                     
                             ((MySqlDBManager)Common.dbMgr).ExecuteScalar(CommandType.Text, str9);
                             ((MySqlDBManager)Common.dbMgr).ExecuteScalar(CommandType.Text, str10);
                             ((MySqlDBManager)Common.dbMgr).ExecuteScalar(CommandType.Text, str11);
                             ((MySqlDBManager)Common.dbMgr).ExecuteScalar(CommandType.Text, str);
-                        }
+                        
                     }
                     if (num1 == 0 && str7 != "")
                     {
