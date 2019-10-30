@@ -765,6 +765,10 @@ namespace RecoEngine_BI
                                 {
                                     num3 = int.Parse(((OraDBManager)Common.dbMgr).ExecuteScalar(CommandType.Text, str));
                                 }
+                                if (Common.iDBType == 3)
+                                {
+                                    num3 = int.Parse(((MySqlDBManager)Common.dbMgr).ExecuteScalar(CommandType.Text, str));
+                                }
                                 if (num3 == 0)
                                 {
                                     if (num != 0)
@@ -1717,9 +1721,9 @@ namespace RecoEngine_BI
                     {
                         if (str7 != "")
                         {
-                            str7 = string.Concat("CREATE TABLE ETS_TRE_X_SELL_PNTL(TIMEPERIOD varchar2(50),SEGMENTCOLNAME varchar(50),CURRENTSEGMENT VARCHAR(50), ", str7, ") NOLOGGING");
+                            str7 = string.Concat("CREATE TABLE ETS_TRE_X_SELL_PNTL(TIMEPERIOD varchar(50),SEGMENTCOLNAME varchar(50),CURRENTSEGMENT VARCHAR(50), ", str7, ") ");
                         }
-                        if (Common.iDBType == 1)
+                        if (Common.iDBType == 3)
                         {
                             ((MySqlDBManager)Common.dbMgr).ExecuteScalar(CommandType.Text, str7);
                         }
