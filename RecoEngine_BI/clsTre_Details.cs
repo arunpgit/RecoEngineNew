@@ -343,6 +343,8 @@ namespace RecoEngine_BI
                 strSql = "Select * from TRE_MAPPING where TABLENAME='" + strTabName + "'" + " and  PROJECTID=" + iProjectId;
                 if (Common.iDBType == (int)Enums.DBType.Oracle)
                     dtTab = ((OraDBManager)Common.dbMgr).ExecuteDataTable(CommandType.Text, strSql);
+               else if (Common.iDBType == (int)Enums.DBType.Mysql)
+                    dtTab = ((MySqlDBManager)Common.dbMgr).ExecuteDataTable(CommandType.Text, strSql);
                 else
                     dtTab = ((DBManager)Common.dbMgr).ExecuteDataTable(CommandType.Text, strSql);
 
@@ -435,11 +437,28 @@ namespace RecoEngine_BI
 
                 //if (iCount == 0)
                 //{
+                if(Common.iDBType == (int)Enums.DBType.Mysql)
+                {
+                    string strInsertSString1 = string.Empty;
+                    ((MySqlDBManager)Common.dbMgr).ExecuteScalar(CommandType.Text, "Drop Table ETS_TRE_X_SELL_PNTL");
+                    strInsertSString1= strInsertSString.Replace(",", " Double ,");
+                   if( strInsertSString.Contains("X_ARPU") == true)
+                    {
+                        strInsertSString1 = strInsertSString1.Replace("X_ARPU Double", "X_ARPU DECIMAL(18,2)");
+                    }
+                    
+                    strSql = "CREATE TABLE  ETS_TRE_X_SELL_PNTL(TIMEPERIOD BIGINT(11) NOT NULL, SegmentColName varchar(200), CURRENTSEGMENT varchar(200), " + strInsertSString1 + " Double)";
+                    ((MySqlDBManager)Common.dbMgr).ExecuteScalar(CommandType.Text, strSql);
+                }
 
                 strSql = "truncate Table ETS_TRE_X_SELL_PNTL";
                 if (Common.iDBType == (int)Enums.DBType.Oracle)
                 {
                     ((OraDBManager)Common.dbMgr).ExecuteScalar(CommandType.Text, strSql);
+                }
+                if (Common.iDBType == (int)Enums.DBType.Mysql)
+                {
+                    ((MySqlDBManager)Common.dbMgr).ExecuteScalar(CommandType.Text, strSql);
                 }
                 else
                 {
@@ -464,6 +483,15 @@ namespace RecoEngine_BI
                         //((OraDBManager)Common.dbMgr).BeginTrans();
                     
                 }
+                else if (Common.iDBType == (int)Enums.DBType.Mysql)
+                {
+                    ((MySqlDBManager)Common.dbMgr).ExecuteScalar(CommandType.Text, strInsertString);
+
+
+                    //((OraDBManager)Common.dbMgr).CommitTrans();
+                    //((OraDBManager)Common.dbMgr).BeginTrans();
+
+                }
                 else
                 {
                     ((DBManager)Common.dbMgr).ExecuteScalar(CommandType.Text, strInsertString);
@@ -475,6 +503,10 @@ namespace RecoEngine_BI
                 if (Common.iDBType == (int)Enums.DBType.Oracle)
                 {
                     ((OraDBManager)Common.dbMgr).ExecuteScalar(CommandType.Text, strSql);
+                }
+               else  if (Common.iDBType == (int)Enums.DBType.Mysql)
+                {
+                    ((MySqlDBManager)Common.dbMgr).ExecuteScalar(CommandType.Text, strSql);
                 }
                 else
                 {
@@ -499,15 +531,28 @@ namespace RecoEngine_BI
 
                 if (strSegmentVString != "")
                     strInsertString += strSegmentVString + ",";
+                if (Common.iDBType == (int)Enums.DBType.Oracle)
+                    {
 
-                strInsertString += strETS_TRE_BASEVString + " From ETS_ADM_WEEKLY_A A, ETS_ADM_WEEKLY_B B,ETS_TRE_X_SELL_PNTL C WHERE ";
-                strInsertString += strKeyCString + " (+) " + " And A." + strSegmentColumn + " = C.CURRENTSEGMENT ";
-                //where a.msisdn = b.msisdn (+) and nvl(b.A_decile,'Not Tagged') = c.a_current_segment;
-
+                        strInsertString += strETS_TRE_BASEVString + " From ETS_ADM_WEEKLY_A A, ETS_ADM_WEEKLY_B B,ETS_TRE_X_SELL_PNTL C WHERE ";
+                        strInsertString += strKeyCString + " (+) " + " And A." + strSegmentColumn + " = C.CURRENTSEGMENT ";
+                        //where a.msisdn = b.msisdn (+) and nvl(b.A_decile,'Not Tagged') = c.a_current_segment;
+                    }
+                else if(Common.iDBType == (int)Enums.DBType.Mysql)
+                {
+                    strInsertString += strETS_TRE_BASEVString + " From ETS_ADM_WEEKLY_A A, ETS_ADM_WEEKLY_B B,ETS_TRE_X_SELL_PNTL C WHERE ";
+                    strInsertString += strKeyCString + " " + " And A." + strSegmentColumn + " = C.CURRENTSEGMENT ";
+                }
 
                 if (Common.iDBType == (int)Enums.DBType.Oracle)
                 {
                     ((OraDBManager)Common.dbMgr).ExecuteScalar(CommandType.Text, strInsertString);
+                    //((OraDBManager)Common.dbMgr).CommitTrans();
+                    //((OraDBManager)Common.dbMgr).BeginTrans();
+                }
+               else if (Common.iDBType == (int)Enums.DBType.Mysql)
+                {
+                    ((MySqlDBManager)Common.dbMgr).ExecuteScalar(CommandType.Text, strInsertString);
                     //((OraDBManager)Common.dbMgr).CommitTrans();
                     //((OraDBManager)Common.dbMgr).BeginTrans();
                 }
@@ -1046,6 +1091,8 @@ namespace RecoEngine_BI
                 string strSql = "Select TIMEPERIOD_ID from TRE_TIMEPERIOD WHERE T1='" + strT1String + "' AND  T2='" + strT2String + "'";
                 if (Common.iDBType == (int)Enums.DBType.Oracle)
                     dt = ((OraDBManager)Common.dbMgr).ExecuteDataTable(CommandType.Text, strSql);
+                if (Common.iDBType == (int)Enums.DBType.Mysql)
+                    dt = ((MySqlDBManager)Common.dbMgr).ExecuteDataTable(CommandType.Text, strSql);
                 else if (Common.iDBType == (int)Enums.DBType.SQl)
                     dt = ((DBManager)Common.dbMgr).ExecuteDataTable(CommandType.Text, strSql);
 
@@ -1060,6 +1107,8 @@ namespace RecoEngine_BI
 
                 if (Common.iDBType == (int)Enums.DBType.Oracle)
                     iCount = int.Parse(((OraDBManager)Common.dbMgr).ExecuteScalar(CommandType.Text, strSql));
+                else if (Common.iDBType == (int)Enums.DBType.Mysql)
+                    iCount = int.Parse(((MySqlDBManager)Common.dbMgr).ExecuteScalar(CommandType.Text, strSql));
                 else if (Common.iDBType == (int)Enums.DBType.SQl)
                     iCount = int.Parse(((OraDBManager)Common.dbMgr).ExecuteScalar(CommandType.Text, strSql));
 
@@ -1072,6 +1121,8 @@ namespace RecoEngine_BI
 
                 if (Common.iDBType == (int)Enums.DBType.Oracle)
                     dt = ((OraDBManager)Common.dbMgr).ExecuteDataTable(CommandType.Text, strSql);
+                else if (Common.iDBType == (int)Enums.DBType.Mysql)
+                    dt = ((MySqlDBManager)Common.dbMgr).ExecuteDataTable(CommandType.Text, strSql);
                 else if (Common.iDBType == (int)Enums.DBType.SQl)
                     dt = ((DBManager)Common.dbMgr).ExecuteDataTable(CommandType.Text, strSql);
 
