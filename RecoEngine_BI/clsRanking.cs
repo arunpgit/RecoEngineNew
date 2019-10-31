@@ -10,196 +10,311 @@ namespace RecoEngine_BI
 {
     public class clsRanking
     {
-
-        public string fnOpportunitiesRnkng(int iProjectid)
+        public clsRanking()
         {
-            DataTable dt;
-            string strSql = "";
-            strSql = "Select OPP_NAME from Opportunity  where  Project_id= " + iProjectid;
-            if (Common.iDBType == (int)Enums.DBType.Oracle)
-                dt = ((OraDBManager)Common.dbMgr).ExecuteDataTable(CommandType.Text, strSql);
-            else
-                dt = ((DBManager)Common.dbMgr).ExecuteDataTable(CommandType.Text, strSql);
-
-            //OraDBManager con = new OraDBManager(((DBManager)Common.dbMgr).GetConnectionString);
-            //DataContext dc = new DataContext(((DBManager)Common.dbMgr).GetConnectionString);
-
-            //DataTable dtTemp=from dt1 in dc.GetTable<DataTable>() 
-            //where dt1.TableName.Equals("Opportunity")
-
-            //DataTable dtTemp= 
-
-            strSql = " Insert into CUSTOMER_PNTL (OPP_NAME,OPP_PNTL,Opp_Status)";
-            foreach (DataRow dr in dt.Rows)
-            {
-                strSql += " Select  '" + dr[0].ToString() + "'  ," + dr[0].ToString() + "_Pntl , " + " CASE  When " + dr[0].ToString() + "_STATUS= 'NON_USER' Then 'X-SELL-" + dr[0].ToString() + "'";
-                strSql += " When " + dr[0].ToString() + "_STATUS= 'DROPPER' Then 'MITIGATE-" +dr[0].ToString()+"'" ;
-                strSql += " When " + dr[0].ToString() + "_STATUS= 'STOPPER' Then 'REVIVE-" + dr[0].ToString() + "'";
-                strSql += " When " + dr[0].ToString() + "_STATUS= 'GROWER' Then 'NO ACTION-" + dr[0].ToString() + "'";
-                strSql += " When " + dr[0].ToString() + "_STATUS= 'FLAT' Then 'UP-SELL-" + dr[0].ToString() + "'";
-                strSql += " When " + dr[0].ToString() + "_STATUS= 'NEW_USER' Then 'NO ACTION' END   FROM TRE_OPPORTUNITY WHERE CUSTOMER=cust_rec.customer ";
-                strSql += " Union";
-            }
-              return strSql = strSql.Remove(strSql.Length -5, 5) + ";";
         }
 
-        public void fnCustomRanking(int iProjectid,string strRank1,string strRank2,string strRank3,string strRank4)
+        public bool fnCheckOpportunityExists(int iProjectId)
+        {
+            DataTable dataTable = null;
+            string str = "";
+            str = string.Concat("Select OPP_NAME from Opportunity  where ISONMAIN=0 and Project_id= ", iProjectId);
+            if (Common.iDBType == 1 || Common.iDBType == 2)
+            {
+                dataTable = (Common.iDBType == 2 ? ((DBManager)Common.dbMgr).ExecuteDataTable(CommandType.Text, str) : ((OraDBManager)Common.dbMgr).ExecuteDataTable(CommandType.Text, str));
+            }
+            else if(Common.iDBType ==3)
+            {
+                dataTable = ((DBManager)Common.dbMgr).ExecuteDataTable(CommandType.Text, str);
+
+            }
+            if (dataTable.Rows.Count > 0)
+            {
+                return true;
+            }
+            return false;
+        }
+
+        public void fnCustomRanking(int iProjectid, string strRank1, string strRank2, string strRank3, string strRank4)
         {
             try
             {
-                string strSql = "";
-                strSql = "Delete from TRE_RANKING ";
-                if (Common.iDBType == (int)Enums.DBType.Oracle)
-                    ((OraDBManager)Common.dbMgr).ExecuteNonQuery(CommandType.Text, strSql);
-                else if (Common.iDBType == (int)Enums.DBType.SQl)
-                    ((DBManager)Common.dbMgr).ExecuteNonQuery(CommandType.Text, strSql);
+                string str = "";
+                str = "Delete from TRE_RANKING ";
+                if (Common.iDBType == 1)
+                {
+                    ((OraDBManager)Common.dbMgr).ExecuteNonQuery(CommandType.Text, str);
+                }
+                else if (Common.iDBType == 2)
+                {
+                    ((DBManager)Common.dbMgr).ExecuteNonQuery(CommandType.Text, str);
+                }
+                else if (Common.iDBType == 3)
+                {
+                    ((MySqlDBManager)Common.dbMgr).ExecuteNonQuery(CommandType.Text, str);
 
-                strSql = " DECLARE ";
-                strSql += " Rank1 Customer_Pntl.Opp_Pntl%TYPE;";
-                strSql += " Rank2 Customer_Pntl.Opp_Pntl%TYPE;";
-                strSql += " Rank3 Customer_Pntl.Opp_Pntl%TYPE;";
-                strSql += " Rank4 Customer_Pntl.Opp_Pntl%TYPE;";
-                strSql += " Rank1_Name Customer_Pntl.Opp_Name%TYPE ;";
-                strSql += " Rank2_Name Customer_Pntl.Opp_Name%TYPE ;";
-                strSql += " Rank3_Name Customer_Pntl.Opp_Name%TYPE ;";
-                strSql += " Rank4_Name Customer_Pntl.Opp_Name%TYPE ;";
-                strSql += " Rank1_Action Customer_Pntl.Opp_Status%TYPE;";
-                strSql += " Rank2_Action Customer_Pntl.Opp_Status%TYPE;";
-                strSql += " Rank3_Action Customer_Pntl.Opp_Status%TYPE;";
-                strSql += " Rank4_Action Customer_Pntl.Opp_Status%TYPE;";
-                strSql += " customer  Tre_Opportunity.CUSTOMER%TYPE;";
-                strSql += " Counter integer :=0;";
-                strSql += " CURSOR ttl_customer IS ";
-                strSql += " SELECT CUSTOMER FROM Tre_Opportunity; ";
-                strSql += " BEGIN ";
-                strSql += " FOR cust_rec in ttl_customer";
-                strSql += " LOOP";
-                strSql += fnOpportunitiesRnkng(iProjectid);
-                strSql += " Rank1_Name  :='" + strRank1 + "';";
-                strSql += " Rank2_Name  :='" + strRank2 + "';";
-                strSql += " Rank3_Name  :='" + strRank3 + "';";
-                strSql += " Rank4_Name  :='" + strRank4 + "';";
-                strSql += " Customrank_Selection(cust_rec.customer,Rank1,Rank2,Rank3,Rank4,Counter,Rank1_Name,Rank2_Name,Rank3_Name,Rank4_Name,Rank1_Action,Rank2_Action,Rank3_Action,Rank4_Action);";
-                strSql += " Delete  from CUSTOMER_PNTL; ";
-                strSql += " end LOOP;";
-                strSql += " END;";
-                if (Common.iDBType == (int)Enums.DBType.Oracle)
-                    ((OraDBManager)Common.dbMgr).ExecuteNonQuery(CommandType.Text, strSql);
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
-        }
+                }
+                str = " DECLARE ";
+                str = string.Concat(str, " Rank1 Customer_Pntl.Opp_Pntl%TYPE;");
+                str = string.Concat(str, " Rank2 Customer_Pntl.Opp_Pntl%TYPE;");
+                str = string.Concat(str, " Rank3 Customer_Pntl.Opp_Pntl%TYPE;");
+                str = string.Concat(str, " Rank4 Customer_Pntl.Opp_Pntl%TYPE;");
+                str = string.Concat(str, " Rank1_Name Customer_Pntl.Opp_Name%TYPE ;");
+                str = string.Concat(str, " Rank2_Name Customer_Pntl.Opp_Name%TYPE ;");
+                str = string.Concat(str, " Rank3_Name Customer_Pntl.Opp_Name%TYPE ;");
+                str = string.Concat(str, " Rank4_Name Customer_Pntl.Opp_Name%TYPE ;");
+                str = string.Concat(str, " Rank1_Action Customer_Pntl.Opp_Status%TYPE;");
+                str = string.Concat(str, " Rank2_Action Customer_Pntl.Opp_Status%TYPE;");
+                str = string.Concat(str, " Rank3_Action Customer_Pntl.Opp_Status%TYPE;");
+                str = string.Concat(str, " Rank4_Action Customer_Pntl.Opp_Status%TYPE;");
+                str = string.Concat(str, " customer  Tre_Opportunity.CUSTOMER%TYPE;");
+                str = string.Concat(str, " Counter integer :=0;");
+                str = string.Concat(str, " CURSOR ttl_customer IS ");
+                str = string.Concat(str, " SELECT CUSTOMER FROM Tre_Opportunity; ");
+                str = string.Concat(str, " BEGIN ");
+                str = string.Concat(str, " FOR cust_rec in ttl_customer");
+                str = string.Concat(str, " LOOP");
+                str = string.Concat(str, this.fnOpportunitiesRnkng(iProjectid));
+                str = string.Concat(str, " Rank1_Name  :='", strRank1, "';");
+                str = string.Concat(str, " Rank2_Name  :='", strRank2, "';");
+                str = string.Concat(str, " Rank3_Name  :='", strRank3, "';");
+                str = string.Concat(str, " Rank4_Name  :='", strRank4, "';");
+                str = string.Concat(str, " Customrank_Selection(cust_rec.customer,Rank1,Rank2,Rank3,Rank4,Counter,Rank1_Name,Rank2_Name,Rank3_Name,Rank4_Name,Rank1_Action,Rank2_Action,Rank3_Action,Rank4_Action);");
+                str = string.Concat(str, " Delete  from CUSTOMER_PNTL; ");
+                str = string.Concat(str, " end LOOP;");
+                str = string.Concat(str, " END;");
+                if (Common.iDBType == 1)
+                {
+                    ((OraDBManager)Common.dbMgr).ExecuteNonQuery(CommandType.Text, str);
+                }else if(Common.iDBType ==3)
+                {
+                    ((MySqlDBManager)Common.dbMgr).ExecuteNonQuery(CommandType.Text, str);
 
-        public void fnPotentialRanking(int iProjectid)
-        {
-            try
-            {
-                string strSql = "";
-                strSql = "Delete from TRE_RANKING ";
-                if (Common.iDBType == (int)Enums.DBType.Oracle)
-                    ((OraDBManager)Common.dbMgr).ExecuteNonQuery(CommandType.Text, strSql);
-                else if (Common.iDBType == (int)Enums.DBType.SQl)
-                    ((DBManager)Common.dbMgr).ExecuteNonQuery(CommandType.Text, strSql);
-                strSql  = " DECLARE ";
-                strSql += " Rank1 Customer_Pntl.Opp_Pntl%TYPE;";
-                strSql += " Rank2 Customer_Pntl.Opp_Pntl%TYPE;";
-                strSql += " Rank3 Customer_Pntl.Opp_Pntl%TYPE;";
-                strSql += " Rank4 Customer_Pntl.Opp_Pntl%TYPE;";
-                strSql += " Rank1_Name Customer_Pntl.Opp_Name%TYPE ;";
-                strSql += " Rank2_Name Customer_Pntl.Opp_Name%TYPE ;";
-                strSql += " Rank3_Name Customer_Pntl.Opp_Name%TYPE ;";
-                strSql += " Rank4_Name Customer_Pntl.Opp_Name%TYPE ;";
-                strSql += " Rank1_Action Customer_Pntl.Opp_Status%TYPE;";
-                strSql += " Rank2_Action Customer_Pntl.Opp_Status%TYPE;";
-                strSql += " Rank3_Action Customer_Pntl.Opp_Status%TYPE;";
-                strSql += " Rank4_Action Customer_Pntl.Opp_Status%TYPE;";
-                strSql += " customer  Tre_Opportunity.CUSTOMER%TYPE;";
-                strSql += " CURSOR ttl_customer IS ";
-                strSql += " SELECT CUSTOMER FROM Tre_Opportunity; ";
-                strSql += " BEGIN ";
-                strSql += " FOR cust_rec in ttl_customer";
-                strSql += " LOOP ";
-                strSql += fnOpportunitiesRnkng(iProjectid);
-                strSql += " Rank_Selection(cust_rec.customer,Rank1,Rank2,Rank3,Rank4,Rank1_Name,Rank2_Name,Rank3_Name,Rank4_Name,Rank1_Action,Rank2_Action,Rank3_Action,Rank4_Action);";
-                strSql += " Delete  from CUSTOMER_PNTL; ";
-                strSql += " end LOOP;";
-                strSql += " END;";
-                if (Common.iDBType == (int)Enums.DBType.Oracle)
-                    ((OraDBManager)Common.dbMgr).ExecuteNonQuery(CommandType.Text, strSql);
+                }
             }
-            catch (Exception ex)
+            catch (Exception exception)
             {
-                throw ex;
+                throw exception;
             }
-        
         }
 
         public void fnCustomRankingFrmExport(int iProjectid, string strRank1, string strRank2, string strRank3, string strRank4)
         {
             try
             {
-                string strSql = "";
-                DataTable dtTemp1 = null;
-                DataTable dtTemp2 = null;
-                string strColPntl = "";
-                string strColStatus = "";
-                string strColumns_PNTL = "";
-                string strColumns_STATUS = "";
-                string strCustomCols = "";
-                string str_CustomCols = "";
-
-                strSql = "Select OPP_NAME from OPPORTUNITY";
-                if (Common.iDBType == (int)Enums.DBType.Oracle)
-                    dtTemp1 = ((OraDBManager)Common.dbMgr).ExecuteDataTable(CommandType.Text, strSql);
-                else if (Common.iDBType == (int)Enums.DBType.SQl)
-                    dtTemp1 = ((DBManager)Common.dbMgr).ExecuteDataTable(CommandType.Text, strSql);
-
-                foreach (DataRow dr in dtTemp1.Rows)
+                string str = "";
+                str = "Delete from TRE_RANKING ";
+                if (Common.iDBType == 1)
                 {
-                    strColPntl = strColPntl + dr.ItemArray[0].ToString() + "_PNTL as '" + dr.ItemArray[0].ToString() + "' , ";
-                    strColStatus = strColStatus + dr.ItemArray[0].ToString() + "_STATUS as '" + dr.ItemArray[0].ToString() + "' , ";
+                    ((OraDBManager)Common.dbMgr).ExecuteNonQuery(CommandType.Text, str);
                 }
-
-                strSql = "Select RANK1, RANK2, RANK3, RANK4 from OPPORTUNITY_RANKING";
-                if (Common.iDBType == (int)Enums.DBType.Oracle)
-                    dtTemp2 = ((OraDBManager)Common.dbMgr).ExecuteDataTable(CommandType.Text, strSql);
-                else if (Common.iDBType == (int)Enums.DBType.SQl)
-                    dtTemp2 = ((DBManager)Common.dbMgr).ExecuteDataTable(CommandType.Text, strSql);
-
-                foreach (DataRow dr in dtTemp2.Rows)
+                else if (Common.iDBType == 2)
                 {
-                    strCustomCols = "'" + dr.ItemArray[0].ToString() + "'" + " , " + "'" + dr.ItemArray[1].ToString() + "'" + " , " + "'" + dr.ItemArray[2].ToString() + "'" + " ," + "'" +
-                                                                                   dr.ItemArray[3].ToString() + "'";
+                    ((DBManager)Common.dbMgr).ExecuteNonQuery(CommandType.Text, str);
                 }
-
-                strColumns_PNTL = strColPntl.Replace("'", "''");
-                strColumns_STATUS = strColStatus.Replace("'", "''");
-                str_CustomCols = strCustomCols.Replace("'", "''");
-
-                strColumns_PNTL = strColumns_PNTL.Remove((strColumns_PNTL.Length) - 2);
-                strColumns_STATUS = strColumns_STATUS.Remove((strColumns_STATUS.Length) - 2);
-
-                strSql = " DECLARE ";
-                strSql += " strModColumnsPNTL string(20000);";
-                strSql += " strModColumnsSTATUS string(20000);";
-                strSql += " strCustomCol string(20000);";
-                strSql += " BEGIN";
-                strSql += " strModColumnsPNTL := '" + strColumns_PNTL + "';";
-                strSql += " strModColumnsSTATUS := '" + strColumns_STATUS + "';";
-                strSql += " strCustomCol := '" + str_CustomCols + "';";
-                strSql += " TRE_CUSTOM_RANKING(strModColumnsPNTL, strModColumnsSTATUS, strCustomCol);";
-                strSql += " END;";
-
-                ((OraDBManager)Common.dbMgr).ExecuteNonQuery(CommandType.Text, strSql);
-                //((OraDBManager)Common.dbMgr).CommitTrans();
-                //((OraDBManager)Common.dbMgr).BeginTrans();
+                else if (Common.iDBType == 3)
+                {
+                    ((MySqlDBManager)Common.dbMgr).ExecuteNonQuery(CommandType.Text, str);
+                }
+                str = " DECLARE ";
+                str = string.Concat(str, " Rank1 Customer_Pntl.Opp_Pntl%TYPE;");
+                str = string.Concat(str, " Rank2 Customer_Pntl.Opp_Pntl%TYPE;");
+                str = string.Concat(str, " Rank3 Customer_Pntl.Opp_Pntl%TYPE;");
+                str = string.Concat(str, " Rank4 Customer_Pntl.Opp_Pntl%TYPE;");
+                str = string.Concat(str, " Rank1_Name Customer_Pntl.Opp_Name%TYPE ;");
+                str = string.Concat(str, " Rank2_Name Customer_Pntl.Opp_Name%TYPE ;");
+                str = string.Concat(str, " Rank3_Name Customer_Pntl.Opp_Name%TYPE ;");
+                str = string.Concat(str, " Rank4_Name Customer_Pntl.Opp_Name%TYPE ;");
+                str = string.Concat(str, " Rank1_Action Customer_Pntl.Opp_Status%TYPE;");
+                str = string.Concat(str, " Rank2_Action Customer_Pntl.Opp_Status%TYPE;");
+                str = string.Concat(str, " Rank3_Action Customer_Pntl.Opp_Status%TYPE;");
+                str = string.Concat(str, " Rank4_Action Customer_Pntl.Opp_Status%TYPE;");
+                str = string.Concat(str, " customer  Tre_Opportunity.CUSTOMER%TYPE;");
+                str = string.Concat(str, " Counter integer :=0;");
+                str = string.Concat(str, " CURSOR ttl_customer IS ");
+                str = string.Concat(str, " SELECT CUSTOMER FROM Tre_OpportunityExport; ");
+                str = string.Concat(str, " BEGIN ");
+                str = string.Concat(str, " FOR cust_rec in ttl_customer");
+                str = string.Concat(str, " LOOP");
+                str = string.Concat(str, this.fnOpportunitiesRnkngfrmExport(iProjectid));
+                str = string.Concat(str, " Rank1_Name  :='", strRank1, "';");
+                str = string.Concat(str, " Rank2_Name  :='", strRank2, "';");
+                str = string.Concat(str, " Rank3_Name  :='", strRank3, "';");
+                str = string.Concat(str, " Rank4_Name  :='", strRank4, "';");
+                str = string.Concat(str, " Customrank_Selection(cust_rec.customer,Rank1,Rank2,Rank3,Rank4,Counter,Rank1_Name,Rank2_Name,Rank3_Name,Rank4_Name,Rank1_Action,Rank2_Action,Rank3_Action,Rank4_Action);");
+                str = string.Concat(str, " Delete  from CUSTOMER_PNTL; ");
+                str = string.Concat(str, " end LOOP;");
+                str = string.Concat(str, " END;");
+                if (Common.iDBType == 1)
+                {
+                    ((OraDBManager)Common.dbMgr).ExecuteNonQuery(CommandType.Text, str);
+                }
+                else if (Common.iDBType == 3)
+                {
+                    ((MySqlDBManager)Common.dbMgr).ExecuteNonQuery(CommandType.Text, str);
+                }
             }
-            catch (Exception ex)
+            catch (Exception exception)
             {
+                throw exception;
+            }
+        }
 
-                throw ex;
+        public void fnMainRanking(int iProjectId)
+        {
+            DataTable dataTable = this.fnRankingcriteria(iProjectId);
+            if (dataTable.Rows.Count > 0)
+            {
+                if (dataTable.Rows[0]["Type"].ToString() == "Custom")
+                {
+                    this.fnCustomRanking(iProjectId, dataTable.Rows[0]["Rank1"].ToString(), dataTable.Rows[0]["Rank2"].ToString(), dataTable.Rows[0]["Rank3"].ToString(), dataTable.Rows[0]["Rank4"].ToString());
+                    return;
+                }
+                this.fnPotentialRanking(iProjectId);
+            }
+        }
+
+        public void fnMainRankingfrmExport(int iProjectId)
+        {
+            DataTable dataTable = this.fnRankingcriteria(iProjectId);
+            if (dataTable.Rows.Count > 0)
+            {
+                if (dataTable.Rows[0]["Type"].ToString() == "Custom")
+                {
+                    this.fnCustomRankingFrmExport(iProjectId, dataTable.Rows[0]["Rank1"].ToString(), dataTable.Rows[0]["Rank2"].ToString(), dataTable.Rows[0]["Rank3"].ToString(), dataTable.Rows[0]["Rank4"].ToString());
+                    return;
+                }
+                this.fnPotentialRankingFrmExport(iProjectId);
+            }
+        }
+
+        public string fnOpportunitiesRnkng(int iProjectid)
+        {
+            DataTable dataTable;
+            string str = "";
+            str = string.Concat("Select OPP_NAME from Opportunity  where  Project_id= ", iProjectid);
+
+            dataTable = (Common.iDBType == 2 ? ((DBManager)Common.dbMgr).ExecuteDataTable(CommandType.Text, str) : ((OraDBManager)Common.dbMgr).ExecuteDataTable(CommandType.Text, str));
+            if(Common.iDBType ==3)
+            {
+                ((MySqlDBManager)Common.dbMgr).ExecuteDataTable(CommandType.Text, str);
+            }
+            str = " Insert into CUSTOMER_PNTL (OPP_NAME,OPP_PNTL,Opp_Status)";
+            foreach (DataRow row in dataTable.Rows)
+            {
+                string str1 = str;
+                string[] strArrays = new string[] { str1, " Select  '", row[0].ToString(), "'  ,", row[0].ToString(), "_Pntl ,  CASE  When ", row[0].ToString(), "_STATUS= 'NON_USER' Then 'X-SELL-", row[0].ToString(), "'" };
+                str = string.Concat(strArrays);
+                string str2 = str;
+                string[] strArrays1 = new string[] { str2, " When ", row[0].ToString(), "_STATUS= 'DROPPER' Then 'MITIGATE-", row[0].ToString(), "'" };
+                str = string.Concat(strArrays1);
+                string str3 = str;
+                string[] strArrays2 = new string[] { str3, " When ", row[0].ToString(), "_STATUS= 'STOPPER' Then 'REVIVE-", row[0].ToString(), "'" };
+                str = string.Concat(strArrays2);
+                string str4 = str;
+                string[] strArrays3 = new string[] { str4, " When ", row[0].ToString(), "_STATUS= 'GROWER' Then 'NO ACTION-", row[0].ToString(), "'" };
+                str = string.Concat(strArrays3);
+                string str5 = str;
+                string[] strArrays4 = new string[] { str5, " When ", row[0].ToString(), "_STATUS= 'FLAT' Then 'UP-SELL-", row[0].ToString(), "'" };
+                str = string.Concat(strArrays4);
+                str = string.Concat(str, " When ", row[0].ToString(), "_STATUS= 'NEW_USER' Then 'NO ACTION' END   FROM TRE_OPPORTUNITY WHERE CUSTOMER=cust_rec.customer ");
+                str = string.Concat(str, " Union");
+            }
+            string str6 = string.Concat(str.Remove(str.Length - 5, 5), ";");
+            str = str6;
+            return str6;
+        }
+
+        public string fnOpportunitiesRnkngfrmExport(int iProjectid)
+        {
+            DataTable dataTable;
+            string str = "";
+            str = string.Concat("Select OPP_NAME from Opportunity where ISONMAIN=1 AND Project_id= ", iProjectid);
+            dataTable = (Common.iDBType ==2 ? ((DBManager)Common.dbMgr).ExecuteDataTable(CommandType.Text, str) : ((OraDBManager)Common.dbMgr).ExecuteDataTable(CommandType.Text, str));
+            if (Common.iDBType == 3)
+            {
+                ((MySqlDBManager)Common.dbMgr).ExecuteDataTable(CommandType.Text, str);
+            }
+            str = " Insert into CUSTOMER_PNTL (OPP_NAME,OPP_PNTL,Opp_Status)";
+            foreach (DataRow row in dataTable.Rows)
+            {
+                string str1 = str;
+                string[] strArrays = new string[] { str1, " Select  '", row[0].ToString(), "'  ,", row[0].ToString(), "_Pntl ,  CASE  When ", row[0].ToString(), "_STATUS= 'NON_USER' Then 'X-SELL-", row[0].ToString(), "'" };
+                str = string.Concat(strArrays);
+                string str2 = str;
+                string[] strArrays1 = new string[] { str2, " When ", row[0].ToString(), "_STATUS= 'DROPPER' Then 'MITIGATE-", row[0].ToString(), "'" };
+                str = string.Concat(strArrays1);
+                string str3 = str;
+                string[] strArrays2 = new string[] { str3, " When ", row[0].ToString(), "_STATUS= 'STOPPER' Then 'REVIVE-", row[0].ToString(), "'" };
+                str = string.Concat(strArrays2);
+                string str4 = str;
+                string[] strArrays3 = new string[] { str4, " When ", row[0].ToString(), "_STATUS= 'GROWER' Then 'NO ACTION-", row[0].ToString(), "'" };
+                str = string.Concat(strArrays3);
+                string str5 = str;
+                string[] strArrays4 = new string[] { str5, " When ", row[0].ToString(), "_STATUS= 'FLAT' Then 'UP-SELL-", row[0].ToString(), "'" };
+                str = string.Concat(strArrays4);
+                str = string.Concat(str, " When ", row[0].ToString(), "_STATUS= 'NEW_USER' Then 'NO ACTION' END   FROM TRE_OPPORTUNITYEXPORT WHERE CUSTOMER=cust_rec.customer ");
+                str = string.Concat(str, " Union");
+            }
+            string str6 = string.Concat(str.Remove(str.Length - 5, 5), ";");
+            str = str6;
+            return str6;
+        }
+
+        public void fnPotentialRanking(int iProjectid)
+        {
+            try
+            {
+                string str = "";
+                str = "Delete from TRE_RANKING ";
+                if (Common.iDBType == 1)
+                {
+                    ((OraDBManager)Common.dbMgr).ExecuteNonQuery(CommandType.Text, str);
+                }
+                else if (Common.iDBType == 2)
+                {
+                    ((DBManager)Common.dbMgr).ExecuteNonQuery(CommandType.Text, str);
+                }
+                else if (Common.iDBType == 3)
+                {
+                    ((MySqlDBManager)Common.dbMgr).ExecuteNonQuery(CommandType.Text, str);
+                }
+                str = " DECLARE ";
+                str = string.Concat(str, " Rank1 Customer_Pntl.Opp_Pntl%TYPE;");
+                str = string.Concat(str, " Rank2 Customer_Pntl.Opp_Pntl%TYPE;");
+                str = string.Concat(str, " Rank3 Customer_Pntl.Opp_Pntl%TYPE;");
+                str = string.Concat(str, " Rank4 Customer_Pntl.Opp_Pntl%TYPE;");
+                str = string.Concat(str, " Rank1_Name Customer_Pntl.Opp_Name%TYPE ;");
+                str = string.Concat(str, " Rank2_Name Customer_Pntl.Opp_Name%TYPE ;");
+                str = string.Concat(str, " Rank3_Name Customer_Pntl.Opp_Name%TYPE ;");
+                str = string.Concat(str, " Rank4_Name Customer_Pntl.Opp_Name%TYPE ;");
+                str = string.Concat(str, " Rank1_Action Customer_Pntl.Opp_Status%TYPE;");
+                str = string.Concat(str, " Rank2_Action Customer_Pntl.Opp_Status%TYPE;");
+                str = string.Concat(str, " Rank3_Action Customer_Pntl.Opp_Status%TYPE;");
+                str = string.Concat(str, " Rank4_Action Customer_Pntl.Opp_Status%TYPE;");
+                str = string.Concat(str, " customer  Tre_Opportunity.CUSTOMER%TYPE;");
+                str = string.Concat(str, " CURSOR ttl_customer IS ");
+                str = string.Concat(str, " SELECT CUSTOMER FROM Tre_Opportunity; ");
+                str = string.Concat(str, " BEGIN ");
+                str = string.Concat(str, " FOR cust_rec in ttl_customer");
+                str = string.Concat(str, " LOOP ");
+                str = string.Concat(str, this.fnOpportunitiesRnkng(iProjectid));
+                str = string.Concat(str, " Rank_Selection(cust_rec.customer,Rank1,Rank2,Rank3,Rank4,Rank1_Name,Rank2_Name,Rank3_Name,Rank4_Name,Rank1_Action,Rank2_Action,Rank3_Action,Rank4_Action);");
+                str = string.Concat(str, " Delete  from CUSTOMER_PNTL; ");
+                str = string.Concat(str, " end LOOP;");
+                str = string.Concat(str, " END;");
+                if (Common.iDBType == 1)
+                {
+                    ((OraDBManager)Common.dbMgr).ExecuteNonQuery(CommandType.Text, str);
+                }
+                else if (Common.iDBType == 3)
+                {
+                    ((DBManager)Common.dbMgr).ExecuteNonQuery(CommandType.Text, str);
+                }
+            }
+            catch (Exception exception)
+            {
+                throw exception;
             }
         }
 
@@ -207,175 +322,74 @@ namespace RecoEngine_BI
         {
             try
             {
-                string strSql = "";
-                string strColPntl = "";
-                string strColStatus = "";
-                string strColumns_PNTL = "";
-                string strColumns_STATUS = "";
-                DataTable dtTemp=null;
-                //strSql = "Delete from TRE_RANKING ";
-                //if (Common.iDBType == (int)Enums.DBType.Oracle)
-                //    ((OraDBManager)Common.dbMgr).ExecuteNonQuery(CommandType.Text, strSql);
-                //else if (Common.iDBType == (int)Enums.DBType.SQl)
-                //    ((DBManager)Common.dbMgr).ExecuteNonQuery(CommandType.Text, strSql);
-
-                strSql = "Select OPP_NAME from OPPORTUNITY";
-                if (Common.iDBType == (int)Enums.DBType.Oracle)
-                  dtTemp = ((OraDBManager)Common.dbMgr).ExecuteDataTable(CommandType.Text, strSql);
-                else if (Common.iDBType == (int)Enums.DBType.SQl)
-                  dtTemp =  ((DBManager)Common.dbMgr).ExecuteDataTable(CommandType.Text, strSql);
-
-                foreach (DataRow dr in dtTemp.Rows)
+                string str = "";
+                str = "Delete from TRE_RANKING ";
+                if (Common.iDBType == 1)
                 {
-                    strColPntl = strColPntl + dr.ItemArray[0].ToString() + "_PNTL as '" + dr.ItemArray[0].ToString() + "' , ";
-                    strColStatus = strColStatus + dr.ItemArray[0].ToString() + "_STATUS as '" + dr.ItemArray[0].ToString() + "' , ";
+                    ((OraDBManager)Common.dbMgr).ExecuteNonQuery(CommandType.Text, str);
                 }
-
-                strColumns_PNTL = strColPntl.Replace("'","''");
-                strColumns_STATUS = strColStatus.Replace("'", "''");
-
-                strColumns_PNTL = strColumns_PNTL.Remove((strColumns_PNTL.Length) - 2);
-                strColumns_STATUS = strColumns_STATUS.Remove((strColumns_STATUS.Length) - 2);
-
-                strSql = " DECLARE ";
-                strSql += " strModColumnsPNTL string(20000);";
-                strSql += " strModColumnsSTATUS string(20000);";
-                strSql += " BEGIN";
-                strSql += " strModColumnsPNTL := '" + strColumns_PNTL + "';";
-                strSql += " strModColumnsSTATUS := '" + strColumns_STATUS + "';";
-                strSql += " TRE_POTENTIAL_RANKING(strModColumnsPNTL, strModColumnsSTATUS);";
-                strSql += " END;";
-
-                ((OraDBManager)Common.dbMgr).ExecuteNonQuery(CommandType.Text, strSql);
-
-                //strSql = " DECLARE ";
-                //strSql += " Rank1 Customer_Pntl.Opp_Pntl%TYPE;";
-                //strSql += " Rank2 Customer_Pntl.Opp_Pntl%TYPE;";
-                //strSql += " Rank3 Customer_Pntl.Opp_Pntl%TYPE;";
-                //strSql += " Rank4 Customer_Pntl.Opp_Pntl%TYPE;";
-                //strSql += " Rank1_Name Customer_Pntl.Opp_Name%TYPE ;";
-                //strSql += " Rank2_Name Customer_Pntl.Opp_Name%TYPE ;";
-                //strSql += " Rank3_Name Customer_Pntl.Opp_Name%TYPE ;";
-                //strSql += " Rank4_Name Customer_Pntl.Opp_Name%TYPE ;";
-                //strSql += " Rank1_Action Customer_Pntl.Opp_Status%TYPE;";
-                //strSql += " Rank2_Action Customer_Pntl.Opp_Status%TYPE;";
-                //strSql += " Rank3_Action Customer_Pntl.Opp_Status%TYPE;";
-                //strSql += " Rank4_Action Customer_Pntl.Opp_Status%TYPE;";
-                //strSql += " customer  Tre_Opportunity.CUSTOMER%TYPE;";
-                //strSql += " CURSOR ttl_customer IS ";
-                //strSql += " SELECT CUSTOMER FROM Tre_OpportunityExport; ";
-                //strSql += " BEGIN ";
-                //strSql += " FOR cust_rec in ttl_customer";
-                //strSql += " LOOP ";
-                //strSql += fnOpportunitiesRnkngfrmExport(iProjectid);
-                //strSql += " Rank_Selection(cust_rec.customer,Rank1,Rank2,Rank3,Rank4,Rank1_Name,Rank2_Name,Rank3_Name,Rank4_Name,Rank1_Action,Rank2_Action,Rank3_Action,Rank4_Action);";
-                //strSql += " Delete  from CUSTOMER_PNTL; ";
-                //strSql += " end LOOP;";
-                //strSql += " END;";
-                //if (Common.iDBType == (int)Enums.DBType.Oracle)
-                //    ((OraDBManager)Common.dbMgr).ExecuteNonQuery(CommandType.Text, strSql);
-                //((OraDBManager)Common.dbMgr).CommitTrans();
-                //((OraDBManager)Common.dbMgr).BeginTrans();
+                else if (Common.iDBType == 2)
+                {
+                    ((DBManager)Common.dbMgr).ExecuteNonQuery(CommandType.Text, str);
+                }
+                else if (Common.iDBType == 3)
+                {
+                    ((MySqlDBManager)Common.dbMgr).ExecuteNonQuery(CommandType.Text, str);
+                }
+                str = " DECLARE ";
+                str = string.Concat(str, " Rank1 Customer_Pntl.Opp_Pntl%TYPE;");
+                str = string.Concat(str, " Rank2 Customer_Pntl.Opp_Pntl%TYPE;");
+                str = string.Concat(str, " Rank3 Customer_Pntl.Opp_Pntl%TYPE;");
+                str = string.Concat(str, " Rank4 Customer_Pntl.Opp_Pntl%TYPE;");
+                str = string.Concat(str, " Rank1_Name Customer_Pntl.Opp_Name%TYPE ;");
+                str = string.Concat(str, " Rank2_Name Customer_Pntl.Opp_Name%TYPE ;");
+                str = string.Concat(str, " Rank3_Name Customer_Pntl.Opp_Name%TYPE ;");
+                str = string.Concat(str, " Rank4_Name Customer_Pntl.Opp_Name%TYPE ;");
+                str = string.Concat(str, " Rank1_Action Customer_Pntl.Opp_Status%TYPE;");
+                str = string.Concat(str, " Rank2_Action Customer_Pntl.Opp_Status%TYPE;");
+                str = string.Concat(str, " Rank3_Action Customer_Pntl.Opp_Status%TYPE;");
+                str = string.Concat(str, " Rank4_Action Customer_Pntl.Opp_Status%TYPE;");
+                str = string.Concat(str, " customer  Tre_Opportunity.CUSTOMER%TYPE;");
+                str = string.Concat(str, " CURSOR ttl_customer IS ");
+                str = string.Concat(str, " SELECT CUSTOMER FROM Tre_OpportunityExport; ");
+                str = string.Concat(str, " BEGIN ");
+                str = string.Concat(str, " FOR cust_rec in ttl_customer");
+                str = string.Concat(str, " LOOP ");
+                str = string.Concat(str, this.fnOpportunitiesRnkngfrmExport(iProjectid));
+                str = string.Concat(str, " Rank_Selection(cust_rec.customer,Rank1,Rank2,Rank3,Rank4,Rank1_Name,Rank2_Name,Rank3_Name,Rank4_Name,Rank1_Action,Rank2_Action,Rank3_Action,Rank4_Action);");
+                str = string.Concat(str, " Delete  from CUSTOMER_PNTL; ");
+                str = string.Concat(str, " end LOOP;");
+                str = string.Concat(str, " END;");
+                if (Common.iDBType == 1)
+                {
+                    ((OraDBManager)Common.dbMgr).ExecuteNonQuery(CommandType.Text, str);
+                }
+                else if (Common.iDBType == 3)
+                {
+                    ((MySqlDBManager)Common.dbMgr).ExecuteNonQuery(CommandType.Text, str);
+                }
             }
-            catch (Exception ex)
+            catch (Exception exception)
             {
-
-                throw ex;
+                throw exception;
             }
-
         }
 
-        public string fnOpportunitiesRnkngfrmExport(int iProjectid)
+        public DataTable fnRankingcriteria(int iProjectId)
         {
-            DataTable dt;
-            string strSql = "";
-            // The below is commented bcz as running on procedure we are not checking isonmain
-            //strSql = "Select OPP_NAME from Opportunity where ISONMAIN=1 AND Project_id= " + iProjectid;
-            strSql = "Select OPP_NAME from Opportunity where Project_id= " + iProjectid;
-            if (Common.iDBType == (int)Enums.DBType.Oracle)
-                dt = ((OraDBManager)Common.dbMgr).ExecuteDataTable(CommandType.Text, strSql);
-            else
-                dt = ((DBManager)Common.dbMgr).ExecuteDataTable(CommandType.Text, strSql);
-            strSql = " Insert into CUSTOMER_PNTL (OPP_NAME,OPP_PNTL,Opp_Status)";
-            foreach (DataRow dr in dt.Rows)
+            DataTable dataTable;
+            string str = "";
+            str = string.Concat(str, "Select TYPE,RANK1,RANK2,RANK3,RANK4 from OPPORTUNITY_RANKING where PROJECT_ID=", iProjectId);
+            dataTable = (Common.iDBType == 2 ? ((DBManager)Common.dbMgr).ExecuteDataTable(CommandType.Text, str) : ((OraDBManager)Common.dbMgr).ExecuteDataTable(CommandType.Text, str));
+            if (Common.iDBType == 3)
             {
-                strSql += " Select  '" + dr[0].ToString() + "'  ," + dr[0].ToString() + "_Pntl , " + " CASE  When " + dr[0].ToString() + "_STATUS= 'NON_USER' Then 'X-SELL-" + dr[0].ToString() + "'";
-                strSql += " When " + dr[0].ToString() + "_STATUS= 'DROPPER' Then 'MITIGATE-" + dr[0].ToString() + "'";
-                strSql += " When " + dr[0].ToString() + "_STATUS= 'STOPPER' Then 'REVIVE-" + dr[0].ToString() + "'";
-                strSql += " When " + dr[0].ToString() + "_STATUS= 'GROWER' Then 'NO ACTION-" + dr[0].ToString() + "'";
-                strSql += " When " + dr[0].ToString() + "_STATUS= 'FLAT' Then 'UP-SELL-" + dr[0].ToString() + "'";
-                strSql += " When " + dr[0].ToString() + "_STATUS= 'NEW_USER' Then 'NO ACTION' END   FROM TRE_OPPORTUNITYEXPORT WHERE CUSTOMER=cust_rec.customer ";
-                strSql += " Union";
+                ((MySqlDBManager)Common.dbMgr).ExecuteNonQuery(CommandType.Text, str);
             }
-            return strSql = strSql.Remove(strSql.Length - 5, 5) + ";";
-
+            return dataTable;
         }
-        public DataTable  fnRankingcriteria(int iProjectId )
-        {
-        string strSql="";  
-            DataTable dt;
-         strSql+="Select TYPE,RANK1,RANK2,RANK3,RANK4 from OPPORTUNITY_RANKING where PROJECT_ID=" + iProjectId;
-         if (Common.iDBType == (int)Enums.DBType.Oracle)
-             dt = ((OraDBManager)Common.dbMgr).ExecuteDataTable(CommandType.Text, strSql);
-         else
-             dt = ((DBManager)Common.dbMgr).ExecuteDataTable(CommandType.Text, strSql);
-         return dt;
-        }
-
-        public void fnMainRanking(int iProjectId)
-        {
-
-            DataTable dt = fnRankingcriteria(iProjectId);
-            if (dt.Rows.Count > 0)
-            {
-                if (dt.Rows[0]["Type"].ToString() == "Custom")
-                {
-
-                    fnCustomRanking(iProjectId, dt.Rows[0]["Rank1"].ToString(), dt.Rows[0]["Rank2"].ToString(), dt.Rows[0]["Rank3"].ToString(), dt.Rows[0]["Rank4"].ToString());
-                }
-                else 
-                {
-                    fnPotentialRanking(iProjectId);
-                }
-            }
-        
-        }
-        public void fnMainRankingfrmExport(int iProjectId)
-        {
-
-            DataTable dt = fnRankingcriteria(iProjectId);
-            if (dt.Rows.Count > 0)
-            {
-                if (dt.Rows[0]["Type"].ToString() == "Custom")
-                {
-                    fnCustomRankingFrmExport(iProjectId, dt.Rows[0]["Rank1"].ToString(), dt.Rows[0]["Rank2"].ToString(), dt.Rows[0]["Rank3"].ToString(), dt.Rows[0]["Rank4"].ToString());
-                    //fnCustomRanking(iProjectId, dt.Rows[0]["Rank1"].ToString(), dt.Rows[0]["Rank2"].ToString(), dt.Rows[0]["Rank3"].ToString(), dt.Rows[0]["Rank4"].ToString());
-                }
-                else
-                {
-                    fnPotentialRankingFrmExport (iProjectId);
-                }
-            }
-
-        }
-        public bool fnCheckOpportunityExists(int iProjectId)
-        {
-            DataTable dt;
-            string strSql = "";
-            strSql = "Select OPP_NAME from Opportunity  where ISONMAIN=0 and Project_id= " + iProjectId;
-            if (Common.iDBType == (int)Enums.DBType.Oracle)
-                dt = ((OraDBManager)Common.dbMgr).ExecuteDataTable(CommandType.Text, strSql);
-            else
-                dt = ((DBManager)Common.dbMgr).ExecuteDataTable(CommandType.Text, strSql);
-            if (dt.Rows.Count > 0)
-                return true;
-            else
-              return false;
-        
-        }
-
     }
 }
+
 
 
 
