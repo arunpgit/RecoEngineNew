@@ -17,12 +17,12 @@ namespace RecoEngine
     public partial class CntrlOfferLibrary : UserControl
     {
         bool bIsShowOPPList = false;
-      
+
         clsOffers clsObj = new clsOffers();
         int iTabIndex = 0;
         int iOfferID = 0;
         bool bIsOffersLoaded = false;
-          public CntrlOfferLibrary(int iTabIndex)
+        public CntrlOfferLibrary(int iTabIndex)
         {
             this.iTabIndex = iTabIndex;
             InitializeComponent();
@@ -37,7 +37,7 @@ namespace RecoEngine
                     case 1:
                         pgOfferLibrary.SelectedPage = pgOffers;
                         fnShowOffersList(true);
-                       
+
                         break;
                     case 2:
                         pgOfferLibrary.SelectedPage = pgCampaign;
@@ -298,14 +298,14 @@ namespace RecoEngine
                 frmOriginal frmorgin = (frmOriginal)Common.TopMostParent(this);
                 frmorgin.fnOffersOpprortunityCount();
                 //frmorgin.fnShowOffers(1);
-               
+
             }
             catch (Exception ex)
             {
                 Telerik.WinControls.RadMessageBox.Show(this, ex.Message, ex.TargetSite.Name.ToString(), MessageBoxButtons.OK, RadMessageIcon.Error, MessageBoxDefaultButton.Button1);
             }
         }
-    
+
         private void btnONext_Click(object sender, EventArgs e)
         {
             try
@@ -380,7 +380,7 @@ namespace RecoEngine
                 Telerik.WinControls.RadMessageBox.Show(this, ex.Message, ex.TargetSite.Name.ToString(), MessageBoxButtons.OK, RadMessageIcon.Error, MessageBoxDefaultButton.Button1);
             }
         }
-       private void btnOInActive_Click(object sender, EventArgs e)
+        private void btnOInActive_Click(object sender, EventArgs e)
         {
             try
             {
@@ -437,18 +437,6 @@ namespace RecoEngine
             }
         }
 
-     
-       private void pgCampaign_Paint(object sender, PaintEventArgs e)
-       {
 
-       }
-
-   
-
-       
-
-     
-
-           
     }
 }

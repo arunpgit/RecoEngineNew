@@ -1816,12 +1816,8 @@ namespace RecoEngine_BI
             try
             {
                 string str = "";
-                if (Common.iDBType != 1)
-                {
-                    str = string.Concat("Select Top 1 ", strString, " from ", strTableName);
-                    dataTable = ((DBManager)Common.dbMgr).ExecuteDataTable(CommandType.Text, str);
-                }
-                else
+                dataTable = null;
+                if (Common.iDBType == 1)
                 {
                     if (iExpressionFor == 3 || iExpressionFor == 5 || iExpressionFor == 2)
                     {
@@ -1835,6 +1831,23 @@ namespace RecoEngine_BI
                     }
                     dataTable = ((OraDBManager)Common.dbMgr).ExecuteDataTable(CommandType.Text, str);
                 }
+                else if(Common.iDBType == 3)
+
+                {
+                    if (iExpressionFor == 3 || iExpressionFor == 5 || iExpressionFor == 2)
+                    {
+                        string[] strArrays = new string[] { "Select  ", strString, " from ", strTableName, "  limit 2" };
+                        str = string.Concat(strArrays);
+                    }
+                    else
+                    {
+                        string[] strArrays1 = new string[] { "Select  1 from ", strTableName, " Where ", strString, "   limit 2" };
+                        str = string.Concat(strArrays1);
+                    }
+                    dataTable = ((MySqlDBManager)Common.dbMgr).ExecuteDataTable(CommandType.Text, str);
+
+                }
+
                 dataTable1 = dataTable;
             }
             catch (Exception exception)

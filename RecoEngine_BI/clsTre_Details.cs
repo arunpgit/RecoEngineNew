@@ -1390,6 +1390,7 @@ namespace RecoEngine_BI
                 }
                 if (Common.iDBType == (int)Enums.DBType.Mysql)
                 {
+                    strSql = strSql.Replace("NVL", "IFNULL");
 
                     dt = ((MySqlDBManager)Common.dbMgr).ExecuteDataTable(CommandType.Text, strSql);
                 }

@@ -24,36 +24,14 @@ namespace RecoEngine
         {
             try
             {
-
-               // DataTable dt = ClsObj.fnGetOppRanking(Common.iProjectID);
                 if(ddRankingCriteria.DataSource ==null)
                 ddRankingCriteria.DataSource = Enum.GetValues(typeof(RecoEngine_BI.Enums.Rank_Criteria));
                 bIsRankingLoaded = true;
                 if (!bIsRankingLoaded)
                     fnShowOpportunityRanking();
                 bIsRankingLoaded = true;
-               // fnShowOpportunityRanking();
-                //if (dt.Rows.Count != 0)
-                //{
-                //    dt.Columns.Add(new DataColumn("Select", typeof(bool)));
-                //    for (int i = 0; i < dt.Rows.Count; i++)
-                //    {
-                //        dt.Rows[i]["Select"] = false;
-                //    }
-                //    grdRanking.DataSource = dt;
-                //    grdRanking.AllowAddNewRow = false;
-                //    grdRanking.ShowRowHeaderColumn = false;
-                //    grdRanking.EnableGrouping = false;
-                //    grdRanking.ShowFilteringRow = false;
-                //   // grdRanking.MasterTemplate.AutoSizeRows = false;
-                //    grdRanking.Columns["ID"].IsVisible = false;
-                //    for (int i = 0; i < dt.Columns.Count - 1; i++)
-                //    {
-                //        grdRanking.MasterTemplate.Columns[i].ReadOnly = true;
-                //    }
-                //    grdRanking.MasterTemplate.AutoSizeColumnsMode = GridViewAutoSizeColumnsMode.Fill;
-                 
-                //}
+             
+       
             }
             catch (Exception ex)
             {
@@ -435,119 +413,5 @@ namespace RecoEngine
             }
              
         }
-         //private void grdRanking_SelectionChanged(object sender, EventArgs e)
-        //{
-        //    try
-        //    {
-        //        if (bIsRankingLoaded && grdRanking.CurrentRow != null)
-        //        {
-        //            bDonotFireSelectionChange = true;
-        //            GridViewRowInfo grdRow = grdRanking.CurrentRow;
-        //            //iCurrentRankID = int.Parse(grdRow.Cells["ID"].Value.ToString());
-      
-        //            if (grdRow.Cells["RANK1"].Value != null)
-        //            {
-        //                ddlOppRank1.SelectedValue = grdRow.Cells["RANK1"].Value;
-        //            }
-        //            else
-        //                ddlOppRank1.SelectedIndex = -1;
-
-        //            if (grdRow.Cells["RANK2"].Value != null)
-        //            {
-        //                ddlOppRank2.SelectedValue = grdRow.Cells["RANK2"].Value;
-        //            }
-        //            else
-        //                ddlOppRank2.SelectedIndex = -1;
-        //            if (grdRow.Cells["RANK3"].Value != null)
-        //            {
-        //                ddlOppRank3.SelectedValue = grdRow.Cells["RANK3"].Value;
-        //            }
-        //            else
-        //                ddlOppRank3.SelectedIndex = -1;
-        //            if (grdRow.Cells["RANK4"].Value != null)
-        //            {
-        //                ddlOppRank4.SelectedValue = grdRow.Cells["RANK4"].Value;
-        //            }
-        //            else
-        //                ddlOppRank4.SelectedIndex = -1;
-
-        //            ddRankingCriteria.SelectedIndex=Convert.ToInt16(grdRow.Cells["TYPE"].Value)-1;
-        //        // int i=   (int)(RecoEngine_BI.Enums.Rank_Criteria.Potential);
-        //            btnDelete.Visible = true;
-        //            btnRnkngSave.Text = "Update";
-        //            bDonotFireSelectionChange = false;
-        //        }
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        //MessageBox.Show(ex.Message);
-        //        Telerik.WinControls.RadMessageBox.Show(this, ex.Message, ex.TargetSite.Name.ToString(), MessageBoxButtons.OK, RadMessageIcon.Error, MessageBoxDefaultButton.Button1);
-        //    }
-        //}
-
-        //private void btnRankingDelete_Click(object sender, EventArgs e)
-        //{
-        //    try
-        //    {
-        //        DataTable dt = ((DataTable)grdRanking.DataSource);
-        //        DataRow[] drRow = dt.Select("Select=1");
-        //        if (drRow.Length == 0)
-        //        {
-        //            Telerik.WinControls.RadMessageBox.Show(this, "Select at least one.", "Information", MessageBoxButtons.OK, RadMessageIcon.Error, MessageBoxDefaultButton.Button1);
-        //            return;
-        //        }
-        //        else
-        //        {
-
-        //            DialogResult ds = Telerik.WinControls.RadMessageBox.Show(this, "Do you wish to delete selected record(s)?", "Confirmation", MessageBoxButtons.YesNo, RadMessageIcon.Info, MessageBoxDefaultButton.Button1);
-        //            if (ds != DialogResult.Yes)
-        //            {
-        //                return;
-        //            }
-        //            ArrayList recForDelete = new ArrayList();
-        //            string strId = "";
-        //            for (int i = 0; i < drRow.Length; i++)
-        //            {
-        //                strId = drRow[i]["ID"].ToString();
-
-        //                recForDelete.Add(new ValueItemPair(strId, ""));
-        //            }
-
-        //            if (recForDelete.Count > 0)
-        //            {
-        //                string curRecId = "";
-
-        //                for (int i = 0; i < recForDelete.Count; i++)
-        //                {
-
-        //                    curRecId = ((ValueItemPair)recForDelete[i]).Value.ToString();
-        //                    if (!ClsObj.fnDeleteRankingOpportunity(curRecId))
-        //                    {
-        //                        return;
-        //                    }
-        //                    else
-        //                    {
-        //                        // dt.Select("User_ID=" + curRecId.ToString())[0].Delete();
-        //                    }
-        //                }
-        //            }
-        //            fnBindRanking();
-        //        }
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        Telerik.WinControls.RadMessageBox.Show(this, ex.Message, ex.TargetSite.Name.ToString(), MessageBoxButtons.OK, RadMessageIcon.Error, MessageBoxDefaultButton.Button1);
-        //    }
-        //}
-        
-        //private void btnNewRanking_Click(object sender, EventArgs e)
-        //{
-           
-        //    ddlOppRank1.SelectedIndex = -1;
-        //    ddlOppRank2.SelectedIndex = -1;
-        //    ddlOppRank3.SelectedIndex = -1;
-        //    ddlOppRank4.SelectedIndex = -1;
-        //    btnRnkngSave.Text = "Save";
-        //}
     }
 }

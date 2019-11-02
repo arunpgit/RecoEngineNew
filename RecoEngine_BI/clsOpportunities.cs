@@ -198,13 +198,13 @@ namespace RecoEngine_BI
             try
             {
                 DataTable dataTable1 = new DataTable();
-                if (Common.iDBType == 1 || Common.iDBType == 3)
+                if (Common.iDBType == 1 )
                 {
                     dataTable1 = (Common.iDBType != 1 ? ((DBManager)Common.dbMgr).ExecuteDataTable(CommandType.Text, "select top 1 * from ETS_TRE_BASE2") : ((OraDBManager)Common.dbMgr).ExecuteDataTable(CommandType.Text, "select * from ETS_TRE_BASE2 where ROWNUM <= 2"));
                 }
                 else if (Common.iDBType == 3)
                 {
-                    dataTable1 = ((MySqlDBManager)Common.dbMgr).ExecuteDataTable(CommandType.Text, "select top 1 * from ETS_TRE_BASE2");
+                    dataTable1 = ((MySqlDBManager)Common.dbMgr).ExecuteDataTable(CommandType.Text, "select  * from ETS_TRE_BASE2 limit 1");
                         
                 }
                 DataTableReader dataTableReader = new DataTableReader(dataTable1);

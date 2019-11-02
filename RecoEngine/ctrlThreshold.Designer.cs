@@ -74,17 +74,13 @@
             this.radLabel1 = new Telerik.WinControls.UI.RadLabel();
             this.label1 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.gbMain)).BeginInit();
-            this.gbMain.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gbTop)).BeginInit();
-            this.gbTop.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.chartThreshold)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.radGroupBox1)).BeginInit();
-            this.radGroupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.grwrTrackBar)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.drprTrackBar)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.stprTrackBar)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gbBottom)).BeginInit();
-            this.gbBottom.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.txtCPNewUser)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtCPNonUser)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtCPGrower)).BeginInit();
@@ -141,7 +137,14 @@
             this.gbMain.Margin = new System.Windows.Forms.Padding(3, 0, 0, 0);
             this.gbMain.Name = "gbMain";
             this.gbMain.Padding = new System.Windows.Forms.Padding(2, 18, 2, 2);
-            this.gbMain.Size = new System.Drawing.Size(997, 537);
+            // 
+            // 
+            // 
+            this.gbMain.RootElement.AccessibleDescription = null;
+            this.gbMain.RootElement.AccessibleName = null;
+            this.gbMain.RootElement.ControlBounds = new System.Drawing.Rectangle(0, 0, 200, 100);
+            this.gbMain.RootElement.Padding = new System.Windows.Forms.Padding(2, 18, 2, 2);
+            this.gbMain.Size = new System.Drawing.Size(1327, 665);
             this.gbMain.TabIndex = 1;
             // 
             // gbTop
@@ -166,8 +169,11 @@
             // 
             // 
             // 
+            this.gbTop.RootElement.AccessibleDescription = null;
+            this.gbTop.RootElement.AccessibleName = null;
+            this.gbTop.RootElement.ControlBounds = new System.Drawing.Rectangle(2, 18, 200, 100);
             this.gbTop.RootElement.Padding = new System.Windows.Forms.Padding(0);
-            this.gbTop.Size = new System.Drawing.Size(993, 330);
+            this.gbTop.Size = new System.Drawing.Size(1323, 458);
             this.gbTop.TabIndex = 14;
             // 
             // chartThreshold
@@ -175,7 +181,7 @@
             this.chartThreshold.Dock = System.Windows.Forms.DockStyle.Fill;
             this.chartThreshold.Location = new System.Drawing.Point(0, 36);
             this.chartThreshold.Name = "chartThreshold";
-            this.chartThreshold.Size = new System.Drawing.Size(993, 248);
+            this.chartThreshold.Size = new System.Drawing.Size(1323, 376);
             this.chartThreshold.TabIndex = 15;
             // 
             // radGroupBox1
@@ -194,21 +200,31 @@
             this.radGroupBox1.HeaderImageKey = "";
             this.radGroupBox1.HeaderMargin = new System.Windows.Forms.Padding(0);
             this.radGroupBox1.HeaderText = "";
-            this.radGroupBox1.Location = new System.Drawing.Point(0, 284);
+            this.radGroupBox1.Location = new System.Drawing.Point(0, 412);
             this.radGroupBox1.Margin = new System.Windows.Forms.Padding(0);
             this.radGroupBox1.Name = "radGroupBox1";
             // 
             // 
             // 
+            this.radGroupBox1.RootElement.AccessibleDescription = null;
+            this.radGroupBox1.RootElement.AccessibleName = null;
+            this.radGroupBox1.RootElement.ControlBounds = new System.Drawing.Rectangle(0, 412, 200, 100);
             this.radGroupBox1.RootElement.Padding = new System.Windows.Forms.Padding(0);
-            this.radGroupBox1.Size = new System.Drawing.Size(993, 46);
+            this.radGroupBox1.Size = new System.Drawing.Size(1323, 46);
             this.radGroupBox1.TabIndex = 17;
             // 
             // grwrTrackBar
             // 
+            this.grwrTrackBar.BackColor = System.Drawing.SystemColors.ControlLightLight;
             this.grwrTrackBar.Location = new System.Drawing.Point(402, 6);
             this.grwrTrackBar.Maximum = 200;
             this.grwrTrackBar.Name = "grwrTrackBar";
+            // 
+            // 
+            // 
+            this.grwrTrackBar.RootElement.AccessibleDescription = null;
+            this.grwrTrackBar.RootElement.AccessibleName = null;
+            this.grwrTrackBar.RootElement.ControlBounds = new System.Drawing.Rectangle(402, 6, 150, 30);
             this.grwrTrackBar.ShowTicks = false;
             this.grwrTrackBar.Size = new System.Drawing.Size(135, 28);
             this.grwrTrackBar.SliderAreaColor1 = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(174)))), ((int)(((byte)(219)))));
@@ -221,9 +237,16 @@
             // 
             // drprTrackBar
             // 
+            this.drprTrackBar.BackColor = System.Drawing.SystemColors.ControlLightLight;
             this.drprTrackBar.Location = new System.Drawing.Point(223, 6);
             this.drprTrackBar.Maximum = 200;
             this.drprTrackBar.Name = "drprTrackBar";
+            // 
+            // 
+            // 
+            this.drprTrackBar.RootElement.AccessibleDescription = null;
+            this.drprTrackBar.RootElement.AccessibleName = null;
+            this.drprTrackBar.RootElement.ControlBounds = new System.Drawing.Rectangle(223, 6, 150, 30);
             this.drprTrackBar.ShowTicks = false;
             this.drprTrackBar.Size = new System.Drawing.Size(135, 28);
             this.drprTrackBar.SliderAreaColor1 = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(174)))), ((int)(((byte)(219)))));
@@ -236,9 +259,16 @@
             // 
             // stprTrackBar
             // 
+            this.stprTrackBar.BackColor = System.Drawing.SystemColors.ControlLightLight;
             this.stprTrackBar.Location = new System.Drawing.Point(24, 6);
             this.stprTrackBar.Maximum = 200;
             this.stprTrackBar.Name = "stprTrackBar";
+            // 
+            // 
+            // 
+            this.stprTrackBar.RootElement.AccessibleDescription = null;
+            this.stprTrackBar.RootElement.AccessibleName = null;
+            this.stprTrackBar.RootElement.ControlBounds = new System.Drawing.Rectangle(24, 6, 150, 30);
             this.stprTrackBar.ShowTicks = false;
             this.stprTrackBar.Size = new System.Drawing.Size(135, 28);
             this.stprTrackBar.SliderAreaColor1 = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(174)))), ((int)(((byte)(219)))));
@@ -257,7 +287,7 @@
             this.lblTop.Margin = new System.Windows.Forms.Padding(10, 0, 3, 0);
             this.lblTop.Name = "lblTop";
             this.lblTop.Padding = new System.Windows.Forms.Padding(5, 0, 0, 0);
-            this.lblTop.Size = new System.Drawing.Size(993, 36);
+            this.lblTop.Size = new System.Drawing.Size(1323, 36);
             this.lblTop.TabIndex = 14;
             this.lblTop.Text = "Threshold Setup - ";
             this.lblTop.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -311,87 +341,144 @@
             this.gbBottom.HeaderImageKey = "";
             this.gbBottom.HeaderMargin = new System.Windows.Forms.Padding(0);
             this.gbBottom.HeaderText = "";
-            this.gbBottom.Location = new System.Drawing.Point(2, 348);
+            this.gbBottom.Location = new System.Drawing.Point(2, 476);
             this.gbBottom.Margin = new System.Windows.Forms.Padding(0);
             this.gbBottom.Name = "gbBottom";
             // 
             // 
             // 
+            this.gbBottom.RootElement.AccessibleDescription = null;
+            this.gbBottom.RootElement.AccessibleName = null;
+            this.gbBottom.RootElement.ControlBounds = new System.Drawing.Rectangle(2, 476, 200, 100);
             this.gbBottom.RootElement.Padding = new System.Windows.Forms.Padding(0);
-            this.gbBottom.Size = new System.Drawing.Size(993, 187);
+            this.gbBottom.Size = new System.Drawing.Size(1323, 187);
             this.gbBottom.TabIndex = 15;
             // 
             // txtCPNewUser
             // 
+            this.txtCPNewUser.BackColor = System.Drawing.SystemColors.ControlLightLight;
             this.txtCPNewUser.Font = new System.Drawing.Font("Arial", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtCPNewUser.Location = new System.Drawing.Point(495, 109);
             this.txtCPNewUser.MaxLength = 20;
             this.txtCPNewUser.Name = "txtCPNewUser";
             this.txtCPNewUser.ReadOnly = true;
+            // 
+            // 
+            // 
+            this.txtCPNewUser.RootElement.AccessibleDescription = null;
+            this.txtCPNewUser.RootElement.AccessibleName = null;
+            this.txtCPNewUser.RootElement.ControlBounds = new System.Drawing.Rectangle(495, 109, 100, 20);
+            this.txtCPNewUser.RootElement.StretchVertically = true;
             this.txtCPNewUser.Size = new System.Drawing.Size(73, 18);
             this.txtCPNewUser.TabIndex = 49;
             this.txtCPNewUser.TabStop = false;
             // 
             // txtCPNonUser
             // 
+            this.txtCPNonUser.BackColor = System.Drawing.SystemColors.ControlLightLight;
             this.txtCPNonUser.Font = new System.Drawing.Font("Arial", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtCPNonUser.Location = new System.Drawing.Point(416, 109);
             this.txtCPNonUser.MaxLength = 20;
             this.txtCPNonUser.Name = "txtCPNonUser";
             this.txtCPNonUser.ReadOnly = true;
+            // 
+            // 
+            // 
+            this.txtCPNonUser.RootElement.AccessibleDescription = null;
+            this.txtCPNonUser.RootElement.AccessibleName = null;
+            this.txtCPNonUser.RootElement.ControlBounds = new System.Drawing.Rectangle(416, 109, 100, 20);
+            this.txtCPNonUser.RootElement.StretchVertically = true;
             this.txtCPNonUser.Size = new System.Drawing.Size(73, 18);
             this.txtCPNonUser.TabIndex = 48;
             this.txtCPNonUser.TabStop = false;
             // 
             // txtCPGrower
             // 
+            this.txtCPGrower.BackColor = System.Drawing.SystemColors.ControlLightLight;
             this.txtCPGrower.Font = new System.Drawing.Font("Arial", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtCPGrower.Location = new System.Drawing.Point(337, 109);
             this.txtCPGrower.MaxLength = 20;
             this.txtCPGrower.Name = "txtCPGrower";
             this.txtCPGrower.ReadOnly = true;
+            // 
+            // 
+            // 
+            this.txtCPGrower.RootElement.AccessibleDescription = null;
+            this.txtCPGrower.RootElement.AccessibleName = null;
+            this.txtCPGrower.RootElement.ControlBounds = new System.Drawing.Rectangle(337, 109, 100, 20);
+            this.txtCPGrower.RootElement.StretchVertically = true;
             this.txtCPGrower.Size = new System.Drawing.Size(73, 18);
             this.txtCPGrower.TabIndex = 47;
             this.txtCPGrower.TabStop = false;
             // 
             // txtCPStopper
             // 
+            this.txtCPStopper.BackColor = System.Drawing.SystemColors.ControlLightLight;
             this.txtCPStopper.Font = new System.Drawing.Font("Arial", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtCPStopper.Location = new System.Drawing.Point(258, 109);
             this.txtCPStopper.MaxLength = 20;
             this.txtCPStopper.Name = "txtCPStopper";
             this.txtCPStopper.ReadOnly = true;
+            // 
+            // 
+            // 
+            this.txtCPStopper.RootElement.AccessibleDescription = null;
+            this.txtCPStopper.RootElement.AccessibleName = null;
+            this.txtCPStopper.RootElement.ControlBounds = new System.Drawing.Rectangle(258, 109, 100, 20);
+            this.txtCPStopper.RootElement.StretchVertically = true;
             this.txtCPStopper.Size = new System.Drawing.Size(73, 18);
             this.txtCPStopper.TabIndex = 46;
             this.txtCPStopper.TabStop = false;
             // 
             // txtCPDropper
             // 
+            this.txtCPDropper.BackColor = System.Drawing.SystemColors.ControlLightLight;
             this.txtCPDropper.Font = new System.Drawing.Font("Arial", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtCPDropper.Location = new System.Drawing.Point(178, 109);
             this.txtCPDropper.MaxLength = 20;
             this.txtCPDropper.Name = "txtCPDropper";
             this.txtCPDropper.ReadOnly = true;
+            // 
+            // 
+            // 
+            this.txtCPDropper.RootElement.AccessibleDescription = null;
+            this.txtCPDropper.RootElement.AccessibleName = null;
+            this.txtCPDropper.RootElement.ControlBounds = new System.Drawing.Rectangle(178, 109, 100, 20);
+            this.txtCPDropper.RootElement.StretchVertically = true;
             this.txtCPDropper.Size = new System.Drawing.Size(73, 18);
             this.txtCPDropper.TabIndex = 45;
             this.txtCPDropper.TabStop = false;
             // 
             // txtCPFlat
             // 
+            this.txtCPFlat.BackColor = System.Drawing.SystemColors.ControlLightLight;
             this.txtCPFlat.Font = new System.Drawing.Font("Arial", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtCPFlat.Location = new System.Drawing.Point(100, 109);
             this.txtCPFlat.MaxLength = 20;
             this.txtCPFlat.Name = "txtCPFlat";
             this.txtCPFlat.ReadOnly = true;
+            // 
+            // 
+            // 
+            this.txtCPFlat.RootElement.AccessibleDescription = null;
+            this.txtCPFlat.RootElement.AccessibleName = null;
+            this.txtCPFlat.RootElement.ControlBounds = new System.Drawing.Rectangle(100, 109, 100, 20);
+            this.txtCPFlat.RootElement.StretchVertically = true;
             this.txtCPFlat.Size = new System.Drawing.Size(73, 18);
             this.txtCPFlat.TabIndex = 44;
             this.txtCPFlat.TabStop = false;
             // 
             // lblCntPercent
             // 
+            this.lblCntPercent.BackColor = System.Drawing.SystemColors.ControlLightLight;
             this.lblCntPercent.Font = new System.Drawing.Font("Arial", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblCntPercent.Location = new System.Drawing.Point(15, 110);
             this.lblCntPercent.Name = "lblCntPercent";
+            // 
+            // 
+            // 
+            this.lblCntPercent.RootElement.AccessibleDescription = null;
+            this.lblCntPercent.RootElement.AccessibleName = null;
             this.lblCntPercent.Size = new System.Drawing.Size(50, 16);
             this.lblCntPercent.TabIndex = 43;
             this.lblCntPercent.Text = "Count %";
@@ -408,143 +495,247 @@
             // 
             // txtAvgNewUser
             // 
+            this.txtAvgNewUser.BackColor = System.Drawing.SystemColors.ControlLightLight;
             this.txtAvgNewUser.Font = new System.Drawing.Font("Arial", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtAvgNewUser.Location = new System.Drawing.Point(496, 132);
             this.txtAvgNewUser.MaxLength = 20;
             this.txtAvgNewUser.Name = "txtAvgNewUser";
             this.txtAvgNewUser.ReadOnly = true;
+            // 
+            // 
+            // 
+            this.txtAvgNewUser.RootElement.AccessibleDescription = null;
+            this.txtAvgNewUser.RootElement.AccessibleName = null;
+            this.txtAvgNewUser.RootElement.ControlBounds = new System.Drawing.Rectangle(496, 132, 100, 20);
+            this.txtAvgNewUser.RootElement.StretchVertically = true;
             this.txtAvgNewUser.Size = new System.Drawing.Size(73, 18);
             this.txtAvgNewUser.TabIndex = 41;
             this.txtAvgNewUser.TabStop = false;
             // 
             // txtAvgNonUser
             // 
+            this.txtAvgNonUser.BackColor = System.Drawing.SystemColors.ControlLightLight;
             this.txtAvgNonUser.Font = new System.Drawing.Font("Arial", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtAvgNonUser.Location = new System.Drawing.Point(417, 132);
             this.txtAvgNonUser.MaxLength = 20;
             this.txtAvgNonUser.Name = "txtAvgNonUser";
             this.txtAvgNonUser.ReadOnly = true;
+            // 
+            // 
+            // 
+            this.txtAvgNonUser.RootElement.AccessibleDescription = null;
+            this.txtAvgNonUser.RootElement.AccessibleName = null;
+            this.txtAvgNonUser.RootElement.ControlBounds = new System.Drawing.Rectangle(417, 132, 100, 20);
+            this.txtAvgNonUser.RootElement.StretchVertically = true;
             this.txtAvgNonUser.Size = new System.Drawing.Size(73, 18);
             this.txtAvgNonUser.TabIndex = 40;
             this.txtAvgNonUser.TabStop = false;
             // 
             // txtAvgGrower
             // 
+            this.txtAvgGrower.BackColor = System.Drawing.SystemColors.ControlLightLight;
             this.txtAvgGrower.Font = new System.Drawing.Font("Arial", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtAvgGrower.Location = new System.Drawing.Point(338, 132);
             this.txtAvgGrower.MaxLength = 20;
             this.txtAvgGrower.Name = "txtAvgGrower";
             this.txtAvgGrower.ReadOnly = true;
+            // 
+            // 
+            // 
+            this.txtAvgGrower.RootElement.AccessibleDescription = null;
+            this.txtAvgGrower.RootElement.AccessibleName = null;
+            this.txtAvgGrower.RootElement.ControlBounds = new System.Drawing.Rectangle(338, 132, 100, 20);
+            this.txtAvgGrower.RootElement.StretchVertically = true;
             this.txtAvgGrower.Size = new System.Drawing.Size(73, 18);
             this.txtAvgGrower.TabIndex = 39;
             this.txtAvgGrower.TabStop = false;
             // 
             // txtAvgStopper
             // 
+            this.txtAvgStopper.BackColor = System.Drawing.SystemColors.ControlLightLight;
             this.txtAvgStopper.Font = new System.Drawing.Font("Arial", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtAvgStopper.Location = new System.Drawing.Point(259, 132);
             this.txtAvgStopper.MaxLength = 20;
             this.txtAvgStopper.Name = "txtAvgStopper";
             this.txtAvgStopper.ReadOnly = true;
+            // 
+            // 
+            // 
+            this.txtAvgStopper.RootElement.AccessibleDescription = null;
+            this.txtAvgStopper.RootElement.AccessibleName = null;
+            this.txtAvgStopper.RootElement.ControlBounds = new System.Drawing.Rectangle(259, 132, 100, 20);
+            this.txtAvgStopper.RootElement.StretchVertically = true;
             this.txtAvgStopper.Size = new System.Drawing.Size(73, 18);
             this.txtAvgStopper.TabIndex = 38;
             this.txtAvgStopper.TabStop = false;
             // 
             // txtAvgDropper
             // 
+            this.txtAvgDropper.BackColor = System.Drawing.SystemColors.ControlLightLight;
             this.txtAvgDropper.Font = new System.Drawing.Font("Arial", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtAvgDropper.Location = new System.Drawing.Point(179, 132);
             this.txtAvgDropper.MaxLength = 20;
             this.txtAvgDropper.Name = "txtAvgDropper";
             this.txtAvgDropper.ReadOnly = true;
+            // 
+            // 
+            // 
+            this.txtAvgDropper.RootElement.AccessibleDescription = null;
+            this.txtAvgDropper.RootElement.AccessibleName = null;
+            this.txtAvgDropper.RootElement.ControlBounds = new System.Drawing.Rectangle(179, 132, 100, 20);
+            this.txtAvgDropper.RootElement.StretchVertically = true;
             this.txtAvgDropper.Size = new System.Drawing.Size(73, 18);
             this.txtAvgDropper.TabIndex = 37;
             this.txtAvgDropper.TabStop = false;
             // 
             // txtAvgFlat
             // 
+            this.txtAvgFlat.BackColor = System.Drawing.SystemColors.ControlLightLight;
             this.txtAvgFlat.Font = new System.Drawing.Font("Arial", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtAvgFlat.Location = new System.Drawing.Point(101, 132);
             this.txtAvgFlat.MaxLength = 20;
             this.txtAvgFlat.Name = "txtAvgFlat";
             this.txtAvgFlat.ReadOnly = true;
+            // 
+            // 
+            // 
+            this.txtAvgFlat.RootElement.AccessibleDescription = null;
+            this.txtAvgFlat.RootElement.AccessibleName = null;
+            this.txtAvgFlat.RootElement.ControlBounds = new System.Drawing.Rectangle(101, 132, 100, 20);
+            this.txtAvgFlat.RootElement.StretchVertically = true;
             this.txtAvgFlat.Size = new System.Drawing.Size(73, 18);
             this.txtAvgFlat.TabIndex = 36;
             this.txtAvgFlat.TabStop = false;
             // 
             // txtCNewUser
             // 
+            this.txtCNewUser.BackColor = System.Drawing.SystemColors.ControlLightLight;
             this.txtCNewUser.Font = new System.Drawing.Font("Arial", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtCNewUser.Location = new System.Drawing.Point(496, 87);
             this.txtCNewUser.MaxLength = 20;
             this.txtCNewUser.Name = "txtCNewUser";
             this.txtCNewUser.ReadOnly = true;
+            // 
+            // 
+            // 
+            this.txtCNewUser.RootElement.AccessibleDescription = null;
+            this.txtCNewUser.RootElement.AccessibleName = null;
+            this.txtCNewUser.RootElement.ControlBounds = new System.Drawing.Rectangle(496, 87, 100, 20);
+            this.txtCNewUser.RootElement.StretchVertically = true;
             this.txtCNewUser.Size = new System.Drawing.Size(73, 18);
             this.txtCNewUser.TabIndex = 35;
             this.txtCNewUser.TabStop = false;
             // 
             // txtCNonUser
             // 
+            this.txtCNonUser.BackColor = System.Drawing.SystemColors.ControlLightLight;
             this.txtCNonUser.Font = new System.Drawing.Font("Arial", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtCNonUser.Location = new System.Drawing.Point(417, 87);
             this.txtCNonUser.MaxLength = 20;
             this.txtCNonUser.Name = "txtCNonUser";
             this.txtCNonUser.ReadOnly = true;
+            // 
+            // 
+            // 
+            this.txtCNonUser.RootElement.AccessibleDescription = null;
+            this.txtCNonUser.RootElement.AccessibleName = null;
+            this.txtCNonUser.RootElement.ControlBounds = new System.Drawing.Rectangle(417, 87, 100, 20);
+            this.txtCNonUser.RootElement.StretchVertically = true;
             this.txtCNonUser.Size = new System.Drawing.Size(73, 18);
             this.txtCNonUser.TabIndex = 34;
             this.txtCNonUser.TabStop = false;
             // 
             // txtCGrower
             // 
+            this.txtCGrower.BackColor = System.Drawing.SystemColors.ControlLightLight;
             this.txtCGrower.Font = new System.Drawing.Font("Arial", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtCGrower.Location = new System.Drawing.Point(338, 87);
             this.txtCGrower.MaxLength = 20;
             this.txtCGrower.Name = "txtCGrower";
             this.txtCGrower.ReadOnly = true;
+            // 
+            // 
+            // 
+            this.txtCGrower.RootElement.AccessibleDescription = null;
+            this.txtCGrower.RootElement.AccessibleName = null;
+            this.txtCGrower.RootElement.ControlBounds = new System.Drawing.Rectangle(338, 87, 100, 20);
+            this.txtCGrower.RootElement.StretchVertically = true;
             this.txtCGrower.Size = new System.Drawing.Size(73, 18);
             this.txtCGrower.TabIndex = 33;
             this.txtCGrower.TabStop = false;
             // 
             // txtCStopper
             // 
+            this.txtCStopper.BackColor = System.Drawing.SystemColors.ControlLightLight;
             this.txtCStopper.Font = new System.Drawing.Font("Arial", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtCStopper.Location = new System.Drawing.Point(259, 87);
             this.txtCStopper.MaxLength = 20;
             this.txtCStopper.Name = "txtCStopper";
             this.txtCStopper.ReadOnly = true;
+            // 
+            // 
+            // 
+            this.txtCStopper.RootElement.AccessibleDescription = null;
+            this.txtCStopper.RootElement.AccessibleName = null;
+            this.txtCStopper.RootElement.ControlBounds = new System.Drawing.Rectangle(259, 87, 100, 20);
+            this.txtCStopper.RootElement.StretchVertically = true;
             this.txtCStopper.Size = new System.Drawing.Size(73, 18);
             this.txtCStopper.TabIndex = 32;
             this.txtCStopper.TabStop = false;
             // 
             // txtCDropper
             // 
+            this.txtCDropper.BackColor = System.Drawing.SystemColors.ControlLightLight;
             this.txtCDropper.Font = new System.Drawing.Font("Arial", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtCDropper.Location = new System.Drawing.Point(179, 87);
             this.txtCDropper.MaxLength = 20;
             this.txtCDropper.Name = "txtCDropper";
             this.txtCDropper.ReadOnly = true;
+            // 
+            // 
+            // 
+            this.txtCDropper.RootElement.AccessibleDescription = null;
+            this.txtCDropper.RootElement.AccessibleName = null;
+            this.txtCDropper.RootElement.ControlBounds = new System.Drawing.Rectangle(179, 87, 100, 20);
+            this.txtCDropper.RootElement.StretchVertically = true;
             this.txtCDropper.Size = new System.Drawing.Size(73, 18);
             this.txtCDropper.TabIndex = 31;
             this.txtCDropper.TabStop = false;
             // 
             // txtCFlat
             // 
+            this.txtCFlat.BackColor = System.Drawing.SystemColors.ControlLightLight;
             this.txtCFlat.Font = new System.Drawing.Font("Arial", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtCFlat.Location = new System.Drawing.Point(101, 87);
             this.txtCFlat.MaxLength = 20;
             this.txtCFlat.Name = "txtCFlat";
             this.txtCFlat.ReadOnly = true;
+            // 
+            // 
+            // 
+            this.txtCFlat.RootElement.AccessibleDescription = null;
+            this.txtCFlat.RootElement.AccessibleName = null;
+            this.txtCFlat.RootElement.ControlBounds = new System.Drawing.Rectangle(101, 87, 100, 20);
+            this.txtCFlat.RootElement.StretchVertically = true;
             this.txtCFlat.Size = new System.Drawing.Size(73, 18);
             this.txtCFlat.TabIndex = 30;
             this.txtCFlat.TabStop = false;
             // 
             // txtCtNewUser
             // 
+            this.txtCtNewUser.BackColor = System.Drawing.SystemColors.ControlLightLight;
             this.txtCtNewUser.Font = new System.Drawing.Font("Arial", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtCtNewUser.Location = new System.Drawing.Point(496, 60);
             this.txtCtNewUser.MaxLength = 20;
             this.txtCtNewUser.Name = "txtCtNewUser";
             this.txtCtNewUser.ReadOnly = true;
+            // 
+            // 
+            // 
+            this.txtCtNewUser.RootElement.AccessibleDescription = null;
+            this.txtCtNewUser.RootElement.AccessibleName = null;
+            this.txtCtNewUser.RootElement.ControlBounds = new System.Drawing.Rectangle(496, 60, 100, 20);
+            this.txtCtNewUser.RootElement.StretchVertically = true;
             this.txtCtNewUser.Size = new System.Drawing.Size(73, 18);
             this.txtCtNewUser.TabIndex = 29;
             this.txtCtNewUser.TabStop = false;
@@ -552,11 +743,19 @@
             // 
             // txtCtNonUser
             // 
+            this.txtCtNonUser.BackColor = System.Drawing.SystemColors.ControlLightLight;
             this.txtCtNonUser.Font = new System.Drawing.Font("Arial", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtCtNonUser.Location = new System.Drawing.Point(417, 60);
             this.txtCtNonUser.MaxLength = 20;
             this.txtCtNonUser.Name = "txtCtNonUser";
             this.txtCtNonUser.ReadOnly = true;
+            // 
+            // 
+            // 
+            this.txtCtNonUser.RootElement.AccessibleDescription = null;
+            this.txtCtNonUser.RootElement.AccessibleName = null;
+            this.txtCtNonUser.RootElement.ControlBounds = new System.Drawing.Rectangle(417, 60, 100, 20);
+            this.txtCtNonUser.RootElement.StretchVertically = true;
             this.txtCtNonUser.Size = new System.Drawing.Size(73, 18);
             this.txtCtNonUser.TabIndex = 28;
             this.txtCtNonUser.TabStop = false;
@@ -564,10 +763,18 @@
             // 
             // txtCtGrower
             // 
+            this.txtCtGrower.BackColor = System.Drawing.SystemColors.ControlLightLight;
             this.txtCtGrower.Font = new System.Drawing.Font("Arial", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtCtGrower.Location = new System.Drawing.Point(338, 60);
             this.txtCtGrower.MaxLength = 20;
             this.txtCtGrower.Name = "txtCtGrower";
+            // 
+            // 
+            // 
+            this.txtCtGrower.RootElement.AccessibleDescription = null;
+            this.txtCtGrower.RootElement.AccessibleName = null;
+            this.txtCtGrower.RootElement.ControlBounds = new System.Drawing.Rectangle(338, 60, 100, 20);
+            this.txtCtGrower.RootElement.StretchVertically = true;
             this.txtCtGrower.Size = new System.Drawing.Size(73, 18);
             this.txtCtGrower.TabIndex = 27;
             this.txtCtGrower.TabStop = false;
@@ -575,10 +782,18 @@
             // 
             // txtCtStopper
             // 
+            this.txtCtStopper.BackColor = System.Drawing.SystemColors.ControlLightLight;
             this.txtCtStopper.Font = new System.Drawing.Font("Arial", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtCtStopper.Location = new System.Drawing.Point(259, 60);
             this.txtCtStopper.MaxLength = 20;
             this.txtCtStopper.Name = "txtCtStopper";
+            // 
+            // 
+            // 
+            this.txtCtStopper.RootElement.AccessibleDescription = null;
+            this.txtCtStopper.RootElement.AccessibleName = null;
+            this.txtCtStopper.RootElement.ControlBounds = new System.Drawing.Rectangle(259, 60, 100, 20);
+            this.txtCtStopper.RootElement.StretchVertically = true;
             this.txtCtStopper.Size = new System.Drawing.Size(73, 18);
             this.txtCtStopper.TabIndex = 26;
             this.txtCtStopper.TabStop = false;
@@ -586,10 +801,18 @@
             // 
             // txtCtDropper
             // 
+            this.txtCtDropper.BackColor = System.Drawing.SystemColors.ControlLightLight;
             this.txtCtDropper.Font = new System.Drawing.Font("Arial", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtCtDropper.Location = new System.Drawing.Point(180, 60);
             this.txtCtDropper.MaxLength = 20;
             this.txtCtDropper.Name = "txtCtDropper";
+            // 
+            // 
+            // 
+            this.txtCtDropper.RootElement.AccessibleDescription = null;
+            this.txtCtDropper.RootElement.AccessibleName = null;
+            this.txtCtDropper.RootElement.ControlBounds = new System.Drawing.Rectangle(180, 60, 100, 20);
+            this.txtCtDropper.RootElement.StretchVertically = true;
             this.txtCtDropper.Size = new System.Drawing.Size(73, 18);
             this.txtCtDropper.TabIndex = 25;
             this.txtCtDropper.TabStop = false;
@@ -597,92 +820,154 @@
             // 
             // txtCtFlat
             // 
+            this.txtCtFlat.BackColor = System.Drawing.SystemColors.ControlLightLight;
             this.txtCtFlat.Font = new System.Drawing.Font("Arial", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtCtFlat.Location = new System.Drawing.Point(101, 60);
             this.txtCtFlat.MaxLength = 20;
             this.txtCtFlat.Name = "txtCtFlat";
             this.txtCtFlat.ReadOnly = true;
+            // 
+            // 
+            // 
+            this.txtCtFlat.RootElement.AccessibleDescription = null;
+            this.txtCtFlat.RootElement.AccessibleName = null;
+            this.txtCtFlat.RootElement.ControlBounds = new System.Drawing.Rectangle(101, 60, 100, 20);
+            this.txtCtFlat.RootElement.StretchVertically = true;
             this.txtCtFlat.Size = new System.Drawing.Size(73, 18);
             this.txtCtFlat.TabIndex = 24;
             this.txtCtFlat.TabStop = false;
             // 
             // radLabel9
             // 
+            this.radLabel9.BackColor = System.Drawing.SystemColors.ControlLightLight;
             this.radLabel9.Font = new System.Drawing.Font("Arial", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.radLabel9.Location = new System.Drawing.Point(501, 39);
             this.radLabel9.Name = "radLabel9";
+            // 
+            // 
+            // 
+            this.radLabel9.RootElement.AccessibleDescription = null;
+            this.radLabel9.RootElement.AccessibleName = null;
             this.radLabel9.Size = new System.Drawing.Size(62, 16);
             this.radLabel9.TabIndex = 23;
             this.radLabel9.Text = "New-Users";
             // 
             // radLabel8
             // 
+            this.radLabel8.BackColor = System.Drawing.SystemColors.ControlLightLight;
             this.radLabel8.Font = new System.Drawing.Font("Arial", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.radLabel8.Location = new System.Drawing.Point(423, 39);
             this.radLabel8.Name = "radLabel8";
+            // 
+            // 
+            // 
+            this.radLabel8.RootElement.AccessibleDescription = null;
+            this.radLabel8.RootElement.AccessibleName = null;
             this.radLabel8.Size = new System.Drawing.Size(60, 16);
             this.radLabel8.TabIndex = 22;
             this.radLabel8.Text = "Non-Users";
             // 
             // radLabel7
             // 
+            this.radLabel7.BackColor = System.Drawing.SystemColors.ControlLightLight;
             this.radLabel7.Font = new System.Drawing.Font("Arial", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.radLabel7.Location = new System.Drawing.Point(350, 39);
             this.radLabel7.Name = "radLabel7";
+            // 
+            // 
+            // 
+            this.radLabel7.RootElement.AccessibleDescription = null;
+            this.radLabel7.RootElement.AccessibleName = null;
             this.radLabel7.Size = new System.Drawing.Size(49, 16);
             this.radLabel7.TabIndex = 21;
             this.radLabel7.Text = "Growers";
             // 
             // radLabel6
             // 
+            this.radLabel6.BackColor = System.Drawing.SystemColors.ControlLightLight;
             this.radLabel6.Font = new System.Drawing.Font("Arial", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.radLabel6.Location = new System.Drawing.Point(269, 39);
             this.radLabel6.Name = "radLabel6";
+            // 
+            // 
+            // 
+            this.radLabel6.RootElement.AccessibleDescription = null;
+            this.radLabel6.RootElement.AccessibleName = null;
             this.radLabel6.Size = new System.Drawing.Size(52, 16);
             this.radLabel6.TabIndex = 20;
             this.radLabel6.Text = "Stoppers";
             // 
             // radLabel5
             // 
+            this.radLabel5.BackColor = System.Drawing.SystemColors.ControlLightLight;
             this.radLabel5.Font = new System.Drawing.Font("Arial", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.radLabel5.Location = new System.Drawing.Point(189, 39);
             this.radLabel5.Name = "radLabel5";
+            // 
+            // 
+            // 
+            this.radLabel5.RootElement.AccessibleDescription = null;
+            this.radLabel5.RootElement.AccessibleName = null;
             this.radLabel5.Size = new System.Drawing.Size(53, 16);
             this.radLabel5.TabIndex = 19;
             this.radLabel5.Text = "Droppers";
             // 
             // radLabel4
             // 
+            this.radLabel4.BackColor = System.Drawing.SystemColors.ControlLightLight;
             this.radLabel4.Font = new System.Drawing.Font("Arial", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.radLabel4.Location = new System.Drawing.Point(125, 39);
             this.radLabel4.Name = "radLabel4";
+            // 
+            // 
+            // 
+            this.radLabel4.RootElement.AccessibleDescription = null;
+            this.radLabel4.RootElement.AccessibleName = null;
             this.radLabel4.Size = new System.Drawing.Size(25, 16);
             this.radLabel4.TabIndex = 18;
             this.radLabel4.Text = "Flat";
             // 
             // radLabel3
             // 
+            this.radLabel3.BackColor = System.Drawing.SystemColors.ControlLightLight;
             this.radLabel3.Font = new System.Drawing.Font("Arial", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.radLabel3.Location = new System.Drawing.Point(16, 132);
             this.radLabel3.Name = "radLabel3";
+            // 
+            // 
+            // 
+            this.radLabel3.RootElement.AccessibleDescription = null;
+            this.radLabel3.RootElement.AccessibleName = null;
             this.radLabel3.Size = new System.Drawing.Size(55, 16);
             this.radLabel3.TabIndex = 17;
             this.radLabel3.Text = "Avg Delta";
             // 
             // radLabel2
             // 
+            this.radLabel2.BackColor = System.Drawing.SystemColors.ControlLightLight;
             this.radLabel2.Font = new System.Drawing.Font("Arial", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.radLabel2.Location = new System.Drawing.Point(16, 88);
             this.radLabel2.Name = "radLabel2";
+            // 
+            // 
+            // 
+            this.radLabel2.RootElement.AccessibleDescription = null;
+            this.radLabel2.RootElement.AccessibleName = null;
             this.radLabel2.Size = new System.Drawing.Size(36, 16);
             this.radLabel2.TabIndex = 16;
             this.radLabel2.Text = "Count";
             // 
             // radLabel1
             // 
+            this.radLabel1.BackColor = System.Drawing.SystemColors.ControlLightLight;
             this.radLabel1.Font = new System.Drawing.Font("Arial", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.radLabel1.Location = new System.Drawing.Point(16, 61);
             this.radLabel1.Name = "radLabel1";
+            // 
+            // 
+            // 
+            this.radLabel1.RootElement.AccessibleDescription = null;
+            this.radLabel1.RootElement.AccessibleName = null;
             this.radLabel1.Size = new System.Drawing.Size(36, 16);
             this.radLabel1.TabIndex = 15;
             this.radLabel1.Text = "Cutoff";
@@ -695,18 +980,19 @@
             this.label1.Margin = new System.Windows.Forms.Padding(10, 0, 3, 0);
             this.label1.Name = "label1";
             this.label1.Padding = new System.Windows.Forms.Padding(5, 0, 0, 0);
-            this.label1.Size = new System.Drawing.Size(993, 36);
+            this.label1.Size = new System.Drawing.Size(1323, 36);
             this.label1.TabIndex = 14;
             this.label1.Text = "Status - Breakdown";
             this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // ctrlThreshold
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(997, 537);
+            this.ClientSize = new System.Drawing.Size(1327, 665);
             this.Controls.Add(this.gbMain);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "ctrlThreshold";
@@ -717,19 +1003,13 @@
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Threshold";
             ((System.ComponentModel.ISupportInitialize)(this.gbMain)).EndInit();
-            this.gbMain.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.gbTop)).EndInit();
-            this.gbTop.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.chartThreshold)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.radGroupBox1)).EndInit();
-            this.radGroupBox1.ResumeLayout(false);
-            this.radGroupBox1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.grwrTrackBar)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.drprTrackBar)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.stprTrackBar)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gbBottom)).EndInit();
-            this.gbBottom.ResumeLayout(false);
-            this.gbBottom.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.txtCPNewUser)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtCPNonUser)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtCPGrower)).EndInit();
