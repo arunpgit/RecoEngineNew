@@ -112,212 +112,257 @@ namespace RecoEngine_BI
         {
             try
             {
-                string strSql = "";
-                string strSegmentString = "";
-                string strKeyString = "";
-                string strSegmentVString = "";
-                string strKeyVString = "";
-                string strKeyCString = "";
-                string strETS_TRE_BASEString = "";
-                string strETS_TRE_BASEVString = "";
-                string strETS_TRE_BASE2String = "";
-                string strETS_TRE_BASE2VString = "";
-                string strETS_TRE_BASE3String = "";
-                string strETS_TRE_BASE3VString = "";
+                string str = "";
                 string str1 = "";
-                string strV1 = "";
-
-                DataTable dtTab = new DataTable();
-
-                // strTabName = "TRE_DETAILS_NEW";
-                strSql = "Select * from TRE_MAPPING where TABLENAME='" + strTabName + "' and PROJECTID=" + iProjectId;
-                if (Common.iDBType == (int)Enums.DBType.Oracle)
-                    dtTab = ((OraDBManager)Common.dbMgr).ExecuteDataTable(CommandType.Text, strSql);
-                else
-                    dtTab = ((DBManager)Common.dbMgr).ExecuteDataTable(CommandType.Text, strSql);
-
-                foreach (DataRow dr in dtTab.Rows)
+                string str2 = "";
+                string str3 = "";
+                string str4 = "";
+                string str5 = "";
+                string str6 = "";
+                string str7 = "";
+                string str8 = "";
+                string str9 = "";
+                string str10 = "";
+                string str11 = "";
+                string str12 = "";
+                string str13 = "";
+                DataTable dataTable = new DataTable();
+                object[] objArray = new object[] { "Select * from TRE_MAPPING where TABLENAME='", strTabName, "' and PROJECTID=", iProjectId };
+                str = string.Concat(objArray);
+                dataTable = (Common.iDBType != 1 ? ((DBManager)Common.dbMgr).ExecuteDataTable(CommandType.Text, str) : ((OraDBManager)Common.dbMgr).ExecuteDataTable(CommandType.Text, str));
+                foreach (DataRow row in dataTable.Rows)
                 {
-
-                    if (dr["type"].ToString() == ((int)Enums.ColType.Input).ToString())
+                    if (row["type"].ToString() == 2.ToString())
                     {
-                        if (dr["coldataType"].ToString() != "System.String" && dr["coldataType"].ToString() != "System.DateTime")
+                        if (!(row["coldataType"].ToString() != "System.String") || !(row["coldataType"].ToString() != "System.DateTime"))
                         {
-
-                            str1 = "";
-                            strV1 = "";
-
-                            if (strETS_TRE_BASEString != "")
-                                strETS_TRE_BASEString += ",";
-
-                            if (strETS_TRE_BASE2String != "")
-                                strETS_TRE_BASE2String += ",";
-
-                            if (strETS_TRE_BASE3String != "")
-                                strETS_TRE_BASE3String += ",";
-
-                            if (strETS_TRE_BASEVString != "")
-                                strETS_TRE_BASEVString += ",";
-
-                            if (strETS_TRE_BASE2VString != "")
-                                strETS_TRE_BASE2VString += ",";
-
-                            if (strETS_TRE_BASE3VString != "")
-                                strETS_TRE_BASE3VString += ",";
-
-                            str1 = "A_" + dr[0].ToString() + ",B_" + dr[0].ToString() + ",X_" + dr[0].ToString() + ",D_" + dr[0].ToString();
-
-
-
-                            strV1 = "A_" + dr[0].ToString() + ",B_" + dr[0].ToString() + ",X_" + dr[0].ToString() + ",";
-                            strV1 += " Case When B_" + dr[0].ToString() + " > 0 Then ROUND((A_" + dr[0].ToString() + "/B_" + dr[0].ToString() + ")-1,3) Else 0 End ";
-
-
-                            strETS_TRE_BASEString += str1;
-                            strETS_TRE_BASEVString += strV1;
-
-                            str1 += ",S_" + dr[0].ToString();
-                            // need to pass 0.25 value dynamically
-                            strV1 = " ,CASE WHEN B_" + dr[0].ToString() + " = 0  AND A_" + dr[0].ToString() + " = 0 Then 'NON USER' ";
-                            strV1 += "  WHEN B_" + dr[0].ToString() + " = 0  AND A_" + dr[0].ToString() + " > 0 Then 'NEW USER' ";
-                            strV1 += "  WHEN B_" + dr[0].ToString() + " > 0  AND D_" + dr[0].ToString() + " = -1 Then 'STOPPER' ";
-                            strV1 += "  WHEN D_" + dr[0].ToString() + " <= " + Convert.ToDecimal(strGrower) + " Then 'DROPPER' ";
-                            strV1 += "  WHEN D_" + dr[0].ToString() + " >= " + Convert.ToDecimal(strGrower) + "  Then 'GROWER' ";
-                            strV1 += "  ELSE 'FLAT' End ";
-
-                            strETS_TRE_BASE2String += str1;
-                            strETS_TRE_BASE2VString += "A_" + dr[0].ToString() + ",B_" + dr[0].ToString() + ",X_" + dr[0].ToString() + ",D_" + dr[0].ToString() + strV1;
-
-                            str1 += ",P_" + dr[0].ToString();
-
-                            strV1 = ", CASE WHEN S_" + dr[0].ToString() + " = 'NON USER' Then X_" + dr[0].ToString();
-                            strV1 += "  WHEN S_" + dr[0].ToString() + " = 'DROPPER' then abs(D_" + dr[0].ToString() + ")";
-                            strV1 += "  WHEN S_" + dr[0].ToString() + "= 'STOPPER' then B_" + dr[0].ToString() + "*" + Convert.ToDecimal(strGrower);
-                            strV1 += "  WHEN S_" + dr[0].ToString() + "='FLAT' then a_" + dr[0].ToString() + "*" + Convert.ToDecimal(strGrower);
-                            strV1 += "  ELSE 0 End ";
-
-                            strETS_TRE_BASE3String += str1;
-                            strETS_TRE_BASE3VString += "A_" + dr[0].ToString() + ",B_" + dr[0].ToString() + ",X_" + dr[0].ToString() + ",D_" + dr[0].ToString() + ",S_" + dr[0].ToString() + strV1;
-
-
+                            continue;
                         }
+                        str12 = "";
+                        str13 = "";
+                        if (str6 != "")
+                        {
+                            str6 = string.Concat(str6, ",");
+                        }
+                        if (str8 != "")
+                        {
+                            str8 = string.Concat(str8, ",");
+                        }
+                        if (str10 != "")
+                        {
+                            str10 = string.Concat(str10, ",");
+                        }
+                        if (str7 != "")
+                        {
+                            str7 = string.Concat(str7, ",");
+                        }
+                        if (str9 != "")
+                        {
+                            str9 = string.Concat(str9, ",");
+                        }
+                        if (str11 != "")
+                        {
+                            str11 = string.Concat(str11, ",");
+                        }
+                        string[] strArrays = new string[] { "A_", row[0].ToString(), ",B_", row[0].ToString(), ",X_", row[0].ToString(), ",D_", row[0].ToString() };
+                        str12 = string.Concat(strArrays);
+                        string[] strArrays1 = new string[] { "A_", row[0].ToString(), ",B_", row[0].ToString(), ",X_", row[0].ToString(), "," };
+                        string str14 = string.Concat(strArrays1);
+                        string[] strArrays2 = new string[] { str14, " Case When B_", row[0].ToString(), " > 0 Then ROUND((A_", row[0].ToString(), "/B_", row[0].ToString(), ")-1,3) Else 0 End " };
+                        str13 = string.Concat(strArrays2);
+                        str6 = string.Concat(str6, str12);
+                        str7 = string.Concat(str7, str13);
+                        str12 = string.Concat(str12, ",S_", row[0].ToString());
+                        string[] strArrays3 = new string[] { " ,CASE WHEN B_", row[0].ToString(), " = 0  AND A_", row[0].ToString(), " = 0 Then 'NON USER' " };
+                        string str15 = string.Concat(strArrays3);
+                        string[] strArrays4 = new string[] { str15, "  WHEN B_", row[0].ToString(), " = 0  AND A_", row[0].ToString(), " > 0 Then 'NEW USER' " };
+                        string str16 = string.Concat(strArrays4);
+                        string[] strArrays5 = new string[] { str16, "  WHEN B_", row[0].ToString(), " > 0  AND D_", row[0].ToString(), " = -1 Then 'STOPPER' " };
+                        object obj = string.Concat(strArrays5);
+                        object[] objArray1 = new object[] { obj, "  WHEN D_", row[0].ToString(), " <= ", Convert.ToDecimal(strGrower), " Then 'DROPPER' " };
+                        object obj1 = string.Concat(objArray1);
+                        object[] objArray2 = new object[] { obj1, "  WHEN D_", row[0].ToString(), " >= ", Convert.ToDecimal(strGrower), "  Then 'GROWER' " };
+                        str13 = string.Concat(string.Concat(objArray2), "  ELSE 'FLAT' End ");
+                        str8 = string.Concat(str8, str12);
+                        string str17 = str9;
+                        string[] strArrays6 = new string[] { str17, "A_", row[0].ToString(), ",B_", row[0].ToString(), ",X_", row[0].ToString(), ",D_", row[0].ToString(), str13 };
+                        str9 = string.Concat(strArrays6);
+                        str12 = string.Concat(str12, ",P_", row[0].ToString());
+                        str13 = string.Concat(", CASE WHEN S_", row[0].ToString(), " = 'NON USER' Then X_", row[0].ToString());
+                        string str18 = str13;
+                        string[] strArrays7 = new string[] { str18, "  WHEN S_", row[0].ToString(), " = 'DROPPER' then abs(D_", row[0].ToString(), ")" };
+                        object obj2 = string.Concat(strArrays7);
+                        object[] objArray3 = new object[] { obj2, "  WHEN S_", row[0].ToString(), "= 'STOPPER' then B_", row[0].ToString(), "*", Convert.ToDecimal(strGrower) };
+                        object obj3 = string.Concat(objArray3);
+                        object[] objArray4 = new object[] { obj3, "  WHEN S_", row[0].ToString(), "='FLAT' then a_", row[0].ToString(), "*", Convert.ToDecimal(strGrower) };
+                        str13 = string.Concat(string.Concat(objArray4), "  ELSE 0 End ");
+                        str10 = string.Concat(str10, str12);
+                        string str19 = str11;
+                        string[] strArrays8 = new string[] { str19, "A_", row[0].ToString(), ",B_", row[0].ToString(), ",X_", row[0].ToString(), ",D_", row[0].ToString(), ",S_", row[0].ToString(), str13 };
+                        str11 = string.Concat(strArrays8);
                     }
-                    else if (dr["type"].ToString() == ((int)Enums.ColType.Segment).ToString())
+                    else if (row["type"].ToString() != 4.ToString())
                     {
-                        if (strSegmentString != "")
-                            strSegmentString += ",";
-
-                        if (strSegmentVString != "")
-                            strSegmentVString += ",";
-
-                        strSegmentVString += "A." + dr[0].ToString();
-                        strSegmentString += dr[0].ToString();
+                        if (row["type"].ToString() != 1.ToString())
+                        {
+                            continue;
+                        }
+                        if (str2 != "")
+                        {
+                            str2 = string.Concat(str2, ",");
+                        }
+                        if (str4 != "")
+                        {
+                            str4 = string.Concat(str4, ",");
+                        }
+                        if (str5 != "")
+                        {
+                            str5 = string.Concat(str5, ",");
+                        }
+                        str4 = string.Concat(str4, "A.", row[0].ToString());
+                        str2 = string.Concat(str2, row[0].ToString());
+                        string str20 = str5;
+                        string[] strArrays9 = new string[] { str20, "A.", row[0].ToString(), "=B.", row[0].ToString() };
+                        str5 = string.Concat(strArrays9);
                     }
-                    else if (dr["type"].ToString() == ((int)Enums.ColType.Key).ToString())
+                    else
                     {
-                        if (strKeyString != "")
-                            strKeyString += ",";
-
-                        if (strKeyVString != "")
-                            strKeyVString += ",";
-
-                        if (strKeyCString != "")
-                            strKeyCString += ",";
-
-                        strKeyVString += "A." + dr[0].ToString();
-                        strKeyString += dr[0].ToString();
-
-                        strKeyCString += "A." + dr[0].ToString() + "=" + "B." + dr[0].ToString();
+                        if (str1 != "")
+                        {
+                            str1 = string.Concat(str1, ",");
+                        }
+                        if (str3 != "")
+                        {
+                            str3 = string.Concat(str3, ",");
+                        }
+                        str3 = string.Concat(str3, "A.", row[0].ToString());
+                        str1 = string.Concat(str1, row[0].ToString());
                     }
                 }
-
-
-                strSql = "Delete from ETS_TRE_BASE2";
-                if (Common.iDBType == (int)Enums.DBType.Oracle)
+                str = "Delete from ETS_TRE_BASE2";
+                if (Common.iDBType != 1)
                 {
-                    ((OraDBManager)Common.dbMgr).ExecuteScalar(CommandType.Text, strSql);
+                    ((DBManager)Common.dbMgr).ExecuteScalar(CommandType.Text, str);
                 }
                 else
                 {
-                    ((DBManager)Common.dbMgr).ExecuteScalar(CommandType.Text, strSql);
+                    ((OraDBManager)Common.dbMgr).ExecuteScalar(CommandType.Text, str);
                 }
-                strSql = "Delete from ETS_TRE_BASE3";
-                if (Common.iDBType == (int)Enums.DBType.Oracle)
+                str = "Delete from ETS_TRE_BASE3";
+                if (Common.iDBType != 1)
                 {
-                    ((OraDBManager)Common.dbMgr).ExecuteScalar(CommandType.Text, strSql);
+                    ((DBManager)Common.dbMgr).ExecuteScalar(CommandType.Text, str);
                 }
                 else
                 {
-                    ((DBManager)Common.dbMgr).ExecuteScalar(CommandType.Text, strSql);
+                    ((OraDBManager)Common.dbMgr).ExecuteScalar(CommandType.Text, str);
                 }
-
-                string strInsertString = "Insert into ETS_TRE_BASE2(";
-
-                if (strKeyString != "")
-                    strInsertString += strKeyString + ",";
-
-                if (strSegmentString != "")
-                    strInsertString += strSegmentString + ",";
-
-                if (strETS_TRE_BASE2String != "")
-                    strInsertString += strETS_TRE_BASE2String;
-
-                strInsertString += ") Select ";
-                if (strKeyString != "")
-                    strInsertString += strKeyString + ",";
-
-                if (strSegmentString != "")
-                    strInsertString += strSegmentString + ",";
-
-                strInsertString += strETS_TRE_BASE2VString + " From ETS_TRE_BASE ";
-
-
-                if (Common.iDBType == (int)Enums.DBType.Oracle)
+                string str21 = "Insert into ETS_TRE_BASE2(";
+                if (str2 != "")
                 {
-                    ((OraDBManager)Common.dbMgr).ExecuteScalar(CommandType.Text, strInsertString);
+                    str21 = string.Concat(str21, str2, ",");
+                }
+                if (str1 != "")
+                {
+                    str21 = string.Concat(str21, str1, ",");
+                }
+                if (str8 != "")
+                {
+                    str21 = string.Concat(str21, str8);
+                }
+                str21 = string.Concat(str21, ") Select ");
+                if (str2 != "")
+                {
+                    str21 = string.Concat(str21, str2, ",");
+                }
+                if (str1 != "")
+                {
+                    str21 = string.Concat(str21, str1, ",");
+                }
+                str21 = string.Concat(str21, str9, " From ETS_TRE_BASE ");
+                if (Common.iDBType != 1)
+                {
+                    ((DBManager)Common.dbMgr).ExecuteScalar(CommandType.Text, str21);
                 }
                 else
                 {
-                    ((DBManager)Common.dbMgr).ExecuteScalar(CommandType.Text, strInsertString);
+                    ((OraDBManager)Common.dbMgr).ExecuteScalar(CommandType.Text, str21);
                 }
-
-
-                strInsertString = "Insert into ETS_TRE_BASE3(";
-
-                if (strKeyString != "")
-                    strInsertString += strKeyString + ",";
-
-                if (strSegmentString != "")
-                    strInsertString += strSegmentString + ",";
-
-                if (strETS_TRE_BASE3String != "")
-                    strInsertString += strETS_TRE_BASE3String;
-
-                strInsertString += ") Select ";
-                if (strKeyString != "")
-                    strInsertString += strKeyString + ",";
-
-                if (strSegmentString != "")
-                    strInsertString += strSegmentString + ",";
-
-                strInsertString += strETS_TRE_BASE3VString + " From ETS_TRE_BASE2 ";
-
-                if (Common.iDBType == (int)Enums.DBType.Oracle)
+                str21 = "Insert into ETS_TRE_BASE3(";
+                if (str2 != "")
                 {
-                    ((OraDBManager)Common.dbMgr).ExecuteScalar(CommandType.Text, strInsertString);
+                    str21 = string.Concat(str21, str2, ",");
+                }
+                if (str1 != "")
+                {
+                    str21 = string.Concat(str21, str1, ",");
+                }
+                if (str10 != "")
+                {
+                    str21 = string.Concat(str21, str10);
+                }
+                str21 = string.Concat(str21, ") Select ");
+                if (str2 != "")
+                {
+                    str21 = string.Concat(str21, str2, ",");
+                }
+                if (str1 != "")
+                {
+                    str21 = string.Concat(str21, str1, ",");
+                }
+                str21 = string.Concat(str21, str11, " From ETS_TRE_BASE2 ");
+                if (Common.iDBType != 1)
+                {
+                    ((DBManager)Common.dbMgr).ExecuteScalar(CommandType.Text, str21);
                 }
                 else
                 {
-                    ((DBManager)Common.dbMgr).ExecuteScalar(CommandType.Text, strInsertString);
+                    ((OraDBManager)Common.dbMgr).ExecuteScalar(CommandType.Text, str21);
                 }
-
-
             }
-            catch (Exception ex)
+            catch (Exception exception)
             {
-                throw ex;
+                throw exception;
             }
         }
+        public bool fnDeleteTreOppfrmExport()
+        {
+            string str = "select count(*)  from user_tables where table_name = 'TRE_OPPORTUNITYEXPORT'";
+            if (int.Parse(((OraDBManager)Common.dbMgr).ExecuteScalar(CommandType.Text, str)) > 0)
+            {
+                str = "DROP TABLE TRE_OPPORTUNITYEXPORT";
+                if (Common.iDBType != 1)
+                {
+                    ((DBManager)Common.dbMgr).ExecuteScalar(CommandType.Text, str);
+                }
+                else
+                {
+                    ((OraDBManager)Common.dbMgr).ExecuteScalar(CommandType.Text, str);
+                }
+                str = "DROP SEQUENCE tbl_seq";
+                ((OraDBManager)Common.dbMgr).ExecuteScalar(CommandType.Text, str);
+            }
+            str = "CREATE TABLE TRE_OPPORTUNITYEXPORT (ID NUMBER NOT NULL, CUSTOMER varchar2(50)  NULL,";
+            str = string.Concat(str, "WEEK number(2)  NULL )  NOLOGGING");
+            if (Common.iDBType != 1)
+            {
+                ((DBManager)Common.dbMgr).ExecuteScalar(CommandType.Text, str);
+            }
+            else
+            {
+                ((OraDBManager)Common.dbMgr).ExecuteScalar(CommandType.Text, str);
+            }
+            str = "ALTER TABLE TRE_OPPORTUNITYEXPORT ADD (CONSTRAINT Id_pk PRIMARY KEY (ID))";
+            ((OraDBManager)Common.dbMgr).ExecuteScalar(CommandType.Text, str);
+            str = "CREATE SEQUENCE tbl_seq";
+            ((OraDBManager)Common.dbMgr).ExecuteScalar(CommandType.Text, str);
+            str = "CREATE OR REPLACE TRIGGER tbl_trigr BEFORE INSERT ON TRE_OPPORTUNITYEXPORT FOR EACH ROW BEGIN SELECT tbl_seq.NEXTVAL INTO :new.ID FROM dual; END;";
+            ((OraDBManager)Common.dbMgr).ExecuteScalar(CommandType.Text, str);
+            return true;
+        }
+
+       
+
         public void fnGetSegmentData(string strTabName, int iTIMEPERIOD, string strSegmentColumn, string strT2String, string[] strT2, int iProjectId, bool isActiveChecked, ref int iCount, ref string strSegmentDataFeilds)
         {
             try
