@@ -429,101 +429,76 @@ namespace RecoEngine
             }
         }
 
-        void fnRunProject(int iProjectID)
+        private void fnRunProject(int iProjectID)
         {
             try
             {
-
-                Common.timePeriods.strtp1 = chkddlTP1.m_TextBox.Text.ToString().Split(';').ToArray();
-                Common.timePeriods.strtp2 = cntrlchkDropDowntp2.m_TextBox.Text.ToString().Split(';').ToArray();
-                int TimePeriodId = clstreDetails.fnInsertTREtimePeriodfrmExport(Common.timePeriods.strtp1, Common.timePeriods.strtp2, Common.strTableName, Common.iProjectID);
-                 string strColumns = "";
-                DataTable dtcol = objDatsource.fnGetTreDetailsSchema(Common.strTableName);
-                foreach (DataRow dr in dtcol.Rows)
+                string str = this.chkddlTP1.m_TextBox.Text.ToString();
+                char[] chrArray = new char[] { ';' };
+                Common.timePeriods.strtp1 = str.Split(chrArray).ToArray<string>();
+                string str1 = this.cntrlchkDropDowntp2.m_TextBox.Text.ToString();
+                char[] chrArray1 = new char[] { ';' };
+                Common.timePeriods.strtp2 = str1.Split(chrArray1).ToArray<string>();
+                this.clstreDetails.fnInsertTREtimePeriodfrmExport(Common.timePeriods.strtp1, Common.timePeriods.strtp2, Common.strTableName, Common.iProjectID);
+                string str2 = "";
+                DataTable dataTable = this.objDatsource.fnGetTreDetailsSchema(Common.strTableName);
+                foreach (DataRow row in dataTable.Rows)
                 {
-                    strColumns += dr[0].ToString();
-                    strColumns += ",";
+                    str2 = string.Concat(str2, row[0].ToString());
+                    str2 = string.Concat(str2, ",");
                 }
-                dtcol = objDatsource.fnGetCalaculatedColMappingData(Common.iProjectID, Common.strTableName);
-
-                string strMainFilter = objDatsource.fnselectFilterCondition(Common.iProjectID);
-                foreach (DataRow dr in dtcol.Rows)
+                dataTable = this.objDatsource.fnGetCalaculatedColMappingData(Common.iProjectID, Common.strTableName);
+                string str3 = this.objDatsource.fnselectFilterCondition(Common.iProjectID);
+                foreach (DataRow dataRow in dataTable.Rows)
                 {
-                    strColumns += dr["COMBINE_COLUMNS"].ToString() + " " + dr["COLNAME"].ToString();
-                    strColumns += ",";
+                    str2 = string.Concat(str2, dataRow["COMBINE_COLUMNS"].ToString(), " ", dataRow["COLNAME"].ToString());
+                    str2 = string.Concat(str2, ",");
                 }
-                if (strColumns.Length > 0)
-                    strColumns = strColumns.Remove(strColumns.Length - 1, 1);
-                clstreDetails.fnCreateTableTab(Common.strTableName, strColumns, strMainFilter);
-                string strT1String = clstreDetails.fnBuildTimePeriod(Common.timePeriods.strtp1);
-                string strT2String = clstreDetails.fnBuildTimePeriod(Common.timePeriods.strtp2);
-                //Common.timePeriods.strtp1=
-                if (objRanking.fnRankingcriteria(iProjectID).Rows.Count > 0)
+                if (str2.Length > 0)
                 {
-                    //if (InvokeRequired)
-                    //{
-                    //    this.Invoke(new Action(() => fnCheckExport(Common.iProjectID)));
-                   
-                    if (fnCheckExport(Common.iProjectID))
+                    str2 = str2.Remove(str2.Length - 1, 1);
+                }
+                this.clstreDetails.fnCreateTableView(Common.strTableName, str2, str3);
+                string str4 = this.clstreDetails.fnBuildTimePeriod(Common.timePeriods.strtp1);
+                string str5 = this.clstreDetails.fnBuildTimePeriod(Common.timePeriods.strtp2);
+                if (this.objRanking.fnRankingcriteria(iProjectID).Rows.Count <= 0)
+                {
+                    RadMessageBox.Show(this, "Ranking Criteria is not choosen for Selected Project", "Information", MessageBoxButtons.OK, RadMessageIcon.Error, MessageBoxDefaultButton.Button1);
+                }
+                else if (!this.fnCheckExport(Common.iProjectID))
+                {
+                    MessageBox.Show("Export Settings are not choosen");
+                }
+                else
+                {
+                    this.clstreDetails.fnDeleteTreOppfrmExport();
+                    if (this.ClsObj.fnRunOPoortunitiesfrmExport(iProjectID, Common.strTableName, str4, str5, str3))
                     {
-                       // clstreDetails.fnDeleteTreOppfrmExport();
-
-                        if (ClsObj.fnRunOPoortunitiesfrmExport(iProjectID, Common.strTableName, strT1String, strT2String, strMainFilter))
+                        this.objRanking.fnMainRankingfrmExport(iProjectID);
+                        this.objCampaigns.fnDelteCampaignRankingsfrmExport(Common.iProjectID, Common.strTableName);
+                        DataTable dataTable1 = this.objExport.fnGetCampaigns(iProjectID);
+                        if (dataTable1.Rows.Count <= 0)
                         {
-                            objRanking.fnMainRankingfrmExport(iProjectID);
-                            objCampaigns.fnDelteCampaignRankingsfrmExport(Common.iProjectID, Common.strTableName);
-                            DataTable dt = objExport.fnGetCampaigns(iProjectID);
-                            if (dt.Rows.Count > 0)
-                            {
-                                //foreach (DataRow dr in dt.Rows)
-                                //{
-                                //    objCampaigns.fnSaveCampaignRankingsfrmExport(dr["ELIGIBILITY"].ToString(), Convert.ToInt16(dr["PROJECT_ID"]), dr["SEGMENT_DESCRIPTION"].ToString(), Convert.ToInt16(dr["CAMPAIGN_ID"]), Common.strTableName, strMainFilter);
-                                //}
-
-                                //CntrlOfferLibrary col = new CntrlOfferLibrary(0);
-                                //string strPriorVal=col.getPriortiseVal();
-                                string strPriorVal = "Avg_Ptnl";
-                                int iPriorVal = 0;
-                                if (strPriorVal == "Avg_Ptnl")
-                                {
-                                    iPriorVal = 1;
-                                }
-                                objCampaigns.fnSaveCampaignRankingsfrmExport(iPriorVal, Common.iProjectID, Common.strTableName, strMainFilter);
-                                
-                                //objCampaigns.fnPrioritizeRankingsfrmExport(Common.iProjectID, "Average");
-                                fnExport();
-                            }
-                            else
-                            { 
-                            
-                Telerik.WinControls.RadMessageBox.Show(this,"There are no campaigns to export", "", MessageBoxButtons.OK, RadMessageIcon.Error, MessageBoxDefaultButton.Button1);
-
-                                 }
-                        }//
-                    }
-                
-
+                            RadMessageBox.Show(this, "There are no campaigns to export", "", MessageBoxButtons.OK, RadMessageIcon.Error, MessageBoxDefaultButton.Button1);
+                        }
                         else
                         {
-                            MessageBox.Show("Export Settings are not choosen");
-                        return;
+                            foreach (DataRow row1 in dataTable1.Rows)
+                            {
+                                this.objCampaigns.fnSaveCampaignRankingsfrmExport(row1["ELIGIBILITY"].ToString(), Convert.ToInt16(row1["PROJECT_ID"]), row1["SEGMENT_DESCRIPTION"].ToString(), Convert.ToInt16(row1["CAMPAIGN_ID"]), Common.strTableName, str3);
+                            }
+                            this.objCampaigns.fnPrioritizeRankingsfrmExport(Common.iProjectID, "Average");
+                            this.fnExport();
                         }
-                        //}
                     }
-                    else
-                    {
-                        Telerik.WinControls.RadMessageBox.Show(this, "Ranking Criteria is not choosen for Selected Project", "Information", MessageBoxButtons.OK, RadMessageIcon.Error, MessageBoxDefaultButton.Button1);
-                        return;
-
-                    
                 }
             }
-            catch (Exception ex)
+            catch (Exception exception1)
             {
-                alert.Close();
-                MessageBox.Show(ex.Message);
+                Exception exception = exception1;
+                this.alert.Close();
+                MessageBox.Show(exception.Message);
             }
-
         }
 
         private void chkMinRanking_CheckedChanged(object sender, EventArgs e)
