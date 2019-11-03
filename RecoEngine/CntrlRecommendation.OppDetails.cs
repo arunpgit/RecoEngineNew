@@ -87,28 +87,29 @@ namespace RecoEngine
                 MessageBox.Show(exception.Message);
             }
         }
-    
-        void fnCreateView()
+
+        private void fnCreateView()
         {
-            string strColumns = "";
-            clsDataSource objDatsource = new clsDataSource();
-             strMainFilter = objDatsource.fnselectFilterCondition(Common.iProjectID);
-             
-            DataTable dtcol = objDatsource.fnGetTreDetailsSchema(Common.strTableName);
-            foreach (DataRow dr in dtcol.Rows)
+            string str = "";
+            clsDataSource _clsDataSource = new clsDataSource();
+            this.strMainFilter = _clsDataSource.fnselectFilterCondition(Common.iProjectID);
+            DataTable dataTable = _clsDataSource.fnGetTreDetailsSchema(Common.strTableName);
+            foreach (DataRow row in dataTable.Rows)
             {
-                strColumns += dr[0].ToString();
-                strColumns += ",";
+                str = string.Concat(str, row[0].ToString());
+                str = string.Concat(str, ",");
             }
-            dtcol = objDatsource.fnGetCalaculatedColMappingData(Common.iProjectID,Common.strTableName);
-             foreach (DataRow dr in dtcol.Rows)
+            dataTable = _clsDataSource.fnGetCalaculatedColMappingData(Common.iProjectID, Common.strTableName);
+            foreach (DataRow dataRow in dataTable.Rows)
             {
-                strColumns += dr["COMBINE_COLUMNS"].ToString() + " " + dr["COLNAME"].ToString();
-                strColumns += ",";
+                str = string.Concat(str, dataRow["COMBINE_COLUMNS"].ToString(), " ", dataRow["COLNAME"].ToString());
+                str = string.Concat(str, ",");
             }
-            if (strColumns.Length > 0)
-                strColumns = strColumns.Remove(strColumns.Length - 1, 1);
-            clstreDetails.fnCreateTableTab(Common.strTableName, strColumns, strMainFilter);
+            if (str.Length > 0)
+            {
+                str = str.Remove(str.Length - 1, 1);
+            }
+            this.clstreDetails.fnCreateTableView(Common.strTableName, str, this.strMainFilter);
         }
     }
 }

@@ -231,25 +231,33 @@ namespace RecoEngine
                 ddlLevel5.SelectedIndex = 0;
                 chkIsActive.Checked = true;
                 txtDesc.Text = "";
-                txtCode.Text = ddlLevel2.SelectedValue.ToString() + "_" + ddlLevel3.SelectedValue.ToString() + "_" + ddlLevel4.SelectedValue.ToString() + "_" + ddlLevel5.SelectedValue.ToString();
+                RadTextBox radTextBox = this.txtCode;
+                string[] str = new string[] { this.ddlLevel2.SelectedValue.ToString(), "_", this.ddlLevel3.SelectedValue.ToString(), "_", this.ddlLevel4.SelectedValue.ToString(), "_", this.ddlLevel5.SelectedValue.ToString() };
+                radTextBox.Text = string.Concat(str);
             }
-            catch (Exception ex)
+            catch (Exception exception1)
             {
-                Telerik.WinControls.RadMessageBox.Show(this, ex.Message, ex.TargetSite.Name.ToString(), MessageBoxButtons.OK, RadMessageIcon.Error, MessageBoxDefaultButton.Button1);
+                Exception exception = exception1;
+                RadMessageBox.Show(this, exception.Message, exception.TargetSite.Name.ToString(), MessageBoxButtons.OK, RadMessageIcon.Error, MessageBoxDefaultButton.Button1);
             }
         }
 
         private void ddlLevel1_SelectedIndexChanged(object sender, Telerik.WinControls.UI.Data.PositionChangedEventArgs e)
         {
+
             try
             {
-                if (!bIsOffersLoaded)
-                    return;
-                txtCode.Text = ddlLevel1.SelectedValue.ToString() + "_" + ddlLevel2.SelectedValue.ToString() + "_" + ddlLevel3.SelectedValue.ToString() + "_" + ddlLevel4.SelectedValue.ToString() + "_" + ddlLevel5.SelectedValue.ToString();
+                if (this.bIsOffersLoaded)
+                {
+                    RadTextBox radTextBox = this.txtCode;
+                    string[] str = new string[] { this.ddlLevel1.SelectedValue.ToString(), "_", this.ddlLevel2.SelectedValue.ToString(), "_", this.ddlLevel3.SelectedValue.ToString(), "_", this.ddlLevel4.SelectedValue.ToString(), "_", this.ddlLevel5.SelectedValue.ToString() };
+                    radTextBox.Text = string.Concat(str);
+                }
             }
-            catch (Exception ex)
+            catch (Exception exception1)
             {
-                Telerik.WinControls.RadMessageBox.Show(this, ex.Message, ex.TargetSite.Name.ToString(), MessageBoxButtons.OK, RadMessageIcon.Error, MessageBoxDefaultButton.Button1);
+                Exception exception = exception1;
+                RadMessageBox.Show(this, exception.Message, exception.TargetSite.Name.ToString(), MessageBoxButtons.OK, RadMessageIcon.Error, MessageBoxDefaultButton.Button1);
             }
         }
 

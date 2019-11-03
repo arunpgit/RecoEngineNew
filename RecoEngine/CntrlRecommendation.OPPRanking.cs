@@ -302,116 +302,99 @@ namespace RecoEngine
         {
             try
             {
-                if (objRanking.fnCheckOpportunityExists(Common.iProjectID))
+                if (!this.objRanking.fnCheckOpportunityExists(Common.iProjectID))
                 {
-
-                    if (ddRankingCriteria.SelectedItem.ToString() == RecoEngine_BI.Enums.Rank_Criteria.Custom.ToString())
+                    RadMessageBox.Show(this, "There are no Opportunities to do ranking ", "Opportunity Ranking", MessageBoxButtons.OK, RadMessageIcon.Info, MessageBoxDefaultButton.Button1);
+                }
+                else if (this.ddRankingCriteria.SelectedItem.ToString() != Enums.Rank_Criteria.Custom.ToString())
+                {
+                    string str = "NULL";
+                    string str1 = "NULL";
+                    string str2 = "NULL";
+                    string str3 = "NULL";
+                    this.ClsObj.fnSaveOPPRanking("Potential", Common.iProjectID, str, str1, str2, str3);
+                    this.objRanking.fnPotentialRanking(Common.iProjectID);
+                    this.fnBindRanking();
+                }
+                else if (this.ddlOppRank1.SelectedIndex != -1 || this.ddlOppRank2.SelectedIndex != -1 || this.ddlOppRank3.SelectedIndex != -1 || this.ddlOppRank4.SelectedIndex != -1)
+                {
+                    string str4 = "";
+                    string str5 = "";
+                    string str6 = "";
+                    if (this.ddlOppRank1.SelectedValue != null)
                     {
-
-                        if ((ddlOppRank1.SelectedIndex == -1) && (ddlOppRank2.SelectedIndex == -1) && (ddlOppRank3.SelectedIndex == -1) && (ddlOppRank4.SelectedIndex == -1))
+                        if (this.ddlOppRank2.SelectedIndex != -1)
                         {
-                            Telerik.WinControls.RadMessageBox.Show(this, "Please select the opportunity.", "Opportunity Ranking", MessageBoxButtons.OK, RadMessageIcon.Error, MessageBoxDefaultButton.Button1);
-                            ddlOppRank1.Focus();
+                            str4 = this.ddlOppRank2.SelectedItem.ToString();
+                            if (str4 == this.ddlOppRank1.SelectedValue.ToString())
+                            {
+                                RadMessageBox.Show(this, "An Opportunity is Selected for More then One Rank.", "Opportunity Ranking", MessageBoxButtons.OK, RadMessageIcon.Error, MessageBoxDefaultButton.Button1);
+                                this.ddlOppRank2.Focus();
+                                return;
+                            }
+                        }
+                        else if (this.ddlOppRank2.SelectedIndex == -1 && this.ddlOppRank2.Enabled)
+                        {
+                            RadMessageBox.Show(this, "Please Select the Opportunity for Rank 2.", "Opportunity Ranking", MessageBoxButtons.OK, RadMessageIcon.Error, MessageBoxDefaultButton.Button1);
+                            this.ddlOppRank4.Focus();
                             return;
                         }
-                        else
+                        if (this.ddlOppRank3.SelectedIndex != -1)
                         {
-                            string strRank2 = "";
-                            string strRank3 = "";
-                            string strRank4 = "";
-                            if (ddlOppRank1.SelectedValue == null)
+                            str5 = this.ddlOppRank3.SelectedItem.ToString();
+                            if (str5 == str4 || str5 == this.ddlOppRank1.SelectedValue.ToString())
                             {
-                                Telerik.WinControls.RadMessageBox.Show(this, "Please select opportunity 1.", "Opportunity Ranking", MessageBoxButtons.OK, RadMessageIcon.Error, MessageBoxDefaultButton.Button1);
-                                ddlOppRank1.Focus();
+                                RadMessageBox.Show(this, "An Opportunity is Selected for More then One Rank.", "Opportunity Ranking", MessageBoxButtons.OK, RadMessageIcon.Error, MessageBoxDefaultButton.Button1);
+                                this.ddlOppRank3.Focus();
                                 return;
                             }
-
-
-                            if (ddlOppRank2.SelectedIndex != -1)
-                            {
-                                strRank2 = ddlOppRank2.SelectedItem.ToString();
-                                if (strRank2 == ddlOppRank1.SelectedValue.ToString())
-                                {
-                                    Telerik.WinControls.RadMessageBox.Show(this, "An Opportunity is Selected for More then One Rank.", "Opportunity Ranking", MessageBoxButtons.OK, RadMessageIcon.Error, MessageBoxDefaultButton.Button1);
-                                    ddlOppRank2.Focus();
-                                    return;
-                                }
-                            }
-                            else if (ddlOppRank2.SelectedIndex == -1 && ddlOppRank2.Enabled == true)
-                            {
-                                Telerik.WinControls.RadMessageBox.Show(this, "Please Select the Opportunity for Rank 2.", "Opportunity Ranking", MessageBoxButtons.OK, RadMessageIcon.Error, MessageBoxDefaultButton.Button1);
-                                ddlOppRank4.Focus();
-                                return;
-                            }
-
-                            if (ddlOppRank3.SelectedIndex != -1)
-                            {
-                                strRank3 = ddlOppRank3.SelectedItem.ToString();
-                                if (strRank3 == strRank2 || strRank3 == ddlOppRank1.SelectedValue.ToString())
-                                {
-                                    Telerik.WinControls.RadMessageBox.Show(this, "An Opportunity is Selected for More then One Rank.", "Opportunity Ranking", MessageBoxButtons.OK, RadMessageIcon.Error, MessageBoxDefaultButton.Button1);
-                                    ddlOppRank3.Focus();
-                                    return;
-                                }
-
-                            }
-                            else if (ddlOppRank3.SelectedIndex == -1 && ddlOppRank3.Enabled == true)
-                            {
-                                Telerik.WinControls.RadMessageBox.Show(this, "Please Select the Opportunity for Rank 3.", "Opportunity Ranking", MessageBoxButtons.OK, RadMessageIcon.Error, MessageBoxDefaultButton.Button1);
-                                ddlOppRank4.Focus();
-                                return;
-                            }
-
-
-                            if (ddlOppRank4.SelectedIndex != -1)
-                            {
-                                strRank4 = ddlOppRank4.SelectedItem.ToString();
-                                if (strRank4 == strRank3 || strRank4 == strRank2 || strRank4 == ddlOppRank1.SelectedValue.ToString())
-                                {
-                                    Telerik.WinControls.RadMessageBox.Show(this, "An Opportunity is Selected for More then One Rank.", "Opportunity Ranking", MessageBoxButtons.OK, RadMessageIcon.Error, MessageBoxDefaultButton.Button1);
-                                    ddlOppRank4.Focus();
-                                    return;
-                                }
-
-                            }
-
-                            else if (ddlOppRank4.SelectedIndex == -1 && ddlOppRank4.Enabled == true)
-                            {
-                                Telerik.WinControls.RadMessageBox.Show(this, "Please Select the Opportunity for Rank 4.", "Opportunity Ranking", MessageBoxButtons.OK, RadMessageIcon.Error, MessageBoxDefaultButton.Button1);
-                                ddlOppRank4.Focus();
-                                return;
-                            }
-
-
-                            ClsObj.fnSaveOPPRanking("Custom", Common.iProjectID, ddlOppRank1.SelectedItem.ToString(), strRank2, strRank3, strRank4);
-                            objRanking.fnCustomRanking(Common.iProjectID, ddlOppRank1.SelectedItem.ToString(), strRank2, strRank3, strRank4);
-                            fnBindRanking();
-
                         }
+                        else if (this.ddlOppRank3.SelectedIndex == -1 && this.ddlOppRank3.Enabled)
+                        {
+                            RadMessageBox.Show(this, "Please Select the Opportunity for Rank 3.", "Opportunity Ranking", MessageBoxButtons.OK, RadMessageIcon.Error, MessageBoxDefaultButton.Button1);
+                            this.ddlOppRank4.Focus();
+                            return;
+                        }
+                        if (this.ddlOppRank4.SelectedIndex != -1)
+                        {
+                            str6 = this.ddlOppRank4.SelectedItem.ToString();
+                            if (str6 == str5 || str6 == str4 || str6 == this.ddlOppRank1.SelectedValue.ToString())
+                            {
+                                RadMessageBox.Show(this, "An Opportunity is Selected for More then One Rank.", "Opportunity Ranking", MessageBoxButtons.OK, RadMessageIcon.Error, MessageBoxDefaultButton.Button1);
+                                this.ddlOppRank4.Focus();
+                                return;
+                            }
+                        }
+                        else if (this.ddlOppRank4.SelectedIndex == -1 && this.ddlOppRank4.Enabled)
+                        {
+                            RadMessageBox.Show(this, "Please Select the Opportunity for Rank 4.", "Opportunity Ranking", MessageBoxButtons.OK, RadMessageIcon.Error, MessageBoxDefaultButton.Button1);
+                            this.ddlOppRank4.Focus();
+                            return;
+                        }
+                        this.ClsObj.fnSaveOPPRanking("Custom", Common.iProjectID, this.ddlOppRank1.SelectedItem.ToString(), str4, str5, str6);
+                        this.objRanking.fnCustomRanking(Common.iProjectID, this.ddlOppRank1.SelectedItem.ToString(), str4, str5, str6);
+                        this.fnBindRanking();
                     }
                     else
                     {
-                        string strRank1 = "NULL";
-                        string strRank2 = "NULL";
-                        string strRank3 = "NULL";
-                        string strRank4 = "NULL";
-
-                        ClsObj.fnSaveOPPRanking("Potential", Common.iProjectID, strRank1, strRank2, strRank3, strRank4);
-                        objRanking.fnPotentialRanking(Common.iProjectID);
-                        fnBindRanking();
+                        RadMessageBox.Show(this, "Please select opportunity 1.", "Opportunity Ranking", MessageBoxButtons.OK, RadMessageIcon.Error, MessageBoxDefaultButton.Button1);
+                        this.ddlOppRank1.Focus();
+                        return;
                     }
                 }
-                else 
+                else
                 {
-                    Telerik.WinControls.RadMessageBox.Show(this, "There are no Opportunities to do ranking ", "Opportunity Ranking", MessageBoxButtons.OK, RadMessageIcon.Info, MessageBoxDefaultButton.Button1);
-                            
+                    RadMessageBox.Show(this, "Please select the opportunity.", "Opportunity Ranking", MessageBoxButtons.OK, RadMessageIcon.Error, MessageBoxDefaultButton.Button1);
+                    this.ddlOppRank1.Focus();
+                    return;
                 }
             }
-            catch (Exception ex)
+            catch (Exception exception1)
             {
-                Telerik.WinControls.RadMessageBox.Show(this, ex.Message, ex.TargetSite.Name.ToString(), MessageBoxButtons.OK, RadMessageIcon.Error, MessageBoxDefaultButton.Button1);
+                Exception exception = exception1;
+                RadMessageBox.Show(this, exception.Message, exception.TargetSite.Name.ToString(), MessageBoxButtons.OK, RadMessageIcon.Error, MessageBoxDefaultButton.Button1);
             }
-             
         }
+
     }
 }

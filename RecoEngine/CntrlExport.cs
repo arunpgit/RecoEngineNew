@@ -1,431 +1,436 @@
-﻿using System;
+﻿using RecoEngine_BI;
+using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Drawing;
 using System.Data;
+using System.Drawing;
+using System.IO;
 using System.Linq;
+using System.Reflection;
+using System.Resources;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Windows.Forms;
-using RecoEngine_BI;
 using Telerik.WinControls;
-using System.IO;
-using System.Globalization;
+using Telerik.WinControls.UI;
 
 namespace RecoEngine
 {
     public partial class CntrlExport : UserControl
     {
-        clsExport objExport = new clsExport();
-        clsProjects clsProjObj = new clsProjects();
-        clsRanking objRanking = new clsRanking();
-        clsTre_Details clstreDetails = new clsTre_Details();
-        clsCampaign objCampaigns = new clsCampaign();
-        clsOpportunities ClsObj = new clsOpportunities();
-        clsDataSource objDatsource = new clsDataSource();
-        bool bIsControlGroup = false;
-        string strBaseCustomers;
-        bool bIsFixedCustomers = false;
-        bool bIsInsertintoDBs = false;
-        AlertForm alert;
+        private clsExport objExport = new clsExport();
+
+        private clsProjects clsProjObj = new clsProjects();
+
+        private clsRanking objRanking = new clsRanking();
+
+        private clsTre_Details clstreDetails = new clsTre_Details();
+
+        private clsCampaign objCampaigns = new clsCampaign();
+
+        private clsOpportunities ClsObj = new clsOpportunities();
+
+        private clsDataSource objDatsource = new clsDataSource();
+
+        private bool bIsControlGroup;
+
+        private string strBaseCustomers;
+
+        private bool bIsFixedCustomers;
+
+        private bool bIsInsertintoDBs;
+
+        private AlertForm alert;
 
         public CntrlExport()
         {
-            InitializeComponent();
-            this.Load += new EventHandler(CntrlExport_Load);
+            this.InitializeComponent();
+            base.Load += new EventHandler(this.CntrlExport_Load);
         }
 
-        void CntrlExport_Load(object sender, EventArgs e)
+        private void BindingTimeperiods()
+        {
+            this.bndgcntrlchkDropDowntp1(this.chkddlTP1, true);
+            this.bndgcntrlchkDropDowntp1(this.cntrlchkDropDowntp2, false);
+        }
+
+        private void bndgcntrlchkDropDowntp1(CntrlchkDropDown ctrl, bool bIsT1)
         {
             try
             {
-                fillLabels();
-                BindingTimeperiods();
-            }
-            catch (Exception ex)
-            {
-                Telerik.WinControls.RadMessageBox.Show(this, ex.Message, ex.TargetSite.Name.ToString(), MessageBoxButtons.OK, RadMessageIcon.Error, MessageBoxDefaultButton.Button1);
-            }
-
-        }
-
-        private void btnSaveExports_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                string Ranking1 = "";
-
-                if (chkRanking1.Checked == true)
+                DataTable dataTable = this.clstreDetails.fnTREtimeperiods(Common.strTableName);
+                DataSet dataSet = new DataSet();
+                string str = "Selected";
+                dataTable.Columns.Add(new DataColumn("Selected", typeof(bool)));
+                for (int i = 0; i < dataTable.Rows.Count; i++)
                 {
-                    Ranking1 = "PR_Rank1";
-                }
-                if (chkRanking2.Checked == true)
-                {
-                    if (Ranking1 != "")
-                        Ranking1 += ",PR_Rank2";
-                    else
-                        Ranking1 += "PR_Rank2";
-                }
-                if (chkRanking3.Checked == true)
-                {
-                    if (Ranking1 != "")
-                        Ranking1 += ",PR_Rank3";
-                    else
-                        Ranking1 += "PR_Rank3";
-
-                }
-                if (chkRanking4.Checked == true)
-                {
-                    if (Ranking1 != "")
-                        Ranking1 += ",PR_Rank4";
-                    else
-                        Ranking1 += "PR_Rank4";
-
-
-
-                }
-                if (Ranking1 == "")
-                {
-                    Telerik.WinControls.RadMessageBox.Show(this, "Please Select One Of the Ranknigs", "Export", MessageBoxButtons.OK, RadMessageIcon.Error, MessageBoxDefaultButton.Button1);
-                    return;
-                }
-
-                if (chkControlGroup.Checked)
-                    bIsControlGroup = true;
-                if (chkDbExport.Checked && chkFileExport.Checked)
-                {
-
-                    Telerik.WinControls.RadMessageBox.Show(this, "Please Select only one either DataBase or File", "Export", MessageBoxButtons.OK, RadMessageIcon.Error, MessageBoxDefaultButton.Button1);
-                    chkDbExport.Checked = false;
-                    chkFileExport.Checked = false;
-                    return;
-                }
-                if (bIsControlGroup && txtFixedCustomers.Text != "" && txtBasePercent.Text != "")
-                {
-
-                    Telerik.WinControls.RadMessageBox.Show(this, "Please Select only one either Percentage or Fixed Customers", "Export", MessageBoxButtons.OK, RadMessageIcon.Error, MessageBoxDefaultButton.Button1);
-                    txtFixedCustomers.Text = "";
-                    txtBasePercent.Text = "";
-                    return;
-                }
-
-                if (txtFixedCustomers.Text.Trim() != "")
-                {
-                    bIsFixedCustomers = true;
-                    strBaseCustomers = txtFixedCustomers.Text;
-                }
-
-                else
-                    strBaseCustomers = txtBasePercent.Text;
-                if (bIsControlGroup && strBaseCustomers == "")
-                {
-                    Telerik.WinControls.RadMessageBox.Show(this, "Please Select any one either Percentage or Fixed Customers", "Export", MessageBoxButtons.OK, RadMessageIcon.Error, MessageBoxDefaultButton.Button1);
-                    return;
-                }
-
-                else
-                {
-
-                    if (chkDbExport.Checked)
-                        bIsInsertintoDBs = true;
-                    else
-                        bIsInsertintoDBs = false;
-                    if (!chkDbExport.Checked && !chkFileExport.Checked)
+                    if ((!bIsT1 || i != 1 && i != 2 && i != 3) && (bIsT1 || i != 0))
                     {
-                        Telerik.WinControls.RadMessageBox.Show(this, "Please Select any one either File or DataBase", "Export", MessageBoxButtons.OK, RadMessageIcon.Error, MessageBoxDefaultButton.Button1);
-                        return;
-                    }
-                    if (chkDbExport.Checked && chkFileExport.Checked)
-                    {
-                        chkDbExport.Checked = false;
-                        chkFileExport.Checked = false;
-                        Telerik.WinControls.RadMessageBox.Show(this, "Please Select Only one either File or DataBase", "Export", MessageBoxButtons.OK, RadMessageIcon.Error, MessageBoxDefaultButton.Button1);
-                        return;
-                    }
-                    // char K=   bIsControlGroup=True?'T':'F'
-                    if (objExport.fnInsertExportSettings(bIsControlGroup == true ? 'T' : 'F', strBaseCustomers, bIsFixedCustomers == true ? 'T' : 'F', bIsInsertintoDBs == true ? 'T' : 'F', Common.iProjectID, Ranking1, txtMinimum.Text, txtMaximum.Text))
-                        MessageBox.Show("Export Settings saved sucessfully");
-                }
-            }
-            catch (Exception ex)
-            {
-
-                Telerik.WinControls.RadMessageBox.Show(this, ex.Message, ex.TargetSite.Name.ToString(), MessageBoxButtons.OK, RadMessageIcon.Error, MessageBoxDefaultButton.Button1);
-
-            }
-        }
-        private void chkControlGroup_CheckedChanged(object sender, EventArgs e)
-        {
-            if (!chkControlGroup.Checked)
-            {
-                txtBasePercent.Enabled = false;
-                txtFixedCustomers.Enabled = false;
-            }
-            else
-            {
-                txtBasePercent.Enabled = true;
-                txtFixedCustomers.Enabled = true;
-            }
-        }
-        private void chkRanking1_CheckedChanged(object sender, EventArgs e)
-        {
-            string chkRanking = "";
-            chkRanking = (sender as CheckBox).Name;
-            switch (chkRanking)
-            {
-                case "chkRanking1":
-                    chkRanking2.CheckedChanged -= chkRanking1_CheckedChanged;
-                    chkRanking3.CheckedChanged -= chkRanking1_CheckedChanged;
-                    chkRanking4.CheckedChanged -= chkRanking1_CheckedChanged;
-                    chkRanking2.Checked = false;
-                    chkRanking2.CheckedChanged += chkRanking1_CheckedChanged;
-                    chkRanking3.Checked = false;
-                    chkRanking3.CheckedChanged += chkRanking1_CheckedChanged;
-                    chkRanking4.Checked = false;
-                    chkRanking4.CheckedChanged += chkRanking1_CheckedChanged;
-                    break;
-                case "chkRanking2":
-                    chkRanking1.CheckedChanged -= chkRanking1_CheckedChanged;
-                    chkRanking3.CheckedChanged -= chkRanking1_CheckedChanged;
-                    chkRanking4.CheckedChanged -= chkRanking1_CheckedChanged;
-                    chkRanking1.Checked = false;
-                    chkRanking1.CheckedChanged += chkRanking1_CheckedChanged;
-                    chkRanking3.Checked = false;
-                    chkRanking3.CheckedChanged += chkRanking1_CheckedChanged;
-                    chkRanking4.Checked = false;
-                    chkRanking4.CheckedChanged += chkRanking1_CheckedChanged;
-                    break;
-                case "chkRanking3":
-                    chkRanking2.CheckedChanged -= chkRanking1_CheckedChanged;
-                    chkRanking1.CheckedChanged -= chkRanking1_CheckedChanged;
-                    chkRanking4.CheckedChanged -= chkRanking1_CheckedChanged;
-                    chkRanking2.Checked = false;
-                    chkRanking2.CheckedChanged += chkRanking1_CheckedChanged;
-                    chkRanking1.Checked = false;
-                    chkRanking1.CheckedChanged += chkRanking1_CheckedChanged;
-                    chkRanking4.Checked = false;
-                    chkRanking4.CheckedChanged += chkRanking1_CheckedChanged;
-                    break;
-                case "chkRanking4":
-                    chkRanking2.CheckedChanged -= chkRanking1_CheckedChanged;
-                    chkRanking3.CheckedChanged -= chkRanking1_CheckedChanged;
-                    chkRanking1.CheckedChanged -= chkRanking1_CheckedChanged;
-                    chkRanking2.Checked = false;
-                    chkRanking2.CheckedChanged += chkRanking1_CheckedChanged;
-                    chkRanking3.Checked = false;
-                    chkRanking3.CheckedChanged += chkRanking1_CheckedChanged;
-                    chkRanking1.Checked = false;
-                    chkRanking1.CheckedChanged += chkRanking1_CheckedChanged;
-                    break;
-            }
-
-        }
-        void fillLabels()
-        {
-
-            try
-            {
-                DataTable dt = objExport.fnGetCountValues(Common.iProjectID, Common.strTableName);
-                lblCustomers.Text = "";
-                lblSegment.Text = "";
-                lblOffer.Text = "";
-                lblCampaign.Text = "";
-                lblCustomers.Text = dt.Rows[0]["CUSTOMERS"].ToString();
-                lblSegment.Text = dt.Rows[0]["SEGMENT"].ToString();
-                lblOffer.Text = dt.Rows[0]["OFFERS"].ToString();
-                lblCampaign.Text = dt.Rows[0]["CAMPAIGNS"].ToString();
-                DataTable dt1 = clsProjObj.fnGetProjectNames(Common.iUserID);
-                cmbProject.DisplayMember = "Name";
-                cmbProject.ValueMember = "Project_Id";
-                cmbProject.DataSource = dt1;
-
-            }
-            catch (Exception ex)
-            {
-                Telerik.WinControls.RadMessageBox.Show(this, ex.Message, ex.TargetSite.Name.ToString(), MessageBoxButtons.OK, RadMessageIcon.Error, MessageBoxDefaultButton.Button1);
-            }
-        }
-        void BindingTimeperiods()
-        {
-            bndgcntrlchkDropDowntp1(chkddlTP1, true);
-            bndgcntrlchkDropDowntp1(cntrlchkDropDowntp2, false);
-        }
-        void bndgcntrlchkDropDowntp1(CntrlchkDropDown ctrl, bool bIsT1)
-        {
-            try
-            {
-                DataTable dt = clstreDetails.fnTREtimeperiods(Common.strTableName);
-                DataSet ds = new DataSet();
-                string Selected = "Selected";
-                dt.Columns.Add(new DataColumn("Selected", typeof(bool)));
-                for (int i = 0; i < dt.Rows.Count; i++)
-                {
-                    if ((bIsT1 && (i == 1 || i == 2 || i == 3)) || (!bIsT1 && (i == 0)))
-                    {
-                        dt.Rows[i]["Selected"] = true;
+                        dataTable.Rows[i]["Selected"] = false;
                     }
                     else
                     {
-                        dt.Rows[i]["Selected"] = false;
+                        dataTable.Rows[i]["Selected"] = true;
                     }
                 }
-                dt.Columns["Selected"].SetOrdinal(0);
-                //dt.Columns["timeperiod"].SetOrdinal(0);
-
-                ds.Tables.Add(dt);
-                ctrl.ConfigureDropDown(ds, Selected);
-
+                dataTable.Columns["Selected"].SetOrdinal(0);
+                dataSet.Tables.Add(dataTable);
+                ctrl.ConfigureDropDown(dataSet, str);
             }
-            catch (Exception ex)
+            catch (Exception exception)
             {
-
-                throw ex;
+                throw exception;
             }
-
-        }
-
-        private void fnExport()
-        {
-
-            try
-            {
-                DataTable dtCampaign = objExport.fnGetCampaigns(Common.iProjectID);
-                foreach (DataRow drCamp in dtCampaign.Rows)
-                {
-                    DataTable dtExport = objExport.fnSelectExportSettings(Common.iProjectID);
-                    if (dtExport.Rows.Count > 0)
-                    {
-                        var str_array = dtExport.Rows[0]["RANKING"].ToString().Split(',');
-                        String Ranking = "( ";
-                        int iCampaignId = Convert.ToInt16(drCamp["Campaign_Id"]);
-                        foreach (string strRank in str_array)
-                        {
-
-                            //Ranking += strRank + "=" + iCampaignId + " OR ";
-                            Ranking += "TRIM("+strRank +")"+ "=" +"'"+ iCampaignId +"'"+ " OR ";
-
-                        }
-                        Ranking = Ranking.Substring(0, Ranking.Length - 3);
-                        Ranking += ")";
-
-                        DataTable dtrndm = new DataTable();
-                        DataTable dt = objExport.fnExportToFile(dtExport.Rows[0]["ISCONTROLGROUP"].ToString() == "T" ? true : false, dtExport.Rows[0]["ISFIXEDCUSTOMER"].ToString() == "T" ? true : false, dtExport.Rows[0]["BASECUSTOMERS"].ToString(), Convert.ToString(dtExport.Rows[0]["MAXLIMIT"]), Convert.ToString(dtExport.Rows[0]["MINLIMIT"].ToString()), Common.iProjectID, iCampaignId, Ranking, ref dtrndm);
-
-                        if (dt.Rows.Count > 0)
-                        {
-                            if (dtrndm.Rows.Count > 0)
-                            {
-                                foreach (DataRow dr in dtrndm.Rows)
-                                {
-                                    DataRow drc = dt.AsEnumerable().Where(r => (r["CUSTOMER"]).Equals(dr["CUSTOMER"])).First(); // getting the row to edit , change it as you need
-                                    drc["CG"] = 'N';
-                                }
-                            }
-                        }
-
-                        var groupbyCampaign = from table in dt.AsEnumerable()
-
-                                              group table by new { placeCol = table["RANKING"] } into groupby
-
-                                              select new
-
-                                              {
-
-                                                  Value = groupby.Key,
-
-                                                  ColumnValues = groupby
-
-                                              };
-                        foreach (var key in groupbyCampaign)
-                        {
-                            StringBuilder sbma = new StringBuilder();
-                            IEnumerable<string> columnNames = dt.Columns.Cast<DataColumn>().
-                                 Select(column => column.ColumnName);
-                            sbma.AppendLine(string.Join(",", columnNames));
-                            foreach (var columnValue in key.ColumnValues)
-                            {
-                                sbma.AppendLine(string.Join(",", columnValue["PROJECTID"].ToString(), key.Value.placeCol.ToString(), iCampaignId, columnValue["Customer"].ToString(), columnValue["CG"].ToString()));
-
-                            }
-                            File.WriteAllText(@"C:\Users\Public\Downloads\" + "CampaignId" + iCampaignId + key.Value.placeCol.ToString() + DateTime.Now.ToString("yyyy-MM-dd") + ".txt", sbma.ToString());
-                        }
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-
-                MessageBox.Show(ex.Message);
-            }
-        }
-                                //if (dtfile.Rows.Count > 0)
-                                //{
-                                //    StringBuilder sb = new StringBuilder();
-                                //    IEnumerable<string> columnNames = dtfile.Columns.Cast<DataColumn>().
-                                //     Select(column => column.ColumnName);
-                                //    sb.AppendLine(string.Join(",", columnNames));
-                                //    foreach (DataRow row in dtfile.Rows)
-                                //    {
-                                //        IEnumerable<string> fields = row.ItemArray.Select(field => field.ToString());
-                                //        sb.AppendLine(string.Join(",", fields));
-                                //    }
-                                //    SaveFileDialog saveFiledialog = new SaveFileDialog();
-                                //    string path = "";
-                                //    File.WriteAllText(@"C:\Users\Public\Downloads\doc.txt", sb.ToString());
-
-                                //    if (saveFiledialog.ShowDialog() == DialogResult.OK)
-                                //    {
-                                //        path = saveFiledialog.FileName;
-                                //    }
-                                //    if (path != "")
-                                //        File.WriteAllText(@"C:\myfile", sb.ToString());
-
-                                //}
-                                //else
-                                //{
-                                //    Telerik.WinControls.RadMessageBox.Show(this, "There is no data to Export", "Export", MessageBoxButtons.OK, RadMessageIcon.Error, MessageBoxDefaultButton.Button1);
-
-                                //}
-
-
-        private bool fnCheckExport(int iProjectId)
-        {
-            DataTable dtExport = objExport.fnSelectExportSettings(iProjectId);
-            if (dtExport.Rows.Count > 0)
-            {
-                return true;
-            }
-            else
-                return false;
-
         }
 
         private void btnRunPrjct_Click(object sender, EventArgs e)
         {
             try
             {
-               // create a new instance of the alert form
-                alert = new AlertForm();
-                alert.SetMessage("Loading data. Please wait..."); // "Loading data. Please wait..."
-                alert.TopMost = true;
-                alert.StartPosition = FormStartPosition.CenterScreen;
-                alert.Show();
-                alert.Refresh();
-                    // event handler for the Cancel button in AlertForm
-                   // alert.Canceled += new EventHandler<EventArgs>(buttonCancel_Click);
-                     int iProjectID=0;
-                     iProjectID = Convert.ToInt16(cmbProject.SelectedValue); ;
-                    Common.iProjectID = iProjectID;
-                    this.Show();
-                   fnRunProject(iProjectID);
-                    //fnExport();
-                   alert.Close();
-               
-
+                this.alert = new AlertForm();
+                this.alert.SetMessage("Loading data. Please wait...");
+                this.alert.TopMost = true;
+                this.alert.StartPosition = FormStartPosition.CenterScreen;
+                this.alert.Show();
+                this.alert.Refresh();
+                int num = 0;
+                num = Convert.ToInt16(cmbProject.SelectedValue);
+                Common.iProjectID = num;
+                base.Show();
+                this.fnRunProject(num);
+                this.alert.Close();
             }
-            catch(Exception ex)
+            catch (Exception exception)
             {
-                MessageBox.Show(ex.Message);
-                
+                MessageBox.Show(exception.Message);
+            }
+        }
+
+        private void btnSaveExports_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                string str = "";
+                if (this.chkRanking1.Checked)
+                {
+                    str = "PR_Rank1";
+                }
+                if (this.chkRanking2.Checked)
+                {
+                    str = (str == "" ? string.Concat(str, "PR_Rank2") : string.Concat(str, ",PR_Rank2"));
+                }
+                if (this.chkRanking3.Checked)
+                {
+                    str = (str == "" ? string.Concat(str, "PR_Rank3") : string.Concat(str, ",PR_Rank3"));
+                }
+                if (this.chkRanking4.Checked)
+                {
+                    str = (str == "" ? string.Concat(str, "PR_Rank4") : string.Concat(str, ",PR_Rank4"));
+                }
+                if (str != "")
+                {
+                    if (this.chkControlGroup.Checked)
+                    {
+                        this.bIsControlGroup = true;
+                    }
+                    if (this.chkDbExport.Checked && this.chkFileExport.Checked)
+                    {
+                        RadMessageBox.Show(this, "Please Select only one either DataBase or File", "Export", MessageBoxButtons.OK, RadMessageIcon.Error, MessageBoxDefaultButton.Button1);
+                        this.chkDbExport.Checked = false;
+                        this.chkFileExport.Checked = false;
+                    }
+                    else if (!this.bIsControlGroup || !(this.txtFixedCustomers.Text != "") || !(this.txtBasePercent.Text != ""))
+                    {
+                        if (this.txtFixedCustomers.Text.Trim() == "")
+                        {
+                            this.strBaseCustomers = this.txtBasePercent.Text;
+                        }
+                        else
+                        {
+                            this.bIsFixedCustomers = true;
+                            this.strBaseCustomers = this.txtFixedCustomers.Text;
+                        }
+                        if (!this.bIsControlGroup || !(this.strBaseCustomers == ""))
+                        {
+                            if (!this.chkDbExport.Checked)
+                            {
+                                this.bIsInsertintoDBs = false;
+                            }
+                            else
+                            {
+                                this.bIsInsertintoDBs = true;
+                            }
+                            if (!this.chkDbExport.Checked && !this.chkFileExport.Checked)
+                            {
+                                RadMessageBox.Show(this, "Please Select any one either File or DataBase", "Export", MessageBoxButtons.OK, RadMessageIcon.Error, MessageBoxDefaultButton.Button1);
+                            }
+                            else if (this.chkDbExport.Checked && this.chkFileExport.Checked)
+                            {
+                                this.chkDbExport.Checked = false;
+                                this.chkFileExport.Checked = false;
+                                RadMessageBox.Show(this, "Please Select Only one either File or DataBase", "Export", MessageBoxButtons.OK, RadMessageIcon.Error, MessageBoxDefaultButton.Button1);
+                            }
+                            else if (this.objExport.fnInsertExportSettings((this.bIsControlGroup ? 'T' : 'F'), this.strBaseCustomers, (this.bIsFixedCustomers ? 'T' : 'F'), (this.bIsInsertintoDBs ? 'T' : 'F'), Common.iProjectID, str, this.txtMinimum.Text, this.txtMaximum.Text))
+                            {
+                                MessageBox.Show("Export Settings saved sucessfully");
+                            }
+                        }
+                        else
+                        {
+                            RadMessageBox.Show(this, "Please Select any one either Percentage or Fixed Customers", "Export", MessageBoxButtons.OK, RadMessageIcon.Error, MessageBoxDefaultButton.Button1);
+                        }
+                    }
+                    else
+                    {
+                        RadMessageBox.Show(this, "Please Select only one either Percentage or Fixed Customers", "Export", MessageBoxButtons.OK, RadMessageIcon.Error, MessageBoxDefaultButton.Button1);
+                        this.txtFixedCustomers.Text = "";
+                        this.txtBasePercent.Text = "";
+                    }
+                }
+                else
+                {
+                    RadMessageBox.Show(this, "Please Select One Of the Ranknigs", "Export", MessageBoxButtons.OK, RadMessageIcon.Error, MessageBoxDefaultButton.Button1);
+                }
+            }
+            catch (Exception exception1)
+            {
+                Exception exception = exception1;
+                RadMessageBox.Show(this, exception.Message, exception.TargetSite.Name.ToString(), MessageBoxButtons.OK, RadMessageIcon.Error, MessageBoxDefaultButton.Button1);
+            }
+        }
+
+        private void chkControlGroup_CheckedChanged(object sender, EventArgs e)
+        {
+            if (!this.chkControlGroup.Checked)
+            {
+                this.txtBasePercent.Enabled = false;
+                this.txtFixedCustomers.Enabled = false;
+                return;
+            }
+            this.txtBasePercent.Enabled = true;
+            this.txtFixedCustomers.Enabled = true;
+        }
+
+        private void chkMaxRanking_CheckedChanged(object sender, EventArgs e)
+        {
+            if (!this.chkMaxRanking.Checked)
+            {
+                this.txtMaximum.Enabled = false;
+                return;
+            }
+            this.txtMaximum.Enabled = true;
+        }
+
+        private void chkMinRanking_CheckedChanged(object sender, EventArgs e)
+        {
+            if (!this.chkMinRanking.Checked)
+            {
+                this.txtMinimum.Enabled = false;
+                return;
+            }
+            this.txtMinimum.Enabled = true;
+        }
+
+        private void chkRanking1_CheckedChanged(object sender, EventArgs e)
+        {
+            string name = (sender as CheckBox).Name;
+            string str = name;
+            if (name != null)
+            {
+                if (str == "chkRanking1")
+                {
+                    this.chkRanking2.CheckedChanged -= new EventHandler(this.chkRanking1_CheckedChanged);
+                    this.chkRanking3.CheckedChanged -= new EventHandler(this.chkRanking1_CheckedChanged);
+                    this.chkRanking4.CheckedChanged -= new EventHandler(this.chkRanking1_CheckedChanged);
+                    this.chkRanking2.Checked = false;
+                    this.chkRanking2.CheckedChanged += new EventHandler(this.chkRanking1_CheckedChanged);
+                    this.chkRanking3.Checked = false;
+                    this.chkRanking3.CheckedChanged += new EventHandler(this.chkRanking1_CheckedChanged);
+                    this.chkRanking4.Checked = false;
+                    this.chkRanking4.CheckedChanged += new EventHandler(this.chkRanking1_CheckedChanged);
+                    return;
+                }
+                if (str == "chkRanking2")
+                {
+                    this.chkRanking1.CheckedChanged -= new EventHandler(this.chkRanking1_CheckedChanged);
+                    this.chkRanking3.CheckedChanged -= new EventHandler(this.chkRanking1_CheckedChanged);
+                    this.chkRanking4.CheckedChanged -= new EventHandler(this.chkRanking1_CheckedChanged);
+                    this.chkRanking1.Checked = false;
+                    this.chkRanking1.CheckedChanged += new EventHandler(this.chkRanking1_CheckedChanged);
+                    this.chkRanking3.Checked = false;
+                    this.chkRanking3.CheckedChanged += new EventHandler(this.chkRanking1_CheckedChanged);
+                    this.chkRanking4.Checked = false;
+                    this.chkRanking4.CheckedChanged += new EventHandler(this.chkRanking1_CheckedChanged);
+                    return;
+                }
+                if (str == "chkRanking3")
+                {
+                    this.chkRanking2.CheckedChanged -= new EventHandler(this.chkRanking1_CheckedChanged);
+                    this.chkRanking1.CheckedChanged -= new EventHandler(this.chkRanking1_CheckedChanged);
+                    this.chkRanking4.CheckedChanged -= new EventHandler(this.chkRanking1_CheckedChanged);
+                    this.chkRanking2.Checked = false;
+                    this.chkRanking2.CheckedChanged += new EventHandler(this.chkRanking1_CheckedChanged);
+                    this.chkRanking1.Checked = false;
+                    this.chkRanking1.CheckedChanged += new EventHandler(this.chkRanking1_CheckedChanged);
+                    this.chkRanking4.Checked = false;
+                    this.chkRanking4.CheckedChanged += new EventHandler(this.chkRanking1_CheckedChanged);
+                    return;
+                }
+                if (str != "chkRanking4")
+                {
+                    return;
+                }
+                this.chkRanking2.CheckedChanged -= new EventHandler(this.chkRanking1_CheckedChanged);
+                this.chkRanking3.CheckedChanged -= new EventHandler(this.chkRanking1_CheckedChanged);
+                this.chkRanking1.CheckedChanged -= new EventHandler(this.chkRanking1_CheckedChanged);
+                this.chkRanking2.Checked = false;
+                this.chkRanking2.CheckedChanged += new EventHandler(this.chkRanking1_CheckedChanged);
+                this.chkRanking3.Checked = false;
+                this.chkRanking3.CheckedChanged += new EventHandler(this.chkRanking1_CheckedChanged);
+                this.chkRanking1.Checked = false;
+                this.chkRanking1.CheckedChanged += new EventHandler(this.chkRanking1_CheckedChanged);
+            }
+        }
+
+        private void cmbProject_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                Common.iProjectID = Convert.ToInt16(this.cmbProject.SelectedValue);
+                DataTable dataTable = this.objExport.fnGetCountValues(Common.iProjectID, Common.strTableName);
+                this.lblCustomers.Text = "";
+                this.lblSegment.Text = "";
+                this.lblOffer.Text = "";
+                this.lblCampaign.Text = "";
+                this.lblCustomers.Text = dataTable.Rows[0]["CUSTOMERS"].ToString();
+                this.lblSegment.Text = dataTable.Rows[0]["SEGMENT"].ToString();
+                this.lblOffer.Text = dataTable.Rows[0]["OFFERS"].ToString();
+                this.lblCampaign.Text = dataTable.Rows[0]["CAMPAIGNS"].ToString();
+            }
+            catch (Exception exception)
+            {
+                MessageBox.Show(exception.Message);
+            }
+        }
+
+        private void CntrlExport_Load(object sender, EventArgs e)
+        {
+            try
+            {
+                this.fillLabels();
+                this.BindingTimeperiods();
+            }
+            catch (Exception exception1)
+            {
+                Exception exception = exception1;
+                RadMessageBox.Show(this, exception.Message, exception.TargetSite.Name.ToString(), MessageBoxButtons.OK, RadMessageIcon.Error, MessageBoxDefaultButton.Button1);
+            }
+        }
+
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing && this.components != null)
+            {
+                this.components.Dispose();
+            }
+            base.Dispose(disposing);
+        }
+
+        private void fillLabels()
+        {
+            try
+            {
+                DataTable dataTable = this.objExport.fnGetCountValues(Common.iProjectID, Common.strTableName);
+                this.lblCustomers.Text = "";
+                this.lblSegment.Text = "";
+                this.lblOffer.Text = "";
+                this.lblCampaign.Text = "";
+                this.lblCustomers.Text = dataTable.Rows[0]["CUSTOMERS"].ToString();
+                this.lblSegment.Text = dataTable.Rows[0]["SEGMENT"].ToString();
+                this.lblOffer.Text = dataTable.Rows[0]["OFFERS"].ToString();
+                this.lblCampaign.Text = dataTable.Rows[0]["CAMPAIGNS"].ToString();
+                DataTable dataTable1 = this.clsProjObj.fnGetProjectNames(Common.iUserID);
+                this.cmbProject.DisplayMember = "Name";
+                this.cmbProject.ValueMember = "Project_Id";
+                this.cmbProject.DataSource = dataTable1;
+            }
+            catch (Exception exception1)
+            {
+                Exception exception = exception1;
+                RadMessageBox.Show(this, exception.Message, exception.TargetSite.Name.ToString(), MessageBoxButtons.OK, RadMessageIcon.Error, MessageBoxDefaultButton.Button1);
+            }
+        }
+
+        private bool fnCheckExport(int iProjectId)
+        {
+            if (this.objExport.fnSelectExportSettings(iProjectId).Rows.Count > 0)
+            {
+                return true;
+            }
+            return false;
+        }
+
+        private void fnExport()
+        {
+            try
+            {
+                foreach (DataRow row in this.objExport.fnGetCampaigns(Common.iProjectID).Rows)
+                {
+                    DataTable dataTable = this.objExport.fnSelectExportSettings(Common.iProjectID);
+                    if (dataTable.Rows.Count <= 0)
+                    {
+                        continue;
+                    }
+                    string[] strArrays = dataTable.Rows[0]["RANKING"].ToString().Split(new char[] { ',' });
+                    string str = "( ";
+                    int num = Convert.ToInt16(row["Campaign_Id"]);
+                    string[] strArrays1 = strArrays;
+                    for (int i = 0; i < (int)strArrays1.Length; i++)
+                    {
+                        string str1 = strArrays1[i];
+                        object obj = str;
+                        object[] objArray = new object[] { obj, str1, "=", num, " OR " };
+                        str = string.Concat(objArray);
+                    }
+                    str = str.Substring(0, str.Length - 3);
+                    str = string.Concat(str, ")");
+                    DataTable dataTable1 = new DataTable();
+                    DataTable file = this.objExport.fnExportToFile((dataTable.Rows[0]["ISCONTROLGROUP"].ToString() == "T" ? true : false), (dataTable.Rows[0]["ISFIXEDCUSTOMER"].ToString() == "T" ? true : false), dataTable.Rows[0]["BASECUSTOMERS"].ToString(), Convert.ToString(dataTable.Rows[0]["MAXLIMIT"]), Convert.ToString(dataTable.Rows[0]["MINLIMIT"].ToString()), Common.iProjectID, num, str, ref dataTable1);
+                    if (file.Rows.Count > 0 && dataTable1.Rows.Count > 0)
+                    {
+                        foreach (DataRow dataRow in dataTable1.Rows)
+                        {
+                            DataRow dataRow1 = file.AsEnumerable().Where<DataRow>((DataRow r) => r["CUSTOMER"].Equals(dataRow["CUSTOMER"])).First<DataRow>();
+                            dataRow1["CG"] = 'N';
+                        }
+                    }
+                    var collection =
+                        from table in file.AsEnumerable()
+                        group table by new { placeCol = table["RANKING"] } into groupby
+                        select new { Value = groupby.Key, ColumnValues = groupby };
+                    foreach (var variable in collection)
+                    {
+                        StringBuilder stringBuilder = new StringBuilder();
+                        IEnumerable<string> columns =
+                            from DataColumn column in file.Columns
+                            select column.ColumnName;
+                        stringBuilder.AppendLine(string.Join(",", columns));
+                        foreach (DataRow columnValue in variable.ColumnValues)
+                        {
+                            object[] objArray1 = new object[] { columnValue["PROJECT_ID"].ToString(), variable.Value.placeCol.ToString(), num, columnValue["Customer"].ToString(), columnValue["CG"].ToString() };
+                            stringBuilder.AppendLine(string.Join(",", objArray1));
+                        }
+                        object[] str2 = new object[] { "C:\\Users\\Public\\Downloads\\CampaignId", num, variable.Value.placeCol.ToString(), null, null };
+                        str2[3] = DateTime.Now.ToString("yyyy-MM-dd");
+                        str2[4] = ".txt";
+                        File.WriteAllText(string.Concat(str2), stringBuilder.ToString());
+                    }
+                }
+            }
+            catch (Exception exception)
+            {
+                MessageBox.Show(exception.Message);
             }
         }
 
@@ -501,55 +506,5 @@ namespace RecoEngine
             }
         }
 
-        private void chkMinRanking_CheckedChanged(object sender, EventArgs e)
-        {
-            if (!chkMinRanking.Checked)
-            {
-               
-                txtMinimum.Enabled = false;
-            }
-            else
-            {
-                //txtBasePercent.Enabled = true;
-                txtMinimum.Enabled = true;
-            }
-
-        }
-
-        private void chkMaxRanking_CheckedChanged(object sender, EventArgs e)
-        {
-            if (!chkMaxRanking.Checked)
-            {
-                txtMaximum.Enabled = false;
-            }
-            else
-            {
-                txtMaximum.Enabled = true;
-            }
-        }
-
-        private void cmbProject_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            try
-            {
-                Common.iProjectID = Convert.ToInt16(cmbProject.SelectedValue); ;
-                DataTable dt = objExport.fnGetCountValues(Common.iProjectID, Common.strTableName);
-                lblCustomers.Text = "";
-                lblSegment.Text = "";
-                lblOffer.Text = "";
-                lblCampaign.Text = "";
-                lblCustomers.Text = dt.Rows[0]["CUSTOMERS"].ToString();
-                lblSegment.Text = dt.Rows[0]["SEGMENT"].ToString();
-                lblOffer.Text = dt.Rows[0]["OFFERS"].ToString();
-                lblCampaign.Text = dt.Rows[0]["CAMPAIGNS"].ToString();
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message) ;
-            }
-        }
-
-        // This event handler is where the time-consuming work is done.
-        
     }
 }
