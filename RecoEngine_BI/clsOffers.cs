@@ -200,7 +200,7 @@ namespace RecoEngine_BI
                     {
                         str = string.Concat(str, " ,U.First_name + ' ' + U.last_name as UName ");
                     }
-                    str = string.Concat(str, " ,'' as Flag From OFFERS O Left join Users U on U.USER_ID=O.CREATEDBY ");
+                    str = string.Concat(str, " '' as Flag From OFFERS O Left join Users U on U.USER_ID=O.CREATEDBY ");
                     if (iProjectId != 0)
                     {
                         str = string.Concat(str, " Where O.Project_Id=", iProjectId);
