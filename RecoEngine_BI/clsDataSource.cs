@@ -25,7 +25,14 @@ namespace RecoEngine_BI
                 string str = string.Concat(upper);
                 if (Common.iDBType == 1)
                 {
-                    num = int.Parse(((OraDBManager)Common.dbMgr).ExecuteScalar(CommandType.Text, str));
+
+                   num = int.Parse(((OraDBManager)Common.dbMgr).ExecuteScalar(CommandType.Text, str));
+                }
+                else if (Common.iDBType == 3)
+                {
+                    str = " Select count(1) FROM information_schema.columns c WHERE c.table_name = '" + strTabName.ToUpper() + "' AND  Column_name = '" + strColName.ToUpper() + "'  AND c.table_schema  = 'recousr'";
+
+                    num = int.Parse(((MySqlDBManager)Common.dbMgr).ExecuteScalar(CommandType.Text, str));
                 }
                 if (num <= 0)
                 {
@@ -34,21 +41,57 @@ namespace RecoEngine_BI
                     {
                         num = int.Parse(((OraDBManager)Common.dbMgr).ExecuteScalar(CommandType.Text, str));
                     }
+                    if (Common.iDBType == 3)
+                    {
+
+                        str = " Select count(1) from information_schema.columns where table_name= 'TEMP_CALACULATED'";
+                        num = int.Parse(((MySqlDBManager)Common.dbMgr).ExecuteScalar(CommandType.Text, str));
+                    }
                     if (num >= 1)
                     {
                         str = " DROP TABLE TEMP_CALACULATED";
-                        ((OraDBManager)Common.dbMgr).ExecuteNonQuery(CommandType.Text, str);
+                        if (Common.iDBType == 1)
+                        {
+                            ((OraDBManager)Common.dbMgr).ExecuteNonQuery(CommandType.Text, str);
+                        }
+                        else if (Common.iDBType == 3)
+                        {
+                            ((MySqlDBManager)Common.dbMgr).ExecuteNonQuery(CommandType.Text, str);
+                        }
                     }
                     string[] strArrays = new string[] { " CREATE TABLE  TEMP_CALACULATED AS select ", strFormula, "  ", strColName, " from ", strTabName, " where rownum<=1" };
                     str = string.Concat(strArrays);
-                    ((OraDBManager)Common.dbMgr).ExecuteNonQuery(CommandType.Text, str);
+                    if (Common.iDBType == 1)
+                    {
+                        ((OraDBManager)Common.dbMgr).ExecuteNonQuery(CommandType.Text, str);
+                    }
+                    else if (Common.iDBType == 3)
+                    {
+                        strArrays = new string[] { " CREATE TABLE  TEMP_CALACULATED AS select ", strFormula, "  ", strColName, " from ", strTabName, " limit  1" };
+                        str = string.Concat(strArrays);
+                        ((MySqlDBManager)Common.dbMgr).ExecuteNonQuery(CommandType.Text, str);
+                    }
                     str = " SELECT COLUMN_NAME, DATA_TYPE FROM user_tab_columns WHERE table_name = 'TEMP_CALACULATED'";
-                    dataTable = ((OraDBManager)Common.dbMgr).ExecuteDataTable(CommandType.Text, str);
+
+                    if (Common.iDBType == 1)
+                    {
+                        dataTable = ((OraDBManager)Common.dbMgr).ExecuteDataTable(CommandType.Text, str);
+                    }
+                    else if (Common.iDBType == 3)
+                    {
+
+                        str = " SELECT COLUMN_NAME, DATA_TYPE FROM information_schema.columns WHERE table_name = 'TEMP_CALACULATED'";
+                        dataTable = ((MySqlDBManager)Common.dbMgr).ExecuteDataTable(CommandType.Text, str);
+                    }
                     object[] objArray = new object[] { "Insert into TRE_CALCULATED_COLUMNS (COLNAME,COMBINE_COLUMNS,PROJECT_ID,COLDATATYPE,TABLENAME) values ('", strColName.ToUpper(), "','", strFormula.Replace("'", "''"), "', ", ProjectId, " ,'", dataTable.Rows[0]["DATA_TYPE"], "','", strTabName, "')" };
                     str = string.Concat(objArray);
                     if (Common.iDBType == 1)
                     {
                         ((OraDBManager)Common.dbMgr).ExecuteScalar(CommandType.Text, str);
+                    }
+                    else if (Common.iDBType ==3)
+                    {
+                        ((MySqlDBManager)Common.dbMgr).ExecuteScalar(CommandType.Text, str);
                     }
                     return true;
                 }
@@ -253,7 +296,7 @@ namespace RecoEngine_BI
                 }
                 else if (Common.iDBType == 3)
                 {
-                    str = (strTabName != "Tre_Random" ? string.Concat("Select * from ", strTabName, "  where ROWNUM <= 100") : string.Concat("Select * from ", strTabName));
+                    str = (strTabName != "Tre_Random" ? string.Concat("Select * from ", strTabName, "  limit 100") : string.Concat("Select * from ", strTabName));
                     dataTable1 = ((MySqlDBManager)Common.dbMgr).ExecuteDataTable(CommandType.Text, str);
                 }
                 else
