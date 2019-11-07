@@ -1450,224 +1450,286 @@ namespace RecoEngine_BI
                 throw ex;
             }
         }
+
         public bool fnSaveTREThreShold(string[] strT1, string[] strT2, string strOppName, string strDropper, string strGrower, string strStopper, int iOpportunityId, string strTableName, int iProjectid, string strPtnlFilter, bool bIsONMain = false)
         {
+            bool flag;
+            string[] str;
+            object obj;
             try
             {
-                DataTable dtSource = new DataTable();
-                string strSql = "Select * from OPPORTUNITY where OPPORTUNITY_ID = " + iOpportunityId;
-                if (Common.iDBType == (int)Enums.DBType.Oracle)
-                    dtSource = ((OraDBManager)Common.dbMgr).ExecuteDataTable(CommandType.Text, strSql);
-
-                if (Common.iDBType == (int)Enums.DBType.Mysql)
-                    dtSource = ((MySqlDBManager)Common.dbMgr).ExecuteDataTable(CommandType.Text, strSql);
-                else
-                    dtSource = ((DBManager)Common.dbMgr).ExecuteDataTable(CommandType.Text, strSql);
-
-                string strFormula = "";
-                if (!bIsONMain)
-                    strTableName = "TRE_RANDOM";
-                if (dtSource.Rows.Count > 0)
+                DataTable dataTable = new DataTable();
+                string str1 = string.Concat("Select * from OPPORTUNITY where OPPORTUNITY_ID = ", iOpportunityId);
+                if (Common.iDBType == 1)
                 {
-                    strFormula = dtSource.Rows[0]["FORMULA"].ToString();
-                    int iCount = 0;
-                    strSql = "Select * from TRE_MAPPING where PROJECTID= " + iProjectid + " AND  TYPE=" + ((int)Enums.ColType.Key).ToString() + " OR TYPE=" + ((int)Enums.ColType.Time).ToString();
-                    if (Common.iDBType == (int)Enums.DBType.Oracle)
-                        dtSource = ((OraDBManager)Common.dbMgr).ExecuteDataTable(CommandType.Text, strSql);
-                    else if (Common.iDBType == (int)Enums.DBType.Mysql)
-                        dtSource = ((MySqlDBManager)Common.dbMgr).ExecuteDataTable(CommandType.Text, strSql);
-                    else
-                        dtSource = ((DBManager)Common.dbMgr).ExecuteDataTable(CommandType.Text, strSql);
+           dataTable = ((DBManager)Common.dbMgr).ExecuteDataTable(CommandType.Text, str1);
+                }
 
-                    if (dtSource.Rows.Count > 0)
+               else if (Common.iDBType == 3)
+                {
+           dataTable = ((MySqlDBManager)Common.dbMgr).ExecuteDataTable(CommandType.Text, str1);
+                }
+
+
+               string str2 = "";
+                if (!bIsONMain)
+                {
+                    strTableName = "TRE_RANDOM";
+                }
+                if (dataTable.Rows.Count > 0)
+                {
+                    str2 = dataTable.Rows[0]["FORMULA"].ToString();
+                    object[] upper = new object[] { "Select * from TRE_MAPPING where PROJECTID= ", iProjectid, " AND  TYPE=", 1.ToString(), " OR TYPE=", 3.ToString() };
+                    str1 = string.Concat(upper);
+                    if (Common.iDBType == 1)
                     {
-
-                        string strColName = "";
-                        string strUpdateString = "";
-                        string strUpdateMString = "";
-                        string strBT1 = Common.fnBuildQuery(strT1);
-                        string strBT2 = Common.fnBuildQuery(strT2);
-                        int MaxWeek = fnMaxWeek(strTableName);
-                        string strKeyString = "";
-                        string strKColName = "";
-                        string strKACol = "";
-
-                        for (int i = 0; i < dtSource.Rows.Count; i++)
+                        dataTable = ((DBManager)Common.dbMgr).ExecuteDataTable(CommandType.Text, str1);
+                    }
+                    else if (Common.iDBType == 3)
+                    {
+                        dataTable = ((MySqlDBManager)Common.dbMgr).ExecuteDataTable(CommandType.Text, str1);
+                    }
+                    if (dataTable.Rows.Count > 0)
+                    {
+                        string str3 = "";
+                        string str4 = "";
+                        string str5 = "";
+                        string str6 = fnBuildQuery(strT1);
+                        string str7 = fnBuildQuery(strT2);
+                        int num = this.fnMaxWeek(strTableName);
+                        string str8 = "";
+                        string str9 = "";
+                        string str10 = "";
+                        for (int i = 0; i < dataTable.Rows.Count; i++)
                         {
-                            if (strColName != "")
+                            if (str3 != "")
                             {
-                                strColName += ",";
-                                strUpdateString += " And ";
-                                strUpdateMString += " And ";
+                                str3 = string.Concat(str3, ",");
+                                str4 = string.Concat(str4, " And ");
+                                str5 = string.Concat(str5, " And ");
                             }
-
-                            if (dtSource.Rows[i]["TYPE"].ToString() == ((int)Enums.ColType.Key).ToString())
+                            if (dataTable.Rows[i]["TYPE"].ToString() == 1.ToString())
                             {
-                                if (strKeyString != "")
-                                    strKeyString += " AND ";
-
-                                if (strKColName != "")
-                                    strKColName += ",";
-
-                                if (strKACol != "")
-                                    strKACol += ",";
-
-                                strKeyString += "A." + dtSource.Rows[i]["COLNAME"].ToString() + "=B." + dtSource.Rows[i]["COLNAME"].ToString();
-
-                                strKACol += "A." + dtSource.Rows[i]["COLNAME"].ToString();
-                                strKColName += dtSource.Rows[i]["COLNAME"].ToString();
-
-                            }
-
-                            strColName += dtSource.Rows[i]["COLNAME"].ToString();
-                            strUpdateString += "A." + dtSource.Rows[i]["COLNAME"].ToString() + "=B." + dtSource.Rows[i]["COLNAME"].ToString();
-
-                            strUpdateMString += "OPT." + dtSource.Rows[i]["COLNAME"].ToString() + "=TDN." + dtSource.Rows[i]["COLNAME"].ToString();
-                            strUpdateMString += " AND OPT." + dtSource.Rows[i]["COLNAME"].ToString() + "=A." + dtSource.Rows[i]["COLNAME"].ToString();
-                        }
-
-
-                        strSql = "Select count(1) from  TRE_OPPORTUNITY ";
-                        if (Common.iDBType == (int)Enums.DBType.Oracle)
-                        {
-                            iCount = int.Parse(((OraDBManager)Common.dbMgr).ExecuteScalar(CommandType.Text, strSql));
-                        }
-                        else if (Common.iDBType == (int)Enums.DBType.Mysql)
-                        {
-                            iCount = int.Parse(((MySqlDBManager)Common.dbMgr).ExecuteScalar(CommandType.Text, strSql));
-                        }
-                        if (iCount == 0)
-                        {
-                            strSql = " INSERT INTO TRE_OPPORTUNITY(CUSTOMER,WEEK," + strOppName.ToUpper() + "_DELTA," + strOppName.ToUpper() + "_STATUS)";
-                            strSql += " select A.CUSTOMER,A.WEEK, Case When T1=0 then 0 Else Round(T2/T1-1,2) END, ";
-                            strSql += " Case When A.T1+B.T2 =0 Then 'NON_USER' ";
-                            strSql += " When A.T1=0 And B.T2>0 Then 'NEW_USER' ";
-                            strSql += " When Case When T1=0 then 0 Else Round(T2/T1-1,2) End <= " + Convert.ToDecimal(strStopper) + " Then 'STOPPER' ";
-                            strSql += " When Case When T1=0 then 0 Else Round(T2/T1-1,2) End <= " + Convert.ToDecimal(strDropper) + " Then 'DROPPER' ";
-                            strSql += " When Case When T1=0 then 0 Else Round(T2/T1-1,2) End >=  " + Convert.ToDecimal(strGrower) + " Then 'GROWER' ";
-                            strSql += " ELSE 'FLAT' END as Status From  (Select CUSTOMER," + MaxWeek + " as Week ,round(avg(" + strFormula.ToUpper() + "),2) T1 from " + strTableName;
-                            strSql += " where " + strBT1 + "  group by CUSTOMER) A ";
-                            strSql += " Left join (Select CUSTOMER, round(avg(" + strFormula.ToUpper() + "),2) T2 from " + strTableName + " where  " + strBT2 + " group by CUSTOMER) B ";
-                            strSql += " On " + strKeyString;
-
-
-                            if (Common.iDBType == (int)Enums.DBType.Oracle)
-                            {
-                                ((OraDBManager)Common.dbMgr).ExecuteNonQuery(CommandType.Text, strSql);
-                            }
-                            else if (Common.iDBType == (int)Enums.DBType.Mysql)
-                            {
-                                ((MySqlDBManager)Common.dbMgr).ExecuteNonQuery(CommandType.Text, strSql);
-                            }
-                            else
-                                ((DBManager)Common.dbMgr).ExecuteNonQuery(CommandType.Text, strSql);
-                        }
-                        else
-                        {
-                            if (Common.iDBType == (int)Enums.DBType.Oracle || Common.iDBType == (int)Enums.DBType.Mysql)
-                            {
-
-                                strSql = " Delete From TRE_OPP_TEMP";
-                                ((OraDBManager)Common.dbMgr).ExecuteNonQuery(CommandType.Text, strSql);
-                                strSql = " INSERT INTO TRE_OPP_TEMP(CUSTOMER,WEEK,DELTA,STATUS) select S.Customer,S.Week,S.DELTA,S.STATUS from (";
-                                strSql += " select A.CUSTOMER,A.Week, Case When T1=0 then 0 Else Round(T2/T1-1,2) END as DELTA, ";
-                                strSql += " Case When A.T1+B.T2 =0 Then 'NON_USER' ";
-                                strSql += " When A.T1=0 And B.T2>0 Then 'NEW_USER' ";
-                                strSql += " When Case When T1=0 then 0 Else Round(T2/T1-1,2) End < " + Convert.ToDecimal(strStopper) + " Then 'STOPPER' ";
-                                strSql += " When Case When T1=0 then 0 Else Round(T2/T1-1,2) End < " + Convert.ToDecimal(strDropper) + " Then 'DROPPER' ";
-                                strSql += " When Case When T1=0 then 0 Else Round(T2/T1-1,2) End >  " + Convert.ToDecimal(strGrower) + " Then 'GROWER' ";
-                                strSql += " ELSE 'FLAT' END as Status From  (Select CUSTOMER," + MaxWeek + " as Week,round(avg(" + strFormula.ToUpper() + "),2) T1 from " + strTableName;
-                                strSql += " where " + strBT1 + "  group by CUSTOMER) A ";
-                                strSql += " Left join (Select CUSTOMER, round(avg(" + strFormula.ToUpper() + "),2) T2 from " + strTableName + " where  " + strBT2 + " group by CUSTOMER) B ";
-                                strSql += " On " + strKeyString + " )S inner join";
-
-                                strSql += "(Select Distinct CUSTOMER from " + strTableName;
-                                if (strPtnlFilter != "")
-                                    strSql += " where " + strPtnlFilter;
-                                strSql += ")G on S.CUSTOMER=G.CUSTOMER";
-                                if (Common.iDBType == (int)Enums.DBType.Oracle)
-                                    ((OraDBManager)Common.dbMgr).ExecuteNonQuery(CommandType.Text, strSql);
-                                else
-                                    ((MySqlDBManager)Common.dbMgr).ExecuteNonQuery(CommandType.Text, strSql);
-                                strSql = "   INSERT INTO TRE_OPP_TEMP (CUSTOMER,WEEK, DELTA,STATUS) select Customer," + MaxWeek + " ,null, 'NA'  from " + strTableName;
-                                strSql += " A Where A.Customer not in (Select Customer from TRE_OPP_TEMP)  Group By Customer";
-
-                                if (Common.iDBType == (int)Enums.DBType.Oracle)
-                                    ((OraDBManager)Common.dbMgr).ExecuteNonQuery(CommandType.Text, strSql);
-                                else
-                                    ((MySqlDBManager)Common.dbMgr).ExecuteNonQuery(CommandType.Text, strSql);
-
-                                //strSql = " Update TRE_OPPORTUNITY A Set (" + strOppName.ToUpper() + "_DELTA," + strOppName.ToUpper() + "_STATUS," + "WEEK)=";
-                                //strSql += " (Select DELTA,STATUS,WEEK from TRE_OPP_TEMP B where A.CUSTOMER=B.CUSTOMER)";
-                                //strSql += " where Exists (select 1 from TRE_OPPORTUNITY O , TRE_OPP_TEMP T where O.CUSTOMER=T.CUSTOMER AND O.CUSTOMER=A.CUSTOMER )";
-                                //((OraDBManager)Common.dbMgr).ExecuteNonQuery(CommandType.Text, strSql);
-
-                                //as every customer is not updated commented previous one
-                                strSql = " Update TRE_OPPORTUNITY A Set (" + strOppName.ToUpper() + "_DELTA," + strOppName.ToUpper() + "_STATUS," + "WEEK)=";
-                                strSql += " (Select DELTA,STATUS,WEEK from TRE_OPP_TEMP B where A.CUSTOMER=B.CUSTOMER)";
-                                strSql += " where Exists (select 1 from TRE_OPPORTUNITY O , TRE_OPP_TEMP T where O.CUSTOMER=T.CUSTOMER  )";
-
-                                if (Common.iDBType == (int)Enums.DBType.Oracle)
-                                    ((OraDBManager)Common.dbMgr).ExecuteNonQuery(CommandType.Text, strSql);
-                                else
-                                    ((MySqlDBManager)Common.dbMgr).ExecuteNonQuery(CommandType.Text, strSql);
-
-                                // //((OraDBManager)Common.dbMgr).CommitTrans();
-                                if (bIsONMain)
+                                if (str8 != "")
                                 {
-                                    strSql = " INSERT INTO TRE_OPPORTUNITY(CUSTOMER,WEEK," + strOppName.ToUpper() + "_DELTA," + strOppName.ToUpper() + "_STATUS)";
-                                    strSql += " Select Z.Customer,Z.WEEK,Z.DELTA,Z.STATUS FROM (select S.Customer,S.WEEK,S.DELTA,S.STATUS from ";
-                                    strSql += " (select A.CUSTOMER,B.WEEK, Case When T1=0 then 0 Else Round(T2/T1-1,2) END as DELTA, ";
-                                    strSql += " Case When A.T1+B.T2 =0 Then 'NON_USER' ";
-                                    strSql += " When A.T1=0 And B.T2>0 Then 'NEW_USER' ";
-                                    strSql += " When Case When T1=0 then 0 Else Round(T2/T1-1,2) End < " + Convert.ToDecimal(strStopper) + " Then 'STOPPER' ";
-                                    strSql += " When Case When T1=0 then 0 Else Round(T2/T1-1,2) End < " + Convert.ToDecimal(strDropper) + " Then 'DROPPER' ";
-                                    strSql += " When Case When T1=0 then 0 Else Round(T2/T1-1,2) End > " + Convert.ToDecimal(strGrower) + " Then 'GROWER' ";
-                                    strSql += " ELSE 'FLAT' END as Status From  (Select CUSTOMER, round(avg(" + strFormula.ToUpper() + "),2) T1 from " + strTableName;
-                                    strSql += " where " + strBT1 + "  group by CUSTOMER) A ";
-                                    strSql += " Left join (Select CUSTOMER," + MaxWeek + " as Week, round(avg(" + strFormula.ToUpper() + "),2) T2 from " + strTableName + " where  " + strBT2 + " group by CUSTOMER) B ";
-                                    strSql += " On " + strKeyString + ")S inner join";
-                                    strSql += "(Select Distinct CUSTOMER from  " + strTableName;
-                                    if (strPtnlFilter != "")
-                                        strSql += " where " + strPtnlFilter;
-                                    strSql += " )G on S.CUSTOMER=G.CUSTOMER)Z";
-                                    strSql += " Where Z.Customer not in (Select Customer from TRE_OPPORTUNITY)";
+                                    str8 = string.Concat(str8, " AND ");
+                                }
+                                if (str9 != "")
+                                {
+                                    str9 = string.Concat(str9, ",");
+                                }
+                                if (str10 != "")
+                                {
+                                    str10 = string.Concat(str10, ",");
+                                }
+                                string str11 = str8;
+                                str = new string[] { str11, "A.", dataTable.Rows[i]["COLNAME"].ToString(), "=B.", dataTable.Rows[i]["COLNAME"].ToString() };
+                                str8 = string.Concat(str);
+                                str10 = string.Concat(str10, "A.", dataTable.Rows[i]["COLNAME"].ToString());
+                                str9 = string.Concat(str9, dataTable.Rows[i]["COLNAME"].ToString());
+                            }
+                            str3 = string.Concat(str3, dataTable.Rows[i]["COLNAME"].ToString());
+                            string str12 = str4;
+                            string[] strArrays = new string[] { str12, "A.", dataTable.Rows[i]["COLNAME"].ToString(), "=B.", dataTable.Rows[i]["COLNAME"].ToString() };
+                            str4 = string.Concat(strArrays);
+                            string str13 = str5;
+                            string[] strArrays1 = new string[] { str13, "OPT.", dataTable.Rows[i]["COLNAME"].ToString(), "=TDN.", dataTable.Rows[i]["COLNAME"].ToString() };
+                            str5 = string.Concat(strArrays1);
+                            string str14 = str5;
+                            string[] strArrays2 = new string[] { str14, " AND OPT.", dataTable.Rows[i]["COLNAME"].ToString(), "=A.", dataTable.Rows[i]["COLNAME"].ToString() };
+                            str5 = string.Concat(strArrays2);
+                        }
+                        str1 = "Select count(1) from  TRE_OPPORTUNITY ";
+                        int numOppCount = 0;
 
-                                    if (Common.iDBType == (int)Enums.DBType.Oracle)
-                                        ((OraDBManager)Common.dbMgr).ExecuteNonQuery(CommandType.Text, strSql);
-                                    else
-                                        ((MySqlDBManager)Common.dbMgr).ExecuteNonQuery(CommandType.Text, strSql);
+                        if (Common.iDBType == 1)
+                        {
+                            numOppCount = int.Parse(((OraDBManager)Common.dbMgr).ExecuteScalar(CommandType.Text, str1));
+                        }
 
-                                    strSql = "INSERT INTO TRE_OPPORTUNITY (CUSTOMER,WEEK," + strOppName.ToUpper() + "_DELTA," + strOppName.ToUpper() + "_STATUS) ";
-                                    strSql += "select Customer," + MaxWeek + ",null, 'NA'  from " + strTableName + " A ";
-                                    strSql += "Where A.Customer not in (Select Customer from TRE_OPPORTUNITY)  Group By Customer";
+                        else if (Common.iDBType == 3)
+                        {
+                            numOppCount = int.Parse(((MySqlDBManager)Common.dbMgr).ExecuteScalar(CommandType.Text, str1));
+                        }
 
-                                    if (Common.iDBType == (int)Enums.DBType.Oracle)
-                                        ((OraDBManager)Common.dbMgr).ExecuteNonQuery(CommandType.Text, strSql);
-                                    else
-                                        ((MySqlDBManager)Common.dbMgr).ExecuteNonQuery(CommandType.Text, strSql);
-                                    // //((OraDBManager)Common.dbMgr).CommitTrans();
+                        if (numOppCount == 0)
+                        {
+                            string[] upper1 = new string[] { " INSERT INTO TRE_OPPORTUNITY(CUSTOMER,WEEK,", strOppName.ToUpper(), "_DELTA,", strOppName.ToUpper(), "_STATUS)" };
+                            str1 = string.Concat(upper1);
+                            str1 = string.Concat(str1, " select A.CUSTOMER,A.WEEK, Case When T1=0 then 0 Else Round(T2/T1-1,2) END, ");
+                            str1 = string.Concat(str1, " Case When A.T1+B.T2 =0 Then 'NON_USER' ");
+                            str1 = string.Concat(str1, " When A.T1=0 And B.T2>0 Then 'NEW_USER' ");
+                            obj = str1;
+                            object[] objArray = new object[] { obj, " When Case When T1=0 then 0 Else Round(T2/T1-1,2) End <= ", Convert.ToDecimal(strStopper), " Then 'STOPPER' " };
+                            str1 = string.Concat(objArray);
+                            object obj1 = str1;
+                            object[] num1 = new object[] { obj1, " When Case When T1=0 then 0 Else Round(T2/T1-1,2) End <= ", Convert.ToDecimal(strDropper), " Then 'DROPPER' " };
+                            str1 = string.Concat(num1);
+                            object obj2 = str1;
+                            object[] objArray1 = new object[] { obj2, " When Case When T1=0 then 0 Else Round(T2/T1-1,2) End >=  ", Convert.ToDecimal(strGrower), " Then 'GROWER' " };
+                            str1 = string.Concat(objArray1);
+                            object obj3 = str1;
+                            object[] upper2 = new object[] { obj3, " ELSE 'FLAT' END as Status From  (Select CUSTOMER,", num, " as Week ,round(avg(", str2.ToUpper(), "),2) T1 from ", strTableName };
+                            str1 = string.Concat(upper2);
+                            str1 = string.Concat(str1, " where ", str6, "  group by CUSTOMER) A ");
+                            string str15 = str1;
+                            string[] upper3 = new string[] { str15, " Left join (Select CUSTOMER, round(avg(", str2.ToUpper(), "),2) T2 from ", strTableName, " where  ", str7, " group by CUSTOMER) B " };
+                            str1 = string.Concat(upper3);
+                            str1 = string.Concat(str1, " On ", str8);
+
+                            if (Common.iDBType == 1)
+                            {
+                                ((OraDBManager)Common.dbMgr).ExecuteNonQuery(CommandType.Text, str1);
+                            }
+
+                            else if (Common.iDBType == 3)
+                            {
+                                ((MySqlDBManager)Common.dbMgr).ExecuteNonQuery(CommandType.Text, str1);
+                            }
+
+                         
+                        }
+                        else if (Common.iDBType == 1 || Common.iDBType == 3)
+                        {
+                            str1 = " Delete From TRE_OPP_TEMP";
+                            if (Common.iDBType == 1)
+                            {
+                                ((OraDBManager)Common.dbMgr).ExecuteNonQuery(CommandType.Text, str1);
+                            }
+
+                            else if (Common.iDBType == 3)
+                            {
+                                ((MySqlDBManager)Common.dbMgr).ExecuteNonQuery(CommandType.Text, str1);
+                            }
+
+                            str1 = " INSERT INTO TRE_OPP_TEMP(CUSTOMER,WEEK,DELTA,STATUS) select S.Customer,S.Week,S.DELTA,S.STATUS from (";
+                            str1 = string.Concat(str1, " select A.CUSTOMER,A.Week, Case When T1=0 then 0 Else Round(T2/T1-1,2) END as DELTA, ");
+                            str1 = string.Concat(str1, " Case When A.T1+B.T2 =0 Then 'NON_USER' ");
+                            str1 = string.Concat(str1, " When A.T1=0 And B.T2>0 Then 'NEW_USER' ");
+                            object obj4 = str1;
+                            object[] num2 = new object[] { obj4, " When Case When T1=0 then 0 Else Round(T2/T1-1,2) End < ", Convert.ToDecimal(strStopper), " Then 'STOPPER' " };
+                            str1 = string.Concat(num2);
+                            object obj5 = str1;
+                            object[] objArray2 = new object[] { obj5, " When Case When T1=0 then 0 Else Round(T2/T1-1,2) End < ", Convert.ToDecimal(strDropper), " Then 'DROPPER' " };
+                            str1 = string.Concat(objArray2);
+                            object obj6 = str1;
+                            object[] num3 = new object[] { obj6, " When Case When T1=0 then 0 Else Round(T2/T1-1,2) End >  ", Convert.ToDecimal(strGrower), " Then 'GROWER' " };
+                            str1 = string.Concat(num3);
+                            object obj7 = str1;
+                            object[] objArray3 = new object[] { obj7, " ELSE 'FLAT' END as Status From  (Select CUSTOMER,", num, " as Week,round(avg(", str2.ToUpper(), "),2) T1 from ", strTableName };
+                            str1 = string.Concat(objArray3);
+                            str1 = string.Concat(str1, " where ", str6, "  group by CUSTOMER) A ");
+                            string str16 = str1;
+                            string[] strArrays3 = new string[] { str16, " Left join (Select CUSTOMER, round(avg(", str2.ToUpper(), "),2) T2 from ", strTableName, " where  ", str7, " group by CUSTOMER) B " };
+                            str1 = string.Concat(strArrays3);
+                            str1 = string.Concat(str1, " On ", str8, " )S inner join");
+                            str1 = string.Concat(str1, "(Select Distinct CUSTOMER from ", strTableName);
+                            if (strPtnlFilter != "")
+                            {
+                                str1 = string.Concat(str1, " where ", strPtnlFilter);
+                            }
+                            str1 = string.Concat(str1, ")G on S.CUSTOMER=G.CUSTOMER");
+                            if (Common.iDBType == 1)
+                            {
+                                ((OraDBManager)Common.dbMgr).ExecuteNonQuery(CommandType.Text, str1);
+                            }
+
+                            else if (Common.iDBType == 3)
+                            {
+                                ((MySqlDBManager)Common.dbMgr).ExecuteNonQuery(CommandType.Text, str1);
+                            }
+                            object[] objArray4 = new object[] { "   INSERT INTO TRE_OPP_TEMP (CUSTOMER,WEEK, DELTA,STATUS) select Customer,", num, " ,null, 'NA'  from ", strTableName };
+                            str1 = string.Concat(objArray4);
+                            str1 = string.Concat(str1, " A Where A.Customer not in (Select Customer from TRE_OPP_TEMP)  Group By Customer");
+                            if (Common.iDBType == 1)
+                            {
+                                ((OraDBManager)Common.dbMgr).ExecuteNonQuery(CommandType.Text, str1);
+                            }
+
+                            else if (Common.iDBType == 3)
+                            {
+                                ((MySqlDBManager)Common.dbMgr).ExecuteNonQuery(CommandType.Text, str1);
+                            }
+                            string[] upper4 = new string[] { " Update TRE_OPPORTUNITY A Set (", strOppName.ToUpper(), "_DELTA,", strOppName.ToUpper(), "_STATUS,WEEK)=" };
+                            str1 = string.Concat(upper4);
+                            str1 = string.Concat(str1, " (Select DELTA,STATUS,WEEK from TRE_OPP_TEMP B where A.CUSTOMER=B.CUSTOMER)");
+                            str1 = string.Concat(str1, " where Exists (select 1 from TRE_OPPORTUNITY O , TRE_OPP_TEMP T where O.CUSTOMER=T.CUSTOMER  )");
+                            if (Common.iDBType == 1)
+                            {
+                                ((OraDBManager)Common.dbMgr).ExecuteNonQuery(CommandType.Text, str1);
+                            }
+
+                            else if (Common.iDBType == 3)
+                            {
+                                ((MySqlDBManager)Common.dbMgr).ExecuteNonQuery(CommandType.Text, str1);
+                            }
+                            if (bIsONMain)
+                            {
+                                string[] strArrays4 = new string[] { " INSERT INTO TRE_OPPORTUNITY(CUSTOMER,WEEK,", strOppName.ToUpper(), "_DELTA,", strOppName.ToUpper(), "_STATUS)" };
+                                str1 = string.Concat(strArrays4);
+                                str1 = string.Concat(str1, " Select Z.Customer,Z.WEEK,Z.DELTA,Z.STATUS FROM (select S.Customer,S.WEEK,S.DELTA,S.STATUS from ");
+                                str1 = string.Concat(str1, " (select A.CUSTOMER,B.WEEK, Case When T1=0 then 0 Else Round(T2/T1-1,2) END as DELTA, ");
+                                str1 = string.Concat(str1, " Case When A.T1+B.T2 =0 Then 'NON_USER' ");
+                                str1 = string.Concat(str1, " When A.T1=0 And B.T2>0 Then 'NEW_USER' ");
+                                object obj8 = str1;
+                                object[] num4 = new object[] { obj8, " When Case When T1=0 then 0 Else Round(T2/T1-1,2) End < ", Convert.ToDecimal(strStopper), " Then 'STOPPER' " };
+                                str1 = string.Concat(num4);
+                                object obj9 = str1;
+                                object[] num5 = new object[] { obj9, " When Case When T1=0 then 0 Else Round(T2/T1-1,2) End < ", Convert.ToDecimal(strDropper), " Then 'DROPPER' " };
+                                str1 = string.Concat(num5);
+                                object obj10 = str1;
+                                object[] objArray5 = new object[] { obj10, " When Case When T1=0 then 0 Else Round(T2/T1-1,2) End > ", Convert.ToDecimal(strGrower), " Then 'GROWER' " };
+                                str1 = string.Concat(objArray5);
+                                string str17 = str1;
+                                string[] upper5 = new string[] { str17, " ELSE 'FLAT' END as Status From  (Select CUSTOMER, round(avg(", str2.ToUpper(), "),2) T1 from ", strTableName };
+                                str1 = string.Concat(upper5);
+                                str1 = string.Concat(str1, " where ", str6, "  group by CUSTOMER) A ");
+                                object obj11 = str1;
+                                upper = new object[] { obj11, " Left join (Select CUSTOMER,", num, " as Week, round(avg(", str2.ToUpper(), "),2) T2 from ", strTableName, " where  ", str7, " group by CUSTOMER) B " };
+                                str1 = string.Concat(upper);
+                                str1 = string.Concat(str1, " On ", str8, ")S inner join");
+                                str1 = string.Concat(str1, "(Select Distinct CUSTOMER from  ", strTableName);
+                                if (strPtnlFilter != "")
+                                {
+                                    str1 = string.Concat(str1, " where ", strPtnlFilter);
+                                }
+                                str1 = string.Concat(str1, " )G on S.CUSTOMER=G.CUSTOMER)Z");
+                                str1 = string.Concat(str1, " Where Z.Customer not in (Select Customer from TRE_OPPORTUNITY)");
+                                if (Common.iDBType == 1)
+                                {
+                                    ((OraDBManager)Common.dbMgr).ExecuteNonQuery(CommandType.Text, str1);
                                 }
 
-                            }
-                            else
-                            {
-                                //strSql = " Update TRE_OPPORTUNITY Set (" + strOppName + ")=";
-                                //strSql += " (Select " + strFormula.Replace("'", "''") + " from " + strTableName + " where " + strUpdateString + ")";
-                                //((DBManager)Common.dbMgr).ExecuteNonQuery(CommandType.Text, strSql);
+                                else if (Common.iDBType == 3)
+                                {
+                                    ((MySqlDBManager)Common.dbMgr).ExecuteNonQuery(CommandType.Text, str1);
+                                }
+                                str = new string[] { "INSERT INTO TRE_OPPORTUNITY (CUSTOMER,WEEK,", strOppName.ToUpper(), "_DELTA,", strOppName.ToUpper(), "_STATUS) " };
+                                str1 = string.Concat(str);
+                                obj = str1;
+                                upper = new object[] { obj, "select Customer,", num, ",null, 'NA'  from ", strTableName, " A " };
+                                str1 = string.Concat(upper);
+                                str1 = string.Concat(str1, "Where A.Customer not in (Select Customer from TRE_OPPORTUNITY)  Group By Customer");
+                                if (Common.iDBType == 1)
+                                {
+                                    ((OraDBManager)Common.dbMgr).ExecuteNonQuery(CommandType.Text, str1);
+                                }
+
+                                else if (Common.iDBType == 3)
+                                {
+                                    ((MySqlDBManager)Common.dbMgr).ExecuteNonQuery(CommandType.Text, str1);
+                                }
                             }
                         }
-
-
-
                     }
                 }
-                return true;
+                flag = true;
             }
-            catch (Exception ex)
+            catch (Exception exception)
             {
-                throw ex;
+                throw exception;
             }
+            return flag;
         }
         public int fnMaxWeek(string strTableName)
         {
@@ -1675,7 +1737,11 @@ namespace RecoEngine_BI
             {
                 string strSql = "";
                 strSql = " SELECT Max(WEEK) FROM  " + strTableName;
-                return int.Parse(((OraDBManager)Common.dbMgr).ExecuteScalar(CommandType.Text, strSql)); ;
+                if (Common.iDBType == (int)Enums.DBType.Oracle)
+                    return int.Parse(((OraDBManager)Common.dbMgr).ExecuteScalar(CommandType.Text, strSql));
+                else if (Common.iDBType == (int)Enums.DBType.Mysql)
+                    return int.Parse(((MySqlDBManager)Common.dbMgr).ExecuteScalar(CommandType.Text, strSql));
+                return 0;
             }
             catch (Exception ex)
             {

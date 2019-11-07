@@ -26,11 +26,11 @@ namespace RecoEngine_BI
                 if (Common.iDBType == 1)
                 {
 
-                   num = int.Parse(((OraDBManager)Common.dbMgr).ExecuteScalar(CommandType.Text, str));
+                    num = int.Parse(((OraDBManager)Common.dbMgr).ExecuteScalar(CommandType.Text, str));
                 }
-                else if (Common.iDBType == 3)
+                else if (Common.iDBType == 3) ;
                 {
-                    str = " Select count(1) FROM information_schema.columns c WHERE c.table_name = '" + strTabName.ToUpper() + "' AND  Column_name = '" + strColName.ToUpper() + "'  AND c.table_schema  = 'recousr'";
+                    str = " Select count(1) FROM TRE_CALCULATED_COLUMNS c WHERE   colname = '" + strColName.ToUpper() + "'  ";
 
                     num = int.Parse(((MySqlDBManager)Common.dbMgr).ExecuteScalar(CommandType.Text, str));
                 }
@@ -1345,7 +1345,7 @@ namespace RecoEngine_BI
                         }
                         else
                         {
-                            if (dataRow["Table"] != null)
+                            if (dataRow["Table"].ToString() != "C")
                             {
                                 str15 = string.Concat(str15, dataRow[0].ToString());
                             }
@@ -1835,13 +1835,13 @@ namespace RecoEngine_BI
             {
                 object[] objArray = new object[] { "update TRE_CALCULATED_COLUMNS Set COMBINE_COLUMNS= '", strFormula, "' Where Project_Id= ", ProjectId, " and COLNAME ='", strColName, "'" };
                 string str = string.Concat(objArray);
-                if (Common.iDBType != 1)
-                {
-                    ((DBManager)Common.dbMgr).ExecuteScalar(CommandType.Text, str);
-                }
-                else
+                if (Common.iDBType == 1)
                 {
                     ((OraDBManager)Common.dbMgr).ExecuteScalar(CommandType.Text, str);
+                }
+                else if (Common.iDBType == 3)
+                {
+                    ((MySqlDBManager)Common.dbMgr).ExecuteScalar(CommandType.Text, str);
                 }
                 flag = true;
             }
