@@ -71,7 +71,7 @@ namespace RecoEngine
                         string str = this.clstreDetails.fnBuildTimePeriod(Common.timePeriods.strtp1);
                         string str1 = this.clstreDetails.fnBuildTimePeriod(Common.timePeriods.strtp2);
                         this.clstreDetails.fnDeleteTreOppfrmExport();
-                        if (this.ClsObj.fnRunOPoortunities(Common.iProjectID, Common.strTableName, str, str1, this.strMainFilter))
+                        if (this.ClsObj.fnRunOPoortunitiesfrmProcedure(Common.iProjectID, Common.strTableName, str, str1))
                         {
                             this.objRanking.fnMainRankingfrmExport(Common.iProjectID);
                             this.fnShowOpportunitiesDetails();

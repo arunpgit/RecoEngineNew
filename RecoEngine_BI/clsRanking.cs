@@ -25,7 +25,7 @@ namespace RecoEngine_BI
             }
             else if(Common.iDBType ==3)
             {
-                dataTable = ((DBManager)Common.dbMgr).ExecuteDataTable(CommandType.Text, str);
+                dataTable = ((MySqlDBManager)Common.dbMgr).ExecuteDataTable(CommandType.Text, str);
 
             }
             if (dataTable.Rows.Count > 0)
@@ -190,14 +190,15 @@ namespace RecoEngine_BI
 
         public string fnOpportunitiesRnkng(int iProjectid)
         {
-            DataTable dataTable;
+            DataTable dataTable = null ;
             string str = "";
             str = string.Concat("Select OPP_NAME from Opportunity  where  Project_id= ", iProjectid);
 
-            dataTable = (Common.iDBType == 2 ? ((DBManager)Common.dbMgr).ExecuteDataTable(CommandType.Text, str) : ((OraDBManager)Common.dbMgr).ExecuteDataTable(CommandType.Text, str));
-            if(Common.iDBType ==3)
+            if (Common.iDBType == 2 )
+             dataTable =   ((OraDBManager)Common.dbMgr).ExecuteDataTable(CommandType.Text, str);
+            else if(Common.iDBType ==3)
             {
-                ((MySqlDBManager)Common.dbMgr).ExecuteDataTable(CommandType.Text, str);
+                dataTable = ((MySqlDBManager)Common.dbMgr).ExecuteDataTable(CommandType.Text, str);
             }
             str = " Insert into CUSTOMER_PNTL (OPP_NAME,OPP_PNTL,Opp_Status)";
             foreach (DataRow row in dataTable.Rows)
@@ -309,7 +310,8 @@ namespace RecoEngine_BI
                 }
                 else if (Common.iDBType == 3)
                 {
-                    ((DBManager)Common.dbMgr).ExecuteNonQuery(CommandType.Text, str);
+                    //here we ned to call the procedurw what I sent . We need to modify rank_slection with limit
+                    ((MySqlDBManager)Common.dbMgr).ExecuteNonQuery(CommandType.Text, str);
                 }
             }
             catch (Exception exception)

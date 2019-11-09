@@ -129,7 +129,10 @@ namespace RecoEngine_BI
                 DataTable dataTable = new DataTable();
                 object[] objArray = new object[] { "Select * from TRE_MAPPING where TABLENAME='", strTabName, "' and PROJECTID=", iProjectId };
                 str = string.Concat(objArray);
-                dataTable = (Common.iDBType != 1 ? ((DBManager)Common.dbMgr).ExecuteDataTable(CommandType.Text, str) : ((OraDBManager)Common.dbMgr).ExecuteDataTable(CommandType.Text, str));
+                    if(Common.iDBType == 1)
+                    dataTable =((OraDBManager)Common.dbMgr).ExecuteDataTable(CommandType.Text, str);
+                else if (Common.iDBType == 3)
+                    dataTable = ((MySqlDBManager)Common.dbMgr).ExecuteDataTable(CommandType.Text, str);
                 foreach (DataRow row in dataTable.Rows)
                 {
                     if (row["type"].ToString() == 2.ToString())
@@ -240,22 +243,23 @@ namespace RecoEngine_BI
                     }
                 }
                 str = "Delete from ETS_TRE_BASE2";
-                if (Common.iDBType != 1)
-                {
-                    ((DBManager)Common.dbMgr).ExecuteScalar(CommandType.Text, str);
-                }
-                else
+                if (Common.iDBType == 1)
                 {
                     ((OraDBManager)Common.dbMgr).ExecuteScalar(CommandType.Text, str);
                 }
+                else if(Common.iDBType==3)
+                {
+                    ((MySqlDBManager)Common.dbMgr).ExecuteScalar(CommandType.Text, str);
+                }
+                    
                 str = "Delete from ETS_TRE_BASE3";
-                if (Common.iDBType != 1)
-                {
-                    ((DBManager)Common.dbMgr).ExecuteScalar(CommandType.Text, str);
-                }
-                else
+                if (Common.iDBType == 1)
                 {
                     ((OraDBManager)Common.dbMgr).ExecuteScalar(CommandType.Text, str);
+                }
+                else if (Common.iDBType == 3)
+                {
+                    ((MySqlDBManager)Common.dbMgr).ExecuteScalar(CommandType.Text, str);
                 }
                 string str21 = "Insert into ETS_TRE_BASE2(";
                 if (str2 != "")
@@ -280,13 +284,13 @@ namespace RecoEngine_BI
                     str21 = string.Concat(str21, str1, ",");
                 }
                 str21 = string.Concat(str21, str9, " From ETS_TRE_BASE ");
-                if (Common.iDBType != 1)
+                if (Common.iDBType == 1)
                 {
-                    ((DBManager)Common.dbMgr).ExecuteScalar(CommandType.Text, str21);
+                    ((OraDBManager)Common.dbMgr).ExecuteScalar(CommandType.Text, str);
                 }
-                else
+                else if (Common.iDBType == 3)
                 {
-                    ((OraDBManager)Common.dbMgr).ExecuteScalar(CommandType.Text, str21);
+                    ((MySqlDBManager)Common.dbMgr).ExecuteScalar(CommandType.Text, str);
                 }
                 str21 = "Insert into ETS_TRE_BASE3(";
                 if (str2 != "")
@@ -311,13 +315,13 @@ namespace RecoEngine_BI
                     str21 = string.Concat(str21, str1, ",");
                 }
                 str21 = string.Concat(str21, str11, " From ETS_TRE_BASE2 ");
-                if (Common.iDBType != 1)
+                if (Common.iDBType == 1)
                 {
-                    ((DBManager)Common.dbMgr).ExecuteScalar(CommandType.Text, str21);
+                    ((OraDBManager)Common.dbMgr).ExecuteScalar(CommandType.Text, str);
                 }
-                else
+                else if (Common.iDBType == 3)
                 {
-                    ((OraDBManager)Common.dbMgr).ExecuteScalar(CommandType.Text, str21);
+                    ((MySqlDBManager)Common.dbMgr).ExecuteScalar(CommandType.Text, str);
                 }
             }
             catch (Exception exception)
@@ -1661,6 +1665,22 @@ namespace RecoEngine_BI
 
                             else if (Common.iDBType == 3)
                             {
+
+                                str1 = " Update TRE_OPPORTUNITY A inner join TRE_OPP_TEMP B on A.CUSTOMER = B.CUSTOMER";
+                                str1 += " Set " + strOppName.ToUpper()+ "_DELTA = delta";
+                                str1 += " where Exists(select 1 from(select 1 from TRE_OPPORTUNITY O , TRE_OPP_TEMP T where O.CUSTOMER = T.CUSTOMER) as c  )";
+                              ((MySqlDBManager)Common.dbMgr).ExecuteNonQuery(CommandType.Text, str1);
+
+
+                                str1 = " Update TRE_OPPORTUNITY A inner join TRE_OPP_TEMP B on A.CUSTOMER = B.CUSTOMER";
+                                str1 += " Set " + strOppName.ToUpper()+ "_status = Status";
+                                str1 += " where Exists(select 1 from(select 1 from TRE_OPPORTUNITY O , TRE_OPP_TEMP T where O.CUSTOMER = T.CUSTOMER) as c  )";
+                                ((MySqlDBManager)Common.dbMgr).ExecuteNonQuery(CommandType.Text, str1);
+
+
+                                str1 = " Update TRE_OPPORTUNITY A inner join TRE_OPP_TEMP B on A.CUSTOMER = B.CUSTOMER";
+                                str1 += " Set A.WEEK = B.WEEK";
+                                str1 += " where Exists(select 1 from(select 1 from TRE_OPPORTUNITY O , TRE_OPP_TEMP T where O.CUSTOMER = T.CUSTOMER) as c  )";
                                 ((MySqlDBManager)Common.dbMgr).ExecuteNonQuery(CommandType.Text, str1);
                             }
                             if (bIsONMain)
@@ -1771,7 +1791,11 @@ namespace RecoEngine_BI
 
                     strSql = " Update TRE_OPPORTUNITY A Set " + strOppName.ToUpper() + "_PNTL=0";
                     strSql += " WHERE " + strOppName.ToUpper() + "_STATUS='NA' ";
-                    ((OraDBManager)Common.dbMgr).ExecuteNonQuery(CommandType.Text, strSql);
+                    if (Common.iDBType == (int)Enums.DBType.Oracle)
+                        ((OraDBManager)Common.dbMgr).ExecuteNonQuery(CommandType.Text, strSql);
+                    
+                    else if (Common.iDBType == (int)Enums.DBType.Mysql)
+                        ((MySqlDBManager)Common.dbMgr).ExecuteNonQuery(CommandType.Text, strSql);
                     strSql = " Update TRE_OPPORTUNITY A Set " + strOppName.ToUpper() + "_PNTL=";
                     strSql += " (Select " + strFormula + " from ETS_TRE_BASE2 B where A.CUSTOMER=B.CUSTOMER)";
                     strSql += " WHERE EXISTS (SELECT 1 from TRE_OPPORTUNITY O , ETS_TRE_BASE2 T   where  O.CUSTOMER=T.CUSTOMER AND O.CUSTOMER=A.CUSTOMER AND O." + strOppName.ToUpper() + "_STATUS!='NA' )";
@@ -1781,8 +1805,16 @@ namespace RecoEngine_BI
 
                     if (Common.iDBType == (int)Enums.DBType.Oracle)
                         ((OraDBManager)Common.dbMgr).ExecuteNonQuery(CommandType.Text, strSql);
-                    else
+
+                    else if (Common.iDBType == (int)Enums.DBType.Mysql)
+                    {
+
+                        strSql = " Update TRE_OPPORTUNITY A Set " + strOppName.ToUpper() + "_PNTL=";
+                        strSql += " (Select " + strFormula + " from ETS_TRE_BASE2 B where A.CUSTOMER=B.CUSTOMER)";
+                        strSql += " WHERE EXISTS (Select 1 from (SELECT 1 from TRE_OPPORTUNITY O , ETS_TRE_BASE2 T   where  O.CUSTOMER=T.CUSTOMER AND O.CUSTOMER=A.CUSTOMER AND O." + strOppName.ToUpper() + "_STATUS!='NA' ) as C)";
+
                         ((MySqlDBManager)Common.dbMgr).ExecuteNonQuery(CommandType.Text, strSql);
+                    }
                 }
                 else
                 {
@@ -1801,9 +1833,23 @@ namespace RecoEngine_BI
         {
             DataTable dt = new DataTable();
             string strSQL = "Delete From Opportunity_values where opportunity_id =" + oppid;
-            ((OraDBManager)Common.dbMgr).ExecuteScalar(CommandType.Text, strSQL);
+            if (Common.iDBType == (int)Enums.DBType.Oracle)
+            {
+                ((OraDBManager)Common.dbMgr).ExecuteScalar(CommandType.Text, strSQL);
+            }
+            else if (Common.iDBType == (int)Enums.DBType.Mysql)
+            {
+                ((MySqlDBManager)Common.dbMgr).ExecuteScalar(CommandType.Text, strSQL);
+            }
             strSQL = "Select  OPP_NAME From Opportunity where opportunity_id =" + oppid;
-            dt = ((OraDBManager)Common.dbMgr).ExecuteDataTable(CommandType.Text, strSQL);
+            if (Common.iDBType == (int)Enums.DBType.Oracle)
+            {
+                dt=((OraDBManager)Common.dbMgr).ExecuteDataTable(CommandType.Text, strSQL);
+            }
+            else if (Common.iDBType == (int)Enums.DBType.Mysql)
+            {
+               dt= ((MySqlDBManager)Common.dbMgr).ExecuteDataTable(CommandType.Text, strSQL);
+            }
             string Oppname = dt.Rows[0]["OPP_NAME"].ToString();
             strSQL = "Insert into Opportunity_values Select " + oppid + " , sum(" + Oppname + "_delta),sum(" + Oppname + "_pntl) from tre_opportunity ";
             if (Common.iDBType == (int)Enums.DBType.Oracle)

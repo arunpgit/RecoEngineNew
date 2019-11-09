@@ -59,7 +59,7 @@ namespace RecoEngine_BI
                 if (Common.iDBType == (int)Enums.DBType.Oracle)
                     dt = ((OraDBManager)Common.dbMgr).ExecuteDataTable(CommandType.Text, strSql);
                 else if (Common.iDBType == (int)Enums.DBType.Mysql)
-                    dt = ((OraDBManager)Common.dbMgr).ExecuteDataTable(CommandType.Text, strSql);
+                    dt = ((MySqlDBManager)Common.dbMgr).ExecuteDataTable(CommandType.Text, strSql);
                 else
                     dt = ((DBManager)Common.dbMgr).ExecuteDataTable(CommandType.Text, strSql);
 
@@ -216,6 +216,12 @@ namespace RecoEngine_BI
 
                         ((OraDBManager)Common.dbMgr).ExecuteNonQuery(CommandType.Text, strSql);
                     }
+                    else if (Common.iDBType == (int)Enums.DBType.Mysql)
+                    {
+                        strSql += "CREATEDDATE=currentdate() ,CREATEDBY=" + strLoginUserId + ",PROJECT_ID=" + iProjectId + ",ISACTIVE = " + iIsActive + ",ELGBL_FORMULA = '" + strElgblFormula.Replace("'", "''") + "',OPP_ACTION = '" + OppType + "'  where OPPORTUNITY_ID=" + iOpportunityId;
+
+                        ((MySqlDBManager)Common.dbMgr).ExecuteNonQuery(CommandType.Text, strSql);
+                    }
                     else
                     {
                         strSql += "CREATEDDATE=getdate() ,CREATEDBY=" + strLoginUserId + ",PROJECT_ID" + iProjectId + ",ISACTIVE = " + iIsActive + ",OPP_ACTION = '" + OppType + "'  where OPPORTUNITY_ID=" + iOpportunityId;
@@ -238,8 +244,8 @@ namespace RecoEngine_BI
                     else if (Common.iDBType == (int)Enums.DBType.Mysql)
                     {
 
-                        strSql += " currentdate() ," + strLoginUserId + "," + iProjectId + "," + iIsActive + ")";
-                        ((OraDBManager)Common.dbMgr).ExecuteNonQuery(CommandType.Text, strSql);
+                        strSql += " CURRENT_DATE() ," + strLoginUserId + "," + iProjectId + "," + iIsActive + ")";
+                        ((MySqlDBManager)Common.dbMgr).ExecuteNonQuery(CommandType.Text, strSql);
                         iOpportunityId = int.Parse(((MySqlDBManager)Common.dbMgr).ExecuteScalar(CommandType.Text, "Select max(OPPORTUNITY_ID) from OPPORTUNITY"));
 
                     }
@@ -257,10 +263,10 @@ namespace RecoEngine_BI
                 {
                     iCount = int.Parse(((OraDBManager)Common.dbMgr).ExecuteScalar(CommandType.Text, strSql));
                 }
-                else if (Common.iDBType == (int)Enums.DBType.Oracle)
+                else if (Common.iDBType == (int)Enums.DBType.Mysql)
                 {
                     strSql = " Select count(1) from information_schema.columns c where c.table_name = 'TRE_OPPORTUNITY' and upper(column_name) = '" + strOppName.ToUpper() + "_DELTA' AND c.table_schema = 'recousr'";
-                   iCount = int.Parse(((OraDBManager)Common.dbMgr).ExecuteScalar(CommandType.Text, strSql));
+                   iCount = int.Parse(((MySqlDBManager)Common.dbMgr).ExecuteScalar(CommandType.Text, strSql));
                 }
                 else
                 {
@@ -323,7 +329,7 @@ namespace RecoEngine_BI
                 }
                 else if (Common.iDBType == (int)Enums.DBType.Mysql)
                 {
-                     strSql = "Select isnull(count(1),0) from OPPORTUNITY_RANKING where project_id= " + iProjectId + " AND ( RANK1 =" + strOppId + " OR RANK2 = " + strOppId + " OR RANK3 = " + strOppId + " OR RANK4 =" + strOppId + ")";
+                     strSql = "Select count(1) from OPPORTUNITY_RANKING where project_id= " + iProjectId + " AND ( RANK1 =" + strOppId + " OR RANK2 = " + strOppId + " OR RANK3 = " + strOppId + " OR RANK4 =" + strOppId + ")";
 
                     return int.Parse(((MySqlDBManager)Common.dbMgr).ExecuteScalar(CommandType.Text, strSql)) > 0;
                 }
@@ -373,7 +379,6 @@ namespace RecoEngine_BI
                     if (iCount > 0)
                     {
                         strSql = "Alter  TABLE TRE_OPPORTUNITY drop Column " + strName.ToUpper() + "_DELTA";
-                        ((OraDBManager)Common.dbMgr).ExecuteNonQuery(CommandType.Text, strSql);
 
                         if (Common.iDBType == (int)Enums.DBType.Oracle)
                         {
@@ -439,7 +444,15 @@ namespace RecoEngine_BI
             }
             catch (Exception ex)
             {
-                ((OraDBManager)Common.dbMgr).RollbackTrans();
+                if (Common.iDBType == (int)Enums.DBType.Oracle)
+                {
+                    ((OraDBManager)Common.dbMgr).RollbackTrans();
+                }
+
+                else if (Common.iDBType == (int)Enums.DBType.Mysql)
+                {
+                    ((MySqlDBManager)Common.dbMgr).RollbackTrans();
+                }
                 throw ex;
             }
         }
@@ -556,7 +569,15 @@ namespace RecoEngine_BI
             }
             catch (Exception ex)
             {
-                ((OraDBManager)Common.dbMgr).RollbackTrans();
+                if (Common.iDBType == (int)Enums.DBType.Oracle)
+                {
+                    ((OraDBManager)Common.dbMgr).RollbackTrans();
+                }
+
+                else if (Common.iDBType == (int)Enums.DBType.Mysql)
+                {
+                    ((MySqlDBManager)Common.dbMgr).RollbackTrans();
+                }
                 throw ex;
             }
         }
@@ -756,7 +777,15 @@ namespace RecoEngine_BI
             }
             catch (Exception ex)
             {
-                ((OraDBManager)Common.dbMgr).RollbackTrans();
+                if (Common.iDBType == (int)Enums.DBType.Oracle)
+                {
+                    ((OraDBManager)Common.dbMgr).RollbackTrans();
+                }
+
+                else if (Common.iDBType == (int)Enums.DBType.Mysql)
+                {
+                    ((MySqlDBManager)Common.dbMgr).RollbackTrans();
+                }
                 throw ex;
             }
         }
