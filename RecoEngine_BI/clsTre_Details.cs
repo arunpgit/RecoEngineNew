@@ -1081,8 +1081,8 @@ namespace RecoEngine_BI
                 string strSql = "Select * from OPPORTUNITY WHERE PROJECT_ID=" + iProjectId + " AND ISONMAIN=0 ";
                 if (Common.iDBType == (int)Enums.DBType.Oracle)
                     dt = ((OraDBManager)Common.dbMgr).ExecuteDataTable(CommandType.Text, strSql);
-                if (Common.iDBType == (int)Enums.DBType.Oracle)
-                    dt = ((OraDBManager)Common.dbMgr).ExecuteDataTable(CommandType.Text, strSql);
+                if (Common.iDBType == (int)Enums.DBType.Mysql)
+                    dt = ((MySqlDBManager)Common.dbMgr).ExecuteDataTable(CommandType.Text, strSql);
                 else if (Common.iDBType == (int)Enums.DBType.SQl)
                     dt = ((DBManager)Common.dbMgr).ExecuteDataTable(CommandType.Text, strSql);
 
@@ -1103,6 +1103,9 @@ namespace RecoEngine_BI
                         dtOpp = ((OraDBManager)Common.dbMgr).ExecuteDataTable(CommandType.Text, strSql);
                     else if (Common.iDBType == (int)Enums.DBType.SQl)
                         dtOpp = ((DBManager)Common.dbMgr).ExecuteDataTable(CommandType.Text, strSql);
+                    else if (Common.iDBType == (int)Enums.DBType.Mysql)
+                        dtOpp = ((MySqlDBManager)Common.dbMgr).ExecuteDataTable(CommandType.Text, strSql);
+
 
                 }
 
