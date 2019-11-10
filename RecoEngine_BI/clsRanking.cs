@@ -266,29 +266,56 @@ namespace RecoEngine_BI
         {
             try
             {
-                string str = "";
-                str = "Delete from TRE_RANKING ";
-                if (Common.iDBType == 1)
+                if (Common.iDBType == 3)
                 {
-                    ((OraDBManager)Common.dbMgr).ExecuteNonQuery(CommandType.Text, str);
-                }
-                else if (Common.iDBType == 2)
-                {
-                    ((DBManager)Common.dbMgr).ExecuteNonQuery(CommandType.Text, str);
-                }
-                else if (Common.iDBType == 3)
-                {
-                    ((MySqlDBManager)Common.dbMgr).ExecuteNonQuery(CommandType.Text, str);
-                }
-                str = "CALL `recousr`.`InsertTreRanking`( " + iProjectid + ")";
-                if (Common.iDBType == 1)
-                {
-                    ((OraDBManager)Common.dbMgr).ExecuteNonQuery(CommandType.Text, str);
-                }
-                else if (Common.iDBType == 3)
-                {
-                    //here we ned to call the procedurw what I sent . We need to modify rank_slection with limit
-                    ((MySqlDBManager)Common.dbMgr).ExecuteNonQuery(CommandType.Text, str);
+                    string str = "";
+                    str = "Delete from TRE_RANKING ";
+                        ((MySqlDBManager)Common.dbMgr).ExecuteNonQuery(CommandType.Text, str);
+                    str = "CALL `recousr`.`InsertTreRanking`( " + iProjectid + ")";
+                        //here we ned to call the procedurw what I sent . We need to modify rank_slection with limit
+                        ((MySqlDBManager)Common.dbMgr).ExecuteNonQuery(CommandType.Text, str);
+
+                 }
+                else {
+                    string str = "";
+                    str = "Delete from TRE_RANKING ";
+                    if (Common.iDBType == 1)
+                    {
+                        ((OraDBManager)Common.dbMgr).ExecuteNonQuery(CommandType.Text, str);
+                    }
+                    else if (Common.iDBType == 2)
+                    {
+                        ((DBManager)Common.dbMgr).ExecuteNonQuery(CommandType.Text, str);
+                    }
+                    str = " DECLARE ";
+                    str = string.Concat(str, " Rank1 Customer_Pntl.Opp_Pntl%TYPE;");
+                    str = string.Concat(str, " Rank2 Customer_Pntl.Opp_Pntl%TYPE;");
+                    str = string.Concat(str, " Rank3 Customer_Pntl.Opp_Pntl%TYPE;");
+                    str = string.Concat(str, " Rank4 Customer_Pntl.Opp_Pntl%TYPE;");
+                    str = string.Concat(str, " Rank1_Name Customer_Pntl.Opp_Name%TYPE ;");
+                    str = string.Concat(str, " Rank2_Name Customer_Pntl.Opp_Name%TYPE ;");
+                    str = string.Concat(str, " Rank3_Name Customer_Pntl.Opp_Name%TYPE ;");
+                    str = string.Concat(str, " Rank4_Name Customer_Pntl.Opp_Name%TYPE ;");
+                    str = string.Concat(str, " Rank1_Action Customer_Pntl.Opp_Status%TYPE;");
+                    str = string.Concat(str, " Rank2_Action Customer_Pntl.Opp_Status%TYPE;");
+                    str = string.Concat(str, " Rank3_Action Customer_Pntl.Opp_Status%TYPE;");
+                    str = string.Concat(str, " Rank4_Action Customer_Pntl.Opp_Status%TYPE;");
+                    str = string.Concat(str, " customer  Tre_Opportunity.CUSTOMER%TYPE;");
+                    str = string.Concat(str, " CURSOR ttl_customer IS ");
+                    str = string.Concat(str, " SELECT CUSTOMER FROM Tre_Opportunity; ");
+                    str = string.Concat(str, " BEGIN ");
+                    str = string.Concat(str, " FOR cust_rec in ttl_customer");
+                    str = string.Concat(str, " LOOP ");
+                    str = string.Concat(str, this.fnOpportunitiesRnkng(iProjectid));
+                    str = string.Concat(str, " Rank_Selection(cust_rec.customer,Rank1,Rank2,Rank3,Rank4,Rank1_Name,Rank2_Name,Rank3_Name,Rank4_Name,Rank1_Action,Rank2_Action,Rank3_Action,Rank4_Action);");
+                    str = string.Concat(str, " Delete  from CUSTOMER_PNTL; ");
+                    str = string.Concat(str, " end LOOP;");
+                    str = string.Concat(str, " END;");
+                    if (Common.iDBType == 1)
+                    {
+                        ((OraDBManager)Common.dbMgr).ExecuteNonQuery(CommandType.Text, str);
+                    }
+
                 }
             }
             catch (Exception exception)
@@ -356,13 +383,16 @@ namespace RecoEngine_BI
 
         public DataTable fnRankingcriteria(int iProjectId)
         {
-            DataTable dataTable;
+            DataTable dataTable = null ;
             string str = "";
             str = string.Concat(str, "Select TYPE,RANK1,RANK2,RANK3,RANK4 from OPPORTUNITY_RANKING where PROJECT_ID=", iProjectId);
-            dataTable = (Common.iDBType == 2 ? ((DBManager)Common.dbMgr).ExecuteDataTable(CommandType.Text, str) : ((OraDBManager)Common.dbMgr).ExecuteDataTable(CommandType.Text, str));
+            if (Common.iDBType == 1 || Common.iDBType == 2)
+            {
+                dataTable = (Common.iDBType == 2 ? ((DBManager)Common.dbMgr).ExecuteDataTable(CommandType.Text, str) : ((OraDBManager)Common.dbMgr).ExecuteDataTable(CommandType.Text, str));
+            }
             if (Common.iDBType == 3)
             {
-                ((MySqlDBManager)Common.dbMgr).ExecuteNonQuery(CommandType.Text, str);
+               dataTable= ((MySqlDBManager)Common.dbMgr).ExecuteDataTable(CommandType.Text, str);
             }
             return dataTable;
         }

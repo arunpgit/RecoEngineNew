@@ -110,7 +110,7 @@ namespace RecoEngine_BI
                 if (Common.iDBType == (int)Enums.DBType.Oracle)
                     ((OraDBManager)Common.dbMgr).ExecuteNonQuery(CommandType.Text, strSql);
 
-              else if (Common.iDBType == (int)Enums.DBType.Oracle)
+              else if (Common.iDBType == (int)Enums.DBType.Mysql)
                     ((MySqlDBManager)Common.dbMgr).ExecuteNonQuery(CommandType.Text, strSql);
             }
             catch (Exception ex)
@@ -914,42 +914,66 @@ namespace RecoEngine_BI
                     
                     return false;
                 }
-                strSql = " Declare";
-                strSql += " BaseTable string(200);";
-                strSql += " BEGIN";
-                strSql += " BaseTable := 'ets_tre_base';";
-                strSql += " TRE_GET_DELTASTATUS(BaseTable);";
-                strSql += " END;";
-                if (Common.iDBType == (int)Enums.DBType.Oracle)
+                if (Common.iDBType == 1)
                 {
-                    ((OraDBManager)Common.dbMgr).ExecuteNonQuery(CommandType.Text, strSql);
-                }
+                    strSql = " Declare";
+                    strSql += " BaseTable string(200);";
+                    strSql += " BEGIN";
+                    strSql += " BaseTable := 'ets_tre_base';";
+                    strSql += " TRE_GET_DELTASTATUS(BaseTable);";
+                    strSql += " END;";
+                    if (Common.iDBType == (int)Enums.DBType.Oracle)
+                    {
+                        ((OraDBManager)Common.dbMgr).ExecuteNonQuery(CommandType.Text, strSql);
+                    }
 
-                else if (Common.iDBType == (int)Enums.DBType.Mysql)
-                {
-                    ((MySqlDBManager)Common.dbMgr).ExecuteNonQuery(CommandType.Text, strSql);
+                    else if (Common.iDBType == (int)Enums.DBType.Mysql)
+                    {
+                        ((MySqlDBManager)Common.dbMgr).ExecuteNonQuery(CommandType.Text, strSql);
+                    }
+
+
+                    //((OraDBManager)Common.dbMgr).ExecuteNonQuery(CommandType.Text, strSql);
+
+                    strSql = " Declare";
+                    strSql += " MainTableName string(200);";
+                    strSql += " Week int;";
+                    strSql += " BEGIN";
+                    strSql += " MainTableName := '" + strTabName + "_V'" + ";";
+                    strSql += " Week :=" + objclsTreDetails.fnMaxWeek(strTabName) + ";";
+                    strSql += " TRE_GET_PTNL(MainTableName, Week);";
+                    strSql += " END;";
+                    if (Common.iDBType == (int)Enums.DBType.Oracle)
+                    {
+                        ((OraDBManager)Common.dbMgr).ExecuteNonQuery(CommandType.Text, strSql);
+                    }
                 }
+                else
+                {
+
+                    
+                    string BaseTable = "'ets_tre_base'";
+                    strSql = " CALL `recousr`.`TRE_GET_DELTASTATUS`(";
+                    strSql += BaseTable+")";
+                   
+                  
+                        ((MySqlDBManager)Common.dbMgr).ExecuteNonQuery(CommandType.Text, strSql);
+                  
+
+                    //((OraDBManager)Common.dbMgr).ExecuteNonQuery(CommandType.Text, strSql);
+
+                    strSql = " Declare";
+                    strSql += " MainTableName string(200);";
+                    strSql += " Week int;";
+                    strSql += " BEGIN";
+                    strSql += " MainTableName := '" + strTabName + "_V'" + ";";
+                    strSql += " Week :=" + objclsTreDetails.fnMaxWeek(strTabName) + ";";
+                    strSql += " TRE_GET_PTNL(MainTableName, Week);";
+                    strSql += " END;";
+                   
+                        ((MySqlDBManager)Common.dbMgr).ExecuteNonQuery(CommandType.Text, strSql);
+                   }
                 
-
-                //((OraDBManager)Common.dbMgr).ExecuteNonQuery(CommandType.Text, strSql);
-
-                strSql = " Declare";
-                strSql += " MainTableName string(200);";
-                strSql += " Week int;";
-                strSql += " BEGIN";
-                strSql += " MainTableName := '" + strTabName + "_V'" + ";";
-                strSql += " Week :=" + objclsTreDetails.fnMaxWeek(strTabName) + ";";
-                strSql += " TRE_GET_PTNL(MainTableName, Week);";
-                strSql += " END;";
-                if (Common.iDBType == (int)Enums.DBType.Oracle)
-                {
-                    ((OraDBManager)Common.dbMgr).ExecuteNonQuery(CommandType.Text, strSql);
-                }
-
-                else if (Common.iDBType == (int)Enums.DBType.Mysql)
-                {
-                    ((MySqlDBManager)Common.dbMgr).ExecuteNonQuery(CommandType.Text, strSql);
-                }
 
                 // //((OraDBManager)Common.dbMgr).CommitTrans();
                 return true;

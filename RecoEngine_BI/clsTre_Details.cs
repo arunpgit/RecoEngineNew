@@ -331,10 +331,26 @@ namespace RecoEngine_BI
         }
         public bool fnDeleteTreOppfrmExport()
         {
-            string str = "select count(*)  from user_tables where table_name = 'TRE_OPPORTUNITYEXPORT'";
-            if (int.Parse(((OraDBManager)Common.dbMgr).ExecuteScalar(CommandType.Text, str)) > 0)
+            string str = string.Empty;
+            if (Common.iDBType == 1)
             {
-                str = "DROP TABLE TRE_OPPORTUNITYEXPORT";
+                 str = "select count(*)  from user_tables where table_name = 'TRE_OPPORTUNITYEXPORT'";
+                if (int.Parse(((OraDBManager)Common.dbMgr).ExecuteScalar(CommandType.Text, str)) > 0)
+                {
+                    str = "DROP TABLE TRE_OPPORTUNITYEXPORT";
+                    if (Common.iDBType != 1)
+                    {
+                        ((DBManager)Common.dbMgr).ExecuteScalar(CommandType.Text, str);
+                    }
+                    else
+                    {
+                        ((MySqlDBManager)Common.dbMgr).ExecuteScalar(CommandType.Text, str);
+                    }
+                    str = "DROP SEQUENCE tbl_seq";
+                    ((OraDBManager)Common.dbMgr).ExecuteScalar(CommandType.Text, str);
+                }
+                str = "CREATE TABLE TRE_OPPORTUNITYEXPORT (ID NUMBER NOT NULL, CUSTOMER varchar2(50)  NULL,";
+                str = string.Concat(str, "WEEK number(2)  NULL )  NOLOGGING");
                 if (Common.iDBType != 1)
                 {
                     ((DBManager)Common.dbMgr).ExecuteScalar(CommandType.Text, str);
@@ -343,25 +359,22 @@ namespace RecoEngine_BI
                 {
                     ((OraDBManager)Common.dbMgr).ExecuteScalar(CommandType.Text, str);
                 }
-                str = "DROP SEQUENCE tbl_seq";
+                str = "ALTER TABLE TRE_OPPORTUNITYEXPORT ADD (CONSTRAINT Id_pk PRIMARY KEY (ID))";
                 ((OraDBManager)Common.dbMgr).ExecuteScalar(CommandType.Text, str);
-            }
-            str = "CREATE TABLE TRE_OPPORTUNITYEXPORT (ID NUMBER NOT NULL, CUSTOMER varchar2(50)  NULL,";
-            str = string.Concat(str, "WEEK number(2)  NULL )  NOLOGGING");
-            if (Common.iDBType != 1)
-            {
-                ((DBManager)Common.dbMgr).ExecuteScalar(CommandType.Text, str);
+                str = "CREATE SEQUENCE tbl_seq";
+                ((OraDBManager)Common.dbMgr).ExecuteScalar(CommandType.Text, str);
+                str = "CREATE OR REPLACE TRIGGER tbl_trigr BEFORE INSERT ON TRE_OPPORTUNITYEXPORT FOR EACH ROW BEGIN SELECT tbl_seq.NEXTVAL INTO :new.ID FROM dual; END;";
+                ((OraDBManager)Common.dbMgr).ExecuteScalar(CommandType.Text, str);
             }
             else
             {
-                ((OraDBManager)Common.dbMgr).ExecuteScalar(CommandType.Text, str);
+
+                str = "DROP TABLE TRE_OPPORTUNITYEXPORT";
+                ((MySqlDBManager)Common.dbMgr).ExecuteScalar(CommandType.Text, str);
+                str = "CREATE TABLE TRE_OPPORTUNITYEXPORT (ID int NOT NULL PRIMARY KEY AUTO_INCREMENT, CUSTOMER varchar(50)  NULL,";
+                str = string.Concat(str, "WEEK int(20)  NULL )  ");
+                ((MySqlDBManager)Common.dbMgr).ExecuteScalar(CommandType.Text, str);
             }
-            str = "ALTER TABLE TRE_OPPORTUNITYEXPORT ADD (CONSTRAINT Id_pk PRIMARY KEY (ID))";
-            ((OraDBManager)Common.dbMgr).ExecuteScalar(CommandType.Text, str);
-            str = "CREATE SEQUENCE tbl_seq";
-            ((OraDBManager)Common.dbMgr).ExecuteScalar(CommandType.Text, str);
-            str = "CREATE OR REPLACE TRIGGER tbl_trigr BEFORE INSERT ON TRE_OPPORTUNITYEXPORT FOR EACH ROW BEGIN SELECT tbl_seq.NEXTVAL INTO :new.ID FROM dual; END;";
-            ((OraDBManager)Common.dbMgr).ExecuteScalar(CommandType.Text, str);
             return true;
         }
 
@@ -2381,11 +2394,25 @@ namespace RecoEngine_BI
         {
             try
             {
-                string strSql = "Create Table " + TableName + "_V as Select " + Columns + " from " + TableName;
-                ((OraDBManager)Common.dbMgr).ExecuteNonQuery(CommandType.Text, strSql);
+                if (Common.iDBType == 1)
+                {
+                    string strSql = "Create Table " + TableName + "_V as Select " + Columns + " from " + TableName;
+                    ((OraDBManager)Common.dbMgr).ExecuteNonQuery(CommandType.Text, strSql);
 
-                strSql = "CREATE INDEX " + TableName + "_V_IX on " + TableName + "_V" + "(CUSTOMER)";
-                ((OraDBManager)Common.dbMgr).ExecuteNonQuery(CommandType.Text, strSql);
+                    strSql = "CREATE INDEX " + TableName + "_V_IX on " + TableName + "_V" + "(CUSTOMER)";
+                    ((OraDBManager)Common.dbMgr).ExecuteNonQuery(CommandType.Text, strSql);
+                }
+                else
+                {
+                    
+                        string strSql = "Create Table " + TableName + "_V as Select " + Columns + " from " + TableName;
+                        ((MySqlDBManager)Common.dbMgr).ExecuteNonQuery(CommandType.Text, strSql);
+
+                        strSql = "CREATE INDEX " + TableName + "_V_IX on " + TableName + "_V" + "(CUSTOMER)";
+                        ((MySqlDBManager)Common.dbMgr).ExecuteNonQuery(CommandType.Text, strSql);
+                    
+                }
+
             }
             catch (Exception ex)
             {
