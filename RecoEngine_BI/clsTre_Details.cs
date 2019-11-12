@@ -1059,20 +1059,12 @@ namespace RecoEngine_BI
                     if (Common.iDBType == (int)Enums.DBType.Oracle)
                     {
                         ((OraDBManager)Common.dbMgr).ExecuteScalar(CommandType.Text, strInsertBTable);
-                        if (bIsONMain)
-                        {
-                            //((OraDBManager)Common.dbMgr).CommitTrans();
-                            //((OraDBManager)Common.dbMgr).BeginTrans();
-                        }
+                       
                     }
                     else if (Common.iDBType == (int)Enums.DBType.Mysql)
                     {
-                        ((MySqlDBManager)Common.dbMgr).ExecuteScalar(CommandType.Text, strInsertBTable);
-                        if (bIsONMain)
-                        {
-                            //((OraDBManager)Common.dbMgr).CommitTrans();
-                            //((OraDBManager)Common.dbMgr).BeginTrans();
-                        }
+                        ((MySqlDBManager)Common.dbMgr).ExecuteNonQuery(CommandType.Text, strInsertBTable);
+                       
                     }
                     else
                     {

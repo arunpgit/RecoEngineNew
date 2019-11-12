@@ -951,26 +951,25 @@ namespace RecoEngine_BI
                 else
                 {
 
-                    
+                    strSql = "Select count(1) from information_schema.columns c where c.table_name = 'ets_tre_base_d'";
+                   int iCount = int.Parse(((MySqlDBManager)Common.dbMgr).ExecuteScalar(CommandType.Text, strSql));
+                    if(iCount >0)
+                    {
+                        strSql = "Drop table ets_tre_base_d ";
+                        ((MySqlDBManager)Common.dbMgr).ExecuteNonQuery(CommandType.Text, strSql);
+
+                    }
                     string BaseTable = "'ets_tre_base'";
                     strSql = " CALL `recousr`.`TRE_GET_DELTASTATUS`(";
                     strSql += BaseTable+")";
                    
                   
                         ((MySqlDBManager)Common.dbMgr).ExecuteNonQuery(CommandType.Text, strSql);
-                  
+
 
                     //((OraDBManager)Common.dbMgr).ExecuteNonQuery(CommandType.Text, strSql);
 
-                    strSql = " Declare";
-                    strSql += " MainTableName string(200);";
-                    strSql += " Week int;";
-                    strSql += " BEGIN";
-                    strSql += " MainTableName := '" + strTabName + "_V'" + ";";
-                    strSql += " Week :=" + objclsTreDetails.fnMaxWeek(strTabName) + ";";
-                    strSql += " TRE_GET_PTNL(MainTableName, Week);";
-                    strSql += " END;";
-                   
+                    strSql = " CALL `recousr`.`TRE_GET_PTNL`('" + strTabName + "_V' ,"+ objclsTreDetails.fnMaxWeek(strTabName)+")";
                         ((MySqlDBManager)Common.dbMgr).ExecuteNonQuery(CommandType.Text, strSql);
                    }
                 
@@ -981,7 +980,14 @@ namespace RecoEngine_BI
             }
             catch (Exception ex)
             {
-                ((OraDBManager)Common.dbMgr).RollbackTrans();
+                if (Common.iDBType == 1)
+                {
+                    ((OraDBManager)Common.dbMgr).RollbackTrans();
+                }
+                else if(Common.iDBType ==3)
+                {
+                    ((MySqlDBManager)Common.dbMgr).RollbackTrans();
+                }
                 throw ex;
             }
         }

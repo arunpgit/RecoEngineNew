@@ -342,30 +342,38 @@ namespace RecoEngine_BI
                 {
                     ((MySqlDBManager)Common.dbMgr).ExecuteNonQuery(CommandType.Text, str);
                 }
-                str = " DECLARE ";
-                str = string.Concat(str, " Rank1 Customer_Pntl.Opp_Pntl%TYPE;");
-                str = string.Concat(str, " Rank2 Customer_Pntl.Opp_Pntl%TYPE;");
-                str = string.Concat(str, " Rank3 Customer_Pntl.Opp_Pntl%TYPE;");
-                str = string.Concat(str, " Rank4 Customer_Pntl.Opp_Pntl%TYPE;");
-                str = string.Concat(str, " Rank1_Name Customer_Pntl.Opp_Name%TYPE ;");
-                str = string.Concat(str, " Rank2_Name Customer_Pntl.Opp_Name%TYPE ;");
-                str = string.Concat(str, " Rank3_Name Customer_Pntl.Opp_Name%TYPE ;");
-                str = string.Concat(str, " Rank4_Name Customer_Pntl.Opp_Name%TYPE ;");
-                str = string.Concat(str, " Rank1_Action Customer_Pntl.Opp_Status%TYPE;");
-                str = string.Concat(str, " Rank2_Action Customer_Pntl.Opp_Status%TYPE;");
-                str = string.Concat(str, " Rank3_Action Customer_Pntl.Opp_Status%TYPE;");
-                str = string.Concat(str, " Rank4_Action Customer_Pntl.Opp_Status%TYPE;");
-                str = string.Concat(str, " customer  Tre_Opportunity.CUSTOMER%TYPE;");
-                str = string.Concat(str, " CURSOR ttl_customer IS ");
-                str = string.Concat(str, " SELECT CUSTOMER FROM Tre_OpportunityExport; ");
-                str = string.Concat(str, " BEGIN ");
-                str = string.Concat(str, " FOR cust_rec in ttl_customer");
-                str = string.Concat(str, " LOOP ");
-                str = string.Concat(str, this.fnOpportunitiesRnkngfrmExport(iProjectid));
-                str = string.Concat(str, " Rank_Selection(cust_rec.customer,Rank1,Rank2,Rank3,Rank4,Rank1_Name,Rank2_Name,Rank3_Name,Rank4_Name,Rank1_Action,Rank2_Action,Rank3_Action,Rank4_Action);");
-                str = string.Concat(str, " Delete  from CUSTOMER_PNTL; ");
-                str = string.Concat(str, " end LOOP;");
-                str = string.Concat(str, " END;");
+                if (Common.iDBType == 1)
+                {
+                    str = " DECLARE ";
+                    str = string.Concat(str, " Rank1 Customer_Pntl.Opp_Pntl%TYPE;");
+                    str = string.Concat(str, " Rank2 Customer_Pntl.Opp_Pntl%TYPE;");
+                    str = string.Concat(str, " Rank3 Customer_Pntl.Opp_Pntl%TYPE;");
+                    str = string.Concat(str, " Rank4 Customer_Pntl.Opp_Pntl%TYPE;");
+                    str = string.Concat(str, " Rank1_Name Customer_Pntl.Opp_Name%TYPE ;");
+                    str = string.Concat(str, " Rank2_Name Customer_Pntl.Opp_Name%TYPE ;");
+                    str = string.Concat(str, " Rank3_Name Customer_Pntl.Opp_Name%TYPE ;");
+                    str = string.Concat(str, " Rank4_Name Customer_Pntl.Opp_Name%TYPE ;");
+                    str = string.Concat(str, " Rank1_Action Customer_Pntl.Opp_Status%TYPE;");
+                    str = string.Concat(str, " Rank2_Action Customer_Pntl.Opp_Status%TYPE;");
+                    str = string.Concat(str, " Rank3_Action Customer_Pntl.Opp_Status%TYPE;");
+                    str = string.Concat(str, " Rank4_Action Customer_Pntl.Opp_Status%TYPE;");
+                    str = string.Concat(str, " customer  Tre_Opportunity.CUSTOMER%TYPE;");
+                    str = string.Concat(str, " CURSOR ttl_customer IS ");
+                    str = string.Concat(str, " SELECT CUSTOMER FROM Tre_OpportunityExport; ");
+                    str = string.Concat(str, " BEGIN ");
+                    str = string.Concat(str, " FOR cust_rec in ttl_customer");
+                    str = string.Concat(str, " LOOP ");
+                    str = string.Concat(str, this.fnOpportunitiesRnkngfrmExport(iProjectid));
+                    str = string.Concat(str, " Rank_Selection(cust_rec.customer,Rank1,Rank2,Rank3,Rank4,Rank1_Name,Rank2_Name,Rank3_Name,Rank4_Name,Rank1_Action,Rank2_Action,Rank3_Action,Rank4_Action);");
+                    str = string.Concat(str, " Delete  from CUSTOMER_PNTL; ");
+                    str = string.Concat(str, " end LOOP;");
+                    str = string.Concat(str, " END;");
+                }
+                else
+                {
+                    str = "CALL `recousr`.`InsertTreRanking_export`( " + iProjectid + ")";
+                    
+                }
                 if (Common.iDBType == 1)
                 {
                     ((OraDBManager)Common.dbMgr).ExecuteNonQuery(CommandType.Text, str);
