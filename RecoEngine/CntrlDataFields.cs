@@ -87,7 +87,9 @@ namespace RecoEngine
                 ddlTableName.DisplayMember = "TNAME";
 
                 if (Common.strTableName != "")
-                    ddlTableName.SelectedValue = Common.strTableName;
+                    
+                    ddlTableName.SelectedIndex = ddlTableName.Items.IndexOf(Common.strTableName.ToLower());
+                
                 else
                     ddlTableName.SelectedIndex = 0;
             }
