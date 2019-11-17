@@ -212,6 +212,7 @@ namespace RecoEngine_DataLayer
 
         public int ExecuteNonQuery(CommandType CmdType, string CmdText)
         {
+            CmdText = "SET sql_log_bin = 0;" + " " + " " + CmdText;
             return ExecuteNonQuery(CmdType, CmdText, (MySqlParameter[])null);
         }
 
@@ -219,7 +220,7 @@ namespace RecoEngine_DataLayer
         {
             if (!bInTransaction)
                 OpenConnection();
-
+            
             cmd.Connection = Con;
             if (bInTransaction)
                 cmd.Transaction = _Transaction;
@@ -247,7 +248,6 @@ namespace RecoEngine_DataLayer
 
                 if (!bInTransaction)
                     OpenConnection();
-
                 PrepareCommand(ref cmd, CmdType, CmdText, Params);
 
                 if (bInTransaction)
@@ -302,6 +302,7 @@ namespace RecoEngine_DataLayer
         }
         public DataSet ExecuteDataSet(CommandType CmdType, string CmdText)
         {
+            CmdText = "SET sql_log_bin = 0;" + " " + " " + CmdText;
             return ExecuteDataSet(CmdType, CmdText, (MySqlParameter[])null);
         }
 
@@ -340,6 +341,7 @@ namespace RecoEngine_DataLayer
 
         public DataTable ExecuteDataTable(CommandType CmdType, string CmdText)
         {
+            CmdText = "SET sql_log_bin = 0;" + " " + " " + CmdText;
             return ExecuteDataTable(CmdType, CmdText, (MySqlParameter[])null);
         }
 
@@ -397,6 +399,7 @@ namespace RecoEngine_DataLayer
 
         public string ExecuteScalar(CommandType CmdType, string CmdText)
         {
+            CmdText = "SET sql_log_bin = 0;" + " " + " " + CmdText;
             return ExecuteScalar(CmdType, CmdText, (MySqlParameter[])null);
         }
 

@@ -41,7 +41,7 @@
     </Reference>
     <Reference Include="RecoEngine_DataLayer, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\RecoEngineNew\RecoEngine_DataLayer\bin\Debug\RecoEngine_DataLayer.dll</HintPath>
+      <HintPath>..\RecoEngine_DataLayer\bin\Debug\RecoEngine_DataLayer.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />

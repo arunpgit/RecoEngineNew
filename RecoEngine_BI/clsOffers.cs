@@ -282,7 +282,7 @@ namespace RecoEngine_BI
                     else if (Common.iDBType == 3)
                     {
                         object obj4 = str;
-                        object[] objArray4 = new object[] { obj4, " getdate() ,", iIsActive, ")" };
+                        object[] objArray4 = new object[] { obj4, " CURDATE()  ,", iIsActive, ")" };
                         str = string.Concat(objArray4);
                         ((MySqlDBManager)Common.dbMgr).ExecuteNonQuery(CommandType.Text, str);
                         iOfferId = int.Parse(((MySqlDBManager)Common.dbMgr).ExecuteScalar(CommandType.Text, "Select max(OFFER_ID) from OFFERS"));
