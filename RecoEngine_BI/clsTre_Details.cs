@@ -14,9 +14,13 @@ namespace RecoEngine_BI
             try
             {
                 DataTable dt;
+                string strsql1 = string.Empty;
+                strsql1 = "select distinct concat(ifnull(DATE_FORMAT (sysdate(), year), '') , '-' , ifnull(DATE_FORMAT (sysdate(),week), '')) as timeperiod,year,week  from " + strTableName + "  where year is not null  and week is not null  order by year desc, week desc";
                 string strSQl = "select distinct to_char(YEAR) || '-' || to_char(WEEK) as timeperiod,year,week  from " + strTableName + "  where YEAR is not null  and WEEK is not null  order by year desc, week desc";
                 if (Common.iDBType == (int)Enums.DBType.Oracle)
                     dt = ((OraDBManager)Common.dbMgr).ExecuteDataTable(CommandType.Text, strSQl);
+                else if (Common.iDBType == (int)Enums.DBType.Mysql)
+                    dt = ((MySqlDBManager)Common.dbMgr).ExecuteDataTable(CommandType.Text, strsql1);
                 else
                 {
                     dt = ((DBManager)Common.dbMgr).ExecuteDataTable(CommandType.Text, strSQl);
@@ -38,6 +42,8 @@ namespace RecoEngine_BI
                 string strSql = "Select COLNAME from TRE_MAPPING where TABLENAME='" + strTabName + "' and type=" + ((int)Enums.ColType.Segment).ToString();
                 if (Common.iDBType == (int)Enums.DBType.Oracle)
                     dt = ((OraDBManager)Common.dbMgr).ExecuteDataTable(CommandType.Text, strSql);
+                else if (Common.iDBType == (int)Enums.DBType.Mysql)
+                    dt = ((MySqlDBManager)Common.dbMgr).ExecuteDataTable(CommandType.Text, strSql);
                 else
                     dt = ((DBManager)Common.dbMgr).ExecuteDataTable(CommandType.Text, strSql);
                 return dt;
@@ -60,6 +66,9 @@ namespace RecoEngine_BI
                         strQuery += " OR ";
                     if (Common.iDBType == (int)Enums.DBType.Oracle)
                         strQuery += " to_char(year) || '-' || to_char(week) = ";
+
+                    else if (Common.iDBType == (int)Enums.DBType.Mysql)
+                        strQuery += " Concat(CAST(year as char), '-', cast(week as char)) = ";
                     else if (Common.iDBType == (int)Enums.DBType.SQl)
                         strQuery += " to_char(year) + '-' + to_char(week) = ";
                     strQuery += "'";
@@ -103,212 +112,274 @@ namespace RecoEngine_BI
         {
             try
             {
-                string strSql = "";
-                string strSegmentString = "";
-                string strKeyString = "";
-                string strSegmentVString = "";
-                string strKeyVString = "";
-                string strKeyCString = "";
-                string strETS_TRE_BASEString = "";
-                string strETS_TRE_BASEVString = "";
-                string strETS_TRE_BASE2String = "";
-                string strETS_TRE_BASE2VString = "";
-                string strETS_TRE_BASE3String = "";
-                string strETS_TRE_BASE3VString = "";
+                string str = "";
                 string str1 = "";
-                string strV1 = "";
-
-                DataTable dtTab = new DataTable();
-
-                // strTabName = "TRE_DETAILS_NEW";
-                strSql = "Select * from TRE_MAPPING where TABLENAME='" + strTabName + "' and PROJECTID=" + iProjectId;
-                if (Common.iDBType == (int)Enums.DBType.Oracle)
-                    dtTab = ((OraDBManager)Common.dbMgr).ExecuteDataTable(CommandType.Text, strSql);
-                else
-                    dtTab = ((DBManager)Common.dbMgr).ExecuteDataTable(CommandType.Text, strSql);
-
-                foreach (DataRow dr in dtTab.Rows)
+                string str2 = "";
+                string str3 = "";
+                string str4 = "";
+                string str5 = "";
+                string str6 = "";
+                string str7 = "";
+                string str8 = "";
+                string str9 = "";
+                string str10 = "";
+                string str11 = "";
+                string str12 = "";
+                string str13 = "";
+                DataTable dataTable = new DataTable();
+                object[] objArray = new object[] { "Select * from TRE_MAPPING where TABLENAME='", strTabName, "' and PROJECTID=", iProjectId };
+                str = string.Concat(objArray);
+                    if(Common.iDBType == 1)
+                    dataTable =((OraDBManager)Common.dbMgr).ExecuteDataTable(CommandType.Text, str);
+                else if (Common.iDBType == 3)
+                    dataTable = ((MySqlDBManager)Common.dbMgr).ExecuteDataTable(CommandType.Text, str);
+                foreach (DataRow row in dataTable.Rows)
                 {
-
-                    if (dr["type"].ToString() == ((int)Enums.ColType.Input).ToString())
+                    if (row["type"].ToString() == 2.ToString())
                     {
-                         if (dr["coldataType"].ToString() != "System.String" && dr["coldataType"].ToString() != "System.DateTime")
+                        if (!(row["coldataType"].ToString() != "System.String") || !(row["coldataType"].ToString() != "System.DateTime"))
                         {
-
-                            str1 = "";
-                            strV1 = "";
-
-                            if (strETS_TRE_BASEString != "")
-                                strETS_TRE_BASEString += ",";
-
-                            if (strETS_TRE_BASE2String != "")
-                                strETS_TRE_BASE2String += ",";
-
-                            if (strETS_TRE_BASE3String != "")
-                                strETS_TRE_BASE3String += ",";
-
-                            if (strETS_TRE_BASEVString != "")
-                                strETS_TRE_BASEVString += ",";
-
-                            if (strETS_TRE_BASE2VString != "")
-                                strETS_TRE_BASE2VString += ",";
-
-                            if (strETS_TRE_BASE3VString != "")
-                                strETS_TRE_BASE3VString += ",";
-
-                            str1 = "A_" + dr[0].ToString() + ",B_" + dr[0].ToString() + ",X_" + dr[0].ToString() + ",D_" + dr[0].ToString();
-
-
-
-                            strV1 = "A_" + dr[0].ToString() + ",B_" + dr[0].ToString() + ",X_" + dr[0].ToString() + ",";
-                            strV1 += " Case When B_" + dr[0].ToString() + " > 0 Then ROUND((A_" + dr[0].ToString() + "/B_" + dr[0].ToString() + ")-1,3) Else 0 End ";
-
-
-                            strETS_TRE_BASEString += str1;
-                            strETS_TRE_BASEVString += strV1;
-
-                            str1 += ",S_" + dr[0].ToString();
-                            // need to pass 0.25 value dynamically
-                            strV1 = " ,CASE WHEN B_" + dr[0].ToString() + " = 0  AND A_" + dr[0].ToString() + " = 0 Then 'NON USER' ";
-                            strV1 += "  WHEN B_" + dr[0].ToString() + " = 0  AND A_" + dr[0].ToString() + " > 0 Then 'NEW USER' ";
-                            strV1 += "  WHEN B_" + dr[0].ToString() + " > 0  AND D_" + dr[0].ToString() + " = -1 Then 'STOPPER' ";
-                            strV1 += "  WHEN D_" + dr[0].ToString() + " <= " + Convert.ToDecimal(strGrower) + " Then 'DROPPER' ";
-                            strV1 += "  WHEN D_" + dr[0].ToString() + " >= " + Convert.ToDecimal(strGrower) + "  Then 'GROWER' ";
-                            strV1 += "  ELSE 'FLAT' End ";
-
-                            strETS_TRE_BASE2String += str1;
-                            strETS_TRE_BASE2VString += "A_" + dr[0].ToString() + ",B_" + dr[0].ToString() + ",X_" + dr[0].ToString() + ",D_" + dr[0].ToString() + strV1;
-
-                            str1 += ",P_" + dr[0].ToString();
-
-                            strV1 = ", CASE WHEN S_" + dr[0].ToString() + " = 'NON USER' Then X_" + dr[0].ToString();
-                            strV1 += "  WHEN S_" + dr[0].ToString() + " = 'DROPPER' then abs(D_" + dr[0].ToString() + ")";
-                            strV1 += "  WHEN S_" + dr[0].ToString() + "= 'STOPPER' then B_" + dr[0].ToString() + "*" + Convert.ToDecimal(strGrower);
-                            strV1 += "  WHEN S_" + dr[0].ToString() + "='FLAT' then a_" + dr[0].ToString() + "*" + Convert.ToDecimal(strGrower);
-                            strV1 += "  ELSE 0 End ";
-
-                            strETS_TRE_BASE3String += str1;
-                            strETS_TRE_BASE3VString += "A_" + dr[0].ToString() + ",B_" + dr[0].ToString() + ",X_" + dr[0].ToString() + ",D_" + dr[0].ToString() + ",S_" + dr[0].ToString() + strV1;
-
-
+                            continue;
                         }
-                        }
-                        else if (dr["type"].ToString() == ((int)Enums.ColType.Segment).ToString())
+                        str12 = "";
+                        str13 = "";
+                        if (str6 != "")
                         {
-                            if (strSegmentString != "")
-                                strSegmentString += ",";
-
-                            if (strSegmentVString != "")
-                                strSegmentVString += ",";
-
-                            strSegmentVString += "A." + dr[0].ToString();
-                            strSegmentString += dr[0].ToString();
+                            str6 = string.Concat(str6, ",");
                         }
-                        else if (dr["type"].ToString() == ((int)Enums.ColType.Key).ToString())
+                        if (str8 != "")
                         {
-                            if (strKeyString != "")
-                                strKeyString += ",";
-
-                            if (strKeyVString != "")
-                                strKeyVString += ",";
-
-                            if (strKeyCString != "")
-                                strKeyCString += ",";
-
-                            strKeyVString += "A." + dr[0].ToString();
-                            strKeyString += dr[0].ToString();
-
-                            strKeyCString += "A." + dr[0].ToString() + "=" + "B." + dr[0].ToString();
+                            str8 = string.Concat(str8, ",");
                         }
+                        if (str10 != "")
+                        {
+                            str10 = string.Concat(str10, ",");
+                        }
+                        if (str7 != "")
+                        {
+                            str7 = string.Concat(str7, ",");
+                        }
+                        if (str9 != "")
+                        {
+                            str9 = string.Concat(str9, ",");
+                        }
+                        if (str11 != "")
+                        {
+                            str11 = string.Concat(str11, ",");
+                        }
+                        string[] strArrays = new string[] { "A_", row[0].ToString(), ",B_", row[0].ToString(), ",X_", row[0].ToString(), ",D_", row[0].ToString() };
+                        str12 = string.Concat(strArrays);
+                        string[] strArrays1 = new string[] { "A_", row[0].ToString(), ",B_", row[0].ToString(), ",X_", row[0].ToString(), "," };
+                        string str14 = string.Concat(strArrays1);
+                        string[] strArrays2 = new string[] { str14, " Case When B_", row[0].ToString(), " > 0 Then ROUND((A_", row[0].ToString(), "/B_", row[0].ToString(), ")-1,3) Else 0 End " };
+                        str13 = string.Concat(strArrays2);
+                        str6 = string.Concat(str6, str12);
+                        str7 = string.Concat(str7, str13);
+                        str12 = string.Concat(str12, ",S_", row[0].ToString());
+                        string[] strArrays3 = new string[] { " ,CASE WHEN B_", row[0].ToString(), " = 0  AND A_", row[0].ToString(), " = 0 Then 'NON USER' " };
+                        string str15 = string.Concat(strArrays3);
+                        string[] strArrays4 = new string[] { str15, "  WHEN B_", row[0].ToString(), " = 0  AND A_", row[0].ToString(), " > 0 Then 'NEW USER' " };
+                        string str16 = string.Concat(strArrays4);
+                        string[] strArrays5 = new string[] { str16, "  WHEN B_", row[0].ToString(), " > 0  AND D_", row[0].ToString(), " = -1 Then 'STOPPER' " };
+                        object obj = string.Concat(strArrays5);
+                        object[] objArray1 = new object[] { obj, "  WHEN D_", row[0].ToString(), " <= ", Convert.ToDecimal(strGrower), " Then 'DROPPER' " };
+                        object obj1 = string.Concat(objArray1);
+                        object[] objArray2 = new object[] { obj1, "  WHEN D_", row[0].ToString(), " >= ", Convert.ToDecimal(strGrower), "  Then 'GROWER' " };
+                        str13 = string.Concat(string.Concat(objArray2), "  ELSE 'FLAT' End ");
+                        str8 = string.Concat(str8, str12);
+                        string str17 = str9;
+                        string[] strArrays6 = new string[] { str17, "A_", row[0].ToString(), ",B_", row[0].ToString(), ",X_", row[0].ToString(), ",D_", row[0].ToString(), str13 };
+                        str9 = string.Concat(strArrays6);
+                        str12 = string.Concat(str12, ",P_", row[0].ToString());
+                        str13 = string.Concat(", CASE WHEN S_", row[0].ToString(), " = 'NON USER' Then X_", row[0].ToString());
+                        string str18 = str13;
+                        string[] strArrays7 = new string[] { str18, "  WHEN S_", row[0].ToString(), " = 'DROPPER' then abs(D_", row[0].ToString(), ")" };
+                        object obj2 = string.Concat(strArrays7);
+                        object[] objArray3 = new object[] { obj2, "  WHEN S_", row[0].ToString(), "= 'STOPPER' then B_", row[0].ToString(), "*", Convert.ToDecimal(strGrower) };
+                        object obj3 = string.Concat(objArray3);
+                        object[] objArray4 = new object[] { obj3, "  WHEN S_", row[0].ToString(), "='FLAT' then a_", row[0].ToString(), "*", Convert.ToDecimal(strGrower) };
+                        str13 = string.Concat(string.Concat(objArray4), "  ELSE 0 End ");
+                        str10 = string.Concat(str10, str12);
+                        string str19 = str11;
+                        string[] strArrays8 = new string[] { str19, "A_", row[0].ToString(), ",B_", row[0].ToString(), ",X_", row[0].ToString(), ",D_", row[0].ToString(), ",S_", row[0].ToString(), str13 };
+                        str11 = string.Concat(strArrays8);
                     }
-                
-
-                strSql = "Delete from ETS_TRE_BASE2";
-                if (Common.iDBType == (int)Enums.DBType.Oracle)
-                {
-                    ((OraDBManager)Common.dbMgr).ExecuteScalar(CommandType.Text, strSql);
+                    else if (row["type"].ToString() != 4.ToString())
+                    {
+                        if (row["type"].ToString() != 1.ToString())
+                        {
+                            continue;
+                        }
+                        if (str2 != "")
+                        {
+                            str2 = string.Concat(str2, ",");
+                        }
+                        if (str4 != "")
+                        {
+                            str4 = string.Concat(str4, ",");
+                        }
+                        if (str5 != "")
+                        {
+                            str5 = string.Concat(str5, ",");
+                        }
+                        str4 = string.Concat(str4, "A.", row[0].ToString());
+                        str2 = string.Concat(str2, row[0].ToString());
+                        string str20 = str5;
+                        string[] strArrays9 = new string[] { str20, "A.", row[0].ToString(), "=B.", row[0].ToString() };
+                        str5 = string.Concat(strArrays9);
+                    }
+                    else
+                    {
+                        if (str1 != "")
+                        {
+                            str1 = string.Concat(str1, ",");
+                        }
+                        if (str3 != "")
+                        {
+                            str3 = string.Concat(str3, ",");
+                        }
+                        str3 = string.Concat(str3, "A.", row[0].ToString());
+                        str1 = string.Concat(str1, row[0].ToString());
+                    }
                 }
-                else
+                str = "Delete from ETS_TRE_BASE2";
+                if (Common.iDBType == 1)
                 {
-                    ((DBManager)Common.dbMgr).ExecuteScalar(CommandType.Text, strSql);
+                    ((OraDBManager)Common.dbMgr).ExecuteScalar(CommandType.Text, str);
                 }
-                strSql = "Delete from ETS_TRE_BASE3";
-                if (Common.iDBType == (int)Enums.DBType.Oracle)
+                else if(Common.iDBType==3)
                 {
-                    ((OraDBManager)Common.dbMgr).ExecuteScalar(CommandType.Text, strSql);
+                    ((MySqlDBManager)Common.dbMgr).ExecuteScalar(CommandType.Text, str);
                 }
-                else
+                    
+                str = "Delete from ETS_TRE_BASE3";
+                if (Common.iDBType == 1)
                 {
-                    ((DBManager)Common.dbMgr).ExecuteScalar(CommandType.Text, strSql);
+                    ((OraDBManager)Common.dbMgr).ExecuteScalar(CommandType.Text, str);
                 }
-
-                string strInsertString = "Insert into ETS_TRE_BASE2(";
-
-                if (strKeyString != "")
-                    strInsertString += strKeyString + ",";
-
-                if (strSegmentString != "")
-                    strInsertString += strSegmentString + ",";
-
-                if (strETS_TRE_BASE2String != "")
-                    strInsertString += strETS_TRE_BASE2String;
-
-                strInsertString += ") Select ";
-                if (strKeyString != "")
-                    strInsertString += strKeyString + ",";
-
-                if (strSegmentString != "")
-                    strInsertString += strSegmentString + ",";
-
-                strInsertString += strETS_TRE_BASE2VString + " From ETS_TRE_BASE ";
-
-
-                if (Common.iDBType == (int)Enums.DBType.Oracle)
+                else if (Common.iDBType == 3)
                 {
-                    ((OraDBManager)Common.dbMgr).ExecuteScalar(CommandType.Text, strInsertString);
+                    ((MySqlDBManager)Common.dbMgr).ExecuteScalar(CommandType.Text, str);
                 }
-                else
+                string str21 = "Insert into ETS_TRE_BASE2(";
+                if (str2 != "")
                 {
-                    ((DBManager)Common.dbMgr).ExecuteScalar(CommandType.Text, strInsertString);
+                    str21 = string.Concat(str21, str2, ",");
                 }
-
-
-                strInsertString = "Insert into ETS_TRE_BASE3(";
-
-                if (strKeyString != "")
-                    strInsertString += strKeyString + ",";
-
-                if (strSegmentString != "")
-                    strInsertString += strSegmentString + ",";
-
-                if (strETS_TRE_BASE3String != "")
-                    strInsertString += strETS_TRE_BASE3String;
-
-                strInsertString += ") Select ";
-                if (strKeyString != "")
-                    strInsertString += strKeyString + ",";
-
-                if (strSegmentString != "")
-                    strInsertString += strSegmentString + ",";
-
-                strInsertString += strETS_TRE_BASE3VString + " From ETS_TRE_BASE2 ";
-
-                if (Common.iDBType == (int)Enums.DBType.Oracle)
+                if (str1 != "")
                 {
-                    ((OraDBManager)Common.dbMgr).ExecuteScalar(CommandType.Text, strInsertString);
+                    str21 = string.Concat(str21, str1, ",");
                 }
-                else
+                if (str8 != "")
                 {
-                    ((DBManager)Common.dbMgr).ExecuteScalar(CommandType.Text, strInsertString);
+                    str21 = string.Concat(str21, str8);
                 }
-
-
+                str21 = string.Concat(str21, ") Select ");
+                if (str2 != "")
+                {
+                    str21 = string.Concat(str21, str2, ",");
+                }
+                if (str1 != "")
+                {
+                    str21 = string.Concat(str21, str1, ",");
+                }
+                str21 = string.Concat(str21, str9, " From ETS_TRE_BASE ");
+                if (Common.iDBType == 1)
+                {
+                    ((OraDBManager)Common.dbMgr).ExecuteScalar(CommandType.Text, str);
+                }
+                else if (Common.iDBType == 3)
+                {
+                    ((MySqlDBManager)Common.dbMgr).ExecuteScalar(CommandType.Text, str);
+                }
+                str21 = "Insert into ETS_TRE_BASE3(";
+                if (str2 != "")
+                {
+                    str21 = string.Concat(str21, str2, ",");
+                }
+                if (str1 != "")
+                {
+                    str21 = string.Concat(str21, str1, ",");
+                }
+                if (str10 != "")
+                {
+                    str21 = string.Concat(str21, str10);
+                }
+                str21 = string.Concat(str21, ") Select ");
+                if (str2 != "")
+                {
+                    str21 = string.Concat(str21, str2, ",");
+                }
+                if (str1 != "")
+                {
+                    str21 = string.Concat(str21, str1, ",");
+                }
+                str21 = string.Concat(str21, str11, " From ETS_TRE_BASE2 ");
+                if (Common.iDBType == 1)
+                {
+                    ((OraDBManager)Common.dbMgr).ExecuteScalar(CommandType.Text, str);
+                }
+                else if (Common.iDBType == 3)
+                {
+                    ((MySqlDBManager)Common.dbMgr).ExecuteScalar(CommandType.Text, str);
+                }
             }
-            catch (Exception ex)
+            catch (Exception exception)
             {
-                throw ex;
+                throw exception;
             }
         }
+        public bool fnDeleteTreOppfrmExport()
+        {
+            string str = string.Empty;
+            if (Common.iDBType == 1)
+            {
+                 str = "select count(*)  from user_tables where table_name = 'TRE_OPPORTUNITYEXPORT'";
+                if (int.Parse(((OraDBManager)Common.dbMgr).ExecuteScalar(CommandType.Text, str)) > 0)
+                {
+                    str = "DROP TABLE TRE_OPPORTUNITYEXPORT";
+                    if (Common.iDBType != 1)
+                    {
+                        ((DBManager)Common.dbMgr).ExecuteScalar(CommandType.Text, str);
+                    }
+                    else
+                    {
+                        ((MySqlDBManager)Common.dbMgr).ExecuteScalar(CommandType.Text, str);
+                    }
+                    str = "DROP SEQUENCE tbl_seq";
+                    ((OraDBManager)Common.dbMgr).ExecuteScalar(CommandType.Text, str);
+                }
+                str = "CREATE TABLE TRE_OPPORTUNITYEXPORT (ID NUMBER NOT NULL, CUSTOMER varchar2(50)  NULL,";
+                str = string.Concat(str, "WEEK number(2)  NULL )  NOLOGGING");
+                if (Common.iDBType != 1)
+                {
+                    ((DBManager)Common.dbMgr).ExecuteScalar(CommandType.Text, str);
+                }
+                else
+                {
+                    ((OraDBManager)Common.dbMgr).ExecuteScalar(CommandType.Text, str);
+                }
+                str = "ALTER TABLE TRE_OPPORTUNITYEXPORT ADD (CONSTRAINT Id_pk PRIMARY KEY (ID))";
+                ((OraDBManager)Common.dbMgr).ExecuteScalar(CommandType.Text, str);
+                str = "CREATE SEQUENCE tbl_seq";
+                ((OraDBManager)Common.dbMgr).ExecuteScalar(CommandType.Text, str);
+                str = "CREATE OR REPLACE TRIGGER tbl_trigr BEFORE INSERT ON TRE_OPPORTUNITYEXPORT FOR EACH ROW BEGIN SELECT tbl_seq.NEXTVAL INTO :new.ID FROM dual; END;";
+                ((OraDBManager)Common.dbMgr).ExecuteScalar(CommandType.Text, str);
+            }
+            else
+            {
+
+                str = "DROP TABLE TRE_OPPORTUNITYEXPORT";
+                ((MySqlDBManager)Common.dbMgr).ExecuteScalar(CommandType.Text, str);
+                str = "CREATE TABLE TRE_OPPORTUNITYEXPORT (ID int NOT NULL PRIMARY KEY AUTO_INCREMENT, CUSTOMER varchar(50)  NULL,";
+                str = string.Concat(str, "WEEK int(20)  NULL )  ");
+                ((MySqlDBManager)Common.dbMgr).ExecuteScalar(CommandType.Text, str);
+            }
+            return true;
+        }
+
+       
+
         public void fnGetSegmentData(string strTabName, int iTIMEPERIOD, string strSegmentColumn, string strT2String, string[] strT2, int iProjectId, bool isActiveChecked, ref int iCount, ref string strSegmentDataFeilds)
         {
             try
@@ -334,6 +405,8 @@ namespace RecoEngine_BI
                 strSql = "Select * from TRE_MAPPING where TABLENAME='" + strTabName + "'" + " and  PROJECTID=" + iProjectId;
                 if (Common.iDBType == (int)Enums.DBType.Oracle)
                     dtTab = ((OraDBManager)Common.dbMgr).ExecuteDataTable(CommandType.Text, strSql);
+                else if (Common.iDBType == (int)Enums.DBType.Mysql)
+                    dtTab = ((MySqlDBManager)Common.dbMgr).ExecuteDataTable(CommandType.Text, strSql);
                 else
                     dtTab = ((DBManager)Common.dbMgr).ExecuteDataTable(CommandType.Text, strSql);
 
@@ -342,7 +415,7 @@ namespace RecoEngine_BI
 
                     if (dr["type"].ToString() == ((int)Enums.ColType.Input).ToString())
                     {
-                         if (dr["coldataType"].ToString() != "System.String" && dr["coldataType"].ToString() != "System.DateTime")
+                        if (dr["coldataType"].ToString() != "System.String" && dr["coldataType"].ToString() != "System.DateTime")
                         {
                             str1 = "";
                             strV1 = "";
@@ -364,10 +437,6 @@ namespace RecoEngine_BI
                                 strInsertSValues += " ROUND(Avg(A_" + dr[0].ToString() + "),2)";
 
 
-                            //strInsertSUserString += "X_" + dr[0].ToString() + "_USR," + "X_" + dr[0].ToString() ;
-
-                            //strInsertSUserValues += " SUM(CASE WHEN REPLACE(A_" + dr[0].ToString() + ",',','.') > 0 THEN 1 ELSE 0 END),";
-                            //strInsertSUserValues += " SUM(REPLACE(A_" + dr[0].ToString() + ",',','.')) ";
 
                             strSegmentDataFeilds += "X_" + dr[0].ToString() + " as " + dr[0].ToString();
 
@@ -432,6 +501,10 @@ namespace RecoEngine_BI
                 {
                     ((OraDBManager)Common.dbMgr).ExecuteScalar(CommandType.Text, strSql);
                 }
+                else if (Common.iDBType == (int)Enums.DBType.Mysql)
+                {
+                    ((MySqlDBManager)Common.dbMgr).ExecuteScalar(CommandType.Text, strSql);
+                }
                 else
                 {
                     ((DBManager)Common.dbMgr).ExecuteScalar(CommandType.Text, strSql);
@@ -449,11 +522,10 @@ namespace RecoEngine_BI
                 if (Common.iDBType == (int)Enums.DBType.Oracle)
                 {
                     ((OraDBManager)Common.dbMgr).ExecuteScalar(CommandType.Text, strInsertString);
-                     
-                    
-                        //((OraDBManager)Common.dbMgr).CommitTrans();
-                        //((OraDBManager)Common.dbMgr).BeginTrans();
-                    
+                }
+                else if (Common.iDBType == (int)Enums.DBType.Mysql)
+                {
+                    ((MySqlDBManager)Common.dbMgr).ExecuteScalar(CommandType.Text, strInsertString);
                 }
                 else
                 {
@@ -466,6 +538,10 @@ namespace RecoEngine_BI
                 if (Common.iDBType == (int)Enums.DBType.Oracle)
                 {
                     ((OraDBManager)Common.dbMgr).ExecuteScalar(CommandType.Text, strSql);
+                }
+                else if (Common.iDBType == (int)Enums.DBType.Mysql)
+                {
+                    ((MySqlDBManager)Common.dbMgr).ExecuteScalar(CommandType.Text, strSql);
                 }
                 else
                 {
@@ -492,13 +568,19 @@ namespace RecoEngine_BI
                     strInsertString += strSegmentVString + ",";
 
                 strInsertString += strETS_TRE_BASEVString + " From ETS_ADM_WEEKLY_A A, ETS_ADM_WEEKLY_B B,ETS_TRE_X_SELL_PNTL C WHERE ";
-                strInsertString += strKeyCString + " (+) " + " And A." + strSegmentColumn + " = C.CURRENTSEGMENT ";
+                strInsertString += strKeyCString + " " + " And A." + strSegmentColumn + " = C.CURRENTSEGMENT ";
                 //where a.msisdn = b.msisdn (+) and nvl(b.A_decile,'Not Tagged') = c.a_current_segment;
 
 
                 if (Common.iDBType == (int)Enums.DBType.Oracle)
                 {
                     ((OraDBManager)Common.dbMgr).ExecuteScalar(CommandType.Text, strInsertString);
+                    //((OraDBManager)Common.dbMgr).CommitTrans();
+                    //((OraDBManager)Common.dbMgr).BeginTrans();
+                }
+                else if (Common.iDBType == (int)Enums.DBType.Mysql)
+                {
+                    ((MySqlDBManager)Common.dbMgr).ExecuteScalar(CommandType.Text, strInsertString);
                     //((OraDBManager)Common.dbMgr).CommitTrans();
                     //((OraDBManager)Common.dbMgr).BeginTrans();
                 }
@@ -538,6 +620,8 @@ namespace RecoEngine_BI
                 strSql = "Select * from TRE_MAPPING where TABLENAME='" + strTabName + "' and type  =  " + ((int)Enums.ColType.Input).ToString();
                 if (Common.iDBType == (int)Enums.DBType.Oracle)
                     dtTab = ((OraDBManager)Common.dbMgr).ExecuteDataTable(CommandType.Text, strSql);
+                else if (Common.iDBType == (int)Enums.DBType.Mysql)
+                    dtTab = ((MySqlDBManager)Common.dbMgr).ExecuteDataTable(CommandType.Text, strSql);
                 else
                     dtTab = ((DBManager)Common.dbMgr).ExecuteDataTable(CommandType.Text, strSql);
 
@@ -578,6 +662,10 @@ namespace RecoEngine_BI
                     {
                         ((OraDBManager)Common.dbMgr).ExecuteScalar(CommandType.Text, strInsertString);
                     }
+                    else if (Common.iDBType == (int)Enums.DBType.Mysql)
+                    {
+                        ((MySqlDBManager)Common.dbMgr).ExecuteScalar(CommandType.Text, strInsertString);
+                    }
                     else
                     {
                         ((DBManager)Common.dbMgr).ExecuteScalar(CommandType.Text, strInsertString);
@@ -616,6 +704,9 @@ namespace RecoEngine_BI
                 strSql = "Select * from TRE_MAPPING where TABLENAME='" + strTabName + "'";
                 if (Common.iDBType == (int)Enums.DBType.Oracle)
                     dtTab = ((OraDBManager)Common.dbMgr).ExecuteDataTable(CommandType.Text, strSql);
+
+                else if (Common.iDBType == (int)Enums.DBType.Mysql)
+                    dtTab = ((MySqlDBManager)Common.dbMgr).ExecuteDataTable(CommandType.Text, strSql);
                 else
                     dtTab = ((DBManager)Common.dbMgr).ExecuteDataTable(CommandType.Text, strSql);
 
@@ -683,6 +774,12 @@ namespace RecoEngine_BI
                     strSql = "Select NVL(MAX(ID), 0)+1 AS MAX_VAL from ETS_ADM_WEEKLY";
                     if (Common.iDBType == (int)Enums.DBType.Oracle)
                         iMaxId = int.Parse(((OraDBManager)Common.dbMgr).ExecuteScalar(CommandType.Text, strSql));
+
+                    else if (Common.iDBType == (int)Enums.DBType.Mysql)
+                    {
+                        strSql = "Select IFNULL(MAX(ID), 0)+1 AS MAX_VAL from ETS_ADM_WEEKLY";
+                        iMaxId = int.Parse(((MySqlDBManager)Common.dbMgr).ExecuteScalar(CommandType.Text, strSql));
+                    }
                     else
                         iMaxId = int.Parse(((DBManager)Common.dbMgr).ExecuteScalar(CommandType.Text, strSql));
 
@@ -702,6 +799,10 @@ namespace RecoEngine_BI
                     {
                         ((OraDBManager)Common.dbMgr).ExecuteScalar(CommandType.Text, strInsertTString);
                     }
+                    else if (Common.iDBType == (int)Enums.DBType.Mysql)
+                    {
+                        ((MySqlDBManager)Common.dbMgr).ExecuteScalar(CommandType.Text, strInsertTString);
+                    }
                     else
                     {
                         ((DBManager)Common.dbMgr).ExecuteScalar(CommandType.Text, strInsertTString);
@@ -711,6 +812,10 @@ namespace RecoEngine_BI
                     if (Common.iDBType == (int)Enums.DBType.Oracle)
                     {
                         ((OraDBManager)Common.dbMgr).ExecuteScalar(CommandType.Text, strUpdateTString);
+                    }
+                    else if (Common.iDBType == (int)Enums.DBType.Mysql)
+                    {
+                        ((MySqlDBManager)Common.dbMgr).ExecuteScalar(CommandType.Text, strUpdateTString);
                     }
                     else
                     {
@@ -751,6 +856,10 @@ namespace RecoEngine_BI
                 strSql = "Select * from TRE_MAPPING where TABLENAME='" + strTabName + "' and PROJECTID=" + iProjectId;
                 if (Common.iDBType == (int)Enums.DBType.Oracle)
                     dtTab = ((OraDBManager)Common.dbMgr).ExecuteDataTable(CommandType.Text, strSql);
+
+                else if (Common.iDBType == (int)Enums.DBType.Mysql)
+                    dtTab = ((MySqlDBManager)Common.dbMgr).ExecuteDataTable(CommandType.Text, strSql);
+
                 else
                     dtTab = ((DBManager)Common.dbMgr).ExecuteDataTable(CommandType.Text, strSql);
                 string strMainfilter = "";
@@ -761,7 +870,16 @@ namespace RecoEngine_BI
                     strTabName = strTabName + "_V";
                     DataTable dt = new DataTable();
                     strSql = "Select FILTER FROM FILTER_MAIN WHERE PROJECT_ID=" + iProjectId;
-                    dt = (((OraDBManager)Common.dbMgr).ExecuteDataTable(CommandType.Text, strSql));
+                    if (Common.iDBType == (int)Enums.DBType.Oracle)
+                        dt = ((OraDBManager)Common.dbMgr).ExecuteDataTable(CommandType.Text, strSql);
+
+                    else if (Common.iDBType == (int)Enums.DBType.Mysql)
+                        dt = ((MySqlDBManager)Common.dbMgr).ExecuteDataTable(CommandType.Text, strSql);
+
+                    else
+                        dt = ((DBManager)Common.dbMgr).ExecuteDataTable(CommandType.Text, strSql);
+
+
                     if (dt.Rows.Count > 0)
                     {
                         strMainfilter = dt.Rows[0]["FILTER"].ToString();
@@ -796,7 +914,7 @@ namespace RecoEngine_BI
                         }
                         else if (dr["type"].ToString() == ((int)Enums.ColType.Input).ToString())
                         {
-                             if (dr["coldataType"].ToString() != "System.String" && dr["coldataType"].ToString() != "System.DateTime")
+                            if (dr["coldataType"].ToString() != "System.String" && dr["coldataType"].ToString() != "System.DateTime")
                             {
                                 if (strT1Feilds != "")
                                     strT1Feilds += ",";
@@ -862,6 +980,10 @@ namespace RecoEngine_BI
                     {
                         ((OraDBManager)Common.dbMgr).ExecuteScalar(CommandType.Text, strSql);
                     }
+                    else if (Common.iDBType == (int)Enums.DBType.Mysql)
+                    {
+                        ((MySqlDBManager)Common.dbMgr).ExecuteScalar(CommandType.Text, strSql);
+                    }
                     else
                     {
                         ((DBManager)Common.dbMgr).ExecuteScalar(CommandType.Text, strSql);
@@ -871,6 +993,10 @@ namespace RecoEngine_BI
                     if (Common.iDBType == (int)Enums.DBType.Oracle)
                     {
                         ((OraDBManager)Common.dbMgr).ExecuteScalar(CommandType.Text, strSql);
+                    }
+                    if (Common.iDBType == (int)Enums.DBType.Mysql)
+                    {
+                        ((MySqlDBManager)Common.dbMgr).ExecuteScalar(CommandType.Text, strSql);
                     }
                     else
                     {
@@ -896,14 +1022,16 @@ namespace RecoEngine_BI
 
 
 
+
                     if (Common.iDBType == (int)Enums.DBType.Oracle)
                     {
                         ((OraDBManager)Common.dbMgr).ExecuteScalar(CommandType.Text, strInsertATable);
-                        if (bIsONMain)
-                        {
-                            //((OraDBManager)Common.dbMgr).CommitTrans();
-                            //((OraDBManager)Common.dbMgr).BeginTrans();
-                        }
+
+                    }
+                    else if (Common.iDBType == (int)Enums.DBType.Mysql)
+                    {
+                        ((MySqlDBManager)Common.dbMgr).ExecuteScalar(CommandType.Text, strInsertATable);
+
                     }
                     else
                     {
@@ -926,16 +1054,17 @@ namespace RecoEngine_BI
                         strInsertBTable += " and " + strMainfilter;
                     }
 
-                     strInsertBTable +=" Group by " + strKeyString;
+                    strInsertBTable += " Group by " + strKeyString;
 
                     if (Common.iDBType == (int)Enums.DBType.Oracle)
                     {
                         ((OraDBManager)Common.dbMgr).ExecuteScalar(CommandType.Text, strInsertBTable);
-                        if (bIsONMain)
-                        {
-                            //((OraDBManager)Common.dbMgr).CommitTrans();
-                            //((OraDBManager)Common.dbMgr).BeginTrans();
-                        }
+                       
+                    }
+                    else if (Common.iDBType == (int)Enums.DBType.Mysql)
+                    {
+                        ((MySqlDBManager)Common.dbMgr).ExecuteNonQuery(CommandType.Text, strInsertBTable);
+                       
                     }
                     else
                     {
@@ -957,6 +1086,8 @@ namespace RecoEngine_BI
                 string strSql = "Select * from OPPORTUNITY WHERE PROJECT_ID=" + iProjectId + " AND ISONMAIN=0 ";
                 if (Common.iDBType == (int)Enums.DBType.Oracle)
                     dt = ((OraDBManager)Common.dbMgr).ExecuteDataTable(CommandType.Text, strSql);
+                if (Common.iDBType == (int)Enums.DBType.Mysql)
+                    dt = ((MySqlDBManager)Common.dbMgr).ExecuteDataTable(CommandType.Text, strSql);
                 else if (Common.iDBType == (int)Enums.DBType.SQl)
                     dt = ((DBManager)Common.dbMgr).ExecuteDataTable(CommandType.Text, strSql);
 
@@ -977,6 +1108,9 @@ namespace RecoEngine_BI
                         dtOpp = ((OraDBManager)Common.dbMgr).ExecuteDataTable(CommandType.Text, strSql);
                     else if (Common.iDBType == (int)Enums.DBType.SQl)
                         dtOpp = ((DBManager)Common.dbMgr).ExecuteDataTable(CommandType.Text, strSql);
+                    else if (Common.iDBType == (int)Enums.DBType.Mysql)
+                        dtOpp = ((MySqlDBManager)Common.dbMgr).ExecuteDataTable(CommandType.Text, strSql);
+
 
                 }
 
@@ -1005,6 +1139,8 @@ namespace RecoEngine_BI
                 string strSql = "Select TIMEPERIOD_ID from TRE_TIMEPERIOD WHERE T1='" + strT1String + "' AND  T2='" + strT2String + "'";
                 if (Common.iDBType == (int)Enums.DBType.Oracle)
                     dt = ((OraDBManager)Common.dbMgr).ExecuteDataTable(CommandType.Text, strSql);
+                else if (Common.iDBType == (int)Enums.DBType.Mysql)
+                    dt = ((MySqlDBManager)Common.dbMgr).ExecuteDataTable(CommandType.Text, strSql);
                 else if (Common.iDBType == (int)Enums.DBType.SQl)
                     dt = ((DBManager)Common.dbMgr).ExecuteDataTable(CommandType.Text, strSql);
 
@@ -1019,6 +1155,9 @@ namespace RecoEngine_BI
 
                 if (Common.iDBType == (int)Enums.DBType.Oracle)
                     iCount = int.Parse(((OraDBManager)Common.dbMgr).ExecuteScalar(CommandType.Text, strSql));
+
+                else if (Common.iDBType == (int)Enums.DBType.Mysql)
+                    iCount = int.Parse(((MySqlDBManager)Common.dbMgr).ExecuteScalar(CommandType.Text, strSql));
                 else if (Common.iDBType == (int)Enums.DBType.SQl)
                     iCount = int.Parse(((OraDBManager)Common.dbMgr).ExecuteScalar(CommandType.Text, strSql));
 
@@ -1026,11 +1165,14 @@ namespace RecoEngine_BI
                 // fnGetSegmentData(string strTabName, string strSegmentColumn,string strT2String, string[] strT2, ref int iMaxId, ref string strSegmentDataFeilds)
                 fnGetSegmentData(strTabName, iTimePeriodID, strSegmentColName, strT2String, strT2, iProjectId, isActiveChecked, ref iCount, ref strSegmentDataFeilds);
 
-                 strSql = " Select CURRENTSEGMENT ," + strSegmentDataFeilds + " from ETS_TRE_X_SELL_PNTL where  TIMEPERIOD = '" + iTimePeriodID + "' AND SEGMENTCOLNAME ='" + strSegmentColName + "' order by CURRENTSEGMENT";
+                strSql = " Select CURRENTSEGMENT ," + strSegmentDataFeilds + " from ETS_TRE_X_SELL_PNTL where  TIMEPERIOD = '" + iTimePeriodID + "' AND SEGMENTCOLNAME ='" + strSegmentColName + "' order by CURRENTSEGMENT";
 
 
                 if (Common.iDBType == (int)Enums.DBType.Oracle)
                     dt = ((OraDBManager)Common.dbMgr).ExecuteDataTable(CommandType.Text, strSql);
+
+                if (Common.iDBType == (int)Enums.DBType.Mysql)
+                    dt = ((MySqlDBManager)Common.dbMgr).ExecuteDataTable(CommandType.Text, strSql);
                 else if (Common.iDBType == (int)Enums.DBType.SQl)
                     dt = ((DBManager)Common.dbMgr).ExecuteDataTable(CommandType.Text, strSql);
 
@@ -1069,6 +1211,8 @@ namespace RecoEngine_BI
                 string strSql = "Select TIMEPERIOD_ID from TRE_TIMEPERIOD WHERE T1='" + strT1String + "' And T2='" + strT2String + "'";
                 if (Common.iDBType == (int)Enums.DBType.Oracle)
                     dt = ((OraDBManager)Common.dbMgr).ExecuteDataTable(CommandType.Text, strSql);
+                else if (Common.iDBType == (int)Enums.DBType.Mysql)
+                    dt = ((MySqlDBManager)Common.dbMgr).ExecuteDataTable(CommandType.Text, strSql);
                 else if (Common.iDBType == (int)Enums.DBType.SQl)
                     dt = ((DBManager)Common.dbMgr).ExecuteDataTable(CommandType.Text, strSql);
 
@@ -1083,12 +1227,24 @@ namespace RecoEngine_BI
 
                     if (Common.iDBType == (int)Enums.DBType.Oracle)
                         ((OraDBManager)Common.dbMgr).ExecuteScalar(CommandType.Text, strSql);
+                    else if (Common.iDBType == (int)Enums.DBType.Mysql)
+                        ((MySqlDBManager)Common.dbMgr).ExecuteScalar(CommandType.Text, strSql);
                     else
                         ((DBManager)Common.dbMgr).ExecuteScalar(CommandType.Text, strSql);
 
                     strSql = "Select NVL(MAX(TIMEPERIOD_ID), 0) AS TIMEPERIOD_ID from TRE_TIMEPERIOD";
                     if (Common.iDBType == (int)Enums.DBType.Oracle)
+                    {
+                        strSql = "Select NVL(MAX(TIMEPERIOD_ID), 0) AS TIMEPERIOD_ID from TRE_TIMEPERIOD";
+
                         iTimePeriodID = int.Parse(((OraDBManager)Common.dbMgr).ExecuteScalar(CommandType.Text, strSql));
+                    }
+                    else if (Common.iDBType == (int)Enums.DBType.Mysql)
+                    {
+                        strSql = "Select IFNULL(MAX(TIMEPERIOD_ID), 0) AS TIMEPERIOD_ID from TRE_TIMEPERIOD";
+
+                        iTimePeriodID = int.Parse(((MySqlDBManager)Common.dbMgr).ExecuteScalar(CommandType.Text, strSql));
+                    }
                     else
                         iTimePeriodID = int.Parse(((DBManager)Common.dbMgr).ExecuteScalar(CommandType.Text, strSql));
                 }
@@ -1098,6 +1254,8 @@ namespace RecoEngine_BI
 
                 if (Common.iDBType == (int)Enums.DBType.Oracle)
                     dt = ((OraDBManager)Common.dbMgr).ExecuteDataTable(CommandType.Text, strSql);
+                if (Common.iDBType == (int)Enums.DBType.Mysql)
+                    dt = ((MySqlDBManager)Common.dbMgr).ExecuteDataTable(CommandType.Text, strSql);
                 else if (Common.iDBType == (int)Enums.DBType.SQl)
                     dt = ((DBManager)Common.dbMgr).ExecuteDataTable(CommandType.Text, strSql);
 
@@ -1117,6 +1275,8 @@ namespace RecoEngine_BI
 
                 if (Common.iDBType == (int)Enums.DBType.Oracle)
                     dt = ((OraDBManager)Common.dbMgr).ExecuteDataTable(CommandType.Text, strSql);
+                if (Common.iDBType == (int)Enums.DBType.Mysql)
+                    dt = ((MySqlDBManager)Common.dbMgr).ExecuteDataTable(CommandType.Text, strSql);
                 else if (Common.iDBType == (int)Enums.DBType.SQl)
                     dt = ((DBManager)Common.dbMgr).ExecuteDataTable(CommandType.Text, strSql);
 
@@ -1141,12 +1301,17 @@ namespace RecoEngine_BI
                     ((OraDBManager)Common.dbMgr).ExecuteNonQuery(CommandType.Text, strSql);
 
 
+                else if (Common.iDBType == (int)Enums.DBType.Mysql)
+                    ((MySqlDBManager)Common.dbMgr).ExecuteNonQuery(CommandType.Text, strSql);
                 strSql = "Insert into STATUS_BREAKDOWN (OPPORTUNITY_ID,DROPPERS_CUTOFF,STOPPERS_CUTOFF,GROWERS_CUTOFF,";
                 strSql += " T1,T2,CURRENTSEGMENT,SEGMENTISACTIVE) values (" + iOPPId + "," + dCtDropper + "," + dCtStoppeer + "," + dCtGrower + ",";
                 strSql += "'" + sT1 + "','" + sT2 + "','" + strCurrentSegmentColumn + "'," + iISActive + ")";
 
                 if (Common.iDBType == (int)Enums.DBType.Oracle)
                     ((OraDBManager)Common.dbMgr).ExecuteNonQuery(CommandType.Text, strSql);
+
+                else if (Common.iDBType == (int)Enums.DBType.Mysql)
+                    ((MySqlDBManager)Common.dbMgr).ExecuteNonQuery(CommandType.Text, strSql);
                 else if (Common.iDBType == (int)Enums.DBType.SQl)
                     ((DBManager)Common.dbMgr).ExecuteNonQuery(CommandType.Text, strSql);
 
@@ -1168,8 +1333,8 @@ namespace RecoEngine_BI
 
                 if (Common.iDBType == (int)Enums.DBType.Oracle)
                     ((OraDBManager)Common.dbMgr).ExecuteNonQuery(CommandType.Text, strSql);
-
-
+                else if (Common.iDBType == (int)Enums.DBType.Mysql)
+                    ((MySqlDBManager)Common.dbMgr).ExecuteNonQuery(CommandType.Text, strSql);
                 strSql = "Insert into STATUS_BREAKDOWN (OPPORTUNITY_ID,FLAT_CUTOFF,DROPPERS_CUTOFF,STOPPERS_CUTOFF,GROWERS_CUTOFF,NONUSERS_CUTOFF,NEWUSERS_CUTOFF,";
                 strSql += " FLAT_COUNT,DROPPERS_COUNT,STOPPERS_COUNT,GROWERS_COUNT,NONUSERS_COUNT,NEWUSERS_COUNT,FLAT_AVG,DROPPERS_AVG,STOPPERS_AVG,";
                 strSql += " GROWERS_AVG,NONUSERS_AVG,NEWUSERS_AVG,T1,T2,CURRENTSEGMENT,SEGMENTISACTIVE) values (" + iOPPId + ",0 ," + dCtDropper + "," + dCtStoppeer + "," + dCtGrower + ",";
@@ -1178,6 +1343,9 @@ namespace RecoEngine_BI
 
                 if (Common.iDBType == (int)Enums.DBType.Oracle)
                     ((OraDBManager)Common.dbMgr).ExecuteNonQuery(CommandType.Text, strSql);
+
+                else if (Common.iDBType == (int)Enums.DBType.Mysql)
+                    ((MySqlDBManager)Common.dbMgr).ExecuteNonQuery(CommandType.Text, strSql);
                 else if (Common.iDBType == (int)Enums.DBType.SQl)
                     ((DBManager)Common.dbMgr).ExecuteNonQuery(CommandType.Text, strSql);
 
@@ -1232,6 +1400,13 @@ namespace RecoEngine_BI
 
                     dt = ((OraDBManager)Common.dbMgr).ExecuteDataTable(CommandType.Text, strSql);
                 }
+                if (Common.iDBType == (int)Enums.DBType.Mysql)
+                {
+                    strSql = strSql.Replace("NVL", "IFNULL");
+
+                    dt = ((MySqlDBManager)Common.dbMgr).ExecuteDataTable(CommandType.Text, strSql);
+                }
+
                 else if (Common.iDBType == (int)Enums.DBType.SQl)
                 {
                     dt = ((DBManager)Common.dbMgr).ExecuteDataTable(CommandType.Text, strSql);
@@ -1268,6 +1443,12 @@ namespace RecoEngine_BI
 
                     dt = ((OraDBManager)Common.dbMgr).ExecuteDataTable(CommandType.Text, strSql);
                 }
+                else if (Common.iDBType == (int)Enums.DBType.Mysql)
+                {
+
+                    dt = ((MySqlDBManager)Common.dbMgr).ExecuteDataTable(CommandType.Text, strSql);
+                }
+
                 else if (Common.iDBType == (int)Enums.DBType.SQl)
                 {
                     dt = ((DBManager)Common.dbMgr).ExecuteDataTable(CommandType.Text, strSql);
@@ -1281,196 +1462,302 @@ namespace RecoEngine_BI
                 throw ex;
             }
         }
-        public bool fnSaveTREThreShold(string[] strT1, string[] strT2, string strOppName, string strDropper, string strGrower, string strStopper, int iOpportunityId, string strTableName,int iProjectid, string strPtnlFilter,  bool bIsONMain = false)
+
+        public bool fnSaveTREThreShold(string[] strT1, string[] strT2, string strOppName, string strDropper, string strGrower, string strStopper, int iOpportunityId, string strTableName, int iProjectid, string strPtnlFilter, bool bIsONMain = false)
         {
+            bool flag;
+            string[] str;
+            object obj;
             try
             {
-                DataTable dtSource = new DataTable();
-                string strSql = "Select * from OPPORTUNITY where OPPORTUNITY_ID = " + iOpportunityId;
-                if (Common.iDBType == (int)Enums.DBType.Oracle)
-                    dtSource = ((OraDBManager)Common.dbMgr).ExecuteDataTable(CommandType.Text, strSql);
-                else
-                    dtSource = ((DBManager)Common.dbMgr).ExecuteDataTable(CommandType.Text, strSql);
-
-                string strFormula = "";
-                if (!bIsONMain)
-                    strTableName = "TRE_RANDOM";
-                if (dtSource.Rows.Count > 0)
+                DataTable dataTable = new DataTable();
+                string str1 = string.Concat("Select * from OPPORTUNITY where OPPORTUNITY_ID = ", iOpportunityId);
+                if (Common.iDBType == 1)
                 {
-                    strFormula = dtSource.Rows[0]["FORMULA"].ToString();
-                   int iCount = 0;
-                    strSql = "Select * from TRE_MAPPING where PROJECTID= " + iProjectid + " AND  TYPE=" + ((int)Enums.ColType.Key).ToString() + " OR TYPE=" + ((int)Enums.ColType.Time).ToString();
-                    if (Common.iDBType == (int)Enums.DBType.Oracle)
-                        dtSource = ((OraDBManager)Common.dbMgr).ExecuteDataTable(CommandType.Text, strSql);
-                    else
-                        dtSource = ((DBManager)Common.dbMgr).ExecuteDataTable(CommandType.Text, strSql);
+           dataTable = ((DBManager)Common.dbMgr).ExecuteDataTable(CommandType.Text, str1);
+                }
 
-                    if (dtSource.Rows.Count > 0)
+               else if (Common.iDBType == 3)
+                {
+           dataTable = ((MySqlDBManager)Common.dbMgr).ExecuteDataTable(CommandType.Text, str1);
+                }
+
+
+               string str2 = "";
+                if (!bIsONMain)
+                {
+                    strTableName = "TRE_RANDOM";
+                }
+                if (dataTable.Rows.Count > 0)
+                {
+                    str2 = dataTable.Rows[0]["FORMULA"].ToString();
+                    object[] upper = new object[] { "Select * from TRE_MAPPING where PROJECTID= ", iProjectid, " AND  TYPE=", 1.ToString(), " OR TYPE=", 3.ToString() };
+                    str1 = string.Concat(upper);
+                    if (Common.iDBType == 1)
                     {
-
-                        string strColName = "";
-                        string strUpdateString = "";
-                        string strUpdateMString = "";
-                        string strBT1 = Common.fnBuildQuery(strT1);
-                        string strBT2 = Common.fnBuildQuery(strT2);
-                        int MaxWeek = fnMaxWeek(strTableName);
-                        string strKeyString = "";
-                        string strKColName = "";
-                        string strKACol = "";
-
-                        for (int i = 0; i < dtSource.Rows.Count; i++)
+                        dataTable = ((DBManager)Common.dbMgr).ExecuteDataTable(CommandType.Text, str1);
+                    }
+                    else if (Common.iDBType == 3)
+                    {
+                        dataTable = ((MySqlDBManager)Common.dbMgr).ExecuteDataTable(CommandType.Text, str1);
+                    }
+                    if (dataTable.Rows.Count > 0)
+                    {
+                        string str3 = "";
+                        string str4 = "";
+                        string str5 = "";
+                        string str6 = fnBuildQuery(strT1);
+                        string str7 = fnBuildQuery(strT2);
+                        int num = this.fnMaxWeek(strTableName);
+                        string str8 = "";
+                        string str9 = "";
+                        string str10 = "";
+                        for (int i = 0; i < dataTable.Rows.Count; i++)
                         {
-                            if (strColName != "")
+                            if (str3 != "")
                             {
-                                strColName += ",";
-                                strUpdateString += " And ";
-                                strUpdateMString += " And ";
+                                str3 = string.Concat(str3, ",");
+                                str4 = string.Concat(str4, " And ");
+                                str5 = string.Concat(str5, " And ");
                             }
-
-                            if (dtSource.Rows[i]["TYPE"].ToString() == ((int)Enums.ColType.Key).ToString())
+                            if (dataTable.Rows[i]["TYPE"].ToString() == 1.ToString())
                             {
-                                if (strKeyString != "")
-                                    strKeyString += " AND ";
-
-                                if (strKColName != "")
-                                    strKColName += ",";
-
-                                if (strKACol != "")
-                                    strKACol += ",";
-
-                                strKeyString += "A." + dtSource.Rows[i]["COLNAME"].ToString() + "=B." + dtSource.Rows[i]["COLNAME"].ToString();
-
-                                strKACol += "A." + dtSource.Rows[i]["COLNAME"].ToString();
-                                strKColName += dtSource.Rows[i]["COLNAME"].ToString();
-
-                            }
-
-                            strColName += dtSource.Rows[i]["COLNAME"].ToString();
-                            strUpdateString += "A." + dtSource.Rows[i]["COLNAME"].ToString() + "=B." + dtSource.Rows[i]["COLNAME"].ToString();
-
-                            strUpdateMString += "OPT." + dtSource.Rows[i]["COLNAME"].ToString() + "=TDN." + dtSource.Rows[i]["COLNAME"].ToString();
-                            strUpdateMString += " AND OPT." + dtSource.Rows[i]["COLNAME"].ToString() + "=A." + dtSource.Rows[i]["COLNAME"].ToString();
-                        }
-
-
-                        strSql = "Select count(1) from  TRE_OPPORTUNITY ";
-                        iCount = int.Parse(((OraDBManager)Common.dbMgr).ExecuteScalar(CommandType.Text, strSql));
-                        if (iCount == 0)
-                        {
-                            strSql = " INSERT INTO TRE_OPPORTUNITY(CUSTOMER,WEEK," + strOppName.ToUpper() + "_DELTA," + strOppName.ToUpper() + "_STATUS)";
-                            strSql += " select A.CUSTOMER,A.WEEK, Case When T1=0 then 0 Else Round(T2/T1-1,2) END, ";
-                            strSql += " Case When A.T1+B.T2 =0 Then 'NON_USER' ";
-                            strSql += " When A.T1=0 And B.T2>0 Then 'NEW_USER' ";
-                            strSql += " When Case When T1=0 then 0 Else Round(T2/T1-1,2) End <= " + Convert.ToDecimal(strStopper) + " Then 'STOPPER' ";
-                            strSql += " When Case When T1=0 then 0 Else Round(T2/T1-1,2) End <= " + Convert.ToDecimal(strDropper) + " Then 'DROPPER' ";
-                            strSql += " When Case When T1=0 then 0 Else Round(T2/T1-1,2) End >=  " + Convert.ToDecimal(strGrower) + " Then 'GROWER' ";
-                            strSql += " ELSE 'FLAT' END as Status From  (Select CUSTOMER," + MaxWeek + " as Week ,round(avg(" + strFormula.ToUpper() + "),2) T1 from " + strTableName;
-                            strSql += " where " + strBT1 + "  group by CUSTOMER) A ";
-                            strSql += " Left join (Select CUSTOMER, round(avg(" + strFormula.ToUpper() + "),2) T2 from " + strTableName + " where  " + strBT2 + " group by CUSTOMER) B ";
-                            strSql += " On " + strKeyString;
-
-
-                            if (Common.iDBType == (int)Enums.DBType.Oracle)
-                            {
-                                ((OraDBManager)Common.dbMgr).ExecuteNonQuery(CommandType.Text, strSql);
-                             //   //((OraDBManager)Common.dbMgr).CommitTrans();
-                            }
-                              
-                            else
-                                ((DBManager)Common.dbMgr).ExecuteNonQuery(CommandType.Text, strSql);
-                        }
-                        else
-                        {
-                            if (Common.iDBType == (int)Enums.DBType.Oracle)
-                            {
-
-                                strSql = " Delete From TRE_OPP_TEMP";
-                                ((OraDBManager)Common.dbMgr).ExecuteNonQuery(CommandType.Text, strSql);
-                                strSql = " INSERT INTO TRE_OPP_TEMP(CUSTOMER,WEEK,DELTA,STATUS) select S.Customer,S.Week,S.DELTA,S.STATUS from (";
-                                strSql += " select A.CUSTOMER,A.Week, Case When T1=0 then 0 Else Round(T2/T1-1,2) END as DELTA, ";
-                                strSql += " Case When A.T1+B.T2 =0 Then 'NON_USER' ";
-                                strSql += " When A.T1=0 And B.T2>0 Then 'NEW_USER' ";
-                                strSql += " When Case When T1=0 then 0 Else Round(T2/T1-1,2) End < " + Convert.ToDecimal(strStopper) + " Then 'STOPPER' ";
-                                strSql += " When Case When T1=0 then 0 Else Round(T2/T1-1,2) End < " + Convert.ToDecimal(strDropper) + " Then 'DROPPER' ";
-                                strSql += " When Case When T1=0 then 0 Else Round(T2/T1-1,2) End >  " + Convert.ToDecimal(strGrower) + " Then 'GROWER' ";
-                                strSql += " ELSE 'FLAT' END as Status From  (Select CUSTOMER," + MaxWeek + " as Week,round(avg(" + strFormula.ToUpper() + "),2) T1 from " + strTableName;
-                                strSql += " where " + strBT1 + "  group by CUSTOMER) A ";
-                                strSql += " Left join (Select CUSTOMER, round(avg(" + strFormula.ToUpper() + "),2) T2 from " + strTableName + " where  " + strBT2 + " group by CUSTOMER) B ";
-                                strSql += " On " + strKeyString + " )S inner join";
-
-                                strSql += "(Select Distinct CUSTOMER from " + strTableName;
-                                if (strPtnlFilter != "")
-                                    strSql += " where " + strPtnlFilter;
-                                strSql += ")G on S.CUSTOMER=G.CUSTOMER";
-
-                                ((OraDBManager)Common.dbMgr).ExecuteNonQuery(CommandType.Text, strSql);
-
-                                strSql = "   INSERT INTO TRE_OPP_TEMP (CUSTOMER,WEEK, DELTA,STATUS) select Customer,"+MaxWeek+" ,null, 'NA'  from " + strTableName;
-                                strSql += " A Where A.Customer not in (Select Customer from TRE_OPP_TEMP)  Group By Customer";
-                                ((OraDBManager)Common.dbMgr).ExecuteNonQuery(CommandType.Text, strSql);
-
-                                //strSql = " Update TRE_OPPORTUNITY A Set (" + strOppName.ToUpper() + "_DELTA," + strOppName.ToUpper() + "_STATUS," + "WEEK)=";
-                                //strSql += " (Select DELTA,STATUS,WEEK from TRE_OPP_TEMP B where A.CUSTOMER=B.CUSTOMER)";
-                                //strSql += " where Exists (select 1 from TRE_OPPORTUNITY O , TRE_OPP_TEMP T where O.CUSTOMER=T.CUSTOMER AND O.CUSTOMER=A.CUSTOMER )";
-                                //((OraDBManager)Common.dbMgr).ExecuteNonQuery(CommandType.Text, strSql);
-
-                                //as every customer is not updated commented previous one
-                                strSql = " Update TRE_OPPORTUNITY A Set (" + strOppName.ToUpper() + "_DELTA," + strOppName.ToUpper() + "_STATUS," + "WEEK)=";
-                                strSql += " (Select DELTA,STATUS,WEEK from TRE_OPP_TEMP B where A.CUSTOMER=B.CUSTOMER)";
-                                strSql += " where Exists (select 1 from TRE_OPPORTUNITY O , TRE_OPP_TEMP T where O.CUSTOMER=T.CUSTOMER  )";
-                                ((OraDBManager)Common.dbMgr).ExecuteNonQuery(CommandType.Text, strSql);
-
-
-                               // //((OraDBManager)Common.dbMgr).CommitTrans();
-                                if (bIsONMain)
+                                if (str8 != "")
                                 {
-                                    strSql = " INSERT INTO TRE_OPPORTUNITY(CUSTOMER,WEEK," + strOppName.ToUpper() + "_DELTA," + strOppName.ToUpper() + "_STATUS)";
-                                    strSql += " Select Z.Customer,Z.WEEK,Z.DELTA,Z.STATUS FROM (select S.Customer,S.WEEK,S.DELTA,S.STATUS from ";
-                                    strSql += " (select A.CUSTOMER,B.WEEK, Case When T1=0 then 0 Else Round(T2/T1-1,2) END as DELTA, ";
-                                    strSql += " Case When A.T1+B.T2 =0 Then 'NON_USER' ";
-                                    strSql += " When A.T1=0 And B.T2>0 Then 'NEW_USER' ";
-                                    strSql += " When Case When T1=0 then 0 Else Round(T2/T1-1,2) End < " + Convert.ToDecimal(strStopper) + " Then 'STOPPER' ";
-                                    strSql += " When Case When T1=0 then 0 Else Round(T2/T1-1,2) End < " + Convert.ToDecimal(strDropper) + " Then 'DROPPER' ";
-                                    strSql += " When Case When T1=0 then 0 Else Round(T2/T1-1,2) End > " + Convert.ToDecimal(strGrower) + " Then 'GROWER' ";
-                                    strSql += " ELSE 'FLAT' END as Status From  (Select CUSTOMER, round(avg(" + strFormula.ToUpper() + "),2) T1 from " + strTableName;
-                                    strSql += " where " + strBT1 + "  group by CUSTOMER) A ";
-                                    strSql += " Left join (Select CUSTOMER," + MaxWeek + " as Week, round(avg(" + strFormula.ToUpper() + "),2) T2 from " + strTableName + " where  " + strBT2 + " group by CUSTOMER) B ";
-                                    strSql += " On " + strKeyString + ")S inner join";
-                                    strSql += "(Select Distinct CUSTOMER from  " + strTableName;
-                                    if (strPtnlFilter != "")
-                                        strSql += " where " + strPtnlFilter;
-                                    strSql += " )G on S.CUSTOMER=G.CUSTOMER)Z";
-                                    strSql += " Where Z.Customer not in (Select Customer from TRE_OPPORTUNITY)";
+                                    str8 = string.Concat(str8, " AND ");
+                                }
+                                if (str9 != "")
+                                {
+                                    str9 = string.Concat(str9, ",");
+                                }
+                                if (str10 != "")
+                                {
+                                    str10 = string.Concat(str10, ",");
+                                }
+                                string str11 = str8;
+                                str = new string[] { str11, "A.", dataTable.Rows[i]["COLNAME"].ToString(), "=B.", dataTable.Rows[i]["COLNAME"].ToString() };
+                                str8 = string.Concat(str);
+                                str10 = string.Concat(str10, "A.", dataTable.Rows[i]["COLNAME"].ToString());
+                                str9 = string.Concat(str9, dataTable.Rows[i]["COLNAME"].ToString());
+                            }
+                            str3 = string.Concat(str3, dataTable.Rows[i]["COLNAME"].ToString());
+                            string str12 = str4;
+                            string[] strArrays = new string[] { str12, "A.", dataTable.Rows[i]["COLNAME"].ToString(), "=B.", dataTable.Rows[i]["COLNAME"].ToString() };
+                            str4 = string.Concat(strArrays);
+                            string str13 = str5;
+                            string[] strArrays1 = new string[] { str13, "OPT.", dataTable.Rows[i]["COLNAME"].ToString(), "=TDN.", dataTable.Rows[i]["COLNAME"].ToString() };
+                            str5 = string.Concat(strArrays1);
+                            string str14 = str5;
+                            string[] strArrays2 = new string[] { str14, " AND OPT.", dataTable.Rows[i]["COLNAME"].ToString(), "=A.", dataTable.Rows[i]["COLNAME"].ToString() };
+                            str5 = string.Concat(strArrays2);
+                        }
+                        str1 = "Select count(1) from  TRE_OPPORTUNITY ";
+                        int numOppCount = 0;
 
-                                    ((OraDBManager)Common.dbMgr).ExecuteNonQuery(CommandType.Text, strSql);
+                        if (Common.iDBType == 1)
+                        {
+                            numOppCount = int.Parse(((OraDBManager)Common.dbMgr).ExecuteScalar(CommandType.Text, str1));
+                        }
 
-                                    strSql = "INSERT INTO TRE_OPPORTUNITY (CUSTOMER,WEEK," + strOppName.ToUpper() + "_DELTA," + strOppName.ToUpper() + "_STATUS) ";
-                                    strSql += "select Customer,"+MaxWeek+",null, 'NA'  from " + strTableName + " A ";
-                                    strSql += "Where A.Customer not in (Select Customer from TRE_OPPORTUNITY)  Group By Customer";
+                        else if (Common.iDBType == 3)
+                        {
+                            numOppCount = int.Parse(((MySqlDBManager)Common.dbMgr).ExecuteScalar(CommandType.Text, str1));
+                        }
 
-                                    ((OraDBManager)Common.dbMgr).ExecuteNonQuery(CommandType.Text, strSql);
-                                   // //((OraDBManager)Common.dbMgr).CommitTrans();
+                        if (numOppCount == 0)
+                        {
+                            string[] upper1 = new string[] { " INSERT INTO TRE_OPPORTUNITY(CUSTOMER,WEEK,", strOppName.ToUpper(), "_DELTA,", strOppName.ToUpper(), "_STATUS)" };
+                            str1 = string.Concat(upper1);
+                            str1 = string.Concat(str1, " select A.CUSTOMER,A.WEEK, Case When T1=0 then 0 Else Round(T2/T1-1,2) END, ");
+                            str1 = string.Concat(str1, " Case When A.T1+B.T2 =0 Then 'NON_USER' ");
+                            str1 = string.Concat(str1, " When A.T1=0 And B.T2>0 Then 'NEW_USER' ");
+                            obj = str1;
+                            object[] objArray = new object[] { obj, " When Case When T1=0 then 0 Else Round(T2/T1-1,2) End <= ", Convert.ToDecimal(strStopper), " Then 'STOPPER' " };
+                            str1 = string.Concat(objArray);
+                            object obj1 = str1;
+                            object[] num1 = new object[] { obj1, " When Case When T1=0 then 0 Else Round(T2/T1-1,2) End <= ", Convert.ToDecimal(strDropper), " Then 'DROPPER' " };
+                            str1 = string.Concat(num1);
+                            object obj2 = str1;
+                            object[] objArray1 = new object[] { obj2, " When Case When T1=0 then 0 Else Round(T2/T1-1,2) End >=  ", Convert.ToDecimal(strGrower), " Then 'GROWER' " };
+                            str1 = string.Concat(objArray1);
+                            object obj3 = str1;
+                            object[] upper2 = new object[] { obj3, " ELSE 'FLAT' END as Status From  (Select CUSTOMER,", num, " as Week ,round(avg(", str2.ToUpper(), "),2) T1 from ", strTableName };
+                            str1 = string.Concat(upper2);
+                            str1 = string.Concat(str1, " where ", str6, "  group by CUSTOMER) A ");
+                            string str15 = str1;
+                            string[] upper3 = new string[] { str15, " Left join (Select CUSTOMER, round(avg(", str2.ToUpper(), "),2) T2 from ", strTableName, " where  ", str7, " group by CUSTOMER) B " };
+                            str1 = string.Concat(upper3);
+                            str1 = string.Concat(str1, " On ", str8);
+
+                            if (Common.iDBType == 1)
+                            {
+                                ((OraDBManager)Common.dbMgr).ExecuteNonQuery(CommandType.Text, str1);
+                            }
+
+                            else if (Common.iDBType == 3)
+                            {
+                                ((MySqlDBManager)Common.dbMgr).ExecuteNonQuery(CommandType.Text, str1);
+                            }
+
+                         
+                        }
+                        else if (Common.iDBType == 1 || Common.iDBType == 3)
+                        {
+                            str1 = " Delete From TRE_OPP_TEMP";
+                            if (Common.iDBType == 1)
+                            {
+                                ((OraDBManager)Common.dbMgr).ExecuteNonQuery(CommandType.Text, str1);
+                            }
+
+                            else if (Common.iDBType == 3)
+                            {
+                                ((MySqlDBManager)Common.dbMgr).ExecuteNonQuery(CommandType.Text, str1);
+                            }
+
+                            str1 = " INSERT INTO TRE_OPP_TEMP(CUSTOMER,WEEK,DELTA,STATUS) select S.Customer,S.Week,S.DELTA,S.STATUS from (";
+                            str1 = string.Concat(str1, " select A.CUSTOMER,A.Week, Case When T1=0 then 0 Else Round(T2/T1-1,2) END as DELTA, ");
+                            str1 = string.Concat(str1, " Case When A.T1+B.T2 =0 Then 'NON_USER' ");
+                            str1 = string.Concat(str1, " When A.T1=0 And B.T2>0 Then 'NEW_USER' ");
+                            object obj4 = str1;
+                            object[] num2 = new object[] { obj4, " When Case When T1=0 then 0 Else Round(T2/T1-1,2) End < ", Convert.ToDecimal(strStopper), " Then 'STOPPER' " };
+                            str1 = string.Concat(num2);
+                            object obj5 = str1;
+                            object[] objArray2 = new object[] { obj5, " When Case When T1=0 then 0 Else Round(T2/T1-1,2) End < ", Convert.ToDecimal(strDropper), " Then 'DROPPER' " };
+                            str1 = string.Concat(objArray2);
+                            object obj6 = str1;
+                            object[] num3 = new object[] { obj6, " When Case When T1=0 then 0 Else Round(T2/T1-1,2) End >  ", Convert.ToDecimal(strGrower), " Then 'GROWER' " };
+                            str1 = string.Concat(num3);
+                            object obj7 = str1;
+                            object[] objArray3 = new object[] { obj7, " ELSE 'FLAT' END as Status From  (Select CUSTOMER,", num, " as Week,round(avg(", str2.ToUpper(), "),2) T1 from ", strTableName };
+                            str1 = string.Concat(objArray3);
+                            str1 = string.Concat(str1, " where ", str6, "  group by CUSTOMER) A ");
+                            string str16 = str1;
+                            string[] strArrays3 = new string[] { str16, " Left join (Select CUSTOMER, round(avg(", str2.ToUpper(), "),2) T2 from ", strTableName, " where  ", str7, " group by CUSTOMER) B " };
+                            str1 = string.Concat(strArrays3);
+                            str1 = string.Concat(str1, " On ", str8, " )S inner join");
+                            str1 = string.Concat(str1, "(Select Distinct CUSTOMER from ", strTableName);
+                            if (strPtnlFilter != "")
+                            {
+                                str1 = string.Concat(str1, " where ", strPtnlFilter);
+                            }
+                            str1 = string.Concat(str1, ")G on S.CUSTOMER=G.CUSTOMER");
+                            if (Common.iDBType == 1)
+                            {
+                                ((OraDBManager)Common.dbMgr).ExecuteNonQuery(CommandType.Text, str1);
+                            }
+
+                            else if (Common.iDBType == 3)
+                            {
+                                ((MySqlDBManager)Common.dbMgr).ExecuteNonQuery(CommandType.Text, str1);
+                            }
+                            object[] objArray4 = new object[] { "   INSERT INTO TRE_OPP_TEMP (CUSTOMER,WEEK, DELTA,STATUS) select Customer,", num, " ,null, 'NA'  from ", strTableName };
+                            str1 = string.Concat(objArray4);
+                            str1 = string.Concat(str1, " A Where A.Customer not in (Select Customer from TRE_OPP_TEMP)  Group By Customer");
+                            if (Common.iDBType == 1)
+                            {
+                                ((OraDBManager)Common.dbMgr).ExecuteNonQuery(CommandType.Text, str1);
+                            }
+
+                            else if (Common.iDBType == 3)
+                            {
+                                ((MySqlDBManager)Common.dbMgr).ExecuteNonQuery(CommandType.Text, str1);
+                            }
+                            string[] upper4 = new string[] { " Update TRE_OPPORTUNITY A Set (", strOppName.ToUpper(), "_DELTA,", strOppName.ToUpper(), "_STATUS,WEEK)=" };
+                            str1 = string.Concat(upper4);
+                            str1 = string.Concat(str1, " (Select DELTA,STATUS,WEEK from TRE_OPP_TEMP B where A.CUSTOMER=B.CUSTOMER)");
+                            str1 = string.Concat(str1, " where Exists (select 1 from TRE_OPPORTUNITY O , TRE_OPP_TEMP T where O.CUSTOMER=T.CUSTOMER  )");
+                            if (Common.iDBType == 1)
+                            {
+                                ((OraDBManager)Common.dbMgr).ExecuteNonQuery(CommandType.Text, str1);
+                            }
+
+                            else if (Common.iDBType == 3)
+                            {
+
+                                str1 = " Update TRE_OPPORTUNITY A inner join TRE_OPP_TEMP B on A.CUSTOMER = B.CUSTOMER";
+                                str1 += " Set " + strOppName.ToUpper()+ "_DELTA = delta";
+                                str1 += " where Exists(select 1 from(select 1 from TRE_OPPORTUNITY O , TRE_OPP_TEMP T where O.CUSTOMER = T.CUSTOMER) as c  )";
+                              ((MySqlDBManager)Common.dbMgr).ExecuteNonQuery(CommandType.Text, str1);
+
+
+                                str1 = " Update TRE_OPPORTUNITY A inner join TRE_OPP_TEMP B on A.CUSTOMER = B.CUSTOMER";
+                                str1 += " Set " + strOppName.ToUpper()+ "_status = Status";
+                                str1 += " where Exists(select 1 from(select 1 from TRE_OPPORTUNITY O , TRE_OPP_TEMP T where O.CUSTOMER = T.CUSTOMER) as c  )";
+                                ((MySqlDBManager)Common.dbMgr).ExecuteNonQuery(CommandType.Text, str1);
+
+
+                                str1 = " Update TRE_OPPORTUNITY A inner join TRE_OPP_TEMP B on A.CUSTOMER = B.CUSTOMER";
+                                str1 += " Set A.WEEK = B.WEEK";
+                                str1 += " where Exists(select 1 from(select 1 from TRE_OPPORTUNITY O , TRE_OPP_TEMP T where O.CUSTOMER = T.CUSTOMER) as c  )";
+                                ((MySqlDBManager)Common.dbMgr).ExecuteNonQuery(CommandType.Text, str1);
+                            }
+                            if (bIsONMain)
+                            {
+                                string[] strArrays4 = new string[] { " INSERT INTO TRE_OPPORTUNITY(CUSTOMER,WEEK,", strOppName.ToUpper(), "_DELTA,", strOppName.ToUpper(), "_STATUS)" };
+                                str1 = string.Concat(strArrays4);
+                                str1 = string.Concat(str1, " Select Z.Customer,Z.WEEK,Z.DELTA,Z.STATUS FROM (select S.Customer,S.WEEK,S.DELTA,S.STATUS from ");
+                                str1 = string.Concat(str1, " (select A.CUSTOMER,B.WEEK, Case When T1=0 then 0 Else Round(T2/T1-1,2) END as DELTA, ");
+                                str1 = string.Concat(str1, " Case When A.T1+B.T2 =0 Then 'NON_USER' ");
+                                str1 = string.Concat(str1, " When A.T1=0 And B.T2>0 Then 'NEW_USER' ");
+                                object obj8 = str1;
+                                object[] num4 = new object[] { obj8, " When Case When T1=0 then 0 Else Round(T2/T1-1,2) End < ", Convert.ToDecimal(strStopper), " Then 'STOPPER' " };
+                                str1 = string.Concat(num4);
+                                object obj9 = str1;
+                                object[] num5 = new object[] { obj9, " When Case When T1=0 then 0 Else Round(T2/T1-1,2) End < ", Convert.ToDecimal(strDropper), " Then 'DROPPER' " };
+                                str1 = string.Concat(num5);
+                                object obj10 = str1;
+                                object[] objArray5 = new object[] { obj10, " When Case When T1=0 then 0 Else Round(T2/T1-1,2) End > ", Convert.ToDecimal(strGrower), " Then 'GROWER' " };
+                                str1 = string.Concat(objArray5);
+                                string str17 = str1;
+                                string[] upper5 = new string[] { str17, " ELSE 'FLAT' END as Status From  (Select CUSTOMER, round(avg(", str2.ToUpper(), "),2) T1 from ", strTableName };
+                                str1 = string.Concat(upper5);
+                                str1 = string.Concat(str1, " where ", str6, "  group by CUSTOMER) A ");
+                                object obj11 = str1;
+                                upper = new object[] { obj11, " Left join (Select CUSTOMER,", num, " as Week, round(avg(", str2.ToUpper(), "),2) T2 from ", strTableName, " where  ", str7, " group by CUSTOMER) B " };
+                                str1 = string.Concat(upper);
+                                str1 = string.Concat(str1, " On ", str8, ")S inner join");
+                                str1 = string.Concat(str1, "(Select Distinct CUSTOMER from  ", strTableName);
+                                if (strPtnlFilter != "")
+                                {
+                                    str1 = string.Concat(str1, " where ", strPtnlFilter);
+                                }
+                                str1 = string.Concat(str1, " )G on S.CUSTOMER=G.CUSTOMER)Z");
+                                str1 = string.Concat(str1, " Where Z.Customer not in (Select Customer from TRE_OPPORTUNITY)");
+                                if (Common.iDBType == 1)
+                                {
+                                    ((OraDBManager)Common.dbMgr).ExecuteNonQuery(CommandType.Text, str1);
                                 }
 
-                            }
-                            else
-                            {
-                                //strSql = " Update TRE_OPPORTUNITY Set (" + strOppName + ")=";
-                                //strSql += " (Select " + strFormula.Replace("'", "''") + " from " + strTableName + " where " + strUpdateString + ")";
-                                //((DBManager)Common.dbMgr).ExecuteNonQuery(CommandType.Text, strSql);
+                                else if (Common.iDBType == 3)
+                                {
+                                    ((MySqlDBManager)Common.dbMgr).ExecuteNonQuery(CommandType.Text, str1);
+                                }
+                                str = new string[] { "INSERT INTO TRE_OPPORTUNITY (CUSTOMER,WEEK,", strOppName.ToUpper(), "_DELTA,", strOppName.ToUpper(), "_STATUS) " };
+                                str1 = string.Concat(str);
+                                obj = str1;
+                                upper = new object[] { obj, "select Customer,", num, ",null, 'NA'  from ", strTableName, " A " };
+                                str1 = string.Concat(upper);
+                                str1 = string.Concat(str1, "Where A.Customer not in (Select Customer from TRE_OPPORTUNITY)  Group By Customer");
+                                if (Common.iDBType == 1)
+                                {
+                                    ((OraDBManager)Common.dbMgr).ExecuteNonQuery(CommandType.Text, str1);
+                                }
+
+                                else if (Common.iDBType == 3)
+                                {
+                                    ((MySqlDBManager)Common.dbMgr).ExecuteNonQuery(CommandType.Text, str1);
+                                }
                             }
                         }
-
-
-
                     }
                 }
-                return true;
+                flag = true;
             }
-            catch (Exception ex)
+            catch (Exception exception)
             {
-                throw ex;
+                throw exception;
             }
+            return flag;
         }
         public int fnMaxWeek(string strTableName)
         {
@@ -1478,7 +1765,11 @@ namespace RecoEngine_BI
             {
                 string strSql = "";
                 strSql = " SELECT Max(WEEK) FROM  " + strTableName;
-                return int.Parse(((OraDBManager)Common.dbMgr).ExecuteScalar(CommandType.Text, strSql)); ;
+                if (Common.iDBType == (int)Enums.DBType.Oracle)
+                    return int.Parse(((OraDBManager)Common.dbMgr).ExecuteScalar(CommandType.Text, strSql));
+                else if (Common.iDBType == (int)Enums.DBType.Mysql)
+                    return int.Parse(((MySqlDBManager)Common.dbMgr).ExecuteScalar(CommandType.Text, strSql));
+                return 0;
             }
             catch (Exception ex)
             {
@@ -1494,25 +1785,44 @@ namespace RecoEngine_BI
                 string strSql = "";
                 //strFormula=strFormula.Replace("'","");
                 strSql = "Update OPPORTUNITY Set PTNL_FORMULA='" + strFormula.ToUpper().Replace("'", "''") + "' where OPPORTUNITY_ID = " + iOpportunityId;
+
                 if (Common.iDBType == (int)Enums.DBType.Oracle)
                     ((OraDBManager)Common.dbMgr).ExecuteNonQuery(CommandType.Text, strSql);
+                else if (Common.iDBType == (int)Enums.DBType.Mysql)
+                    ((MySqlDBManager)Common.dbMgr).ExecuteNonQuery(CommandType.Text, strSql);
                 else
                     ((DBManager)Common.dbMgr).ExecuteNonQuery(CommandType.Text, strSql);
 
 
-                if (Common.iDBType == (int)Enums.DBType.Oracle)
+                if (Common.iDBType == (int)Enums.DBType.Oracle || Common.iDBType == 3)
                 {
 
                     strSql = " Update TRE_OPPORTUNITY A Set " + strOppName.ToUpper() + "_PNTL=0";
                     strSql += " WHERE " + strOppName.ToUpper() + "_STATUS='NA' ";
-                    ((OraDBManager)Common.dbMgr).ExecuteNonQuery(CommandType.Text, strSql);
+                    if (Common.iDBType == (int)Enums.DBType.Oracle)
+                        ((OraDBManager)Common.dbMgr).ExecuteNonQuery(CommandType.Text, strSql);
+                    
+                    else if (Common.iDBType == (int)Enums.DBType.Mysql)
+                        ((MySqlDBManager)Common.dbMgr).ExecuteNonQuery(CommandType.Text, strSql);
                     strSql = " Update TRE_OPPORTUNITY A Set " + strOppName.ToUpper() + "_PNTL=";
                     strSql += " (Select " + strFormula + " from ETS_TRE_BASE2 B where A.CUSTOMER=B.CUSTOMER)";
                     strSql += " WHERE EXISTS (SELECT 1 from TRE_OPPORTUNITY O , ETS_TRE_BASE2 T   where  O.CUSTOMER=T.CUSTOMER AND O.CUSTOMER=A.CUSTOMER AND O." + strOppName.ToUpper() + "_STATUS!='NA' )";
                     //strSql = " Update TRE_OPPORTUNITY A Set " + strOppName.ToUpper() + "_PNTL=";
                     //strSql += " (Select " + strFormula + " from ETS_TRE_BASE2 B where A.CUSTOMER=B.CUSTOMER)";
                     //strSql += " where Exists (select 1 from TRE_OPPORTUNITY O , ETS_TRE_BASE2 T where O.CUSTOMER=T.CUSTOMER AND O.CUSTOMER=A.CUSTOMER)";
-                    ((OraDBManager)Common.dbMgr).ExecuteNonQuery(CommandType.Text, strSql);
+
+                    if (Common.iDBType == (int)Enums.DBType.Oracle)
+                        ((OraDBManager)Common.dbMgr).ExecuteNonQuery(CommandType.Text, strSql);
+
+                    else if (Common.iDBType == (int)Enums.DBType.Mysql)
+                    {
+
+                        strSql = " Update TRE_OPPORTUNITY A Set " + strOppName.ToUpper() + "_PNTL=";
+                        strSql += " (Select " + strFormula + " from ETS_TRE_BASE2 B where A.CUSTOMER=B.CUSTOMER)";
+                        strSql += " WHERE EXISTS (Select 1 from (SELECT 1 from TRE_OPPORTUNITY O , ETS_TRE_BASE2 T   where  O.CUSTOMER=T.CUSTOMER AND O.CUSTOMER=A.CUSTOMER AND O." + strOppName.ToUpper() + "_STATUS!='NA' ) as C)";
+
+                        ((MySqlDBManager)Common.dbMgr).ExecuteNonQuery(CommandType.Text, strSql);
+                    }
                 }
                 else
                 {
@@ -1531,15 +1841,34 @@ namespace RecoEngine_BI
         {
             DataTable dt = new DataTable();
             string strSQL = "Delete From Opportunity_values where opportunity_id =" + oppid;
-            ((OraDBManager)Common.dbMgr).ExecuteScalar(CommandType.Text, strSQL);
+            if (Common.iDBType == (int)Enums.DBType.Oracle)
+            {
+                ((OraDBManager)Common.dbMgr).ExecuteScalar(CommandType.Text, strSQL);
+            }
+            else if (Common.iDBType == (int)Enums.DBType.Mysql)
+            {
+                ((MySqlDBManager)Common.dbMgr).ExecuteScalar(CommandType.Text, strSQL);
+            }
             strSQL = "Select  OPP_NAME From Opportunity where opportunity_id =" + oppid;
-            dt = ((OraDBManager)Common.dbMgr).ExecuteDataTable(CommandType.Text, strSQL);
+            if (Common.iDBType == (int)Enums.DBType.Oracle)
+            {
+                dt=((OraDBManager)Common.dbMgr).ExecuteDataTable(CommandType.Text, strSQL);
+            }
+            else if (Common.iDBType == (int)Enums.DBType.Mysql)
+            {
+               dt= ((MySqlDBManager)Common.dbMgr).ExecuteDataTable(CommandType.Text, strSQL);
+            }
             string Oppname = dt.Rows[0]["OPP_NAME"].ToString();
             strSQL = "Insert into Opportunity_values Select " + oppid + " , sum(" + Oppname + "_delta),sum(" + Oppname + "_pntl) from tre_opportunity ";
             if (Common.iDBType == (int)Enums.DBType.Oracle)
             {
                 ((OraDBManager)Common.dbMgr).ExecuteScalar(CommandType.Text, strSQL);
             }
+            else if (Common.iDBType == (int)Enums.DBType.Mysql)
+            {
+                ((MySqlDBManager)Common.dbMgr).ExecuteScalar(CommandType.Text, strSQL);
+            }
+
             return true;
         }
         public DataTable fnGetOppBreakDowndetails(int iOpportunityId)
@@ -1549,8 +1878,14 @@ namespace RecoEngine_BI
                 DataTable dt = new DataTable();
 
                 string strSQL = "Select * from STATUS_BREAKDOWN where OPPORTUNITY_ID=" + iOpportunityId;
-
-                dt = ((OraDBManager)Common.dbMgr).ExecuteDataTable(CommandType.Text, strSQL);
+                if (Common.iDBType == (int)Enums.DBType.Oracle)
+                {
+                    dt = ((OraDBManager)Common.dbMgr).ExecuteDataTable(CommandType.Text, strSQL);
+                }
+                else if (Common.iDBType == (int)Enums.DBType.Mysql)
+                {
+                    dt = ((MySqlDBManager)Common.dbMgr).ExecuteDataTable(CommandType.Text, strSQL);
+                }
 
                 return dt;
             }
@@ -1574,6 +1909,9 @@ namespace RecoEngine_BI
                 string strSql = "Select TIMEPERIOD_ID from TRE_TIMEPERIOD WHERE T1='" + strT1String + "' And T2='" + strT2String + "'";
                 if (Common.iDBType == (int)Enums.DBType.Oracle)
                     dt = ((OraDBManager)Common.dbMgr).ExecuteDataTable(CommandType.Text, strSql);
+                else if (Common.iDBType == (int)Enums.DBType.Mysql)
+                    dt = ((MySqlDBManager)Common.dbMgr).ExecuteDataTable(CommandType.Text, strSql);
+
                 else if (Common.iDBType == (int)Enums.DBType.SQl)
                     dt = ((DBManager)Common.dbMgr).ExecuteDataTable(CommandType.Text, strSql);
 
@@ -1588,29 +1926,39 @@ namespace RecoEngine_BI
 
                     if (Common.iDBType == (int)Enums.DBType.Oracle)
                         ((OraDBManager)Common.dbMgr).ExecuteScalar(CommandType.Text, strSql);
+
+                    else if (Common.iDBType == (int)Enums.DBType.Mysql)
+                        ((MySqlDBManager)Common.dbMgr).ExecuteScalar(CommandType.Text, strSql);
                     else
                         ((DBManager)Common.dbMgr).ExecuteScalar(CommandType.Text, strSql);
 
                     strSql = "Select NVL(MAX(TIMEPERIOD_ID), 0) AS TIMEPERIOD_ID from TRE_TIMEPERIOD";
                     if (Common.iDBType == (int)Enums.DBType.Oracle)
                         iTimePeriodID = int.Parse(((OraDBManager)Common.dbMgr).ExecuteScalar(CommandType.Text, strSql));
+
+                    else if (Common.iDBType == (int)Enums.DBType.Mysql)
+                    {
+
+                        strSql = "Select IFNULL(MAX(TIMEPERIOD_ID), 0) AS TIMEPERIOD_ID from TRE_TIMEPERIOD";
+                        iTimePeriodID = int.Parse(((MySqlDBManager)Common.dbMgr).ExecuteScalar(CommandType.Text, strSql));
+                    }
                     else
                         iTimePeriodID = int.Parse(((DBManager)Common.dbMgr).ExecuteScalar(CommandType.Text, strSql));
                 }
                 return iTimePeriodID;
 
             }
-          catch (Exception ex)
+            catch (Exception ex)
             {
                 throw ex;
             }
         }
-        public bool fnSaveTREThreSholdfrmExport(string[] strT1, string[] strT2, string strOppName, string strDropper, string strGrower, string strStopper, int iOpportunityId, string strTableName, string strPtnlFilter, int iProjectid,string strMainFilter, bool bIsONMain = false)
+        public bool fnSaveTREThreSholdfrmExport(string[] strT1, string[] strT2, string strOppName, string strDropper, string strGrower, string strStopper, int iOpportunityId, string strTableName, string strPtnlFilter, int iProjectid, string strMainFilter, bool bIsONMain = false)
         {
-        try
+            try
             {
                 //((OraDBManager)Common.dbMgr).BeginTrans();
-               string  strSql = "alter table TRE_OPPORTUNITYEXPORT add " + strOppName.ToUpper() + "_DELTA NUMBER(18,2) ";
+                string strSql = "alter table TRE_OPPORTUNITYEXPORT add " + strOppName.ToUpper() + "_DELTA NUMBER(18,2) ";
                 if (Common.iDBType == (int)Enums.DBType.Oracle)
                     ((OraDBManager)Common.dbMgr).ExecuteNonQuery(CommandType.Text, strSql);
                 else
@@ -1629,14 +1977,14 @@ namespace RecoEngine_BI
                     ((DBManager)Common.dbMgr).ExecuteNonQuery(CommandType.Text, strSql);
                 DataTable dtSource = new DataTable();
 
-                 strSql = "Select * from OPPORTUNITY where OPPORTUNITY_ID = " + iOpportunityId;
+                strSql = "Select * from OPPORTUNITY where OPPORTUNITY_ID = " + iOpportunityId;
                 if (Common.iDBType == (int)Enums.DBType.Oracle)
                     dtSource = ((OraDBManager)Common.dbMgr).ExecuteDataTable(CommandType.Text, strSql);
                 else
                     dtSource = ((DBManager)Common.dbMgr).ExecuteDataTable(CommandType.Text, strSql);
 
                 string strFormula = "";
-                       if (dtSource.Rows.Count > 0)
+                if (dtSource.Rows.Count > 0)
                 {
                     strFormula = dtSource.Rows[0]["FORMULA"].ToString();
                     int iCount = 0;
@@ -1691,176 +2039,176 @@ namespace RecoEngine_BI
 
                             strUpdateMString += "OPT." + dtSource.Rows[i]["COLNAME"].ToString() + "=TDN." + dtSource.Rows[i]["COLNAME"].ToString();
                             strUpdateMString += " AND OPT." + dtSource.Rows[i]["COLNAME"].ToString() + "=A." + dtSource.Rows[i]["COLNAME"].ToString();
-                           }
-
-                                   
-                                   if (Common.iDBType == (int)Enums.DBType.Oracle)
-                                   {
-                                       ((OraDBManager)Common.dbMgr).ExecuteScalar(CommandType.Text, strSql);
-                                   }
-                                   else
-                                   {
-                                       ((DBManager)Common.dbMgr).ExecuteScalar(CommandType.Text, strSql);
-                                   }
-
-
-                                   strSql = " Select Count(*) from  TRE_OPPORTUNITYEXPORT";
-                                   strTableName = strTableName + "_V";
-                                   int rowscount = int.Parse(((OraDBManager)Common.dbMgr).ExecuteScalar(CommandType.Text, strSql));
-                                   if (rowscount == 0)
-                                   {
-                                       strSql = " INSERT INTO TRE_OPPORTUNITYEXPORT(CUSTOMER,WEEK," + strOppName.ToUpper() + "_DELTA," + strOppName.ToUpper() + "_STATUS)";
-                                       strSql += " Select Z.Customer,Z.WEEK,Z.DELTA,Z.STATUS FROM (select S.Customer,S.WEEK,S.DELTA,S.STATUS from ";
-                                       strSql += " (select A.CUSTOMER,B.WEEK, Case When T1=0 then 0 Else Round(T2/T1-1,2) END as DELTA, ";
-                                       strSql += " Case When A.T1+B.T2 =0 Then 'NON_USER' ";
-                                       strSql += " When A.T1=0 And B.T2>0 Then 'NEW_USER' ";
-                                       strSql += " When Case When T1=0 then 0 Else Round(T2/T1-1,2) End <= " + Convert.ToDecimal(strStopper) + " Then 'STOPPER' ";
-                                       strSql += " When Case When T1=0 then 0 Else Round(T2/T1-1,2) End <= " + Convert.ToDecimal(strDropper) + " Then 'DROPPER' ";
-                                       strSql += " When Case When T1=0 then 0 Else Round(T2/T1-1,2) End >= " + Convert.ToDecimal(strGrower) + " Then 'GROWER' ";
-                                       strSql += " ELSE 'FLAT' END as Status From  (Select CUSTOMER, round(avg(" + strFormula.ToUpper() + "),2) T1 from " + strTableName;
-                                       strSql += " where " + strBT1 + "  group by CUSTOMER) A ";
-                                       strSql += " Left join (Select CUSTOMER," + MaxWeek + " as Week, round(avg(" + strFormula.ToUpper() + "),2) T2 from " + strTableName + " where  " + strBT2 + " group by CUSTOMER) B ";
-                                       strSql += " On " + strKeyString + ")S inner join";
-                                       strSql += "(Select Distinct CUSTOMER from  " + strTableName;
-                                       if (strPtnlFilter != "")
-                                           strSql += " where " + strPtnlFilter;
-                                       if (strMainFilter != "" && strMainFilter != strPtnlFilter)
-                                       { 
-                                            if(strPtnlFilter != "")
-                                            {
-                                           strSql +=  " and " + strMainFilter;
-                                            }
-                                           else
-                                            strSql +=" where " + strMainFilter;
-                                       }
-                                       strSql += " )G on S.CUSTOMER=G.CUSTOMER)Z";
-                                       strSql += " Where Z.Customer not in (Select Customer from TRE_OPPORTUNITYEXPORT)";
-
-                                       ((OraDBManager)Common.dbMgr).ExecuteNonQuery(CommandType.Text, strSql);
-
-                                       strSql = "INSERT INTO TRE_OPPORTUNITYEXPORT (CUSTOMER,WEEK," + strOppName.ToUpper() + "_DELTA," + strOppName.ToUpper() + "_STATUS)";
-                                       strSql += "select Customer,"+MaxWeek+",null,'NA'  from " + strTableName + " A ";
-                                       strSql += "Where A.Customer not in (Select Customer from TRE_OPPORTUNITYEXPORT)  Group By Customer";
-                                       ((OraDBManager)Common.dbMgr).ExecuteNonQuery(CommandType.Text, strSql);
-                                       //((OraDBManager)Common.dbMgr).CommitTrans();
-                                       //((OraDBManager)Common.dbMgr).BeginTrans();
-                                   }
-                                   else
-                                   {
-                                       strSql = " Delete From TRE_OPP_TEMP";
-                                       ((OraDBManager)Common.dbMgr).ExecuteNonQuery(CommandType.Text, strSql);
-                                       strSql = " INSERT INTO TRE_OPP_TEMP(CUSTOMER,WEEK,DELTA,STATUS) select S.Customer,S.Week,S.DELTA,S.STATUS from (";
-                                       strSql += " select A.CUSTOMER,A.Week, Case When T1=0 then 0 Else Round(T2/T1-1,2) END as DELTA, ";
-                                       strSql += " Case When A.T1+B.T2 =0 Then 'NON_USER' ";
-                                       strSql += " When A.T1=0 And B.T2>0 Then 'NEW_USER' ";
-                                       strSql += " When Case When T1=0 then 0 Else Round(T2/T1-1,2) End <= " + Convert.ToDecimal(strStopper) + " Then 'STOPPER' ";
-                                       strSql += " When Case When T1=0 then 0 Else Round(T2/T1-1,2) End <= " + Convert.ToDecimal(strDropper) + " Then 'DROPPER' ";
-                                       strSql += " When Case When T1=0 then 0 Else Round(T2/T1-1,2) End >=  " + Convert.ToDecimal(strGrower) + " Then 'GROWER' ";
-                                       strSql += " ELSE 'FLAT' END as Status From  (Select CUSTOMER," + MaxWeek + " as Week,round(avg(" + strFormula.ToUpper() + "),2) T1 from " + strTableName;
-                                       strSql += " where " + strBT1 + "  group by CUSTOMER) A ";
-                                       strSql += " Left join (Select CUSTOMER, round(avg(" + strFormula.ToUpper() + "),2) T2 from " + strTableName + " where  " + strBT2 + " group by CUSTOMER) B ";
-                                       strSql += " On " + strKeyString + " )S inner join";
-
-                                       strSql += "(Select Distinct CUSTOMER from " + strTableName;
-                                       if (strPtnlFilter != "")
-                                           strSql += " where " + strPtnlFilter;
-                                       if (strMainFilter != "" && strMainFilter != strPtnlFilter)
-                                       {
-                                           if (strPtnlFilter != "")
-                                           {
-                                               strSql += " and " + strMainFilter;
-                                           }
-                                           else
-                                               strSql += " where " + strMainFilter;
-                                       }
-                                       
-                                       strSql += ")G on S.CUSTOMER=G.CUSTOMER";
-
-                                       ((OraDBManager)Common.dbMgr).ExecuteNonQuery(CommandType.Text, strSql);
-
-                                       strSql = "   INSERT INTO TRE_OPP_TEMP (CUSTOMER, DELTA,STATUS) select Customer,null, 'NA'  from " + strTableName;
-                                       strSql += " A Where A.Customer not in (Select Customer from TRE_OPP_TEMP)  Group By Customer";
-                                       ((OraDBManager)Common.dbMgr).ExecuteNonQuery(CommandType.Text, strSql);
-
-                                       //Sravanthi
-                                       string strTblCount = "";
-                                       strTblCount = "Select count(*) From TRE_OPPORTUNITYEXPORT";
-                                       int iTblCount = int.Parse(((OraDBManager)Common.dbMgr).ExecuteScalar(CommandType.Text, strTblCount));
-
-                                       string strTabCount = iTblCount.ToString();
-                                       string strSubCnt = strTabCount.Substring(1, (strTabCount.Length - 1));
-
-                                       int iCalCnt = Convert.ToInt32(strTabCount) - Convert.ToInt32(strSubCnt);
-
-                                       for (int i = 1; i <= iCalCnt / (iCalCnt * 0.1); i++)
-                                       {
-
-                                           strSql = "Declare";
-                                           strSql += " oppNameDelta string(200);";
-                                           strSql += " oppNameStatus string(200);";
-                                           strSql+=" minID int;";
-                                           strSql+=" maxID int;";
-                                           strSql+=" BEGIN";
-                                           strSql += " oppNameDelta:='" + strOppName.ToUpper() + "_DELTA'" + ";";
-                                           strSql +=" oppNameStatus:='" + strOppName.ToUpper() + "_STATUS'" + ";";
-                                           strSql += " minID:=" + (i - 1) * (iCalCnt * 0.1) + ";";
-                                           strSql += " maxID:=";
-                                           if (i == (iCalCnt / (iCalCnt * 0.1)))
-                                           {
-                                               strSql += iCalCnt + ";";
-                                           }
-                                           else
-                                           {
-                                               strSql += (i) * (iCalCnt * 0.1) + ";";
-                                           }
-                                           strSql += " STPROC_UPDATE_DELTASTATUS1(oppNameDelta,oppNameStatus,minID,maxID);";
-                                           strSql+=" END;";
-
-                                           #region Comments
-                                           // strSql = " Update TRE_OPPORTUNITYEXPORT A Set (" + strOppName.ToUpper() + "_DELTA," + strOppName.ToUpper() + "_STATUS )=";
-                                           // strSql += " (Select DELTA,STATUS from TRE_OPP_TEMP B where A.CUSTOMER=B.CUSTOMER ) ";
-                                           //strSql +=" WHERE A.ID >=" + (i - 1) * (iCalCnt * 0.1) + " AND A.ID < ";
-
-                                           // if (i == (iCalCnt / (iCalCnt * 0.1)))
-                                           // {
-                                           //     strSql +=   iCalCnt ;
-                                           // }
-                                           // else
-                                           // {
-                                           //     strSql +=(i) * (iCalCnt * 0.1);
-                                           // }
-
-                                           //  strSql += " AND Exists (select 1 from TRE_OPPORTUNITYEXPORT O , TRE_OPP_TEMP T where O.CUSTOMER=T.CUSTOMER AND O.CUSTOMER=A.CUSTOMER )";
-                                          
-                                             //
-
-                                           //strSql = " Insert into TRE_OPPORTUNITYEXPORT A Select " + strOppName.ToUpper() + "_DELTA," + strOppName.ToUpper() + "_STATUS ";
-                                           //strSql += strOppName.ToUpper() + "_PNTL From TRE_OPP_TEMP B where A.CUSTOMER=B.CUSTOMER ";
-                                           //strSql += "WHERE A.ID >=" + (i - 1) * (iCalCnt * 0.1) + " AND A.ID < ";
-
-                                           //if (i == (iCalCnt / (iCalCnt * 0.1)))
-                                           //{
-                                           //    strSql += iCalCnt;
-                                           //}
-                                           //else
-                                           //{
-                                           //    strSql += (i) * (iCalCnt * 0.1);
-                                           //}
-
-                                           //strSql += " AND Exists (select 1 from TRE_OPPORTUNITYEXPORT O , TRE_OPP_TEMP T where O.CUSTOMER=T.CUSTOMER AND O.CUSTOMER=A.CUSTOMER )";
-                                          
-                                           #endregion
-
-                                           ((OraDBManager)Common.dbMgr).ExecuteNonQuery(CommandType.Text, strSql);
-                                       }
-                                   
-                                   }
-                            }
-                            else
-                            {
-                              
-                            }
                         }
+
+
+                        if (Common.iDBType == (int)Enums.DBType.Oracle)
+                        {
+                            ((OraDBManager)Common.dbMgr).ExecuteScalar(CommandType.Text, strSql);
+                        }
+                        else
+                        {
+                            ((DBManager)Common.dbMgr).ExecuteScalar(CommandType.Text, strSql);
+                        }
+
+
+                        strSql = " Select Count(*) from  TRE_OPPORTUNITYEXPORT";
+                        strTableName = strTableName + "_V";
+                        int rowscount = int.Parse(((OraDBManager)Common.dbMgr).ExecuteScalar(CommandType.Text, strSql));
+                        if (rowscount == 0)
+                        {
+                            strSql = " INSERT INTO TRE_OPPORTUNITYEXPORT(CUSTOMER,WEEK," + strOppName.ToUpper() + "_DELTA," + strOppName.ToUpper() + "_STATUS)";
+                            strSql += " Select Z.Customer,Z.WEEK,Z.DELTA,Z.STATUS FROM (select S.Customer,S.WEEK,S.DELTA,S.STATUS from ";
+                            strSql += " (select A.CUSTOMER,B.WEEK, Case When T1=0 then 0 Else Round(T2/T1-1,2) END as DELTA, ";
+                            strSql += " Case When A.T1+B.T2 =0 Then 'NON_USER' ";
+                            strSql += " When A.T1=0 And B.T2>0 Then 'NEW_USER' ";
+                            strSql += " When Case When T1=0 then 0 Else Round(T2/T1-1,2) End <= " + Convert.ToDecimal(strStopper) + " Then 'STOPPER' ";
+                            strSql += " When Case When T1=0 then 0 Else Round(T2/T1-1,2) End <= " + Convert.ToDecimal(strDropper) + " Then 'DROPPER' ";
+                            strSql += " When Case When T1=0 then 0 Else Round(T2/T1-1,2) End >= " + Convert.ToDecimal(strGrower) + " Then 'GROWER' ";
+                            strSql += " ELSE 'FLAT' END as Status From  (Select CUSTOMER, round(avg(" + strFormula.ToUpper() + "),2) T1 from " + strTableName;
+                            strSql += " where " + strBT1 + "  group by CUSTOMER) A ";
+                            strSql += " Left join (Select CUSTOMER," + MaxWeek + " as Week, round(avg(" + strFormula.ToUpper() + "),2) T2 from " + strTableName + " where  " + strBT2 + " group by CUSTOMER) B ";
+                            strSql += " On " + strKeyString + ")S inner join";
+                            strSql += "(Select Distinct CUSTOMER from  " + strTableName;
+                            if (strPtnlFilter != "")
+                                strSql += " where " + strPtnlFilter;
+                            if (strMainFilter != "" && strMainFilter != strPtnlFilter)
+                            {
+                                if (strPtnlFilter != "")
+                                {
+                                    strSql += " and " + strMainFilter;
+                                }
+                                else
+                                    strSql += " where " + strMainFilter;
+                            }
+                            strSql += " )G on S.CUSTOMER=G.CUSTOMER)Z";
+                            strSql += " Where Z.Customer not in (Select Customer from TRE_OPPORTUNITYEXPORT)";
+
+                            ((OraDBManager)Common.dbMgr).ExecuteNonQuery(CommandType.Text, strSql);
+
+                            strSql = "INSERT INTO TRE_OPPORTUNITYEXPORT (CUSTOMER,WEEK," + strOppName.ToUpper() + "_DELTA," + strOppName.ToUpper() + "_STATUS)";
+                            strSql += "select Customer," + MaxWeek + ",null,'NA'  from " + strTableName + " A ";
+                            strSql += "Where A.Customer not in (Select Customer from TRE_OPPORTUNITYEXPORT)  Group By Customer";
+                            ((OraDBManager)Common.dbMgr).ExecuteNonQuery(CommandType.Text, strSql);
+                            //((OraDBManager)Common.dbMgr).CommitTrans();
+                            //((OraDBManager)Common.dbMgr).BeginTrans();
+                        }
+                        else
+                        {
+                            strSql = " Delete From TRE_OPP_TEMP";
+                            ((OraDBManager)Common.dbMgr).ExecuteNonQuery(CommandType.Text, strSql);
+                            strSql = " INSERT INTO TRE_OPP_TEMP(CUSTOMER,WEEK,DELTA,STATUS) select S.Customer,S.Week,S.DELTA,S.STATUS from (";
+                            strSql += " select A.CUSTOMER,A.Week, Case When T1=0 then 0 Else Round(T2/T1-1,2) END as DELTA, ";
+                            strSql += " Case When A.T1+B.T2 =0 Then 'NON_USER' ";
+                            strSql += " When A.T1=0 And B.T2>0 Then 'NEW_USER' ";
+                            strSql += " When Case When T1=0 then 0 Else Round(T2/T1-1,2) End <= " + Convert.ToDecimal(strStopper) + " Then 'STOPPER' ";
+                            strSql += " When Case When T1=0 then 0 Else Round(T2/T1-1,2) End <= " + Convert.ToDecimal(strDropper) + " Then 'DROPPER' ";
+                            strSql += " When Case When T1=0 then 0 Else Round(T2/T1-1,2) End >=  " + Convert.ToDecimal(strGrower) + " Then 'GROWER' ";
+                            strSql += " ELSE 'FLAT' END as Status From  (Select CUSTOMER," + MaxWeek + " as Week,round(avg(" + strFormula.ToUpper() + "),2) T1 from " + strTableName;
+                            strSql += " where " + strBT1 + "  group by CUSTOMER) A ";
+                            strSql += " Left join (Select CUSTOMER, round(avg(" + strFormula.ToUpper() + "),2) T2 from " + strTableName + " where  " + strBT2 + " group by CUSTOMER) B ";
+                            strSql += " On " + strKeyString + " )S inner join";
+
+                            strSql += "(Select Distinct CUSTOMER from " + strTableName;
+                            if (strPtnlFilter != "")
+                                strSql += " where " + strPtnlFilter;
+                            if (strMainFilter != "" && strMainFilter != strPtnlFilter)
+                            {
+                                if (strPtnlFilter != "")
+                                {
+                                    strSql += " and " + strMainFilter;
+                                }
+                                else
+                                    strSql += " where " + strMainFilter;
+                            }
+
+                            strSql += ")G on S.CUSTOMER=G.CUSTOMER";
+
+                            ((OraDBManager)Common.dbMgr).ExecuteNonQuery(CommandType.Text, strSql);
+
+                            strSql = "   INSERT INTO TRE_OPP_TEMP (CUSTOMER, DELTA,STATUS) select Customer,null, 'NA'  from " + strTableName;
+                            strSql += " A Where A.Customer not in (Select Customer from TRE_OPP_TEMP)  Group By Customer";
+                            ((OraDBManager)Common.dbMgr).ExecuteNonQuery(CommandType.Text, strSql);
+
+                            //Sravanthi
+                            string strTblCount = "";
+                            strTblCount = "Select count(*) From TRE_OPPORTUNITYEXPORT";
+                            int iTblCount = int.Parse(((OraDBManager)Common.dbMgr).ExecuteScalar(CommandType.Text, strTblCount));
+
+                            string strTabCount = iTblCount.ToString();
+                            string strSubCnt = strTabCount.Substring(1, (strTabCount.Length - 1));
+
+                            int iCalCnt = Convert.ToInt32(strTabCount) - Convert.ToInt32(strSubCnt);
+
+                            for (int i = 1; i <= iCalCnt / (iCalCnt * 0.1); i++)
+                            {
+
+                                strSql = "Declare";
+                                strSql += " oppNameDelta string(200);";
+                                strSql += " oppNameStatus string(200);";
+                                strSql += " minID int;";
+                                strSql += " maxID int;";
+                                strSql += " BEGIN";
+                                strSql += " oppNameDelta:='" + strOppName.ToUpper() + "_DELTA'" + ";";
+                                strSql += " oppNameStatus:='" + strOppName.ToUpper() + "_STATUS'" + ";";
+                                strSql += " minID:=" + (i - 1) * (iCalCnt * 0.1) + ";";
+                                strSql += " maxID:=";
+                                if (i == (iCalCnt / (iCalCnt * 0.1)))
+                                {
+                                    strSql += iCalCnt + ";";
+                                }
+                                else
+                                {
+                                    strSql += (i) * (iCalCnt * 0.1) + ";";
+                                }
+                                strSql += " STPROC_UPDATE_DELTASTATUS1(oppNameDelta,oppNameStatus,minID,maxID);";
+                                strSql += " END;";
+
+                                #region Comments
+                                // strSql = " Update TRE_OPPORTUNITYEXPORT A Set (" + strOppName.ToUpper() + "_DELTA," + strOppName.ToUpper() + "_STATUS )=";
+                                // strSql += " (Select DELTA,STATUS from TRE_OPP_TEMP B where A.CUSTOMER=B.CUSTOMER ) ";
+                                //strSql +=" WHERE A.ID >=" + (i - 1) * (iCalCnt * 0.1) + " AND A.ID < ";
+
+                                // if (i == (iCalCnt / (iCalCnt * 0.1)))
+                                // {
+                                //     strSql +=   iCalCnt ;
+                                // }
+                                // else
+                                // {
+                                //     strSql +=(i) * (iCalCnt * 0.1);
+                                // }
+
+                                //  strSql += " AND Exists (select 1 from TRE_OPPORTUNITYEXPORT O , TRE_OPP_TEMP T where O.CUSTOMER=T.CUSTOMER AND O.CUSTOMER=A.CUSTOMER )";
+
+                                //
+
+                                //strSql = " Insert into TRE_OPPORTUNITYEXPORT A Select " + strOppName.ToUpper() + "_DELTA," + strOppName.ToUpper() + "_STATUS ";
+                                //strSql += strOppName.ToUpper() + "_PNTL From TRE_OPP_TEMP B where A.CUSTOMER=B.CUSTOMER ";
+                                //strSql += "WHERE A.ID >=" + (i - 1) * (iCalCnt * 0.1) + " AND A.ID < ";
+
+                                //if (i == (iCalCnt / (iCalCnt * 0.1)))
+                                //{
+                                //    strSql += iCalCnt;
+                                //}
+                                //else
+                                //{
+                                //    strSql += (i) * (iCalCnt * 0.1);
+                                //}
+
+                                //strSql += " AND Exists (select 1 from TRE_OPPORTUNITYEXPORT O , TRE_OPP_TEMP T where O.CUSTOMER=T.CUSTOMER AND O.CUSTOMER=A.CUSTOMER )";
+
+                                #endregion
+
+                                ((OraDBManager)Common.dbMgr).ExecuteNonQuery(CommandType.Text, strSql);
+                            }
+
+                        }
+                    }
+                    else
+                    {
+
+                    }
+                }
                 return true;
             }
             catch (Exception ex)
@@ -1874,7 +2222,7 @@ namespace RecoEngine_BI
             {
                 DataTable dtSource = new DataTable();
                 string strSql = "";
-                
+
 
                 string strTblCount = "";
                 //((OraDBManager)Common.dbMgr).BeginTrans();
@@ -1885,34 +2233,34 @@ namespace RecoEngine_BI
                     int iTblCount = int.Parse(((OraDBManager)Common.dbMgr).ExecuteScalar(CommandType.Text, strTblCount));
 
                     string strTabCount = iTblCount.ToString();
-                    string strSubCnt=strTabCount.Substring(1, (strTabCount.Length-1));
+                    string strSubCnt = strTabCount.Substring(1, (strTabCount.Length - 1));
 
                     int iCalCnt = Convert.ToInt32(strTabCount) - Convert.ToInt32(strSubCnt);
 
                     for (int i = 1; i <= iCalCnt / (iCalCnt * 0.1); i++)
                     {
-                        strSql="declare";
-                        strSql+=" OP_RECHARGE_PNTL string(200);";
-                        strSql+=" OP_RECHARGE_STATUS string(200);";
-                        strSql+=" formula string(5000);";
-                        strSql+=" minID int;";
-                        strSql+=" maxID int;";
-                        strSql+=" BEGIN";
-                        strSql+=" OP_RECHARGE_PNTL:='"+strOppName.ToUpper() + "_PNTL'"+";";
-                        strSql+=" OP_RECHARGE_STATUS:='" + strOppName.ToUpper() + "_STATUS'" + ";";
-                        strSql+= " formula:='" + strFormula.Replace("'", "''") + "';";
-                        strSql+= " minID:="+(i - 1) * (iCalCnt * 0.1)+";";
-                        strSql+= " maxID:=";
+                        strSql = "declare";
+                        strSql += " OP_RECHARGE_PNTL string(200);";
+                        strSql += " OP_RECHARGE_STATUS string(200);";
+                        strSql += " formula string(5000);";
+                        strSql += " minID int;";
+                        strSql += " maxID int;";
+                        strSql += " BEGIN";
+                        strSql += " OP_RECHARGE_PNTL:='" + strOppName.ToUpper() + "_PNTL'" + ";";
+                        strSql += " OP_RECHARGE_STATUS:='" + strOppName.ToUpper() + "_STATUS'" + ";";
+                        strSql += " formula:='" + strFormula.Replace("'", "''") + "';";
+                        strSql += " minID:=" + (i - 1) * (iCalCnt * 0.1) + ";";
+                        strSql += " maxID:=";
                         if (i == (iCalCnt / (iCalCnt * 0.1)))
                         {
                             strSql += iCalCnt + ";";
                         }
                         else
                         {
-                            strSql += (i) * (iCalCnt * 0.1)+";";
+                            strSql += (i) * (iCalCnt * 0.1) + ";";
                         }
                         strSql += " stproc_update_PNTLStatus(OP_RECHARGE_PNTL,OP_RECHARGE_STATUS,formula,minID,maxID);";
-                        strSql+= " END;";
+                        strSql += " END;";
 
                         #region Commented
 
@@ -1968,7 +2316,7 @@ namespace RecoEngine_BI
                 }
                 else
                 {
-               
+
                 }
                 //((OraDBManager)Common.dbMgr).CommitTrans();
                 return true;
@@ -1980,7 +2328,7 @@ namespace RecoEngine_BI
         }
         //public bool fnDeleteTreOppfrmExport()
         //{
-   
+
         //    string strSql = "select count(*)  from user_tables where table_name = 'TRE_OPPORTUNITYEXPORT'";
         //     int i=  int.Parse(((OraDBManager)Common.dbMgr).ExecuteScalar(CommandType.Text, strSql)); 
         //     if (i > 0)
@@ -2005,7 +2353,7 @@ namespace RecoEngine_BI
         //     }
         //    strSql = "CREATE TABLE TRE_OPPORTUNITYEXPORT (ID NUMBER NOT NULL, CUSTOMER varchar2(50)  NULL,";
         //    strSql += "WEEK number(2)  NULL )  NOLOGGING";
-            
+
         //    if (Common.iDBType == (int)Enums.DBType.Oracle)
         //    {
         //        ((OraDBManager)Common.dbMgr).ExecuteScalar(CommandType.Text, strSql);
@@ -2026,23 +2374,37 @@ namespace RecoEngine_BI
         //     strSql= "CREATE SEQUENCE tbl_seq";
 
         //     ((OraDBManager)Common.dbMgr).ExecuteScalar(CommandType.Text, strSql);
-           
+
         //    strSql = "CREATE OR REPLACE TRIGGER tbl_trigr BEFORE INSERT ON TRE_OPPORTUNITYEXPORT FOR EACH ROW BEGIN SELECT tbl_seq.NEXTVAL INTO :new.ID FROM dual; END;";
 
         //    ((OraDBManager)Common.dbMgr).ExecuteScalar(CommandType.Text, strSql);
-            
+
         //    return true;
         //}
 
-        public void fnCreateTableView(string TableName,string Columns, string filter)
+        public void fnCreateTableView(string TableName, string Columns, string filter)
         {
             try
             {
-                string strSql = "Create Table " + TableName + "_V as Select " + Columns + " from " + TableName;
-                ((OraDBManager)Common.dbMgr).ExecuteNonQuery(CommandType.Text, strSql);
+                if (Common.iDBType == 1)
+                {
+                    string strSql = "Create Table " + TableName + "_V as Select " + Columns + " from " + TableName;
+                    ((OraDBManager)Common.dbMgr).ExecuteNonQuery(CommandType.Text, strSql);
 
-                strSql = "CREATE INDEX " + TableName + "_V_IX on " + TableName + "_V" + "(CUSTOMER)";
-                ((OraDBManager)Common.dbMgr).ExecuteNonQuery(CommandType.Text, strSql);
+                    strSql = "CREATE INDEX " + TableName + "_V_IX on " + TableName + "_V" + "(CUSTOMER)";
+                    ((OraDBManager)Common.dbMgr).ExecuteNonQuery(CommandType.Text, strSql);
+                }
+                else
+                {
+                    
+                        string strSql = "Create Table " + TableName + "_V as Select " + Columns + " from " + TableName;
+                        ((MySqlDBManager)Common.dbMgr).ExecuteNonQuery(CommandType.Text, strSql);
+
+                        strSql = "CREATE INDEX " + TableName + "_V_IX on " + TableName + "_V" + "(CUSTOMER)";
+                        ((MySqlDBManager)Common.dbMgr).ExecuteNonQuery(CommandType.Text, strSql);
+                    
+                }
+
             }
             catch (Exception ex)
             {
@@ -2052,45 +2414,45 @@ namespace RecoEngine_BI
             //try
             //{
             //    string strSql = "Create OR REPLACE View " + TableName + "_V as Select " + Columns + " from " + TableName;
-                //if (filter != "")
-                //    strSql += " where " + filter;
+            //if (filter != "")
+            //    strSql += " where " + filter;
 
-             //  ((OraDBManager)Common.dbMgr).ExecuteNonQuery(CommandType.Text, strSql);
+            //  ((OraDBManager)Common.dbMgr).ExecuteNonQuery(CommandType.Text, strSql);
 
-                //strSql="CREATE INDEX VIEW_"+TableName+"_IX ON "+TableName+"(CUSTOMER)";
-                //((OraDBManager)Common.dbMgr).ExecuteNonQuery(CommandType.Text, strSql);
-          //  }
-          //  catch (Exception ex)
-          //  {
-           //     throw ex;
-           // }
-        
+            //strSql="CREATE INDEX VIEW_"+TableName+"_IX ON "+TableName+"(CUSTOMER)";
+            //((OraDBManager)Common.dbMgr).ExecuteNonQuery(CommandType.Text, strSql);
+            //  }
+            //  catch (Exception ex)
+            //  {
+            //     throw ex;
+            // }
+
         }
 
         public void fnCreateTableTab(string TableName, string Columns, string filter)
         {
             try
             {
-                 string strSql ="";
-                    strSql= "select count(*)  from user_tables where table_name = '"+TableName + "_V'";
-                   int i=  int.Parse(((OraDBManager)Common.dbMgr).ExecuteScalar(CommandType.Text, strSql));
-                   if (i > 0)
-                   {
+                string strSql = "";
+                strSql = "select count(*)  from user_tables where table_name = '" + TableName + "_V'";
+                int i = int.Parse(((OraDBManager)Common.dbMgr).ExecuteScalar(CommandType.Text, strSql));
+                if (i > 0)
+                {
 
-                       strSql = "DROP TABLE  " + TableName + "_V";
-                       if (Common.iDBType == (int)Enums.DBType.Oracle)
-                       {
-                           ((OraDBManager)Common.dbMgr).ExecuteScalar(CommandType.Text, strSql);
-                       }
-                       else
-                       {
-                           ((DBManager)Common.dbMgr).ExecuteScalar(CommandType.Text, strSql);
-                       }
-                   }
-                 strSql = "Create Table " + TableName + "_V as Select " + Columns + " from " + TableName+ " nologging";
+                    strSql = "DROP TABLE  " + TableName + "_V";
+                    if (Common.iDBType == (int)Enums.DBType.Oracle)
+                    {
+                        ((OraDBManager)Common.dbMgr).ExecuteScalar(CommandType.Text, strSql);
+                    }
+                    else
+                    {
+                        ((DBManager)Common.dbMgr).ExecuteScalar(CommandType.Text, strSql);
+                    }
+                }
+                strSql = "Create Table " + TableName + "_V as Select " + Columns + " from " + TableName + " nologging";
                 ((OraDBManager)Common.dbMgr).ExecuteNonQuery(CommandType.Text, strSql);
 
-                strSql = "CREATE INDEX " + TableName + "_V_IX on " + TableName+"_V" + "(CUSTOMER)";
+                strSql = "CREATE INDEX " + TableName + "_V_IX on " + TableName + "_V" + "(CUSTOMER)";
                 ((OraDBManager)Common.dbMgr).ExecuteNonQuery(CommandType.Text, strSql);
             }
             catch (Exception ex)
@@ -2117,8 +2479,8 @@ namespace RecoEngine_BI
             try
             {
                 DataTable dt = new DataTable();
-               // strSql = "Select  " + strString + " from " + strTableName + " Where ROWNUM <=2";
-                string strSQL = "Select * from "+TableName+" where ROWNUM<=100";
+                // strSql = "Select  " + strString + " from " + strTableName + " Where ROWNUM <=2";
+                string strSQL = "Select * from " + TableName + " where ROWNUM<=100";
 
                 dt = ((OraDBManager)Common.dbMgr).ExecuteDataTable(CommandType.Text, strSQL);
                 return dt;

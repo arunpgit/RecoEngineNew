@@ -22,6 +22,11 @@ namespace RecoEngine_BI
                     iOfferCount = int.Parse(((OraDBManager)Common.dbMgr).ExecuteScalar(CommandType.Text, "Select count(1) from  OFFERS WHERE ISACTIVE=1 AND PROJECT_ID =" + iProjectID));
                     return int.Parse(((OraDBManager)Common.dbMgr).ExecuteScalar(CommandType.Text, strSql));
                 }
+                else if (Common.iDBType == (int)Enums.DBType.Mysql)
+                {
+                    iOfferCount = int.Parse(((MySqlDBManager)Common.dbMgr).ExecuteScalar(CommandType.Text, "Select count(1) from  OFFERS WHERE ISACTIVE=1 AND PROJECT_ID =" + iProjectID));
+                    return int.Parse(((MySqlDBManager)Common.dbMgr).ExecuteScalar(CommandType.Text, strSql));
+                }
                 else
                 {
                     //iOfferCount = int.Parse(((DBManager)Common.dbMgr).ExecuteScalar(CommandType.Text, "Select count(1) from  OFFERS WHERE PROJECT_ID =" + iProjectID));

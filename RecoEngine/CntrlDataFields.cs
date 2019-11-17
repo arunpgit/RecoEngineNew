@@ -87,7 +87,9 @@ namespace RecoEngine
                 ddlTableName.DisplayMember = "TNAME";
 
                 if (Common.strTableName != "")
-                    ddlTableName.SelectedValue = Common.strTableName;
+                    
+                    ddlTableName.SelectedIndex = ddlTableName.Items.IndexOf(Common.strTableName.ToLower());
+                
                 else
                     ddlTableName.SelectedIndex = 0;
             }
@@ -113,7 +115,7 @@ namespace RecoEngine
                     str["ColumnName"] = row["COLNAME"].ToString();
                     str["Table"] = "C";
                     DataRow dataRow = str;
-                    if (row["COLDATATYPE"].ToString() == "NUMBER")
+                    if (row["COLDATATYPE"].ToString() == "NUMBER" || row["COLDATATYPE"].ToString() == "double")
                     {
                         obj = typeof(decimal);
                     }
@@ -141,7 +143,7 @@ namespace RecoEngine
                         if ((int)dataRowArray.Length <= 0 || !(dataRowArray[0]["TABLENAME"].ToString().ToLower() == this.ddlTableName.SelectedValue.ToString().ToLower()))
                         {
                             item.Rows[i]["Type"] = 5;
-                            if (item.Rows[i]["Table"] != null)
+                            if ( item.Rows[i]["Table"].ToString() != "C")
                             {
                                 item.Rows[i]["Table"] = "M";
                             }
@@ -311,8 +313,9 @@ namespace RecoEngine
 
                 if (bIsLoaded)
                 {
-                    dataschemaGridbinding();
+
                     Common.strTableName = ddlTableName.SelectedValue.ToString();
+                    dataschemaGridbinding();
                 }
             }
             catch (Exception ex)

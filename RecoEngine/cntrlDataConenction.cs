@@ -7,9 +7,10 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 using RecoEngine_BI;
-using RecoEngine_DataLayer;
 using Telerik.WinControls;
 using System.Configuration;
+using RecoEngine_DataLayer;
+
 namespace RecoEngine
 {
     public partial class cntrlDataConenction : UserControl

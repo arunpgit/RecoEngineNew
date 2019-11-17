@@ -17,12 +17,12 @@ namespace RecoEngine
     public partial class CntrlOfferLibrary : UserControl
     {
         bool bIsShowOPPList = false;
-      
+
         clsOffers clsObj = new clsOffers();
         int iTabIndex = 0;
         int iOfferID = 0;
         bool bIsOffersLoaded = false;
-          public CntrlOfferLibrary(int iTabIndex)
+        public CntrlOfferLibrary(int iTabIndex)
         {
             this.iTabIndex = iTabIndex;
             InitializeComponent();
@@ -37,7 +37,7 @@ namespace RecoEngine
                     case 1:
                         pgOfferLibrary.SelectedPage = pgOffers;
                         fnShowOffersList(true);
-                       
+
                         break;
                     case 2:
                         pgOfferLibrary.SelectedPage = pgCampaign;
@@ -231,25 +231,33 @@ namespace RecoEngine
                 ddlLevel5.SelectedIndex = 0;
                 chkIsActive.Checked = true;
                 txtDesc.Text = "";
-                txtCode.Text = ddlLevel2.SelectedValue.ToString() + "_" + ddlLevel3.SelectedValue.ToString() + "_" + ddlLevel4.SelectedValue.ToString() + "_" + ddlLevel5.SelectedValue.ToString();
+                RadTextBox radTextBox = this.txtCode;
+                string[] str = new string[] { this.ddlLevel2.SelectedValue.ToString(), "_", this.ddlLevel3.SelectedValue.ToString(), "_", this.ddlLevel4.SelectedValue.ToString(), "_", this.ddlLevel5.SelectedValue.ToString() };
+                radTextBox.Text = string.Concat(str);
             }
-            catch (Exception ex)
+            catch (Exception exception1)
             {
-                Telerik.WinControls.RadMessageBox.Show(this, ex.Message, ex.TargetSite.Name.ToString(), MessageBoxButtons.OK, RadMessageIcon.Error, MessageBoxDefaultButton.Button1);
+                Exception exception = exception1;
+                RadMessageBox.Show(this, exception.Message, exception.TargetSite.Name.ToString(), MessageBoxButtons.OK, RadMessageIcon.Error, MessageBoxDefaultButton.Button1);
             }
         }
 
         private void ddlLevel1_SelectedIndexChanged(object sender, Telerik.WinControls.UI.Data.PositionChangedEventArgs e)
         {
+
             try
             {
-                if (!bIsOffersLoaded)
-                    return;
-                txtCode.Text = ddlLevel1.SelectedValue.ToString() + "_" + ddlLevel2.SelectedValue.ToString() + "_" + ddlLevel3.SelectedValue.ToString() + "_" + ddlLevel4.SelectedValue.ToString() + "_" + ddlLevel5.SelectedValue.ToString();
+                if (this.bIsOffersLoaded)
+                {
+                    RadTextBox radTextBox = this.txtCode;
+                    string[] str = new string[] { this.ddlLevel1.SelectedValue.ToString(), "_", this.ddlLevel2.SelectedValue.ToString(), "_", this.ddlLevel3.SelectedValue.ToString(), "_", this.ddlLevel4.SelectedValue.ToString(), "_", this.ddlLevel5.SelectedValue.ToString() };
+                    radTextBox.Text = string.Concat(str);
+                }
             }
-            catch (Exception ex)
+            catch (Exception exception1)
             {
-                Telerik.WinControls.RadMessageBox.Show(this, ex.Message, ex.TargetSite.Name.ToString(), MessageBoxButtons.OK, RadMessageIcon.Error, MessageBoxDefaultButton.Button1);
+                Exception exception = exception1;
+                RadMessageBox.Show(this, exception.Message, exception.TargetSite.Name.ToString(), MessageBoxButtons.OK, RadMessageIcon.Error, MessageBoxDefaultButton.Button1);
             }
         }
 
@@ -298,14 +306,14 @@ namespace RecoEngine
                 frmOriginal frmorgin = (frmOriginal)Common.TopMostParent(this);
                 frmorgin.fnOffersOpprortunityCount();
                 //frmorgin.fnShowOffers(1);
-               
+
             }
             catch (Exception ex)
             {
                 Telerik.WinControls.RadMessageBox.Show(this, ex.Message, ex.TargetSite.Name.ToString(), MessageBoxButtons.OK, RadMessageIcon.Error, MessageBoxDefaultButton.Button1);
             }
         }
-    
+
         private void btnONext_Click(object sender, EventArgs e)
         {
             try
@@ -380,7 +388,7 @@ namespace RecoEngine
                 Telerik.WinControls.RadMessageBox.Show(this, ex.Message, ex.TargetSite.Name.ToString(), MessageBoxButtons.OK, RadMessageIcon.Error, MessageBoxDefaultButton.Button1);
             }
         }
-       private void btnOInActive_Click(object sender, EventArgs e)
+        private void btnOInActive_Click(object sender, EventArgs e)
         {
             try
             {
@@ -437,18 +445,6 @@ namespace RecoEngine
             }
         }
 
-     
-       private void pgCampaign_Paint(object sender, PaintEventArgs e)
-       {
 
-       }
-
-   
-
-       
-
-     
-
-           
     }
 }

@@ -583,7 +583,6 @@
             this.pgCampaign.Size = new System.Drawing.Size(773, 555);
             this.pgCampaign.Tag = "Campaign";
             this.pgCampaign.Text = "Campaign Mapping";
-            this.pgCampaign.Paint += new System.Windows.Forms.PaintEventHandler(this.pgCampaign_Paint);
             // 
             // gbNewcampaign
             // 

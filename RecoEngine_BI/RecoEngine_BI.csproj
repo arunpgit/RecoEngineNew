@@ -36,6 +36,9 @@
     <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="RecoEngine_BI">
+      <HintPath>..\..\RecoEngineNew\RecoEngine_BI\bin\Debug\RecoEngine_BI.dll</HintPath>
+    </Reference>
     <Reference Include="RecoEngine_DataLayer, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\RecoEngine_DataLayer\bin\Debug\RecoEngine_DataLayer.dll</HintPath>

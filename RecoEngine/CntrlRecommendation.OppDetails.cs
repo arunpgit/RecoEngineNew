@@ -52,73 +52,64 @@ namespace RecoEngine
         {
             try
             {
-                DialogResult ds = RadMessageBox.Show(this, "This will apply the rules on the entire dataset, are you sure you want to continue", "Confirmation", MessageBoxButtons.YesNo, RadMessageIcon.Info);
-                if (ds.ToString() == "Yes")
+                if (RadMessageBox.Show(this, "This will apply the rules on the entire dataset, are you sure you want to continue", "Confirmation", MessageBoxButtons.YesNo, RadMessageIcon.Info).ToString() == "Yes")
                 {
-
-                    if (objRanking.fnRankingcriteria(Common.iProjectID).Rows.Count > 0)
+                    if (this.objRanking.fnRankingcriteria(Common.iProjectID).Rows.Count <= 0)
                     {
-                        alert = new AlertForm();
-                        alert.SetMessage("Loading data. Please wait..."); // "Loading data. Please wait..."
-                        alert.TopMost = true;
-                        alert.StartPosition = FormStartPosition.CenterScreen;
-                        alert.Show();
-                        alert.Refresh();
-                        fnCreateView();
-                        string strT1String = clstreDetails.fnBuildTimePeriod(Common.timePeriods.strtp1);
-                        string strT2String = clstreDetails.fnBuildTimePeriod(Common.timePeriods.strtp2);
-                       // clstreDetails.fnDeleteTreOppfrmExport();
-                        //if (ClsObj.fnRunOPoortunities(Common.iProjectID, Common.strTableName, strT1String, strT2String, strMainFilter))
-                        //{
-                        //    objRanking.fnMainRankingfrmExport(Common.iProjectID);
-                        //    fnShowOpportunitiesDetails();
-
-                        //    clstreDetails.fnDropTableTab(Common.strTableName);
-                        //}
-
-                        if (ClsObj.fnRunOPoortunitiesfrmProcedure(Common.iProjectID, Common.strTableName, strT1String, strT2String))
-                        {
-                            objRanking.fnMainRankingfrmExport(Common.iProjectID);
-                            fnShowOpportunitiesDetails();
-                            //clstreDetails.fnDropTableTab(Common.strTableName);
-                        }
-
-                        alert.Close();
+                        RadMessageBox.Show(this, "Select the  Ranking Criteria ,Inorder to run Opportunities ", "Information", MessageBoxButtons.OK, RadMessageIcon.Error, MessageBoxDefaultButton.Button1);
+                        return;
                     }
                     else
                     {
-                        Telerik.WinControls.RadMessageBox.Show(this, "Select the  Ranking Criteria ,Inorder to run Opportunities ", "Information", MessageBoxButtons.OK, RadMessageIcon.Error, MessageBoxDefaultButton.Button1);
-                        return;
+                        this.alert = new AlertForm();
+                        this.alert.SetMessage("Loading data. Please wait...");
+                        this.alert.TopMost = true;
+                        this.alert.StartPosition = FormStartPosition.CenterScreen;
+                        this.alert.Show();
+                        this.alert.Refresh();
+                        this.fnCreateView();
+                        string str = this.clstreDetails.fnBuildTimePeriod(Common.timePeriods.strtp1);
+                        string str1 = this.clstreDetails.fnBuildTimePeriod(Common.timePeriods.strtp2);
+                        this.clstreDetails.fnDeleteTreOppfrmExport();
+                        if (this.ClsObj.fnRunOPoortunitiesfrmProcedure(Common.iProjectID, Common.strTableName, str, str1))
+                        {
+                            this.objRanking.fnMainRankingfrmExport(Common.iProjectID);
+                            this.fnShowOpportunitiesDetails();
+                        }
+                        this.alert.Close();
                     }
                 }
             }
-            catch (Exception ex)
+            catch (Exception exception1)
             {
-                alert.Close();
-                MessageBox.Show(ex.Message);
-            }       
+                Exception exception = exception1;
+                this.alert.Close();
+                MessageBox.Show(exception.Message);
+            }
         }
-        void fnCreateView()
+
+        private void fnCreateView()
         {
-            string strColumns = "";
-            clsDataSource objDatsource = new clsDataSource();
-             strMainFilter = objDatsource.fnselectFilterCondition(Common.iProjectID);
-             
-            DataTable dtcol = objDatsource.fnGetTreDetailsSchema(Common.strTableName);
-            foreach (DataRow dr in dtcol.Rows)
+            string str = "";
+            clsDataSource _clsDataSource = new clsDataSource();
+            this.strMainFilter = _clsDataSource.fnselectFilterCondition(Common.iProjectID);
+            DataTable dataTable = _clsDataSource.fnGetTreDetailsSchema(Common.strTableName);
+            foreach (DataRow row in dataTable.Rows)
             {
-                strColumns += dr[0].ToString();
-                strColumns += ",";
+                str = string.Concat(str, row[0].ToString());
+                str = string.Concat(str, ",");
             }
-            dtcol = objDatsource.fnGetCalaculatedColMappingData(Common.iProjectID,Common.strTableName);
-             foreach (DataRow dr in dtcol.Rows)
+            dataTable = _clsDataSource.fnGetCalaculatedColMappingData(Common.iProjectID, Common.strTableName);
+            foreach (DataRow dataRow in dataTable.Rows)
             {
-                strColumns += dr["COMBINE_COLUMNS"].ToString() + " " + dr["COLNAME"].ToString();
-                strColumns += ",";
+                str = string.Concat(str, dataRow["COMBINE_COLUMNS"].ToString(), " ", dataRow["COLNAME"].ToString());
+                str = string.Concat(str, ",");
             }
-            if (strColumns.Length > 0)
-                strColumns = strColumns.Remove(strColumns.Length - 1, 1);
-            clstreDetails.fnCreateTableTab(Common.strTableName, strColumns, strMainFilter);
+            if (str.Length > 0)
+            {
+                str = str.Remove(str.Length - 1, 1);
+            }
+            this.clstreDetails.fnCreateTableView(Common.strTableName, str, this.strMainFilter);
         }
     }
 }

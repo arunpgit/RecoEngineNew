@@ -260,7 +260,7 @@ namespace RecoEngine_BI
                         strQuery += " OR ";
                     if (Common.iDBType == (int)Enums.DBType.Oracle)
                         strQuery += " to_char(year) || '-' || to_char(week) = ";
-                    else if (Common.iDBType == (int)Enums.DBType.SQl)
+                    else if (Common.iDBType == (int)Enums.DBType.Mysql)
                         strQuery += " to_char(year) + '-' + to_char(week) = ";
                     strQuery += "'";
                     strQuery += str[i].Trim();

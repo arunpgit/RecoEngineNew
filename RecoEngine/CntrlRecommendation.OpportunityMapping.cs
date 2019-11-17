@@ -16,7 +16,7 @@ namespace RecoEngine
 {
     partial class CntrlRecommendation
     {
-        string[] OpportunityTypes={"ACQUISITION-RECOMMEND","ACQUISITION-REPLICATE","ACQUISITION-REACTIVATE","STIMULATION","RETENTION-RETAIN","RETENTION-SATISFY"} ;
+        string[] OpportunityTypes = { "ACQUISITION-RECOMMEND", "ACQUISITION-REPLICATE", "ACQUISITION-REACTIVATE", "STIMULATION", "RETENTION-RETAIN", "RETENTION-SATISFY" };
         bool bIsThresholdModified = false;
         bool bIsPtnlModified = false;
         bool bIsOnMain = false;
@@ -33,7 +33,7 @@ namespace RecoEngine
                     gbMain.Dock = DockStyle.None;
                     gbOpportunityList.Dock = DockStyle.Fill;
                     fnLoadOpportunity();
-                 }
+                }
                 else
                 {
                     bIsShowOPPList = false;
@@ -76,39 +76,33 @@ namespace RecoEngine
             this.Cursor = Cursors.WaitCursor;
             try
             {
-                if (Common.sOpportunityName != "")
+                try
                 {
-                    iOpportunityId = int.Parse(grdOppList.CurrentRow.Cells["OPPORTUNITY_ID"].Value.ToString());
-                    string strFormula = grdOppList.CurrentRow.Cells["FORMULA"].Value.ToString();
-                    string strPtnlFilter = grdOppList.CurrentRow.Cells["ELGBL_FORMULA"].Value.ToString();
-                    // pgThresholds.Controls.Clear();
-                    ctrlThreshold ctl = new ctrlThreshold(iOpportunityId, strFormula,strPtnlFilter, Common.timePeriods.strtp1, Common.timePeriods.strtp2);
-                    if (ctl.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+                    if (Common.sOpportunityName == "")
                     {
-
+                        RadMessageBox.Show(this, "Please select Opportunity.", "Information", MessageBoxButtons.OK, RadMessageIcon.Info, MessageBoxDefaultButton.Button1);
+                        this.pgVRecommendation.SelectedPage = this.pgOpportunityMapping;
+                        this.fnShowOpporunityList(true);
                     }
-                    //ctl.Dock = DockStyle.Fill;
-                    //Telerik.WinControls.UI.RadGroupBox gbDummy = Common.GetfrmDummy();
-                    //pgThresholds.Controls.Add(gbDummy);
-                    //pgThresholds.Controls.Add(ctl);
-                    //pgThresholds.Controls.Remove(gbDummy);
+                    else
+                    {
+                        this.iOpportunityId = int.Parse(this.grdOppList.CurrentRow.Cells["OPPORTUNITY_ID"].Value.ToString());
+                        string str = this.grdOppList.CurrentRow.Cells["FORMULA"].Value.ToString();
+                        string str1 = this.grdOppList.CurrentRow.Cells["ELGBL_FORMULA"].Value.ToString();
+                        if ((new ctrlThreshold(this.iOpportunityId, str, str1, Common.timePeriods.strtp1, Common.timePeriods.strtp2)).ShowDialog() == DialogResult.OK)
+                        {
+                        }
+                    }
                 }
-                else
+                catch (Exception exception)
                 {
-                    Telerik.WinControls.RadMessageBox.Show(this, "Please select Opportunity.", "Information", MessageBoxButtons.OK, RadMessageIcon.Info, MessageBoxDefaultButton.Button1);
-                    pgVRecommendation.SelectedPage = pgOpportunityMapping;
-                    fnShowOpporunityList(true);
+                    throw exception;
                 }
-            }
-            catch (Exception ex)
-            {
-                throw ex;
             }
             finally
             {
                 this.Cursor = Cursors.Default;
             }
-
         }
         void fnLoadOpportunity()
         {
@@ -118,7 +112,7 @@ namespace RecoEngine
 
                 clsOpportunities clsObj = new clsOpportunities();
                 bool bIsOpplist = true;
-                DataTable dt = clsObj.fnGetOpportunity(Common.iProjectID,Common.iUserID,bIsOpplist);
+                DataTable dt = clsObj.fnGetOpportunity(Common.iProjectID, Common.iUserID, bIsOpplist);
                 dt.Columns.Add(new DataColumn("Select", typeof(bool)));
                 dt.Columns.Add(new DataColumn("Active", typeof(bool)));
 
@@ -131,7 +125,7 @@ namespace RecoEngine
                         dt.Rows[i]["Active"] = false;
 
                 }
-                
+
                 if (dt.Rows.Count == 0)
                 {
                     for (int i = 0; i < 15; i++)
@@ -173,63 +167,59 @@ namespace RecoEngine
         {
             try
             {
-                clsOpportunities clsObj = new clsOpportunities();
-                DataTable dt = ((DataTable)grdOppList.DataSource);
-                DataRow[] drRow = dt.Select("Flag='Y'");
-                if (drRow.Length == 0)
+                clsOpportunities clsOpportunity = new clsOpportunities();
+                DataRow[] dataRowArray = ((DataTable)this.grdOppList.DataSource).Select("Flag='Y'");
+                if ((int)dataRowArray.Length == 0)
                 {
-                    Telerik.WinControls.RadMessageBox.Show(this, "Active/Inactive at least one Opportunity.", "Information", MessageBoxButtons.OK, RadMessageIcon.Error, MessageBoxDefaultButton.Button1);
-                    return;
+                    RadMessageBox.Show(this, "Active/Inactive at least one Opportunity.", "Information", MessageBoxButtons.OK, RadMessageIcon.Error, MessageBoxDefaultButton.Button1);
                 }
-                else
+                else if (RadMessageBox.Show(this, "Do you wish to Active/Inactive selected Campaign(s)?", "Confirmation", MessageBoxButtons.YesNo, RadMessageIcon.Info, MessageBoxDefaultButton.Button1) == DialogResult.Yes)
                 {
-
-                    DialogResult ds = Telerik.WinControls.RadMessageBox.Show(this, "Do you wish to Active/Inactive selected Campaign(s)?", "Confirmation", MessageBoxButtons.YesNo, RadMessageIcon.Info, MessageBoxDefaultButton.Button1);
-                    if (ds != DialogResult.Yes)
+                    ArrayList arrayLists = new ArrayList();
+                    string str = "";
+                    int num = 0;
+                    while (num < (int)dataRowArray.Length)
                     {
-                        return;
-                    }
-                    ArrayList recForInactive = new ArrayList();
-                    string strId = "";
-                    for (int i = 0; i < drRow.Length; i++)
-                    {
-                        strId = drRow[i]["OPP_NAME"].ToString();
-
-                        if (ClsObj.fnCheckOPPHasInRanking(strId,Common.iProjectID))
+                        str = dataRowArray[num]["OPP_NAME"].ToString();
+                        if (!this.ClsObj.fnCheckOPPHasInRanking(str, Common.iProjectID))
                         {
-                            Telerik.WinControls.RadMessageBox.Show(this, "This opportunity is selected in Ranking, you can not Inactive this Opportunity", "Confirmation", MessageBoxButtons.OK, RadMessageIcon.Info, MessageBoxDefaultButton.Button1);
-                            break;
-                        }
-                        if ((bool)drRow[i]["Active"])
-                        {
-                            strId += ";1";
+                            str = (!(bool)dataRowArray[num]["Active"] ? string.Concat(str, ";0") : string.Concat(str, ";1"));
+                            arrayLists.Add(str);
+                            num++;
                         }
                         else
-                            strId += ";0";
-                        recForInactive.Add(strId);
-                    }
-
-                    if (recForInactive.Count > 0)
-                    {
-                        for (int i = 0; i < recForInactive.Count; i++)
                         {
-                            if (!clsObj.fnActiveOpportunities(recForInactive[i].ToString()))
+                            RadMessageBox.Show(this, "This opportunity is selected in Ranking, you can not Inactive this Opportunity", "Confirmation", MessageBoxButtons.OK, RadMessageIcon.Info, MessageBoxDefaultButton.Button1);
+                            break;
+                        }
+                    }
+                    if (arrayLists.Count > 0)
+                    {
+                        int num1 = 0;
+                        while (num1 < arrayLists.Count)
+                        {
+                            if (clsOpportunity.fnActiveOpportunities(arrayLists[num1].ToString()))
+                            {
+                                num1++;
+                            }
+                            else
                             {
                                 return;
                             }
                         }
                     }
-
-                    
-                  fnLoadOpportunity();
+                    this.fnLoadOpportunity();
                 }
             }
-            catch (Exception ex)
+            catch (Exception exception1)
             {
-                Telerik.WinControls.RadMessageBox.Show(this, ex.Message, ex.TargetSite.Name.ToString(), MessageBoxButtons.OK, RadMessageIcon.Error, MessageBoxDefaultButton.Button1);
+                Exception exception = exception1;
+                RadMessageBox.Show(this, exception.Message, exception.TargetSite.Name.ToString(), MessageBoxButtons.OK, RadMessageIcon.Error, MessageBoxDefaultButton.Button1);
             }
-
         }
+
+
+
         private void grdOppList_CellClick(object sender, GridViewCellEventArgs e)
         {
             try
@@ -242,12 +232,12 @@ namespace RecoEngine
                         //  pgVRecommendation.SelectedPage = pgThresholds;
                         fnShowThreshold();
                     }
-                  if (e.Column.Name.ToUpper() == "SELECT")
-                            {
-                     GridViewRowInfo drRow = grdOppList.CurrentRow;
-                                drRow.Cells["Flag"].Value = "Y";
-                            }
-                      
+                    if (e.Column.Name.ToUpper() == "SELECT")
+                    {
+                        GridViewRowInfo drRow = grdOppList.CurrentRow;
+                        drRow.Cells["Flag"].Value = "Y";
+                    }
+
                 }
 
             }
@@ -256,101 +246,104 @@ namespace RecoEngine
                 Telerik.WinControls.RadMessageBox.Show(this, ex.Message, ex.TargetSite.Name.ToString(), MessageBoxButtons.OK, RadMessageIcon.Error, MessageBoxDefaultButton.Button1);
             }
         }
-        void grdOppList_CellFormatting(object sender, CellFormattingEventArgs e)
+
+        private void grdOppList_CellFormatting(object sender, CellFormattingEventArgs e)
         {
             try
             {
                 if (e.Column.Name.ToLower() == "threshold")
                 {
-                    e.CellElement.Image = imgList.Images[0];
+                    e.CellElement.Image = this.imgList.Images[0];
                 }
             }
-            catch (Exception ex)
+            catch (Exception exception1)
             {
-                Telerik.WinControls.RadMessageBox.Show(this, ex.Message, ex.TargetSite.Name.ToString(), MessageBoxButtons.OK, RadMessageIcon.Error, MessageBoxDefaultButton.Button1);
+                Exception exception = exception1;
+                RadMessageBox.Show(this, exception.Message, exception.TargetSite.Name.ToString(), MessageBoxButtons.OK, RadMessageIcon.Error, MessageBoxDefaultButton.Button1);
             }
         }
+
         private void fnFillSource()
         {
             try
             {
-                clsDataSource clsObj = new clsDataSource();
-                DataTable dtSource = clsObj.fnGetColMappingData(Common.iProjectID);
-                DataRow[] dr = dtSource.Select("TYPE=" + ((int)Enums.ColType.Input).ToString() + " And ISREQUIRED=1");
-
-                DataTable dt = dr.CopyToDataTable();
-
-                ddlSource.DataSource = dt;
-                ddlSource.ValueMember = "COLNAME";
-                ddlSource.DisplayMember = "COLNAME";
-
-                ddlSource.SelectedIndex = 0;
-                foreach (string opptype in OpportunityTypes)
+                DataTable dataTable = (new clsDataSource()).fnGetColMappingData(Common.iProjectID);
+                int num = 2;
+                DataRow[] dataRowArray = dataTable.Select(string.Concat("TYPE=", num.ToString(), " And ISREQUIRED=1"));
+                DataTable dataTable1 = dataRowArray.CopyToDataTable<DataRow>();
+                this.ddlSource.DataSource = dataTable1;
+                this.ddlSource.ValueMember = "COLNAME";
+                this.ddlSource.DisplayMember = "COLNAME";
+                this.ddlSource.SelectedIndex = 0;
+                string[] opportunityTypes = this.OpportunityTypes;
+                for (int i = 0; i < (int)opportunityTypes.Length; i++)
                 {
-                    ddlOpportunityType.Items.Add(opptype);
+                    string str = opportunityTypes[i];
+                    this.ddlOpportunityType.Items.Add(str);
                 }
-                ddlOpportunityType.SelectedIndex = 0;
-
+                this.ddlOpportunityType.SelectedIndex = 0;
             }
-            catch (Exception ex)
+            catch (Exception exception)
             {
-                throw ex;
+                throw exception;
             }
         }
         private void btnSave_Click(object sender, EventArgs e)
-
         {
             try
             {
                 Common.WriteLog("Save button Clicked");
-                if (txtName.Text.Trim().Length == 0)
+                if (this.txtName.Text.Trim().Length != 0)
                 {
-                    Telerik.WinControls.RadMessageBox.Show("Opportunity Name Should not be blank", "Validation", MessageBoxButtons.OK, RadMessageIcon.Info, MessageBoxDefaultButton.Button1);
-                    txtName.Focus();
+                    this.strExpression = this.ddlSource.SelectedValue.ToString();
+                    if (this.strExpression == "")
+                    {
+                        RadMessageBox.Show("Please Add formula.", "Validation", MessageBoxButtons.OK, RadMessageIcon.Info, MessageBoxDefaultButton.Button1);
+                        this.ddlSource.Focus();
+                        return;
+                    }
+                    else if (this.strCurrentSegmentColumn != "")
+                    {
+                        Common.strFormula = this.strExpression;
+                        string text = this.txtName.Text;
+                        Common.sOpportunityName = text;
+                        Common.sOpportunityName = text;
+                        int num = 0;
+                        if (this.chkIsActive.Checked)
+                        {
+                            num = 1;
+                        }
+                        this.iOpportunityId = this.ClsObj.fnSaveOpportunity(this.iOpportunityId, this.txtName.Text.ToString(), this.txtDesc.Text.ToString(), this.strExpression, Common.strPtnlFilter, Common.iUserID, Common.iProjectID, Common.strTableName, Common.strKeyName, Common.timePeriods.strtp1, Common.timePeriods.strtp2, num, ddlOpportunityType.SelectedIndex.ToString());
+                        Common.WriteLog("New Opportunity is added to the OPPORTUNITY table");
+                        this.fnSaveThresholdAndPotential(this.iOpportunityId);
+                        Common.strPtnlFilter = "";
+                        ((frmOriginal)this.TopMostParent()).fnOffersOpprortunityCount();
+                        this.bIsOnMain = false;
+                        Common.WriteLog("Threshold and Potential are added to Status Breakdown");
+                    }
+                    else
+                    {
+                        RadMessageBox.Show("Please Select Segment ", "Validation", MessageBoxButtons.OK, RadMessageIcon.Info, MessageBoxDefaultButton.Button1);
+                        return;
+                    }
+                }
+                else
+                {
+                    RadMessageBox.Show("Opportunity Name Should not be blank", "Validation", MessageBoxButtons.OK, RadMessageIcon.Info, MessageBoxDefaultButton.Button1);
+                    this.txtName.Focus();
                     return;
                 }
-                strExpression = ddlSource.SelectedValue.ToString();
-                if (strExpression == "")
-                {
-                    Telerik.WinControls.RadMessageBox.Show("Please Add formula.", "Validation", MessageBoxButtons.OK, RadMessageIcon.Info, MessageBoxDefaultButton.Button1);
-                    ddlSource.Focus();
-                    return;
-                }
-
-                if (strCurrentSegmentColumn == "")
-                {
-                    Telerik.WinControls.RadMessageBox.Show("Please Select Segment ", "Validation", MessageBoxButtons.OK, RadMessageIcon.Info, MessageBoxDefaultButton.Button1);
-                    return;
-                }
-
-                //string strEx = strExpression.Replace("FIELD!", "");
-                //if (strEx.StartsWith("="))
-                //    strEx = strEx.Substring(1);
-
-                Common.strFormula = strExpression;
-                Common.sOpportunityName = Common.sOpportunityName = txtName.Text;
-            
-                int iIsActive = 0;
-                if (chkIsActive.Checked)
-                    iIsActive = 1;
-
-                iOpportunityId = ClsObj.fnSaveOpportunity(iOpportunityId, txtName.Text.ToString(), txtDesc.Text.ToString(), strExpression,Common.strPtnlFilter, Common.iUserID, Common.iProjectID, Common.strTableName, Common.strKeyName, Common.timePeriods.strtp1, Common.timePeriods.strtp2, iIsActive,((Enums.OpportunityType)ddlOpportunityType.SelectedIndex).ToString());
-                Common.WriteLog("New Opportunity is added to the OPPORTUNITY table");
-
-                fnSaveThresholdAndPotential(iOpportunityId);
-                Common.strPtnlFilter = "";
-                frmOriginal frmorgin = (frmOriginal)Common.TopMostParent(this);
-                frmorgin.fnOffersOpprortunityCount();
-                bIsOnMain = false;
-
-                Common.WriteLog("Threshold and Potential are added to Status Breakdown");
             }
-            catch (Exception ex)
+            catch (Exception exception1)
             {
-                Telerik.WinControls.RadMessageBox.Show(this, ex.Message, ex.TargetSite.Name.ToString(), MessageBoxButtons.OK, RadMessageIcon.Error, MessageBoxDefaultButton.Button1);
+                Exception exception = exception1;
+                RadMessageBox.Show(this, exception.Message, exception.TargetSite.Name.ToString(), MessageBoxButtons.OK, RadMessageIcon.Error, MessageBoxDefaultButton.Button1);
             }
             Common.WriteLog("Save Complete");
         }
+
+
+
         private void fnSaveThresholdAndPotential(int iOpportunityId)
         {
             try
@@ -377,14 +370,14 @@ namespace RecoEngine
                     string strAvgNonUser = strAvg[4] == "" ? "0" : strAvg[4];
                     string strAvgNewUser = strAvg[5] == "" ? "0" : strAvg[5];
 
-                    if (clsTObj.fnSaveTREThreShold(Common.timePeriods.strtp1, Common.timePeriods.strtp2, Common.sOpportunityName, strCtDropper, strCtGrower, srtCtStopper, iOpportunityId, "Tre_Random",Common.iProjectID,Common.strPtnlFilter, bIsOnMain))
+                    if (clsTObj.fnSaveTREThreShold(Common.timePeriods.strtp1, Common.timePeriods.strtp2, Common.sOpportunityName, strCtDropper, strCtGrower, srtCtStopper, iOpportunityId, "Tre_Random", Common.iProjectID, Common.strPtnlFilter, bIsOnMain))
                     {
-                        clsTObj.fnGetBaseData(Common.strTableName, strCtGrower,Common.iProjectID);
+                        clsTObj.fnGetBaseData(Common.strTableName, strCtGrower, Common.iProjectID);
                         clsTObj.fnSaveOPPBreakDownStatus(iOpportunityId, Convert.ToDecimal(strCtDropper), Convert.ToDecimal(strCtGrower), Convert.ToDecimal(srtCtStopper),
                        Common.timePeriods.strtp1, Common.timePeriods.strtp2, strCurrentSegmentColumn, iIsActive);
                         clsTObj.fnInsertOppValues(iOpportunityId);
-                        
-                        
+
+
                         // clsTObj.fnSaveOPPBreakDownStatus(iOpportunityId, 0, Convert.ToDecimal(strCtDropper), Convert.ToDecimal(strCtGrower), Convert.ToDecimal(srtCtStopper), 0, 0,
                         //  Convert.ToDecimal(strCFlat), Convert.ToDecimal(strCDropper), Convert.ToDecimal(strCtGrower), Convert.ToDecimal(srtCStopper), Convert.ToDecimal(strCNonUser),
                         //Convert.ToDecimal(strCNewUser), Convert.ToDecimal(strAvgFlat), Convert.ToDecimal(strAvgDropper),
@@ -456,7 +449,7 @@ namespace RecoEngine
                     strPtnlFilter = grdOppList.MasterView.CurrentRow.Cells["ELGBL_FORMULA"].Value.ToString();
                     ddlOpportunityType.SelectedValue = grdOppList.MasterView.CurrentRow.Cells["OPP_ACTION"].Value.ToString();
                     ddlSource.SelectedValue = strExpression;
-                     strPntlExpression = grdOppList.MasterView.CurrentRow.Cells["PTNL_FORMULA"].Value.ToString();
+                    strPntlExpression = grdOppList.MasterView.CurrentRow.Cells["PTNL_FORMULA"].Value.ToString();
                     if (grdOppList.MasterView.CurrentRow.Cells["ISONMAIN"].Value.ToString() == "1")
                         bIsOnMain = true;
                     if (grdOppList.MasterView.CurrentRow.Cells["ISACTIVEID"].Value.ToString() == "1")
@@ -483,7 +476,7 @@ namespace RecoEngine
             try
             {
 
-               // iOpportunityId = 0;
+                // iOpportunityId = 0;
                 string strFormula = ddlSource.SelectedValue.ToString();
 
                 if (ddlSource.SelectedValue.ToString().Trim() == "")
@@ -505,7 +498,7 @@ namespace RecoEngine
                     strCt = ctl.strCutOff.Split(';');
                     strCount = ctl.strCount.Split(';');
                     strAvg = ctl.strAvgDelta.Split(';');
-                   // Common.strPtnlFilter="";
+                    // Common.strPtnlFilter="";
                 }
 
             }
@@ -523,12 +516,12 @@ namespace RecoEngine
         {
             bindingExpressionEditor((int)Enums.ExpressionType.Filter);
         }
-         void bindingExpressionEditor(int iExpressionType)
+        void bindingExpressionEditor(int iExpressionType)
         {
             try
             {
                 clsDataSource clsDSOBJ = new clsDataSource();
-             //   DataTable dt = clsDSOBJ.fnGetTreDetails(Common.strTableName);
+                //   DataTable dt = clsDSOBJ.fnGetTreDetails(Common.strTableName);
                 DataTable dt = clsDSOBJ.fnGetTreDetails("Tre_Random");
                 DataTableReader dr = new DataTableReader(dt);
                 DataTable dtSchema = dr.GetSchemaTable();
@@ -539,13 +532,13 @@ namespace RecoEngine
                     frm.AvailableFields = frm._fieldDict.ToList<KeyValuePair<string, Type>>();
                     frm.dtSource = dtSchema;
                     var res = frm.ShowDialog();
-              
+
                     if (res == System.Windows.Forms.DialogResult.OK)
                     {
                         strPtnlFilter = frm.strExpression;
                         Common.strPtnlFilter = strPtnlFilter;
                     }
-          }
+                }
             }
             catch (Exception ex)
             {
@@ -596,54 +589,40 @@ namespace RecoEngine
         {
             try
             {
-                DataTable dt = ((DataTable)grdOppList.DataSource);
-                DataRow[] drRow = dt.Select("Select=1");
-                if (drRow.Length == 0)
+                DataRow[] dataRowArray = ((DataTable)this.grdOppList.DataSource).Select("Select=1");
+                if ((int)dataRowArray.Length == 0)
                 {
-                    Telerik.WinControls.RadMessageBox.Show(this, "Select at least one Opportunity.", "Information", MessageBoxButtons.OK, RadMessageIcon.Error, MessageBoxDefaultButton.Button1);
-                    return;
+                    RadMessageBox.Show(this, "Select at least one Opportunity.", "Information", MessageBoxButtons.OK, RadMessageIcon.Error, MessageBoxDefaultButton.Button1);
                 }
-                else
+                else if (RadMessageBox.Show(this, "Do you wish to delete selected Opportunity(s)?, you will lost all the info of the Opportunity(s)", "Confirmation", MessageBoxButtons.YesNo, RadMessageIcon.Info, MessageBoxDefaultButton.Button1) == DialogResult.Yes)
                 {
-
-
-                    DialogResult ds = Telerik.WinControls.RadMessageBox.Show(this, "Do you wish to delete selected Opportunity(s)?, you will lost all the info of the Opportunity(s)", "Confirmation", MessageBoxButtons.YesNo, RadMessageIcon.Info, MessageBoxDefaultButton.Button1);
-                    if (ds != DialogResult.Yes)
+                    ArrayList arrayLists = new ArrayList();
+                    string str = "";
+                    int num = 0;
+                    while (num < (int)dataRowArray.Length)
                     {
-                        return;
-                    }
-                    ArrayList recForDelete = new ArrayList();
-                    string strId = "";
-                    for (int i = 0; i < drRow.Length; i++)
-                    {
-                        strId = drRow[i]["OPPORTUNITY_ID"].ToString();
-
-
-                        if (ClsObj.fnCheckOPPHasInRanking("'" + drRow[i]["OPP_NAME"].ToString() + "'",Common.iProjectID))
+                        str = dataRowArray[num]["OPPORTUNITY_ID"].ToString();
+                        if (!this.ClsObj.fnCheckOPPHasInRanking(string.Concat("'", dataRowArray[num]["OPP_NAME"].ToString(), "'"), Common.iProjectID))
                         {
-                            Telerik.WinControls.RadMessageBox.Show(this, "This opportunity is selected in Ranking, you can not delete this Opportunity", "Confirmation", MessageBoxButtons.OK, RadMessageIcon.Info, MessageBoxDefaultButton.Button1);
+                            arrayLists.Add(string.Concat(str, ";", dataRowArray[num]["OPP_NAME"].ToString()));
+                            num++;
+                        }
+                        else
+                        {
+                            RadMessageBox.Show(this, "This opportunity is selected in Ranking, you can not delete this Opportunity", "Confirmation", MessageBoxButtons.OK, RadMessageIcon.Info, MessageBoxDefaultButton.Button1);
                             break;
                         }
-
-                        recForDelete.Add(strId + ";" + drRow[i]["OPP_NAME"].ToString());
-
-                        //recForDelete.Add(new ValueItemPair(strId, drRow[i]["OPP_NAME"].ToString()));
                     }
-
-                    if (recForDelete.Count > 0)
+                    if (arrayLists.Count <= 0 || this.ClsObj.fnDeleteOpportunity(arrayLists))
                     {
-                        if (!ClsObj.fnDeleteOpportunity(recForDelete))
-                        {
-                            return;
-                        }
-
+                        this.fnLoadOpportunity();
                     }
-                    fnLoadOpportunity();
                 }
             }
-            catch (Exception ex)
+            catch (Exception exception1)
             {
-                Telerik.WinControls.RadMessageBox.Show(this, ex.Message, ex.TargetSite.Name.ToString(), MessageBoxButtons.OK, RadMessageIcon.Error, MessageBoxDefaultButton.Button1);
+                Exception exception = exception1;
+                RadMessageBox.Show(this, exception.Message, exception.TargetSite.Name.ToString(), MessageBoxButtons.OK, RadMessageIcon.Error, MessageBoxDefaultButton.Button1);
             }
         }
     }
