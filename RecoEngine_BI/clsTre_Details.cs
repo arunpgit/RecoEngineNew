@@ -286,11 +286,11 @@ namespace RecoEngine_BI
                 str21 = string.Concat(str21, str9, " From ETS_TRE_BASE ");
                 if (Common.iDBType == 1)
                 {
-                    ((OraDBManager)Common.dbMgr).ExecuteScalar(CommandType.Text, str);
+                    ((OraDBManager)Common.dbMgr).ExecuteScalar(CommandType.Text, str21);
                 }
                 else if (Common.iDBType == 3)
                 {
-                    ((MySqlDBManager)Common.dbMgr).ExecuteScalar(CommandType.Text, str);
+                    ((MySqlDBManager)Common.dbMgr).ExecuteScalar(CommandType.Text, str21);
                 }
                 str21 = "Insert into ETS_TRE_BASE3(";
                 if (str2 != "")
@@ -317,11 +317,11 @@ namespace RecoEngine_BI
                 str21 = string.Concat(str21, str11, " From ETS_TRE_BASE2 ");
                 if (Common.iDBType == 1)
                 {
-                    ((OraDBManager)Common.dbMgr).ExecuteScalar(CommandType.Text, str);
+                    ((OraDBManager)Common.dbMgr).ExecuteScalar(CommandType.Text, str21);
                 }
                 else if (Common.iDBType == 3)
                 {
-                    ((MySqlDBManager)Common.dbMgr).ExecuteScalar(CommandType.Text, str);
+                    ((MySqlDBManager)Common.dbMgr).ExecuteScalar(CommandType.Text, str21);
                 }
             }
             catch (Exception exception)
@@ -503,7 +503,7 @@ namespace RecoEngine_BI
                 }
                 else if (Common.iDBType == (int)Enums.DBType.Mysql)
                 {
-                    ((MySqlDBManager)Common.dbMgr).ExecuteScalar(CommandType.Text, strSql);
+                    ((MySqlDBManager)Common.dbMgr).ExecuteNonQuery(CommandType.Text, strSql);
                 }
                 else
                 {
@@ -525,7 +525,7 @@ namespace RecoEngine_BI
                 }
                 else if (Common.iDBType == (int)Enums.DBType.Mysql)
                 {
-                    ((MySqlDBManager)Common.dbMgr).ExecuteScalar(CommandType.Text, strInsertString);
+                    ((MySqlDBManager)Common.dbMgr).ExecuteNonQuery(CommandType.Text, strInsertString);
                 }
                 else
                 {
@@ -541,7 +541,7 @@ namespace RecoEngine_BI
                 }
                 else if (Common.iDBType == (int)Enums.DBType.Mysql)
                 {
-                    ((MySqlDBManager)Common.dbMgr).ExecuteScalar(CommandType.Text, strSql);
+                    ((MySqlDBManager)Common.dbMgr).ExecuteNonQuery(CommandType.Text, strSql);
                 }
                 else
                 {
@@ -580,7 +580,7 @@ namespace RecoEngine_BI
                 }
                 else if (Common.iDBType == (int)Enums.DBType.Mysql)
                 {
-                    ((MySqlDBManager)Common.dbMgr).ExecuteScalar(CommandType.Text, strInsertString);
+                    ((MySqlDBManager)Common.dbMgr).ExecuteNonQuery(CommandType.Text, strInsertString);
                     //((OraDBManager)Common.dbMgr).CommitTrans();
                     //((OraDBManager)Common.dbMgr).BeginTrans();
                 }
@@ -982,7 +982,7 @@ namespace RecoEngine_BI
                     }
                     else if (Common.iDBType == (int)Enums.DBType.Mysql)
                     {
-                        ((MySqlDBManager)Common.dbMgr).ExecuteScalar(CommandType.Text, strSql);
+                        ((MySqlDBManager)Common.dbMgr).ExecuteNonQuery(CommandType.Text, strSql);
                     }
                     else
                     {
@@ -996,7 +996,7 @@ namespace RecoEngine_BI
                     }
                     if (Common.iDBType == (int)Enums.DBType.Mysql)
                     {
-                        ((MySqlDBManager)Common.dbMgr).ExecuteScalar(CommandType.Text, strSql);
+                        ((MySqlDBManager)Common.dbMgr).ExecuteNonQuery(CommandType.Text, strSql);
                     }
                     else
                     {
@@ -1030,7 +1030,11 @@ namespace RecoEngine_BI
                     }
                     else if (Common.iDBType == (int)Enums.DBType.Mysql)
                     {
-                        ((MySqlDBManager)Common.dbMgr).ExecuteScalar(CommandType.Text, strInsertATable);
+                        ((MySqlDBManager)Common.dbMgr).ExecuteNonQuery(CommandType.Text, strInsertATable);
+
+                      // string index= "CREATE INDEX ixweklya ON ETS_ADM_WEEKLY_A(Customer)";
+
+                      //  ((MySqlDBManager)Common.dbMgr).ExecuteNonQuery(CommandType.Text, index);
 
                     }
                     else
@@ -1064,7 +1068,10 @@ namespace RecoEngine_BI
                     else if (Common.iDBType == (int)Enums.DBType.Mysql)
                     {
                         ((MySqlDBManager)Common.dbMgr).ExecuteNonQuery(CommandType.Text, strInsertBTable);
-                       
+                        //string index = "CREATE INDEX ixweklyb ON ETS_ADM_WEEKLY_B(Customer)";
+
+                        //((MySqlDBManager)Common.dbMgr).ExecuteNonQuery(CommandType.Text, index);
+
                     }
                     else
                     {
@@ -1817,10 +1824,9 @@ namespace RecoEngine_BI
                     else if (Common.iDBType == (int)Enums.DBType.Mysql)
                     {
 
-                        strSql = " Update TRE_OPPORTUNITY A Set " + strOppName.ToUpper() + "_PNTL=";
-                        strSql += " (Select " + strFormula + " from ETS_TRE_BASE2 B where A.CUSTOMER=B.CUSTOMER)";
-                        strSql += " WHERE EXISTS (Select 1 from (SELECT 1 from TRE_OPPORTUNITY O , ETS_TRE_BASE2 T   where  O.CUSTOMER=T.CUSTOMER AND O.CUSTOMER=A.CUSTOMER AND O." + strOppName.ToUpper() + "_STATUS!='NA' ) as C)";
-
+                        strSql = "  UPDATE TRE_OPPORTUNITY Join ETS_TRE_BASE2 on TRE_OPPORTUNITY.CUSTOMER = ETS_TRE_BASE2.CUSTOMER Set " +
+                            "" + strOppName.ToUpper() + "_PNTL=";
+                        strSql += " (Select " + strFormula +")";
                         ((MySqlDBManager)Common.dbMgr).ExecuteNonQuery(CommandType.Text, strSql);
                     }
                 }

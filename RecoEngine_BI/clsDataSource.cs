@@ -1727,9 +1727,9 @@ namespace RecoEngine_BI
                         }
                         str2 = string.Concat(str2, ",", str6, ") ");
                         
-                            ((MySqlDBManager)Common.dbMgr).ExecuteScalar(CommandType.Text, str1);
-                            ((MySqlDBManager)Common.dbMgr).ExecuteScalar(CommandType.Text, str2);
-                        
+                            ((MySqlDBManager)Common.dbMgr).ExecuteScalar(CommandType.Text, str1 + ";" + "ALTER TABLE `recousr`.`ets_adm_weekly_a` ADD INDEX `customer` (`CUSTOMER` ASC); ");
+                        ((MySqlDBManager)Common.dbMgr).ExecuteScalar(CommandType.Text, str2 + ";" + "ALTER TABLE `recousr`.`ets_adm_weekly_b` ADD INDEX `customer` (`CUSTOMER` ASC); ");
+
                     }
                     string str21 = "";
                     if (num2 == 0 && str12 != "")
@@ -1754,17 +1754,17 @@ namespace RecoEngine_BI
                         str = "CREATE TABLE TRE_OPPORTUNITY ( CUSTOMER varchar(50) ,";
                         str = string.Concat(str, "WEEK int   )  ");
                      
-                            ((MySqlDBManager)Common.dbMgr).ExecuteScalar(CommandType.Text, str9);
-                            ((MySqlDBManager)Common.dbMgr).ExecuteScalar(CommandType.Text, str10);
-                            ((MySqlDBManager)Common.dbMgr).ExecuteScalar(CommandType.Text, str11);
-                            ((MySqlDBManager)Common.dbMgr).ExecuteScalar(CommandType.Text, str);
-                        
+                            ((MySqlDBManager)Common.dbMgr).ExecuteNonQuery(CommandType.Text, str9+";"+ "ALTER TABLE `recousr`.`ets_tre_base` ADD INDEX `customer` (`CUSTOMER` ASC, `DECILE` ASC); ");
+                            ((MySqlDBManager)Common.dbMgr).ExecuteNonQuery(CommandType.Text, str10 + ";" + "ALTER TABLE `recousr`.`ets_tre_base2` ADD INDEX `customer` (`CUSTOMER` ASC, `DECILE` ASC);");
+                            ((MySqlDBManager)Common.dbMgr).ExecuteNonQuery(CommandType.Text, str11+";" + "ALTER TABLE `recousr`.`ets_tre_base3` ADD INDEX `customer` (`CUSTOMER` ASC, `DECILE` ASC);");
+                        ((MySqlDBManager)Common.dbMgr).ExecuteNonQuery(CommandType.Text, str + ";" + "ALTER TABLE `recousr`.`TRE_OPPORTUNITY` ADD INDEX `customer` (`CUSTOMER` ASC);");
+
                     }
                     if (num1 == 0 && str7 != "")
                     {
                         if (str7 != "")
                         {
-                            str7 = string.Concat("CREATE TABLE ETS_TRE_X_SELL_PNTL(TIMEPERIOD varchar(50),SEGMENTCOLNAME varchar(50),CURRENTSEGMENT VARCHAR(50), ", str7, ") ");
+                            str7 = string.Concat("CREATE TABLE ETS_TRE_X_SELL_PNTL(TIMEPERIOD varchar(50),SEGMENTCOLNAME varchar(50),CURRENTSEGMENT VARCHAR(50), ", str7, ",Index(CURRENTSEGMENT)) ");
                         }
                         if (Common.iDBType == 3)
                         {
