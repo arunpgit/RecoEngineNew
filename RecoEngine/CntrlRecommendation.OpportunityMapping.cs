@@ -313,7 +313,7 @@ namespace RecoEngine
                         {
                             num = 1;
                         }
-                        this.iOpportunityId = this.ClsObj.fnSaveOpportunity(this.iOpportunityId, this.txtName.Text.ToString(), this.txtDesc.Text.ToString(), this.strExpression, Common.strPtnlFilter, Common.iUserID, Common.iProjectID, Common.strTableName, Common.strKeyName, Common.timePeriods.strtp1, Common.timePeriods.strtp2, num, ddlOpportunityType.SelectedIndex.ToString());
+                        this.iOpportunityId = this.ClsObj.fnSaveOpportunity(this.iOpportunityId, this.txtName.Text.ToString(), this.txtDesc.Text.ToString(), this.strExpression, Common.strPtnlFilter, Common.iUserID, Common.iProjectID, Common.strTableName, Common.strKeyName, Common.timePeriods.strtp1, Common.timePeriods.strtp2, num, ddlOpportunityType.SelectedText.ToString());
                         Common.WriteLog("New Opportunity is added to the OPPORTUNITY table");
                         this.fnSaveThresholdAndPotential(this.iOpportunityId);
                         Common.strPtnlFilter = "";

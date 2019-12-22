@@ -131,7 +131,7 @@ namespace RecoEngine
                     if (dataTable1.Rows.Count <= 0)
                     {
                         item.Rows[i]["Type"] = 5;
-                        if (item.Rows[i]["Table"] != null)
+                        if (item.Rows[i]["Table"] != null && item.Rows[i]["Table"] != "C")
                         {
                             item.Rows[i]["Table"] = "M";
                         }

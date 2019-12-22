@@ -5,6 +5,7 @@ using System.Text;
 using System.Data;
 using System.Data.Linq;
 using RecoEngine_DataLayer;
+using System.Data.SqlClient;
 
 namespace RecoEngine_BI
 {
@@ -271,11 +272,10 @@ namespace RecoEngine_BI
                     string str = "";
                     str = "Delete from TRE_RANKING ";
                         ((MySqlDBManager)Common.dbMgr).ExecuteNonQuery(CommandType.Text, str);
-                    str = "CALL `recousr`.`InsertTreRanking`( " + iProjectid + ")";
-                        //here we ned to call the procedurw what I sent . We need to modify rank_slection with limit
-                        ((MySqlDBManager)Common.dbMgr).ExecuteNonQuery(CommandType.Text, str);
+                    ((MySqlDBManager)Common.dbMgr).savepotentialRanking(iProjectid);
+                    
 
-                 }
+                }
                 else {
                     string str = "";
                     str = "Delete from TRE_RANKING ";
@@ -329,7 +329,7 @@ namespace RecoEngine_BI
             try
             {
                 string str = "";
-                str = "Delete from TRE_RANKING ";
+                str = "truncate table TRE_RANKING ";
                 if (Common.iDBType == 1)
                 {
                     ((OraDBManager)Common.dbMgr).ExecuteNonQuery(CommandType.Text, str);
@@ -369,18 +369,14 @@ namespace RecoEngine_BI
                     str = string.Concat(str, " end LOOP;");
                     str = string.Concat(str, " END;");
                 }
-                else
-                {
-                    str = "CALL `recousr`.`InsertTreRanking_export`( " + iProjectid + ")";
-                    
-                }
+               
                 if (Common.iDBType == 1)
                 {
                     ((OraDBManager)Common.dbMgr).ExecuteNonQuery(CommandType.Text, str);
                 }
                 else if (Common.iDBType == 3)
                 {
-                    ((MySqlDBManager)Common.dbMgr).ExecuteNonQuery(CommandType.Text, str);
+                    ((MySqlDBManager)Common.dbMgr).savepotentialRankingExport(iProjectid);
                 }
             }
             catch (Exception exception)

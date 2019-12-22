@@ -203,7 +203,7 @@ namespace RecoEngine_DataLayer
 
             Cmd.CommandText = CmdText;
             Cmd.CommandType = CmdType;
-            Cmd.CommandTimeout = 60;
+            Cmd.CommandTimeout = 6000;
             if ((Params != null))
             {
                 AttachParameters(Cmd, Params);
@@ -212,10 +212,40 @@ namespace RecoEngine_DataLayer
 
         public int ExecuteNonQuery(CommandType CmdType, string CmdText)
         {
-            CmdText = "SET sql_log_bin = 0;" + " " + " " + CmdText;
+           
             return ExecuteNonQuery(CmdType, CmdText, (MySqlParameter[])null);
         }
+        public int ExecuteNonQueryprocedure(CommandType CmdType, string CmdText,MySqlParameter[] param,MySqlCommand cmd,string sql)
+        {
 
+            if (bDebugOn == true)
+                System.Windows.Forms.MessageBox.Show(CmdText, strProductName, System.Windows.Forms.MessageBoxButtons.OK, System.Windows.Forms.MessageBoxIcon.Information);
+
+            try
+            {
+
+                int retVal;
+               if (!bInTransaction)
+                    OpenConnection();
+                PrepareCommand(ref cmd, CmdType, CmdText, param);
+
+                if (bInTransaction)
+                    cmd.Transaction = _Transaction;
+
+                retVal = cmd.ExecuteNonQuery();
+
+                if (!bInTransaction)
+                    CloseConnection();
+
+                cmd.Parameters.Clear();
+                return retVal;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+
+        }
         public int ExecuteNonQuery(MySqlCommand cmd)
         {
             if (!bInTransaction)
@@ -234,6 +264,37 @@ namespace RecoEngine_DataLayer
             return iResult;
 
         }
+
+        //public int ExecuteNonQueryprocedure(CommandType CmdType, string CmdText, MySqlParameter[] Params,MySqlCommand cmd,string sql)
+        //{
+
+        //    if (bDebugOn == true)
+        //        System.Windows.Forms.MessageBox.Show(CmdText, strProductName, System.Windows.Forms.MessageBoxButtons.OK, System.Windows.Forms.MessageBoxIcon.Information);
+
+        //    try
+        //    {
+              
+        //        int retVal;
+        //         if (!bInTransaction)
+        //            OpenConnection();
+        //        PrepareCommand(ref cmd, CmdType, CmdText, Params);
+
+        //        if (bInTransaction)
+        //            cmd.Transaction = _Transaction;
+
+        //        retVal = cmd.ExecuteNonQuery();
+
+        //        if (!bInTransaction)
+        //            CloseConnection();
+
+        //        cmd.Parameters.Clear();
+        //        return retVal;
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        throw ex;
+        //    }
+        //}
 
         public int ExecuteNonQuery(CommandType CmdType, string CmdText, MySqlParameter[] Params)
         {
@@ -302,7 +363,7 @@ namespace RecoEngine_DataLayer
         }
         public DataSet ExecuteDataSet(CommandType CmdType, string CmdText)
         {
-            CmdText = "SET sql_log_bin = 0;" + " " + " " + CmdText;
+           
             return ExecuteDataSet(CmdType, CmdText, (MySqlParameter[])null);
         }
 
@@ -341,8 +402,7 @@ namespace RecoEngine_DataLayer
 
         public DataTable ExecuteDataTable(CommandType CmdType, string CmdText)
         {
-            CmdText = "SET sql_log_bin = 0;" + " " + " " + CmdText;
-            return ExecuteDataTable(CmdType, CmdText, (MySqlParameter[])null);
+             return ExecuteDataTable(CmdType, CmdText, (MySqlParameter[])null);
         }
 
         public DataTable ExecuteDataTable(CommandType CmdType, string CmdText, MySqlParameter[] Params)
@@ -399,7 +459,7 @@ namespace RecoEngine_DataLayer
 
         public string ExecuteScalar(CommandType CmdType, string CmdText)
         {
-            CmdText = "SET sql_log_bin = 0;" + " " + " " + CmdText;
+           
             return ExecuteScalar(CmdType, CmdText, (MySqlParameter[])null);
         }
 
@@ -489,6 +549,60 @@ namespace RecoEngine_DataLayer
             cmd.ExecuteNonQuery();
             CloseConnection();
             return Convert.ToInt32(cmd.Parameters["RETURN_VALUE"].Value);
+        }
+        public  void savepotentialRanking(int ProjectId)
+        {
+            try {
+                MySqlCommand cmd = new MySqlCommand();
+                MySqlConnection con = new MySqlConnection("server=localhost; user id=root; password=Password@123; database=recousr; pooling=false;");
+                con.Open();
+                cmd.Connection = con;
+                cmd.CommandText = "recousr.InsertTreRanking";
+                cmd.CommandType = CommandType.StoredProcedure;
+                MySqlParameter par;
+
+                par = new MySqlParameter("ProjectId", MySqlDbType.Int16);
+                par.Value = ProjectId;
+                par.Direction = ParameterDirection.Input;
+                cmd.Parameters.Add(par);
+
+                cmd.ExecuteNonQuery();
+                con.Close();
+            }
+            catch(Exception ex)
+            {
+                throw ex;
+            
+            }
+        }
+        public void savepotentialRankingExport(int ProjectId)
+        {
+
+            try
+            {
+                MySqlCommand cmd = new MySqlCommand();
+                MySqlConnection con = new MySqlConnection(@"server=localhost; user id=root; password=Password@123; database=recousr; pooling=false;Allow User Variables=True");
+                con.Open();
+                cmd.Connection = con;
+                cmd.CommandText = "recousr.Inserttreranking_base";
+                cmd.CommandTimeout = 6000;
+                cmd.CommandType = CommandType.StoredProcedure;
+                //MySqlParameter par;
+
+                //par = new MySqlParameter("@ProjectId", MySqlDbType.Int16);
+                //par.Value = ProjectId;
+                //par.Direction = ParameterDirection.Input;
+                cmd.Parameters.AddWithValue("@ProjectId", ProjectId);
+
+                cmd.ExecuteNonQuery();
+                con.Close();
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+              
         }
 
         public int GetInsertedProjectMilestone(int p_project_id, int p_epm_milestone_id, string p_milestone_code, string p_milestone_desc, int p_milestone_amount, int p_currency_id, int p_exchange_rate)
