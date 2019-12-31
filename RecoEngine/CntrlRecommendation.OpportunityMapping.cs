@@ -370,19 +370,23 @@ namespace RecoEngine
                     string strAvgNonUser = strAvg[4] == "" ? "0" : strAvg[4];
                     string strAvgNewUser = strAvg[5] == "" ? "0" : strAvg[5];
 
-                    if (clsTObj.fnSaveTREThreShold(Common.timePeriods.strtp1, Common.timePeriods.strtp2, Common.sOpportunityName, strCtDropper, strCtGrower, srtCtStopper, iOpportunityId, "Tre_Random", Common.iProjectID, Common.strPtnlFilter, bIsOnMain))
-                    {
-                        clsTObj.fnGetBaseData(Common.strTableName, strCtGrower, Common.iProjectID);
-                        clsTObj.fnSaveOPPBreakDownStatus(iOpportunityId, Convert.ToDecimal(strCtDropper), Convert.ToDecimal(strCtGrower), Convert.ToDecimal(srtCtStopper),
-                       Common.timePeriods.strtp1, Common.timePeriods.strtp2, strCurrentSegmentColumn, iIsActive);
-                        clsTObj.fnInsertOppValues(iOpportunityId);
+
+                    clsTObj.fnSaveOPPBreakDownStatus(iOpportunityId, Convert.ToDecimal(strCtDropper), Convert.ToDecimal(strCtGrower), Convert.ToDecimal(srtCtStopper),
+                   Common.timePeriods.strtp1, Common.timePeriods.strtp2, strCurrentSegmentColumn, iIsActive);
+
+                    //if (clsTObj.fnSaveTREThreShold(Common.timePeriods.strtp1, Common.timePeriods.strtp2, Common.sOpportunityName, strCtDropper, strCtGrower, srtCtStopper, iOpportunityId, "Tre_Random", Common.iProjectID, Common.strPtnlFilter, bIsOnMain))
+                    //{
+                    //    clsTObj.fnGetBaseData(Common.strTableName, strCtGrower, Common.iProjectID);
+                    //    clsTObj.fnSaveOPPBreakDownStatus(iOpportunityId, Convert.ToDecimal(strCtDropper), Convert.ToDecimal(strCtGrower), Convert.ToDecimal(srtCtStopper),
+                    //   Common.timePeriods.strtp1, Common.timePeriods.strtp2, strCurrentSegmentColumn, iIsActive);
+                    //    clsTObj.fnInsertOppValues(iOpportunityId);
 
 
-                        // clsTObj.fnSaveOPPBreakDownStatus(iOpportunityId, 0, Convert.ToDecimal(strCtDropper), Convert.ToDecimal(strCtGrower), Convert.ToDecimal(srtCtStopper), 0, 0,
-                        //  Convert.ToDecimal(strCFlat), Convert.ToDecimal(strCDropper), Convert.ToDecimal(strCtGrower), Convert.ToDecimal(srtCStopper), Convert.ToDecimal(strCNonUser),
-                        //Convert.ToDecimal(strCNewUser), Convert.ToDecimal(strAvgFlat), Convert.ToDecimal(strAvgDropper),
-                        // Convert.ToDecimal(srtAvgStopper), Convert.ToDecimal(strAvgGrower), Convert.ToDecimal(strAvgNonUser), Convert.ToDecimal(strAvgNewUser), timePeriods.strtp1, timePeriods.strtp2, strCurrentSegmentColumn, iIsActive);
-                    }
+                    //    // clsTObj.fnSaveOPPBreakDownStatus(iOpportunityId, 0, Convert.ToDecimal(strCtDropper), Convert.ToDecimal(strCtGrower), Convert.ToDecimal(srtCtStopper), 0, 0,
+                    //    //  Convert.ToDecimal(strCFlat), Convert.ToDecimal(strCDropper), Convert.ToDecimal(strCtGrower), Convert.ToDecimal(srtCStopper), Convert.ToDecimal(strCNonUser),
+                    //    //Convert.ToDecimal(strCNewUser), Convert.ToDecimal(strAvgFlat), Convert.ToDecimal(strAvgDropper),
+                    //    // Convert.ToDecimal(srtAvgStopper), Convert.ToDecimal(strAvgGrower), Convert.ToDecimal(strAvgNonUser), Convert.ToDecimal(strAvgNewUser), timePeriods.strtp1, timePeriods.strtp2, strCurrentSegmentColumn, iIsActive);
+                    //}
 
                 }
                 // saving Opportunity Potentail

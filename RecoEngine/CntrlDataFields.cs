@@ -98,15 +98,16 @@ namespace RecoEngine
                 throw ex;
             }
         }
-        private void dataschemaGridbinding()
+        private void dataschemaGridbinding(DataTable dataTableEXISTING=null)
         {
             object obj;
             try
             {
                 DataTable item = this.clsDSOBJ.fnGetTreDetailsSchema(this.ddlTableName.SelectedValue.ToString());
                 DataTable dataTable = this.clsDSOBJ.fnGetCalaculatedColMappingData(Common.iProjectID, Common.strTableName);
-                DataTable dataTable1 = this.clsDSOBJ.fnGetColMappingData(Common.iProjectID);
-                item.Columns.Add(new DataColumn("Table", typeof(string)));
+                 DataTable dataTable1 = this.clsDSOBJ.fnGetColMappingData(Common.iProjectID);
+              
+                    item.Columns.Add(new DataColumn("Table", typeof(string)));
                 item.Columns.Add(new DataColumn("Type", typeof(int)));
                 item.Columns.Add(new DataColumn("Required", typeof(bool)));
                 foreach (DataRow row in dataTable.Rows)
@@ -128,6 +129,31 @@ namespace RecoEngine
                 }
                 for (int i = 0; i < item.Rows.Count; i++)
                 {
+
+
+                    if (dataTableEXISTING != null)
+
+                    {
+
+                        DataRow[] dataRowArray = dataTableEXISTING.Select(string.Concat("ColumnName='", item.Rows[i][0].ToString(), "'"));
+                        if ((int)dataRowArray.Length > 0)
+                        {
+                            item.Rows[i]["Type"] = dataRowArray[0]["Type"];
+                            item.Rows[i]["Required"] = dataRowArray[0]["REQUIRED"];
+                        }
+                        else
+                        {
+
+                            item.Rows[i]["Type"] = 5;
+                        }
+                        if (item.Rows[i]["Table"].ToString() != "C")
+                        {
+                            item.Rows[i]["Table"] = "M";
+                        }
+                    }
+
+                    else
+                    { 
                     if (dataTable1.Rows.Count <= 0)
                     {
                         item.Rows[i]["Type"] = 5;
@@ -137,13 +163,14 @@ namespace RecoEngine
                         }
                         item.Rows[i]["Required"] = false;
                     }
+
                     else
                     {
                         DataRow[] dataRowArray = dataTable1.Select(string.Concat("COLNAME='", item.Rows[i][0].ToString(), "'"));
                         if ((int)dataRowArray.Length <= 0 || !(dataRowArray[0]["TABLENAME"].ToString().ToLower() == this.ddlTableName.SelectedValue.ToString().ToLower()))
                         {
                             item.Rows[i]["Type"] = 5;
-                            if ( item.Rows[i]["Table"].ToString() != "C")
+                            if (item.Rows[i]["Table"].ToString() != "C")
                             {
                                 item.Rows[i]["Table"] = "M";
                             }
@@ -159,6 +186,7 @@ namespace RecoEngine
                             }
                         }
                     }
+                }
                 }
                 this.dataschemaGrid.DataSource = item;
                 GridViewComboBoxColumn gridViewComboBoxColumn = new GridViewComboBoxColumn()
@@ -473,7 +501,7 @@ namespace RecoEngine
 
                     }
                     dtmain = (DataTable)dataschemaGrid.DataSource;
-                    dataschemaGridbinding();
+                    dataschemaGridbinding(dtmain);
                 }
                 }
             }

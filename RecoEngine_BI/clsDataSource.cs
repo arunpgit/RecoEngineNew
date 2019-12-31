@@ -1568,7 +1568,7 @@ namespace RecoEngine_BI
                         str = string.Concat(upper1);
                         ((MySqlDBManager)Common.dbMgr).ExecuteNonQuery(CommandType.Text, str);
                         str = string.Concat(" Select count(1) from information_schema.columns c WHERE c.table_name = 'ETS_ADM_WEEKLY_A' and c.column_name = '", dataRow1[0].ToString().ToUpper(), "'");
-                        if (Common.iDBType == 1)
+                        if (Common.iDBType == 3)
                         {
                             num3 = int.Parse(((MySqlDBManager)Common.dbMgr).ExecuteScalar(CommandType.Text, str));
                         }
@@ -1578,7 +1578,7 @@ namespace RecoEngine_BI
                             ((MySqlDBManager)Common.dbMgr).ExecuteNonQuery(CommandType.Text, str);
                         }
                         str = string.Concat(" Select count(1) from information_schema.columns c WHERE c.table_name = 'ETS_TRE_BASE' and c.column_name = '", dataRow1[0].ToString().ToUpper(), "'");
-                        if (Common.iDBType == 1)
+                        if (Common.iDBType == 3)
                         {
                             num3 = int.Parse(((MySqlDBManager)Common.dbMgr).ExecuteScalar(CommandType.Text, str));
                         }
@@ -1588,7 +1588,7 @@ namespace RecoEngine_BI
                             ((MySqlDBManager)Common.dbMgr).ExecuteNonQuery(CommandType.Text, str);
                         }
                         str = string.Concat(" Select count(1) from information_schema.columns c WHERE c.table_name = 'ETS_TRE_BASE2' and c.column_name = '", dataRow1[0].ToString().ToUpper(), "'");
-                        if (Common.iDBType == 1)
+                        if (Common.iDBType == 3)
                         {
                             num3 = int.Parse(((MySqlDBManager)Common.dbMgr).ExecuteScalar(CommandType.Text, str));
                         }
@@ -1598,7 +1598,7 @@ namespace RecoEngine_BI
                             ((MySqlDBManager)Common.dbMgr).ExecuteNonQuery(CommandType.Text, str);
                         }
                         str = string.Concat(" Select count(1) from information_schema.columns c WHERE c.table_name = 'ETS_TRE_BASE3' and c.column_name = '", dataRow1[0].ToString().ToUpper(), "'");
-                        if (Common.iDBType == 1)
+                        if (Common.iDBType == 3)
                         {
                             num3 = int.Parse(((MySqlDBManager)Common.dbMgr).ExecuteScalar(CommandType.Text, str));
                         }
@@ -1607,8 +1607,8 @@ namespace RecoEngine_BI
                             str = string.Concat(" Alter Table ETS_TRE_BASE3 drop column ", dataRow1[0].ToString().ToUpper());
                             ((MySqlDBManager)Common.dbMgr).ExecuteNonQuery(CommandType.Text, str);
                         }
-                        str = string.Concat(" Select count(1) from user_tab_columns where table_name = 'ETS_ADM_WEEKLY_A' and c.column_name = 'A_", dataRow1[0].ToString().ToUpper(), "'");
-                        if (Common.iDBType == 1)
+                        str = string.Concat(" Select count(1) from information_schema.columns C where table_name = 'ETS_ADM_WEEKLY_A' and c.column_name = 'A_", dataRow1[0].ToString().ToUpper(), "'");
+                        if (Common.iDBType == 3)
                         {
                             num3 = int.Parse(((MySqlDBManager)Common.dbMgr).ExecuteScalar(CommandType.Text, str));
                         }
@@ -1650,7 +1650,7 @@ namespace RecoEngine_BI
                             ((MySqlDBManager)Common.dbMgr).ExecuteNonQuery(CommandType.Text, str);
                         }
                         str = string.Concat(" Select count(1) from information_schema.columns c WHERE c.table_name = 'ETS_TRE_BASE2' and c.column_name = 'X_", dataRow1[0].ToString().ToUpper(), "'");
-                        if (Common.iDBType == 1)
+                        if (Common.iDBType == 3)
                         {
                             num3 = int.Parse(((MySqlDBManager)Common.dbMgr).ExecuteScalar(CommandType.Text, str));
                         }

@@ -554,7 +554,7 @@ namespace RecoEngine_DataLayer
         {
             try {
                 MySqlCommand cmd = new MySqlCommand();
-                MySqlConnection con = new MySqlConnection("server=localhost; user id=root; password=Password@123; database=recousr; pooling=false;");
+                MySqlConnection con = new MySqlConnection("server=localhost; user id=root; password=Password@123;port=3308; database=recousr; pooling=false;");
                 con.Open();
                 cmd.Connection = con;
                 cmd.CommandText = "recousr.InsertTreRanking";
@@ -581,7 +581,7 @@ namespace RecoEngine_DataLayer
             try
             {
                 MySqlCommand cmd = new MySqlCommand();
-                MySqlConnection con = new MySqlConnection(@"server=localhost; user id=root; password=Password@123; database=recousr; pooling=false;Allow User Variables=True");
+                MySqlConnection con = new MySqlConnection(@"server=localhost; user id=root; password=Password@123;port=3308; database=recousr; pooling=false;Allow User Variables=True");
                 con.Open();
                 cmd.Connection = con;
                 cmd.CommandText = "recousr.Inserttreranking_base";
