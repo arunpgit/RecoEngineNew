@@ -98,7 +98,7 @@ namespace RecoEngine
             pgRecommendation.Enabled = bIsEnable;
             pgExport.Enabled = bIsEnable;
             pgUserManagement.Enabled = bIsEnable;
-            pgOfferLibrary.Enabled = bIsEnable;
+           // pgOfferLibrary.Enabled = bIsEnable;
             pgReports.Enabled = bIsEnable;
             btnPreview.Enabled = bIsEnable;
 
@@ -173,7 +173,7 @@ namespace RecoEngine
             pgRecommendation.Enabled = true;
             pgExport.Enabled = true;
             pgUserManagement.Enabled = true;
-            pgOfferLibrary.Enabled = true;
+            //pgOfferLibrary.Enabled = true;
             pgReports.Enabled = true;
             btnPreview.Enabled = true;
 
@@ -352,21 +352,21 @@ namespace RecoEngine
             int iOpportunityCount = clsPObj.fnGetOpportunityCount(Common.iProjectID, Common.iUserID, ref iOfferCount);
 
             lblOpportunities.Text = "Opportunities : : " + iOpportunityCount.ToString();
-            lblOffers.Text = "Offers : : " + iOfferCount.ToString();
+            //lblOffers.Text = "Offers : : " + iOfferCount.ToString();
             }
 
     
-        public string LabelText
-        {
-            get
-            {
-                return this.lblOffers.Text;
-            }
-            set
-            {
-                this.lblOffers.Text = value;
-            }
-        }
+        //public string LabelText
+        //{
+        //  ////  get
+        //  ////  {
+        //  //////      return this.lblOffers.Text;
+        //  ////  }
+        //  ////  set
+        //  ////  {
+        //  //// //     this.lblOffers.Text = value;
+        //  ////  }
+        //}
                 private void btnDataFields_Click(object sender, EventArgs e)
         {
             fnShowDataSource(1);

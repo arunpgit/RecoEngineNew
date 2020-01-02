@@ -377,9 +377,6 @@ namespace RecoEngine_BI
             }
             return true;
         }
-
-       
-
         public void fnGetSegmentData(string strTabName, int iTIMEPERIOD, string strSegmentColumn, string strT2String, string[] strT2, int iProjectId, bool isActiveChecked, ref int iCount, ref string strSegmentDataFeilds)
         {
             try
@@ -598,236 +595,6 @@ namespace RecoEngine_BI
                 throw ex;
             }
         }
-        private void fnGetSegmentData_old(string strTabName, int iTIMEPERIOD, string strSegmentColumn, string strT2String, string[] strT2, ref int iCount, ref string strSegmentDataFeilds)
-        {
-            try
-            {
-                string strSql = "";
-
-                string strInsertString = "Insert into ETS_TRE_X_SELL_PNTL(TIMEPERIOD,SegmentColName,CURRENTSEGMENT, ";
-                string strInsertSString = "";
-                string strInsertSValues = "";
-
-                string strInsertValues = "";
-
-
-                string strETS_TRE_BASEString = "";
-                string strETS_TRE_BASEVString = "";
-
-                DataTable dtTab = new DataTable();
-
-                // strTabName = "TRE_DETAILS_NEW";
-                strSql = "Select * from TRE_MAPPING where TABLENAME='" + strTabName + "' and type  =  " + ((int)Enums.ColType.Input).ToString();
-                if (Common.iDBType == (int)Enums.DBType.Oracle)
-                    dtTab = ((OraDBManager)Common.dbMgr).ExecuteDataTable(CommandType.Text, strSql);
-                else if (Common.iDBType == (int)Enums.DBType.Mysql)
-                    dtTab = ((MySqlDBManager)Common.dbMgr).ExecuteDataTable(CommandType.Text, strSql);
-                else
-                    dtTab = ((DBManager)Common.dbMgr).ExecuteDataTable(CommandType.Text, strSql);
-
-                foreach (DataRow dr in dtTab.Rows)
-                {
-
-                    if (dr["type"].ToString() == ((int)Enums.ColType.Input).ToString())
-                    {
-                        if (strInsertSString != "")
-                            strInsertSString += ",";
-
-                        if (strInsertSValues != "")
-                            strInsertSValues += ",";
-
-                        if (strSegmentDataFeilds != "")
-                            strSegmentDataFeilds += ",";
-
-                        strInsertSString += "X_" + dr[0].ToString();
-                        strInsertSValues += " Round(Avg(A_" + dr[0].ToString() + "),2)";
-
-                        strSegmentDataFeilds += "X_" + dr[0].ToString() + " as " + dr[0].ToString();
-                    }
-                }
-
-
-                if (iCount == 0)
-                {
-                    strInsertValues = " Select '" + iTIMEPERIOD + "','" + strSegmentColumn + "'," + strSegmentColumn;
-
-                    if (strInsertSString != "")
-                        strInsertString += strInsertSString;
-
-
-                    strInsertString += ")" + strInsertValues + "," + strInsertSValues + " From  ETS_ADM_WEEKLY_A  where TIMEPERIOD_ID=" + iTIMEPERIOD + " Group By " + strSegmentColumn;
-
-
-                    if (Common.iDBType == (int)Enums.DBType.Oracle)
-                    {
-                        ((OraDBManager)Common.dbMgr).ExecuteScalar(CommandType.Text, strInsertString);
-                    }
-                    else if (Common.iDBType == (int)Enums.DBType.Mysql)
-                    {
-                        ((MySqlDBManager)Common.dbMgr).ExecuteScalar(CommandType.Text, strInsertString);
-                    }
-                    else
-                    {
-                        ((DBManager)Common.dbMgr).ExecuteScalar(CommandType.Text, strInsertString);
-                    }
-
-                }
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
-        }
-        public void fnGetTimePeriodData_old(string strTabName, string[] strT1, string[] strT2, int iTimePeriodID, ref int iMaxId, ref string strT1Feilds, ref string strT2Feilds)
-        {
-            try
-            {
-                string strSql = "";
-
-                string strInsertTString = "Insert into ETS_ADM_WEEKLY(Id,TIMEPERIOD_ID ";
-                string strInsertT1String = "";
-                string strUpdateTString = "Update ETS_ADM_WEEKLY Set  ";
-                string strUpdateT2String = "";
-                string strUpdateT2Values = "";
-                string strKeyString = "";
-                string strSegmentString = "";
-
-
-                string strTimeString = "";
-                string strInsertT1Values = "";
-
-                string strInsertTValues = "";
-
-                DataTable dtTab = new DataTable();
-
-                // strTabName = "TRE_DETAILS_NEW";
-                strSql = "Select * from TRE_MAPPING where TABLENAME='" + strTabName + "'";
-                if (Common.iDBType == (int)Enums.DBType.Oracle)
-                    dtTab = ((OraDBManager)Common.dbMgr).ExecuteDataTable(CommandType.Text, strSql);
-
-                else if (Common.iDBType == (int)Enums.DBType.Mysql)
-                    dtTab = ((MySqlDBManager)Common.dbMgr).ExecuteDataTable(CommandType.Text, strSql);
-                else
-                    dtTab = ((DBManager)Common.dbMgr).ExecuteDataTable(CommandType.Text, strSql);
-
-                foreach (DataRow dr in dtTab.Rows)
-                {
-
-                    if (dr["type"].ToString() != ((int)Enums.ColType.None).ToString())
-                    {
-                        if (dr["type"].ToString() == ((int)Enums.ColType.Key).ToString())
-                        {
-                            if (strKeyString != "")
-                                strKeyString += ",";
-                            strKeyString += dr[0].ToString();
-                        }
-                        else if (dr["type"].ToString() == ((int)Enums.ColType.Time).ToString())
-                        {
-                            if (strTimeString != "")
-                                strTimeString += ",";
-                            strTimeString += dr[0].ToString();
-                        }
-                        else if (dr["type"].ToString() == ((int)Enums.ColType.Segment).ToString())
-                        {
-                            if (strSegmentString != "")
-                                strSegmentString += ",";
-
-                            strSegmentString += dr[0].ToString();
-                        }
-                        else if (dr["type"].ToString() == ((int)Enums.ColType.Input).ToString())
-                        {
-                            if (strInsertT1String != "")
-                                strInsertT1String += ",";
-
-                            if (strUpdateT2String != "")
-                                strUpdateT2String += ",";
-
-                            if (strInsertT1Values != "")
-                                strInsertT1Values += ",";
-
-                            if (strUpdateT2Values != "")
-                                strUpdateT2Values += ",";
-                            if (strT1Feilds != "")
-                                strT1Feilds += ",";
-
-                            if (strT2Feilds != "")
-                                strT2Feilds += ",";
-
-                            strInsertT1String += "T1_" + dr[0].ToString();
-                            strInsertT1Values += " Round(Avg(" + dr[0].ToString() + "),2)";
-
-
-                            strT1Feilds += "T1_" + dr[0].ToString() + " as " + dr[0].ToString();
-                            strT2Feilds += "T2_" + dr[0].ToString() + " as " + dr[0].ToString();
-
-                            strUpdateT2String += "T2_" + dr[0].ToString();
-                            strUpdateT2Values += " Round(Avg(" + dr[0].ToString() + "),2)";
-
-                        }
-                    }
-                }
-
-
-                if (iMaxId == 0)
-                {
-
-                    strSql = "Select NVL(MAX(ID), 0)+1 AS MAX_VAL from ETS_ADM_WEEKLY";
-                    if (Common.iDBType == (int)Enums.DBType.Oracle)
-                        iMaxId = int.Parse(((OraDBManager)Common.dbMgr).ExecuteScalar(CommandType.Text, strSql));
-
-                    else if (Common.iDBType == (int)Enums.DBType.Mysql)
-                    {
-                        strSql = "Select IFNULL(MAX(ID), 0)+1 AS MAX_VAL from ETS_ADM_WEEKLY";
-                        iMaxId = int.Parse(((MySqlDBManager)Common.dbMgr).ExecuteScalar(CommandType.Text, strSql));
-                    }
-                    else
-                        iMaxId = int.Parse(((DBManager)Common.dbMgr).ExecuteScalar(CommandType.Text, strSql));
-
-                    strInsertTValues = " Select " + iMaxId + "," + iTimePeriodID;
-
-
-                    if (strInsertT1String != "")
-                        strInsertTString += "," + strInsertT1String;
-
-
-                    strInsertTString += ")" + strInsertTValues + "," + strInsertT1Values + " From  " + strTabName + " where " + fnBuildQuery(strT1);
-
-
-
-
-                    if (Common.iDBType == (int)Enums.DBType.Oracle)
-                    {
-                        ((OraDBManager)Common.dbMgr).ExecuteScalar(CommandType.Text, strInsertTString);
-                    }
-                    else if (Common.iDBType == (int)Enums.DBType.Mysql)
-                    {
-                        ((MySqlDBManager)Common.dbMgr).ExecuteScalar(CommandType.Text, strInsertTString);
-                    }
-                    else
-                    {
-                        ((DBManager)Common.dbMgr).ExecuteScalar(CommandType.Text, strInsertTString);
-                    }
-                    strUpdateTString = "Update ETS_ADM_WEEKLY Set  ( ";
-                    strUpdateTString += strUpdateT2String + " ) =( Select  " + strUpdateT2Values + " From " + strTabName + " where " + fnBuildQuery(strT2) + ") Where Id=" + iMaxId;
-                    if (Common.iDBType == (int)Enums.DBType.Oracle)
-                    {
-                        ((OraDBManager)Common.dbMgr).ExecuteScalar(CommandType.Text, strUpdateTString);
-                    }
-                    else if (Common.iDBType == (int)Enums.DBType.Mysql)
-                    {
-                        ((MySqlDBManager)Common.dbMgr).ExecuteScalar(CommandType.Text, strUpdateTString);
-                    }
-                    else
-                    {
-                        ((DBManager)Common.dbMgr).ExecuteScalar(CommandType.Text, strUpdateTString);
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
-        }
         public void fnGetTimePeriodData(string strTabName, string[] strT1, string[] strT2, int iTimePeriodID, int iProjectId, ref int iMaxId, ref string strT1Feilds, ref string strT2Feilds, bool bIsONMain = false)
         {
             try
@@ -864,8 +631,8 @@ namespace RecoEngine_BI
                     dtTab = ((DBManager)Common.dbMgr).ExecuteDataTable(CommandType.Text, strSql);
                 string strMainfilter = "";
                 if (!bIsONMain)
-                    strTabName = "TRE_RANDOM";
-                if (strTabName != "TRE_RANDOM")
+                    strTabName = "TRE_RANDOM"+ iProjectId;
+                if (strTabName != "TRE_RANDOM"+ iProjectId)
                 {
                     strTabName = strTabName + "_V";
                     DataTable dt = new DataTable();
@@ -1110,7 +877,7 @@ namespace RecoEngine_BI
                     }
 
                     strCol = strCol.Remove(strCol.Length - 1);
-                    strSql = "Select WEEK, " + strCol + ",Rank1,Rank1_Action,Rank2,Rank2_Action,Rank3,Rank3_Action,Rank4,Rank4_Action from  TRE_OPPORTUNITY T  Left Join Tre_Ranking R  ON R.CUSTOMER=T.CUSTOMER";
+                    strSql = "Select WEEK, " + strCol + ",Rank1,Rank1_Action,Rank2,Rank2_Action,Rank3,Rank3_Action,Rank4,Rank4_Action from  tre_random"+iProjectId+ "  RD   join  TRE_OPPORTUNITYEXPORT T ON  RD.CUSTOMER=T.CUSTOMER  Left Join Tre_Ranking"+iProjectId+" R  ON R.CUSTOMER=T.CUSTOMER WHERE RD.WEEK =(SELECT  WEEK FROM TRE_OPPORTUNITYEXPORT LIMIT 1)";
                     if (Common.iDBType == (int)Enums.DBType.Oracle)
                         dtOpp = ((OraDBManager)Common.dbMgr).ExecuteDataTable(CommandType.Text, strSql);
                     else if (Common.iDBType == (int)Enums.DBType.SQl)
@@ -1185,17 +952,6 @@ namespace RecoEngine_BI
 
 
                 return dt;
-
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
-        }
-        private void fnInsertBaseData(string strTabName, int iTimePeriodID, string strSegmentColName)
-        {
-            try
-            {
 
             }
             catch (Exception ex)
@@ -1328,41 +1084,7 @@ namespace RecoEngine_BI
                 throw ex;
             }
         }
-        public void fnSaveOPPBreakDownStatus(int iOPPId, decimal dCtFlat, decimal dCtDropper, decimal dCtGrower, decimal dCtStoppeer, decimal dCtNonUser, decimal dCtNewUser,
-        decimal dCFlat, decimal dCDropper, decimal dCStoppeer, decimal dCGrower, decimal dCNonUser, decimal dCNewUser,
-        decimal dAVGFlat, decimal dAVGDropper, decimal dAVGStoppeer, decimal dAVGGrower, decimal dAVGNonUser, decimal dAVGNewUser, string[] strT1, string[] strT2, string strCurrentSegmentColumn, int iISActive)
-        {
-            string sT1 = fnBuildTimePeriod(strT1);
-            string sT2 = fnBuildTimePeriod(strT2);
-            try
-            {
-                string strSql = "Delete from STATUS_BREAKDOWN where OPPORTUNITY_ID= " + iOPPId;
-
-                if (Common.iDBType == (int)Enums.DBType.Oracle)
-                    ((OraDBManager)Common.dbMgr).ExecuteNonQuery(CommandType.Text, strSql);
-                else if (Common.iDBType == (int)Enums.DBType.Mysql)
-                    ((MySqlDBManager)Common.dbMgr).ExecuteNonQuery(CommandType.Text, strSql);
-                strSql = "Insert into STATUS_BREAKDOWN (OPPORTUNITY_ID,FLAT_CUTOFF,DROPPERS_CUTOFF,STOPPERS_CUTOFF,GROWERS_CUTOFF,NONUSERS_CUTOFF,NEWUSERS_CUTOFF,";
-                strSql += " FLAT_COUNT,DROPPERS_COUNT,STOPPERS_COUNT,GROWERS_COUNT,NONUSERS_COUNT,NEWUSERS_COUNT,FLAT_AVG,DROPPERS_AVG,STOPPERS_AVG,";
-                strSql += " GROWERS_AVG,NONUSERS_AVG,NEWUSERS_AVG,T1,T2,CURRENTSEGMENT,SEGMENTISACTIVE) values (" + iOPPId + ",0 ," + dCtDropper + "," + dCtStoppeer + "," + dCtGrower + ",";
-                strSql += dCtNonUser + "," + dCtNewUser + "," + dCFlat + "," + dCDropper + "," + dCStoppeer + "," + dCGrower + "," + dCNonUser + "," + dCNewUser + ",";
-                strSql += dAVGFlat + "," + dAVGDropper + "," + dAVGStoppeer + "," + dAVGGrower + "," + dAVGNonUser + "," + dAVGNewUser + ",'" + sT1 + "','" + sT2 + "','" + strCurrentSegmentColumn + "'," + iISActive + ")";
-
-                if (Common.iDBType == (int)Enums.DBType.Oracle)
-                    ((OraDBManager)Common.dbMgr).ExecuteNonQuery(CommandType.Text, strSql);
-
-                else if (Common.iDBType == (int)Enums.DBType.Mysql)
-                    ((MySqlDBManager)Common.dbMgr).ExecuteNonQuery(CommandType.Text, strSql);
-                else if (Common.iDBType == (int)Enums.DBType.SQl)
-                    ((DBManager)Common.dbMgr).ExecuteNonQuery(CommandType.Text, strSql);
-
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
-        }
-        public DataTable fnGetTREThreShold(string[] strT1, string[] strT2, string strFormula, string strPtnlFilter, string strDropper, string strGrower, string strStopper, int iOpportunityId, string strTabName)
+       public DataTable fnGetTREThreShold(string[] strT1, string[] strT2, string strFormula, string strPtnlFilter, string strDropper, string strGrower, string strStopper, int iOpportunityId, string strTabName)
         {
             try
             {
@@ -1427,50 +1149,7 @@ namespace RecoEngine_BI
                 throw ex;
             }
         }
-        public DataTable fnGetTREThreSholdForNewOPP(string[] strT1, string[] strT2, string strFormula, string strDropper, string strGrower, string strStopper, int iOpportunityId, string strTabName)
-        {
-            try
-            {
-                DataTable dt = new DataTable();
-
-                string strSql = "Select NVL(A.CUSTOMER,B.CUSTOMER) CUSTOMER, A.T1, B.T2,Case When T1=0 then 0 Else Round(T2/T1-1,2) End DELTA,";
-                strSql += " Case When A.T1+B.T2 =0 Then 'NON_USER' ";
-                strSql += " When A.T1=0 And B.T2>0 Then 'NEW_USER' ";
-                strSql += " When Case When T1=0 then 0 Else Round(T2/T1-1,2) End < " + Convert.ToDecimal(strStopper) + " Then 'STOPPER' ";
-                strSql += " When Case When T1=0 then 0 Else Round(T2/T1-1,2) End < " + Convert.ToDecimal(strDropper) + " Then 'DROPPER' ";
-                strSql += " When Case When T1=0 then 0 Else Round(T2/T1-1,2) End >  " + Convert.ToDecimal(strGrower) + " Then 'GROWER' ";
-                strSql += " ELSE 'FLAT' END as Status From";
-                strSql += "(Select CUSTOMER, round(avg(" + strFormula.ToUpper() + "),2) T1 from " + strTabName;
-                strSql += " where " + fnBuildQuery(strT1) + "  group by CUSTOMER) A ";
-                strSql += " Left join (Select CUSTOMER, round(avg(" + strFormula.ToUpper() + "),2) T2 from  " + strTabName + " where  " + fnBuildQuery(strT2) + " group by CUSTOMER) B ";
-                strSql += " On A.CUSTOMER=B.CUSTOMER";
-
-                if (Common.iDBType == (int)Enums.DBType.Oracle)
-                {
-
-                    dt = ((OraDBManager)Common.dbMgr).ExecuteDataTable(CommandType.Text, strSql);
-                }
-                else if (Common.iDBType == (int)Enums.DBType.Mysql)
-                {
-
-                    dt = ((MySqlDBManager)Common.dbMgr).ExecuteDataTable(CommandType.Text, strSql);
-                }
-
-                else if (Common.iDBType == (int)Enums.DBType.SQl)
-                {
-                    dt = ((DBManager)Common.dbMgr).ExecuteDataTable(CommandType.Text, strSql);
-                }
-
-                return dt;
-
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
-        }
-
-        public bool fnSaveTREThreShold(string[] strT1, string[] strT2, string strOppName, string strDropper, string strGrower, string strStopper, int iOpportunityId, string strTableName, int iProjectid, string strPtnlFilter, bool bIsONMain = false)
+       public bool fnSaveTREThreShold(string[] strT1, string[] strT2, string strOppName, string strDropper, string strGrower, string strStopper, int iOpportunityId, string strTableName, int iProjectid, string strPtnlFilter, bool bIsONMain = false)
         {
             bool flag;
             string[] str;
@@ -1493,7 +1172,7 @@ namespace RecoEngine_BI
                string str2 = "";
                 if (!bIsONMain)
                 {
-                    strTableName = "TRE_RANDOM";
+                    strTableName = "TRE_RANDOM"+ iProjectid.ToString();
                 }
                 if (dataTable.Rows.Count > 0)
                 {

@@ -313,8 +313,11 @@ namespace RecoEngine
                     string str2 = "NULL";
                     string str3 = "NULL";
                     this.ClsObj.fnSaveOPPRanking("Potential", Common.iProjectID, str, str1, str2, str3);
-                    this.objRanking.fnPotentialRanking(Common.iProjectID);
-                    this.fnBindRanking();
+                    if (this.ClsObj.fnRunOPoortunitiesfrmProcedure(Common.iProjectID, "Tre_Random"+ Common.iProjectID, str, str1,true))
+                    {
+                        this.objRanking.fnPotentialRanking(Common.iProjectID);
+                        this.fnBindRanking();
+                    }
                 }
                 else if (this.ddlOppRank1.SelectedIndex != -1 || this.ddlOppRank2.SelectedIndex != -1 || this.ddlOppRank3.SelectedIndex != -1 || this.ddlOppRank4.SelectedIndex != -1)
                 {

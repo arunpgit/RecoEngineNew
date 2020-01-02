@@ -204,6 +204,8 @@ namespace RecoEngine_BI
                     dt = ((OraDBManager)Common.dbMgr).ExecuteDataTable(CommandType.Text, strSql);
                 else if (Common.iDBType == (int)Enums.DBType.SQl)
                     dt = ((OraDBManager)Common.dbMgr).ExecuteDataTable(CommandType.Text, strSql);
+                else if (Common.iDBType == (int)Enums.DBType.Mysql)
+                    dt = ((MySqlDBManager)Common.dbMgr).ExecuteDataTable(CommandType.Text, strSql);
 
                 if (dt.Rows.Count > 0)
                 {
@@ -873,7 +875,7 @@ namespace RecoEngine_BI
             }
         }
 
-        public bool fnRunOPoortunitiesfrmProcedure(int iProjectId, string strTabName, string Timeperiod1, string Timeperiod2)
+        public bool fnRunOPoortunitiesfrmProcedure(int iProjectId, string strTabName, string Timeperiod1, string Timeperiod2,bool isForSample=false)
         {
             try
             {
@@ -968,9 +970,13 @@ namespace RecoEngine_BI
 
 
                     //((OraDBManager)Common.dbMgr).ExecuteNonQuery(CommandType.Text, strSql);
+                    if(isForSample)
+                        
+                    strSql = " CALL `recousr`.`TRE_GET_PTNL`('" + strTabName + "' ,"+ objclsTreDetails.fnMaxWeek(strTabName)+")";
+                    else
 
-                    strSql = " CALL `recousr`.`TRE_GET_PTNL`('" + strTabName + "_V' ,"+ objclsTreDetails.fnMaxWeek(strTabName)+")";
-                        ((MySqlDBManager)Common.dbMgr).ExecuteNonQuery(CommandType.Text, strSql);
+                    strSql = " CALL `recousr`.`TRE_GET_PTNL`('" + strTabName + "_V' ," + objclsTreDetails.fnMaxWeek(strTabName) + ")";
+                    ((MySqlDBManager)Common.dbMgr).ExecuteNonQuery(CommandType.Text, strSql);
                    }
                 
 

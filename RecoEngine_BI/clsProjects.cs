@@ -89,50 +89,81 @@ namespace RecoEngine_BI
             {
                 string strSql = "";
                         
-       //deleet recommendations of projects
 
                 strSql += "Delete from Projects where Project_Id=" + iProjectId;
                 if (Common.iDBType == (int)Enums.DBType.Oracle)
                     ((OraDBManager)Common.dbMgr).ExecuteScalar(CommandType.Text, strSql);
+
+                else if (Common.iDBType == (int)Enums.DBType.Mysql)
+                    ((MySqlDBManager)Common.dbMgr).ExecuteScalar(CommandType.Text, strSql);
                 else
                     ((DBManager)Common.dbMgr).ExecuteScalar(CommandType.Text, strSql);
               strSql = "DELETE FROM TRE_MAPPING WHERE PROJECTID=" + iProjectId;
               if (Common.iDBType == (int)Enums.DBType.Oracle)
                   ((OraDBManager)Common.dbMgr).ExecuteScalar(CommandType.Text, strSql);
-              else
+
+                else if (Common.iDBType == (int)Enums.DBType.Mysql)
+                    ((MySqlDBManager)Common.dbMgr).ExecuteScalar(CommandType.Text, strSql);
+                else
                   ((DBManager)Common.dbMgr).ExecuteScalar(CommandType.Text, strSql);
 
               strSql = "DELETE FROM  TRE_Calculated_columns WHERE PROJECT_ID=" + iProjectId;
               if (Common.iDBType == (int)Enums.DBType.Oracle)
                   ((OraDBManager)Common.dbMgr).ExecuteScalar(CommandType.Text, strSql);
-              else
+
+                else if (Common.iDBType == (int)Enums.DBType.Mysql)
+                    ((MySqlDBManager)Common.dbMgr).ExecuteScalar(CommandType.Text, strSql);
+                else
                   ((DBManager)Common.dbMgr).ExecuteScalar(CommandType.Text, strSql);
               strSql = "DELETE FROM  Filter_Main WHERE PROJECT_ID=" + iProjectId;
               if (Common.iDBType == (int)Enums.DBType.Oracle)
                   ((OraDBManager)Common.dbMgr).ExecuteScalar(CommandType.Text, strSql);
-              else
+
+                else if (Common.iDBType == (int)Enums.DBType.Mysql)
+                    ((MySqlDBManager)Common.dbMgr).ExecuteScalar(CommandType.Text, strSql);
+                else
                   ((DBManager)Common.dbMgr).ExecuteScalar(CommandType.Text, strSql);
               strSql = "DELETE FROM OPPORTUNITY WHERE PROJECT_ID=" + iProjectId;
               if (Common.iDBType == (int)Enums.DBType.Oracle)
                   ((OraDBManager)Common.dbMgr).ExecuteScalar(CommandType.Text, strSql);
-              else
+
+                else if (Common.iDBType == (int)Enums.DBType.Mysql)
+                    ((MySqlDBManager)Common.dbMgr).ExecuteScalar(CommandType.Text, strSql);
+                else
                   ((DBManager)Common.dbMgr).ExecuteScalar(CommandType.Text, strSql);
               strSql = "DELETE FROM offers where project_id=" + iProjectId;
               if (Common.iDBType == (int)Enums.DBType.Oracle)
                   ((OraDBManager)Common.dbMgr).ExecuteScalar(CommandType.Text, strSql);
-              else
+
+                else if (Common.iDBType == (int)Enums.DBType.Mysql)
+                    ((MySqlDBManager)Common.dbMgr).ExecuteScalar(CommandType.Text, strSql);
+                else
                   ((DBManager)Common.dbMgr).ExecuteScalar(CommandType.Text, strSql);
               strSql = "DELETE FROM campaigns where project_id=" + iProjectId;
               if (Common.iDBType == (int)Enums.DBType.Oracle)
                   ((OraDBManager)Common.dbMgr).ExecuteScalar(CommandType.Text, strSql);
-              else
+
+                else if (Common.iDBType == (int)Enums.DBType.Mysql)
+                    ((MySqlDBManager)Common.dbMgr).ExecuteScalar(CommandType.Text, strSql);
+                else
                   ((DBManager)Common.dbMgr).ExecuteScalar(CommandType.Text, strSql);
               strSql = "DELETE FROM Export_Settings where project_id=" + iProjectId;
 
                 if (Common.iDBType == (int)Enums.DBType.Oracle)
                     ((OraDBManager)Common.dbMgr).ExecuteScalar(CommandType.Text, strSql);
+
+                else if (Common.iDBType == (int)Enums.DBType.Mysql)
+                    ((MySqlDBManager)Common.dbMgr).ExecuteScalar(CommandType.Text, strSql);
                 else
                     ((DBManager)Common.dbMgr).ExecuteScalar(CommandType.Text, strSql);
+                strSql = "drop table tre_random" + iProjectId;
+
+               if (Common.iDBType == (int)Enums.DBType.Mysql)
+                    ((MySqlDBManager)Common.dbMgr).ExecuteScalar(CommandType.Text, strSql);
+                strSql = "drop table tre_ranking" + iProjectId;
+
+                if (Common.iDBType == (int)Enums.DBType.Mysql)
+                    ((MySqlDBManager)Common.dbMgr).ExecuteScalar(CommandType.Text, strSql);
 
             }
             catch (Exception ex)
@@ -159,19 +190,49 @@ namespace RecoEngine_BI
                         strSql += " CURDATE()," + iLoginUserID + ")";
                     else
                         strSql += " Getdate()," + iLoginUserID + ")";
+                    if (Common.iDBType == (int)Enums.DBType.Oracle)
+                        ((OraDBManager)Common.dbMgr).ExecuteScalar(CommandType.Text, strSql);
+                    else if (Common.iDBType == (int)Enums.DBType.Mysql)
+                        ((MySqlDBManager)Common.dbMgr).ExecuteScalar(CommandType.Text, strSql);
+                    else
+                        ((DBManager)Common.dbMgr).ExecuteScalar(CommandType.Text, strSql);
+
+
+                    strSql = "SELECT max(project_id) as projectid FROM projects";
+                   int newProjectId= int.Parse(((MySqlDBManager)Common.dbMgr).ExecuteScalar(CommandType.Text, strSql));
+
+                    strSql = " CREATE TABLE tre_ranking" + newProjectId + " (";
+                    strSql += "   CUSTOMER varchar(100) DEFAULT NULL,";
+                    strSql += "   RANK1_ACTION varchar(100) DEFAULT NULL, ";
+                    strSql += "   RANK2_ACTION varchar(100) DEFAULT NULL, ";
+                    strSql += "   RANK3_ACTION varchar(100) DEFAULT NULL, ";
+                    strSql += "   RANK4_ACTION varchar(100) DEFAULT NULL, ";
+                    strSql += "   RANK1 int(11) DEFAULT NULL, ";
+                    strSql += "   RANK2 int(11) DEFAULT NULL, ";
+                    strSql += "   RANK3 int(11) DEFAULT NULL, ";
+                    strSql += "   RANK4 int(11) DEFAULT NULL )  ";
+                    if (Common.iDBType == (int)Enums.DBType.Mysql)
+                        ((MySqlDBManager)Common.dbMgr).ExecuteScalar(CommandType.Text, strSql);
+
+
                 }
                 else
                 {
                     strSql = "Update PROJECTS set name='" + strPName.Replace("'", "''") + "',";
                     strSql += " Description = '" + strDescription.Replace("'", "''") + "'";
                     strSql += " where Project_Id=" + iProjectId;
+                    if (Common.iDBType == (int)Enums.DBType.Oracle)
+                        ((OraDBManager)Common.dbMgr).ExecuteScalar(CommandType.Text, strSql);
+                    else if (Common.iDBType == (int)Enums.DBType.Mysql)
+                        ((MySqlDBManager)Common.dbMgr).ExecuteScalar(CommandType.Text, strSql);
+                    else
+                        ((DBManager)Common.dbMgr).ExecuteScalar(CommandType.Text, strSql);
                 }
-                if (Common.iDBType == (int)Enums.DBType.Oracle)
-                    ((OraDBManager)Common.dbMgr).ExecuteScalar(CommandType.Text, strSql);
-                else if (Common.iDBType == (int)Enums.DBType.Mysql)
-                    ((MySqlDBManager)Common.dbMgr).ExecuteScalar(CommandType.Text, strSql);
-                else
-                    ((DBManager)Common.dbMgr).ExecuteScalar(CommandType.Text, strSql);
+      
+
+
+
+
 
             }
             catch (Exception ex)

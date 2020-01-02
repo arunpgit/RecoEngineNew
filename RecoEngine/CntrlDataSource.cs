@@ -68,7 +68,8 @@ namespace RecoEngine
                     if (!bPreviewLoaded)
                     {
                         //DataTable dt = clsDSObj.fnGetTreDetails(Common.strTableName);
-                        DataTable dt = clsDSObj.fnGetTreDetails("Tre_Random");
+                        
+                        DataTable dt = clsDSObj.fnGetTreDetails("Tre_Random"+ Common.iProjectID);
                         grdPreview.DataSource = dt;
                         this.grdPreview.MasterTemplate.Refresh(null); 
                         grdPreview.Refresh();

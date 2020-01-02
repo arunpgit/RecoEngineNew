@@ -296,7 +296,7 @@ namespace RecoEngine_BI
                 }
                 else if (Common.iDBType == 3)
                 {
-                    str = (strTabName != "Tre_Random" ? string.Concat("Select * from ", strTabName, "  limit 100") : string.Concat("Select * from ", strTabName));
+                    str = ( !strTabName.Contains("Tre_Random") ? string.Concat("Select * from ", strTabName, "  limit 100") : string.Concat("Select * from ", strTabName));
                     dataTable1 = ((MySqlDBManager)Common.dbMgr).ExecuteDataTable(CommandType.Text, str);
                 }
                 else
@@ -1666,13 +1666,13 @@ namespace RecoEngine_BI
                         ((MySqlDBManager)Common.dbMgr).ExecuteNonQuery(CommandType.Text, str);
                     }
                     str15 = str15.Substring(0, str15.Length - 1);
-                    str = " Select count(1) from information_schema.columns c WHERE c.table_name = 'TRE_RANDOM'";
+                    str = " Select count(1) from information_schema.columns c WHERE c.table_name = 'TRE_RANDOM"+ProjectId+"'";
                    
                         num3 = int.Parse(((MySqlDBManager)Common.dbMgr).ExecuteScalar(CommandType.Text, str));
                     
                     if (num3 >= 1)
                     {
-                        str = " DROP TABLE TRE_RANDOM";
+                        str = " DROP TABLE TRE_RANDOM"+ProjectId ;
                         ((MySqlDBManager)Common.dbMgr).ExecuteNonQuery(CommandType.Text, str);
                     }
                     str = "Select count(1) from information_schema.columns c WHERE c.table_name = 'ETS_ADM_WEEKLY_A'";
@@ -1686,7 +1686,7 @@ namespace RecoEngine_BI
                     }
                     if (num3 == 0)
                     {
-                        string[] strArrays4 = new string[] { "CREATE TABLE TRE_RANDOM AS SELECT ", str15, "   from ", strTabName, " C , " };
+                        string[] strArrays4 = new string[] { "CREATE TABLE TRE_RANDOM"+ ProjectId+" AS SELECT ", str15, "   from ", strTabName, " C , " };
                         str = string.Concat(strArrays4);
                         str = string.Concat(str, " ( SELECT RNDMCUSTOMER FROM   ( SELECT Distinct CUSTOMER as RNDMCUSTOMER FROM ", strTabName);
                         if (strFilerCondition != "")
@@ -1698,7 +1698,7 @@ namespace RecoEngine_BI
                     }
                     else
                     {
-                        string[] strArrays5 = new string[] { "CREATE TABLE TRE_RANDOM AS SELECT ", str15, "   from ", strTabName, " C , " };
+                        string[] strArrays5 = new string[] { "CREATE TABLE TRE_RANDOM"+ ProjectId+ " AS SELECT ", str15, "   from ", strTabName, " C , " };
                         str = string.Concat(strArrays5);
                         str = string.Concat(str, " ( SELECT RNDMCUSTOMER FROM   ( SELECT Distinct CUSTOMER as RNDMCUSTOMER FROM ", strTabName);
                         if (strFilerCondition != "")

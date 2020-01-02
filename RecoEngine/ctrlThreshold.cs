@@ -187,7 +187,7 @@ namespace RecoEngine
                 DataTable dataTable = new DataTable();
                 string[] strArrays = Common.timePeriods.strtp1;
                 string[] strArrays1 = Common.timePeriods.strtp2;
-                dataTable = this.objTredetails.fnGetTREThreShold(strArrays, strArrays1, this.strFormula, Common.strPtnlFilter, this.txtCtDropper.Text, this.txtCtGrower.Text, this.txtCtStopper.Text, this.iOpportunityId, "Tre_Random");
+                dataTable = this.objTredetails.fnGetTREThreShold(strArrays, strArrays1, this.strFormula, Common.strPtnlFilter, this.txtCtDropper.Text, this.txtCtGrower.Text, this.txtCtStopper.Text, this.iOpportunityId, "Tre_Random"+Common.iProjectID);
                 DataTable dataTable1 = dataTable.Clone();
                 DataRow[] dataRowArray = dataTable.Select("STATUS ='STOPPER'");
                 this.txtCStopper.Text = ((int)dataRowArray.Length).ToString();
@@ -433,7 +433,7 @@ namespace RecoEngine
                 this.VAStopper.X = Convert.ToDouble(this.txtCtStopper.Text);
                 this.VADropper.X = Convert.ToDouble(this.txtCtDropper.Text);
                 this.VAGrower.X = Convert.ToDouble(this.txtCtGrower.Text);
-                dataTable = this.objTredetails.fnGetTREThreShold(this.strT1, this.strT2, this.strFormula, Common.strPtnlFilter, this.txtCtDropper.Text, this.txtCtGrower.Text, this.txtCtStopper.Text, this.iOpportunityId, "Tre_Random");
+                dataTable = this.objTredetails.fnGetTREThreShold(this.strT1, this.strT2, this.strFormula, Common.strPtnlFilter, this.txtCtDropper.Text, this.txtCtGrower.Text, this.txtCtStopper.Text, this.iOpportunityId, "Tre_Random"+Common.iProjectID);
                 this.fnAvgDeltaCount();
                 var list = dataTable.AsEnumerable().Select((DataRow obj) => new { onnet = obj["DELTA"].ToString() }).ToList();
                 for (decimal i = new decimal(-1); i <= new decimal(1); i += new decimal(1, 0, 0, false, 1))
