@@ -1,0 +1,13 @@
+﻿################################################################################
+# This .gitignore file was automatically created by Microsoft(R) Visual Studio.
+################################################################################
+
+/.vs
+/packages
+/CustomColumns/bin/Debug
+/RecoEngine/obj/x86
+/RecoEngine/bin/Debug
+/RecoEngine_BI/obj
+/RecoEngine_BI/bin/Debug
+/RecoEngine_DataLayer/obj/Debug
+/RecoEngine_DataLayer/bin/Debug

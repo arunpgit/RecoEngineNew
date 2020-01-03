@@ -492,99 +492,8 @@ namespace RecoEngine_BI
             }
 
         }
-        public bool fnRunOPoortunities(int iProjectId, string strTabName)
-        {
-            try
-            {
-                //((OraDBManager)Common.dbMgr).BeginTrans();
-
-                DataTable dt = new DataTable();
-
-                string strSql = "SELECT O.OPPORTUNITY_ID,O.OPP_NAME,O.FORMULA,O.ELGBL_FORMULA,O.PTNL_FORMULA,S.DROPPERS_CUTOFF ,S.STOPPERS_CUTOFF,S.GROWERS_CUTOFF,";
-                strSql += " S.T1,S.T2,S.CURRENTSEGMENT,S.SEGMENTISACTIVE,TT.TIMEPERIOD_ID ";
-                strSql += " FROM OPPORTUNITY O INNER JOIN STATUS_BREAKDOWN S ON O.OPPORTUNITY_ID=S.OPPORTUNITY_ID ";
-                strSql += " LEFT JOIN TRE_TIMEPERIOD TT ON TT.T1=S.T1 AND TT.T2=S.T2";
-                strSql += " WHERE O.PROJECT_ID= " + iProjectId + " AND O.ISONMAIN=0";
-
-                dt = ((OraDBManager)Common.dbMgr).ExecuteDataTable(CommandType.Text, strSql);
-
-                if (Common.iDBType == (int)Enums.DBType.Oracle)
-                {
-
-                    dt = ((OraDBManager)Common.dbMgr).ExecuteDataTable(CommandType.Text, strSql);
-                }
-
-                else  if (Common.iDBType == (int)Enums.DBType.Mysql)
-                    {
-
-                    dt = ((MySqlDBManager)Common.dbMgr).ExecuteDataTable(CommandType.Text, strSql);
-                }
-
-                for (int i = 0; i < dt.Rows.Count; i++)
-                {
-                    if (!fnSaveOppRecomendationSettings(dt.Rows[i], strTabName, iProjectId))
-                    {
-
-                        if (Common.iDBType == (int)Enums.DBType.Oracle)
-                        {
-
-                            ((OraDBManager)Common.dbMgr).RollbackTrans();
-                        }
-
-                        else if (Common.iDBType == (int)Enums.DBType.Mysql)
-                        {
-                            ((MySqlDBManager)Common.dbMgr).RollbackTrans();
-                        }
-                        return false;
-                    }
-                    if (!fnSaveThreshold(dt.Rows[i], strTabName, iProjectId))
-                    {
-                        if (Common.iDBType == (int)Enums.DBType.Oracle)
-                        {
-
-                            ((OraDBManager)Common.dbMgr).RollbackTrans();
-                        }
-
-                        else if (Common.iDBType == (int)Enums.DBType.Mysql)
-                        {
-                            ((MySqlDBManager)Common.dbMgr).RollbackTrans();
-                        }
-                        return false;
-                    }
-
-                    strSql = "Update OPPORTUNITY A Set ISONMAIN=1 Where OPPORTUNITY_ID=" + dt.Rows[i]["OPPORTUNITY_ID"];
-                    DataTable dtupdate = new DataTable();
-                    if (Common.iDBType == (int)Enums.DBType.Oracle)
-                    {
-
-                        dtupdate = ((OraDBManager)Common.dbMgr).ExecuteDataTable(CommandType.Text, strSql);
-                    }
-
-                    else if (Common.iDBType == (int)Enums.DBType.Mysql)
-                    {
-                        dtupdate = ((MySqlDBManager)Common.dbMgr).ExecuteDataTable(CommandType.Text, strSql);
-                    }
-                }
-
-                //((OraDBManager)Common.dbMgr).CommitTrans();
-                return true;
-            }
-            catch (Exception ex)
-            {
-                if (Common.iDBType == (int)Enums.DBType.Oracle)
-                {
-                    ((OraDBManager)Common.dbMgr).RollbackTrans();
-                }
-
-                else if (Common.iDBType == (int)Enums.DBType.Mysql)
-                {
-                    ((MySqlDBManager)Common.dbMgr).RollbackTrans();
-                }
-                throw ex;
-            }
-        }
         clsTre_Details clsTObj = new clsTre_Details();
-        private bool fnSaveOppRecomendationSettings(DataRow dr, string strTabName, int iProjectId)
+        private bool fnSaveOppRecomendationSettings(DataRow dr, string strTabName, int iProjectId,bool isOnMain=true)
         {
 
             try
@@ -593,7 +502,7 @@ namespace RecoEngine_BI
                 string strT1Feilds = "";
                 string strT2Feilds = "";
 
-                clsTObj.fnGetTimePeriodData(strTabName, dr["T1"].ToString().Split(',').ToArray(), dr["T2"].ToString().Split(',').ToArray(), int.Parse(dr["TIMEPERIOD_ID"].ToString()), iProjectId, ref iMaxId, ref strT1Feilds, ref strT2Feilds, true);
+                  clsTObj.fnGetTimePeriodData(strTabName, dr["T1"].ToString().Split(',').ToArray(), dr["T2"].ToString().Split(',').ToArray(), int.Parse(dr["TIMEPERIOD_ID"].ToString()), iProjectId, ref iMaxId, ref strT1Feilds, ref strT2Feilds, isOnMain);
 
                 clsTObj.fnGetSegmentData(strTabName, int.Parse(dr["TIMEPERIOD_ID"].ToString()), dr["CURRENTSEGMENT"].ToString(), dr["T2"].ToString(), dr["T2"].ToString().Split(';'), iProjectId, dr["SEGMENTISACTIVE"].ToString() == "1" ? true : false, ref iMaxId, ref strT1Feilds);
 
@@ -902,7 +811,7 @@ namespace RecoEngine_BI
                 }
 
 
-                if (!fnSaveOppRecomendationSettings(dt.Rows[0], strTabName, iProjectId))
+                if (!fnSaveOppRecomendationSettings(dt.Rows[0], strTabName, iProjectId, !isForSample))
                 {
                     if (Common.iDBType == (int)Enums.DBType.Oracle)
                     {
@@ -963,7 +872,7 @@ namespace RecoEngine_BI
                     }
                     string BaseTable = "'ets_tre_base'";
                     strSql = " CALL `recousr`.`TRE_GET_DELTASTATUS`(";
-                    strSql += BaseTable+")";
+                    strSql += BaseTable+","+ iProjectId + ")";
                    
                   
                         ((MySqlDBManager)Common.dbMgr).ExecuteNonQuery(CommandType.Text, strSql);
@@ -972,7 +881,7 @@ namespace RecoEngine_BI
                     //((OraDBManager)Common.dbMgr).ExecuteNonQuery(CommandType.Text, strSql);
                     if(isForSample)
                         
-                    strSql = " CALL `recousr`.`TRE_GET_PTNL`('" + strTabName + "' ,"+ objclsTreDetails.fnMaxWeek(strTabName)+")";
+                    strSql = " CALL `recousr`.`TRE_GET_PTNL`('Tre_random"+iProjectId+"' ,"+ objclsTreDetails.fnMaxWeek(strTabName)+")";
                     else
 
                     strSql = " CALL `recousr`.`TRE_GET_PTNL`('" + strTabName + "_V' ," + objclsTreDetails.fnMaxWeek(strTabName) + ")";

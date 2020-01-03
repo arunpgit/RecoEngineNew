@@ -313,7 +313,10 @@ namespace RecoEngine
                     string str2 = "NULL";
                     string str3 = "NULL";
                     this.ClsObj.fnSaveOPPRanking("Potential", Common.iProjectID, str, str1, str2, str3);
-                    if (this.ClsObj.fnRunOPoortunitiesfrmProcedure(Common.iProjectID, "Tre_Random"+ Common.iProjectID, str, str1,true))
+
+                    string strTimperiod = this.clstreDetails.fnBuildTimePeriod(Common.timePeriods.strtp1);
+                    string strTimperiod1 = this.clstreDetails.fnBuildTimePeriod(Common.timePeriods.strtp2);
+                    if (this.ClsObj.fnRunOPoortunitiesfrmProcedure(Common.iProjectID, Common.strTableName, strTimperiod, strTimperiod1, true))
                     {
                         this.objRanking.fnPotentialRanking(Common.iProjectID);
                         this.fnBindRanking();

@@ -108,12 +108,9 @@
             this.radDropDownList1 = new Telerik.WinControls.UI.RadDropDownList();
             this.grdRanking = new Telerik.WinControls.UI.MasterGridViewTemplate();
             ((System.ComponentModel.ISupportInitialize)(this.pgVRecommendation)).BeginInit();
-            this.pgVRecommendation.SuspendLayout();
             this.pgRcmndSettings.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.mvmntwindowMainpanel)).BeginInit();
-            this.mvmntwindowMainpanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gbGMain)).BeginInit();
-            this.gbGMain.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.grdGrouping)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.grdGrouping.MasterTemplate)).BeginInit();
             this.panel5.SuspendLayout();
@@ -124,13 +121,11 @@
             ((System.ComponentModel.ISupportInitialize)(this.gridtpdetails)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridtpdetails.MasterTemplate)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pnMWindow)).BeginInit();
-            this.pnMWindow.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.radLabel1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.btnView)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.radLabel2)).BeginInit();
             this.pgOpportunityMapping.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gbMain)).BeginInit();
-            this.gbMain.SuspendLayout();
             this.pnFill.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.ddlOpportunityType)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pctFilter)).BeginInit();
@@ -144,7 +139,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.txtDesc)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtName)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gbOpportunityList)).BeginInit();
-            this.gbOpportunityList.SuspendLayout();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.grdOppList)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.grdOppList.MasterTemplate)).BeginInit();
@@ -154,7 +148,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.btnNew)).BeginInit();
             this.pgRanking.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gbNewRanking)).BeginInit();
-            this.gbNewRanking.SuspendLayout();
             this.panel4.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.ddRankingCriteria)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.btnRnkngSave)).BeginInit();
@@ -164,7 +157,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.ddlOppRank1)).BeginInit();
             this.pgOppDetails.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.radGroupBox1)).BeginInit();
-            this.radGroupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.grdOpportunities)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.grdOpportunities.MasterTemplate)).BeginInit();
             this.panel6.SuspendLayout();
@@ -183,14 +175,19 @@
             this.pgVRecommendation.Controls.Add(this.pgRanking);
             this.pgVRecommendation.Controls.Add(this.pgOppDetails);
             this.pgVRecommendation.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pgVRecommendation.Font = new System.Drawing.Font("Arial Narrow", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.pgVRecommendation.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.pgVRecommendation.Location = new System.Drawing.Point(0, 0);
             this.pgVRecommendation.Name = "pgVRecommendation";
+            // 
+            // 
+            // 
+            this.pgVRecommendation.RootElement.AccessibleDescription = null;
+            this.pgVRecommendation.RootElement.AccessibleName = null;
+            this.pgVRecommendation.RootElement.ControlBounds = new System.Drawing.Rectangle(0, 0, 400, 300);
             this.pgVRecommendation.SelectedPage = this.pgOpportunityMapping;
             this.pgVRecommendation.Size = new System.Drawing.Size(789, 597);
             this.pgVRecommendation.TabIndex = 0;
             this.pgVRecommendation.SelectedPageChanged += new System.EventHandler(this.pgVRecommendation_SelectedPageChanged);
-            ((Telerik.WinControls.UI.RadPageViewStripElement)(this.pgVRecommendation.GetChildAt(0))).StripButtons = Telerik.WinControls.UI.StripViewButtons.None;
             // 
             // pgRcmndSettings
             // 
@@ -221,6 +218,13 @@
             this.mvmntwindowMainpanel.Margin = new System.Windows.Forms.Padding(0);
             this.mvmntwindowMainpanel.Name = "mvmntwindowMainpanel";
             this.mvmntwindowMainpanel.Padding = new System.Windows.Forms.Padding(2, 18, 2, 2);
+            // 
+            // 
+            // 
+            this.mvmntwindowMainpanel.RootElement.AccessibleDescription = null;
+            this.mvmntwindowMainpanel.RootElement.AccessibleName = null;
+            this.mvmntwindowMainpanel.RootElement.ControlBounds = new System.Drawing.Rectangle(0, 0, 200, 100);
+            this.mvmntwindowMainpanel.RootElement.Padding = new System.Windows.Forms.Padding(2, 18, 2, 2);
             this.mvmntwindowMainpanel.Size = new System.Drawing.Size(768, 551);
             this.mvmntwindowMainpanel.TabIndex = 0;
             // 
@@ -244,17 +248,25 @@
             this.gbGMain.Margin = new System.Windows.Forms.Padding(0);
             this.gbGMain.Name = "gbGMain";
             this.gbGMain.Padding = new System.Windows.Forms.Padding(2, 18, 2, 2);
+            // 
+            // 
+            // 
+            this.gbGMain.RootElement.AccessibleDescription = null;
+            this.gbGMain.RootElement.AccessibleName = null;
+            this.gbGMain.RootElement.ControlBounds = new System.Drawing.Rectangle(0, 0, 200, 100);
+            this.gbGMain.RootElement.Padding = new System.Windows.Forms.Padding(2, 18, 2, 2);
             this.gbGMain.Size = new System.Drawing.Size(764, 293);
             this.gbGMain.TabIndex = 2;
             // 
             // grdGrouping
             // 
             this.grdGrouping.AutoScroll = true;
+            this.grdGrouping.BackColor = System.Drawing.SystemColors.ControlLightLight;
             this.grdGrouping.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.grdGrouping.Font = new System.Drawing.Font("Arial Narrow", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.grdGrouping.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.grdGrouping.Location = new System.Drawing.Point(2, 91);
             // 
-            // grdGrouping
+            // 
             // 
             this.grdGrouping.MasterTemplate.AllowAddNewRow = false;
             this.grdGrouping.MasterTemplate.AllowCellContextMenu = false;
@@ -266,6 +278,12 @@
             this.grdGrouping.MasterTemplate.AllowEditRow = false;
             this.grdGrouping.MasterTemplate.ShowFilteringRow = false;
             this.grdGrouping.Name = "grdGrouping";
+            // 
+            // 
+            // 
+            this.grdGrouping.RootElement.AccessibleDescription = null;
+            this.grdGrouping.RootElement.AccessibleName = null;
+            this.grdGrouping.RootElement.ControlBounds = new System.Drawing.Rectangle(0, 0, 240, 150);
             this.grdGrouping.ShowCellErrors = false;
             this.grdGrouping.ShowGroupPanel = false;
             this.grdGrouping.Size = new System.Drawing.Size(760, 169);
@@ -283,9 +301,16 @@
             // btnNext
             // 
             this.btnNext.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnNext.BackColor = System.Drawing.SystemColors.ControlLightLight;
             this.btnNext.Font = new System.Drawing.Font("Arial", 8F);
             this.btnNext.Location = new System.Drawing.Point(688, 5);
             this.btnNext.Name = "btnNext";
+            // 
+            // 
+            // 
+            this.btnNext.RootElement.AccessibleDescription = null;
+            this.btnNext.RootElement.AccessibleName = null;
+            this.btnNext.RootElement.ControlBounds = new System.Drawing.Rectangle(0, 0, 130, 24);
             this.btnNext.Size = new System.Drawing.Size(61, 24);
             this.btnNext.TabIndex = 3;
             this.btnNext.Text = "Next";
@@ -310,7 +335,7 @@
             this.chkActive.AutoSize = true;
             this.chkActive.Location = new System.Drawing.Point(315, 46);
             this.chkActive.Name = "chkActive";
-            this.chkActive.Size = new System.Drawing.Size(83, 17);
+            this.chkActive.Size = new System.Drawing.Size(104, 21);
             this.chkActive.TabIndex = 21;
             this.chkActive.Text = "Active Base";
             this.chkActive.UseVisualStyleBackColor = true;
@@ -321,7 +346,7 @@
             this.rbtSegment.Checked = true;
             this.rbtSegment.Location = new System.Drawing.Point(17, 42);
             this.rbtSegment.Name = "rbtSegment";
-            this.rbtSegment.Size = new System.Drawing.Size(70, 17);
+            this.rbtSegment.Size = new System.Drawing.Size(85, 21);
             this.rbtSegment.TabIndex = 21;
             this.rbtSegment.TabStop = true;
             this.rbtSegment.Text = "Segment";
@@ -330,9 +355,16 @@
             // 
             // btnGView
             // 
+            this.btnGView.BackColor = System.Drawing.SystemColors.ControlLightLight;
             this.btnGView.Font = new System.Drawing.Font("Arial", 8F);
             this.btnGView.Location = new System.Drawing.Point(419, 45);
             this.btnGView.Name = "btnGView";
+            // 
+            // 
+            // 
+            this.btnGView.RootElement.AccessibleDescription = null;
+            this.btnGView.RootElement.AccessibleName = null;
+            this.btnGView.RootElement.ControlBounds = new System.Drawing.Rectangle(0, 0, 130, 24);
             this.btnGView.Size = new System.Drawing.Size(61, 19);
             this.btnGView.TabIndex = 19;
             this.btnGView.Text = "View";
@@ -340,10 +372,18 @@
             // 
             // ddlSegment
             // 
+            this.ddlSegment.BackColor = System.Drawing.SystemColors.ControlLightLight;
             this.ddlSegment.DropDownAnimationEnabled = true;
             this.ddlSegment.Location = new System.Drawing.Point(107, 44);
             this.ddlSegment.MaxDropDownItems = 0;
             this.ddlSegment.Name = "ddlSegment";
+            // 
+            // 
+            // 
+            this.ddlSegment.RootElement.AccessibleDescription = null;
+            this.ddlSegment.RootElement.AccessibleName = null;
+            this.ddlSegment.RootElement.ControlBounds = new System.Drawing.Rectangle(0, 0, 106, 20);
+            this.ddlSegment.RootElement.StretchVertically = true;
             this.ddlSegment.ShowImageInEditorArea = true;
             this.ddlSegment.Size = new System.Drawing.Size(186, 20);
             this.ddlSegment.TabIndex = 18;
@@ -364,11 +404,12 @@
             // gridtpdetails
             // 
             this.gridtpdetails.AutoScroll = true;
+            this.gridtpdetails.BackColor = System.Drawing.SystemColors.ControlLightLight;
             this.gridtpdetails.Dock = System.Windows.Forms.DockStyle.Top;
-            this.gridtpdetails.Font = new System.Drawing.Font("Arial Narrow", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.gridtpdetails.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.gridtpdetails.Location = new System.Drawing.Point(2, 156);
             // 
-            // gridtpdetails
+            // 
             // 
             this.gridtpdetails.MasterTemplate.AllowAddNewRow = false;
             this.gridtpdetails.MasterTemplate.AllowCellContextMenu = false;
@@ -379,6 +420,12 @@
             this.gridtpdetails.MasterTemplate.AllowDragToGroup = false;
             this.gridtpdetails.MasterTemplate.AllowEditRow = false;
             this.gridtpdetails.Name = "gridtpdetails";
+            // 
+            // 
+            // 
+            this.gridtpdetails.RootElement.AccessibleDescription = null;
+            this.gridtpdetails.RootElement.AccessibleName = null;
+            this.gridtpdetails.RootElement.ControlBounds = new System.Drawing.Rectangle(0, 0, 240, 150);
             this.gridtpdetails.Size = new System.Drawing.Size(764, 100);
             this.gridtpdetails.TabIndex = 1;
             // 
@@ -405,21 +452,34 @@
             this.pnMWindow.Margin = new System.Windows.Forms.Padding(0);
             this.pnMWindow.Name = "pnMWindow";
             this.pnMWindow.Padding = new System.Windows.Forms.Padding(2, 18, 2, 2);
+            // 
+            // 
+            // 
+            this.pnMWindow.RootElement.AccessibleDescription = null;
+            this.pnMWindow.RootElement.AccessibleName = null;
+            this.pnMWindow.RootElement.ControlBounds = new System.Drawing.Rectangle(0, 0, 200, 100);
+            this.pnMWindow.RootElement.Padding = new System.Windows.Forms.Padding(2, 18, 2, 2);
             this.pnMWindow.Size = new System.Drawing.Size(764, 138);
             this.pnMWindow.TabIndex = 0;
             // 
             // radLabel1
             // 
+            this.radLabel1.BackColor = System.Drawing.SystemColors.ControlLightLight;
             this.radLabel1.Font = new System.Drawing.Font("Arial", 8.25F);
             this.radLabel1.Location = new System.Drawing.Point(183, 50);
             this.radLabel1.Name = "radLabel1";
+            // 
+            // 
+            // 
+            this.radLabel1.RootElement.AccessibleDescription = null;
+            this.radLabel1.RootElement.AccessibleName = null;
             this.radLabel1.Size = new System.Drawing.Size(74, 16);
             this.radLabel1.TabIndex = 7;
             this.radLabel1.Text = "Time Period1";
             // 
             // chkddlTP1
             // 
-            this.chkddlTP1.Font = new System.Drawing.Font("Arial Narrow", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.chkddlTP1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.chkddlTP1.Location = new System.Drawing.Point(291, 46);
             this.chkddlTP1.MultipleSelection = true;
             this.chkddlTP1.Name = "chkddlTP1";
@@ -442,9 +502,16 @@
             // 
             // btnView
             // 
+            this.btnView.BackColor = System.Drawing.SystemColors.ControlLightLight;
             this.btnView.Font = new System.Drawing.Font("Arial", 8F);
             this.btnView.Location = new System.Drawing.Point(508, 93);
             this.btnView.Name = "btnView";
+            // 
+            // 
+            // 
+            this.btnView.RootElement.AccessibleDescription = null;
+            this.btnView.RootElement.AccessibleName = null;
+            this.btnView.RootElement.ControlBounds = new System.Drawing.Rectangle(0, 0, 130, 24);
             this.btnView.Size = new System.Drawing.Size(61, 24);
             this.btnView.TabIndex = 0;
             this.btnView.Text = "View";
@@ -452,7 +519,7 @@
             // 
             // cntrlchkDropDowntp2
             // 
-            this.cntrlchkDropDowntp2.Font = new System.Drawing.Font("Arial Narrow", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cntrlchkDropDowntp2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cntrlchkDropDowntp2.Location = new System.Drawing.Point(291, 89);
             this.cntrlchkDropDowntp2.MultipleSelection = true;
             this.cntrlchkDropDowntp2.Name = "cntrlchkDropDowntp2";
@@ -462,9 +529,15 @@
             // 
             // radLabel2
             // 
+            this.radLabel2.BackColor = System.Drawing.SystemColors.ControlLightLight;
             this.radLabel2.Font = new System.Drawing.Font("Arial", 8.25F);
             this.radLabel2.Location = new System.Drawing.Point(183, 93);
             this.radLabel2.Name = "radLabel2";
+            // 
+            // 
+            // 
+            this.radLabel2.RootElement.AccessibleDescription = null;
+            this.radLabel2.RootElement.AccessibleName = null;
             this.radLabel2.Size = new System.Drawing.Size(74, 16);
             this.radLabel2.TabIndex = 8;
             this.radLabel2.Text = "Time Period2";
@@ -474,10 +547,10 @@
             this.pgOpportunityMapping.BackColor = System.Drawing.Color.Transparent;
             this.pgOpportunityMapping.Controls.Add(this.gbMain);
             this.pgOpportunityMapping.Controls.Add(this.gbOpportunityList);
-            this.pgOpportunityMapping.Location = new System.Drawing.Point(10, 35);
+            this.pgOpportunityMapping.Location = new System.Drawing.Point(10, 38);
             this.pgOpportunityMapping.Margin = new System.Windows.Forms.Padding(0);
             this.pgOpportunityMapping.Name = "pgOpportunityMapping";
-            this.pgOpportunityMapping.Size = new System.Drawing.Size(768, 551);
+            this.pgOpportunityMapping.Size = new System.Drawing.Size(768, 548);
             this.pgOpportunityMapping.Tag = "OpportunityMapping";
             this.pgOpportunityMapping.Text = "Opportunity Mapping";
             // 
@@ -502,6 +575,9 @@
             // 
             // 
             // 
+            this.gbMain.RootElement.AccessibleDescription = null;
+            this.gbMain.RootElement.AccessibleName = null;
+            this.gbMain.RootElement.ControlBounds = new System.Drawing.Rectangle(0, 0, 200, 100);
             this.gbMain.RootElement.Padding = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.gbMain.Size = new System.Drawing.Size(629, 457);
             this.gbMain.TabIndex = 3;
@@ -539,17 +615,25 @@
             this.label7.AutoSize = true;
             this.label7.Location = new System.Drawing.Point(273, 262);
             this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(103, 13);
+            this.label7.Size = new System.Drawing.Size(124, 19);
             this.label7.TabIndex = 24;
             this.label7.Text = "Opportunity Type :";
             // 
             // ddlOpportunityType
             // 
+            this.ddlOpportunityType.BackColor = System.Drawing.SystemColors.ControlLightLight;
             this.ddlOpportunityType.DropDownAnimationEnabled = true;
             this.ddlOpportunityType.Font = new System.Drawing.Font("Arial", 8.25F);
             this.ddlOpportunityType.Location = new System.Drawing.Point(382, 257);
             this.ddlOpportunityType.MaxDropDownItems = 0;
             this.ddlOpportunityType.Name = "ddlOpportunityType";
+            // 
+            // 
+            // 
+            this.ddlOpportunityType.RootElement.AccessibleDescription = null;
+            this.ddlOpportunityType.RootElement.AccessibleName = null;
+            this.ddlOpportunityType.RootElement.ControlBounds = new System.Drawing.Rectangle(0, 0, 106, 20);
+            this.ddlOpportunityType.RootElement.StretchVertically = true;
             this.ddlOpportunityType.ShowImageInEditorArea = true;
             this.ddlOpportunityType.Size = new System.Drawing.Size(198, 18);
             this.ddlOpportunityType.TabIndex = 23;
@@ -570,7 +654,7 @@
             this.lblFilter.AutoSize = true;
             this.lblFilter.Location = new System.Drawing.Point(38, 267);
             this.lblFilter.Name = "lblFilter";
-            this.lblFilter.Size = new System.Drawing.Size(39, 13);
+            this.lblFilter.Size = new System.Drawing.Size(46, 19);
             this.lblFilter.TabIndex = 20;
             this.lblFilter.Text = "Filter :";
             // 
@@ -579,14 +663,23 @@
             this.label8.AutoSize = true;
             this.label8.Location = new System.Drawing.Point(41, 235);
             this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(48, 13);
+            this.label8.Size = new System.Drawing.Size(59, 19);
             this.label8.TabIndex = 19;
             this.label8.Text = "IsActive:";
             // 
             // chkIsActive
             // 
+            this.chkIsActive.BackColor = System.Drawing.SystemColors.ControlLightLight;
             this.chkIsActive.Location = new System.Drawing.Point(147, 233);
             this.chkIsActive.Name = "chkIsActive";
+            // 
+            // 
+            // 
+            this.chkIsActive.RootElement.AccessibleDescription = null;
+            this.chkIsActive.RootElement.AccessibleName = null;
+            this.chkIsActive.RootElement.ControlBounds = new System.Drawing.Rectangle(0, 0, 100, 18);
+            this.chkIsActive.RootElement.StretchHorizontally = true;
+            this.chkIsActive.RootElement.StretchVertically = true;
             this.chkIsActive.Size = new System.Drawing.Size(15, 15);
             this.chkIsActive.TabIndex = 18;
             this.chkIsActive.ToggleState = Telerik.WinControls.Enumerations.ToggleState.On;
@@ -604,8 +697,15 @@
             // 
             // btnOppNext
             // 
+            this.btnOppNext.BackColor = System.Drawing.SystemColors.ControlLightLight;
             this.btnOppNext.Location = new System.Drawing.Point(514, 334);
             this.btnOppNext.Name = "btnOppNext";
+            // 
+            // 
+            // 
+            this.btnOppNext.RootElement.AccessibleDescription = null;
+            this.btnOppNext.RootElement.AccessibleName = null;
+            this.btnOppNext.RootElement.ControlBounds = new System.Drawing.Rectangle(0, 0, 130, 24);
             this.btnOppNext.Size = new System.Drawing.Size(66, 29);
             this.btnOppNext.TabIndex = 16;
             this.btnOppNext.Text = "Next";
@@ -613,19 +713,34 @@
             // 
             // ddlSource
             // 
+            this.ddlSource.BackColor = System.Drawing.SystemColors.ControlLightLight;
             this.ddlSource.DropDownAnimationEnabled = true;
             this.ddlSource.Font = new System.Drawing.Font("Arial", 8.25F);
             this.ddlSource.Location = new System.Drawing.Point(147, 202);
             this.ddlSource.MaxDropDownItems = 0;
             this.ddlSource.Name = "ddlSource";
+            // 
+            // 
+            // 
+            this.ddlSource.RootElement.AccessibleDescription = null;
+            this.ddlSource.RootElement.AccessibleName = null;
+            this.ddlSource.RootElement.ControlBounds = new System.Drawing.Rectangle(0, 0, 106, 20);
+            this.ddlSource.RootElement.StretchVertically = true;
             this.ddlSource.ShowImageInEditorArea = true;
             this.ddlSource.Size = new System.Drawing.Size(433, 18);
             this.ddlSource.TabIndex = 15;
             // 
             // btnBack
             // 
+            this.btnBack.BackColor = System.Drawing.SystemColors.ControlLightLight;
             this.btnBack.Location = new System.Drawing.Point(337, 334);
             this.btnBack.Name = "btnBack";
+            // 
+            // 
+            // 
+            this.btnBack.RootElement.AccessibleDescription = null;
+            this.btnBack.RootElement.AccessibleName = null;
+            this.btnBack.RootElement.ControlBounds = new System.Drawing.Rectangle(0, 0, 130, 24);
             this.btnBack.Size = new System.Drawing.Size(66, 29);
             this.btnBack.TabIndex = 14;
             this.btnBack.Text = "Back";
@@ -633,8 +748,15 @@
             // 
             // btnSave
             // 
+            this.btnSave.BackColor = System.Drawing.SystemColors.ControlLightLight;
             this.btnSave.Location = new System.Drawing.Point(428, 334);
             this.btnSave.Name = "btnSave";
+            // 
+            // 
+            // 
+            this.btnSave.RootElement.AccessibleDescription = null;
+            this.btnSave.RootElement.AccessibleName = null;
+            this.btnSave.RootElement.ControlBounds = new System.Drawing.Rectangle(0, 0, 130, 24);
             this.btnSave.Size = new System.Drawing.Size(66, 29);
             this.btnSave.TabIndex = 13;
             this.btnSave.Text = "Save";
@@ -645,7 +767,7 @@
             this.label3.AutoSize = true;
             this.label3.Location = new System.Drawing.Point(39, 205);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(40, 13);
+            this.label3.Size = new System.Drawing.Size(46, 19);
             this.label3.TabIndex = 12;
             this.label3.Text = "Build :";
             // 
@@ -662,6 +784,7 @@
             // 
             // txtDesc
             // 
+            this.txtDesc.BackColor = System.Drawing.SystemColors.ControlLightLight;
             this.txtDesc.Location = new System.Drawing.Point(147, 91);
             this.txtDesc.MaxLength = 500;
             this.txtDesc.Multiline = true;
@@ -669,6 +792,9 @@
             // 
             // 
             // 
+            this.txtDesc.RootElement.AccessibleDescription = null;
+            this.txtDesc.RootElement.AccessibleName = null;
+            this.txtDesc.RootElement.ControlBounds = new System.Drawing.Rectangle(0, 0, 100, 20);
             this.txtDesc.RootElement.StretchVertically = true;
             this.txtDesc.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
             this.txtDesc.Size = new System.Drawing.Size(433, 98);
@@ -677,9 +803,17 @@
             // 
             // txtName
             // 
+            this.txtName.BackColor = System.Drawing.SystemColors.ControlLightLight;
             this.txtName.Location = new System.Drawing.Point(147, 51);
             this.txtName.MaxLength = 23;
             this.txtName.Name = "txtName";
+            // 
+            // 
+            // 
+            this.txtName.RootElement.AccessibleDescription = null;
+            this.txtName.RootElement.AccessibleName = null;
+            this.txtName.RootElement.ControlBounds = new System.Drawing.Rectangle(0, 0, 100, 20);
+            this.txtName.RootElement.StretchVertically = true;
             this.txtName.Size = new System.Drawing.Size(433, 20);
             this.txtName.TabIndex = 3;
             this.txtName.TabStop = false;
@@ -691,7 +825,7 @@
             this.label4.AutoSize = true;
             this.label4.Location = new System.Drawing.Point(39, 308);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(64, 13);
+            this.label4.Size = new System.Drawing.Size(76, 19);
             this.label4.TabIndex = 2;
             this.label4.Text = "Threshold :";
             // 
@@ -700,7 +834,7 @@
             this.lblDesc.AutoSize = true;
             this.lblDesc.Location = new System.Drawing.Point(39, 91);
             this.lblDesc.Name = "lblDesc";
-            this.lblDesc.Size = new System.Drawing.Size(72, 13);
+            this.lblDesc.Size = new System.Drawing.Size(85, 19);
             this.lblDesc.TabIndex = 1;
             this.lblDesc.Text = "Description :";
             // 
@@ -709,7 +843,7 @@
             this.lblName.AutoSize = true;
             this.lblName.Location = new System.Drawing.Point(39, 58);
             this.lblName.Name = "lblName";
-            this.lblName.Size = new System.Drawing.Size(42, 13);
+            this.lblName.Size = new System.Drawing.Size(52, 19);
             this.lblName.TabIndex = 0;
             this.lblName.Text = "Name :";
             // 
@@ -744,6 +878,9 @@
             // 
             // 
             // 
+            this.gbOpportunityList.RootElement.AccessibleDescription = null;
+            this.gbOpportunityList.RootElement.AccessibleName = null;
+            this.gbOpportunityList.RootElement.ControlBounds = new System.Drawing.Rectangle(0, 0, 200, 100);
             this.gbOpportunityList.RootElement.Padding = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.gbOpportunityList.Size = new System.Drawing.Size(712, 304);
             this.gbOpportunityList.TabIndex = 2;
@@ -767,7 +904,7 @@
             this.grdOppList.ImageList = this.imgList;
             this.grdOppList.Location = new System.Drawing.Point(0, 0);
             // 
-            // grdOppList
+            // 
             // 
             this.grdOppList.MasterTemplate.AllowAddNewRow = false;
             this.grdOppList.MasterTemplate.AllowCellContextMenu = false;
@@ -779,6 +916,12 @@
             this.grdOppList.MasterTemplate.EnableGrouping = false;
             this.grdOppList.MasterTemplate.ShowRowHeaderColumn = false;
             this.grdOppList.Name = "grdOppList";
+            // 
+            // 
+            // 
+            this.grdOppList.RootElement.AccessibleDescription = null;
+            this.grdOppList.RootElement.AccessibleName = null;
+            this.grdOppList.RootElement.ControlBounds = new System.Drawing.Rectangle(0, 0, 240, 150);
             this.grdOppList.Size = new System.Drawing.Size(708, 267);
             this.grdOppList.TabIndex = 0;
             this.grdOppList.Text = "radGridView1";
@@ -809,9 +952,16 @@
             // btnOInActive
             // 
             this.btnOInActive.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnOInActive.BackColor = System.Drawing.SystemColors.ControlLightLight;
             this.btnOInActive.Font = new System.Drawing.Font("Arial", 8F);
             this.btnOInActive.Location = new System.Drawing.Point(474, 5);
             this.btnOInActive.Name = "btnOInActive";
+            // 
+            // 
+            // 
+            this.btnOInActive.RootElement.AccessibleDescription = null;
+            this.btnOInActive.RootElement.AccessibleName = null;
+            this.btnOInActive.RootElement.ControlBounds = new System.Drawing.Rectangle(0, 0, 130, 24);
             this.btnOInActive.Size = new System.Drawing.Size(68, 29);
             this.btnOInActive.TabIndex = 18;
             this.btnOInActive.Text = "InActive";
@@ -820,9 +970,16 @@
             // btnDelete
             // 
             this.btnDelete.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnDelete.BackColor = System.Drawing.SystemColors.ControlLightLight;
             this.btnDelete.Font = new System.Drawing.Font("Arial", 8F);
             this.btnDelete.Location = new System.Drawing.Point(549, 5);
             this.btnDelete.Name = "btnDelete";
+            // 
+            // 
+            // 
+            this.btnDelete.RootElement.AccessibleDescription = null;
+            this.btnDelete.RootElement.AccessibleName = null;
+            this.btnDelete.RootElement.ControlBounds = new System.Drawing.Rectangle(0, 0, 130, 24);
             this.btnDelete.Size = new System.Drawing.Size(66, 29);
             this.btnDelete.TabIndex = 15;
             this.btnDelete.Text = "Delete";
@@ -831,9 +988,16 @@
             // btnNew
             // 
             this.btnNew.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnNew.BackColor = System.Drawing.SystemColors.ControlLightLight;
             this.btnNew.Font = new System.Drawing.Font("Arial", 8F);
             this.btnNew.Location = new System.Drawing.Point(621, 5);
             this.btnNew.Name = "btnNew";
+            // 
+            // 
+            // 
+            this.btnNew.RootElement.AccessibleDescription = null;
+            this.btnNew.RootElement.AccessibleName = null;
+            this.btnNew.RootElement.ControlBounds = new System.Drawing.Rectangle(0, 0, 130, 24);
             this.btnNew.Size = new System.Drawing.Size(66, 29);
             this.btnNew.TabIndex = 14;
             this.btnNew.Text = "Create New";
@@ -882,6 +1046,9 @@
             // 
             // 
             // 
+            this.gbNewRanking.RootElement.AccessibleDescription = null;
+            this.gbNewRanking.RootElement.AccessibleName = null;
+            this.gbNewRanking.RootElement.ControlBounds = new System.Drawing.Rectangle(0, 0, 200, 100);
             this.gbNewRanking.RootElement.Padding = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.gbNewRanking.Size = new System.Drawing.Size(768, 235);
             this.gbNewRanking.TabIndex = 5;
@@ -909,10 +1076,18 @@
             // 
             // ddRankingCriteria
             // 
+            this.ddRankingCriteria.BackColor = System.Drawing.SystemColors.ControlLightLight;
             this.ddRankingCriteria.DropDownAnimationEnabled = true;
             this.ddRankingCriteria.Location = new System.Drawing.Point(187, 15);
             this.ddRankingCriteria.MaxDropDownItems = 0;
             this.ddRankingCriteria.Name = "ddRankingCriteria";
+            // 
+            // 
+            // 
+            this.ddRankingCriteria.RootElement.AccessibleDescription = null;
+            this.ddRankingCriteria.RootElement.AccessibleName = null;
+            this.ddRankingCriteria.RootElement.ControlBounds = new System.Drawing.Rectangle(0, 0, 106, 20);
+            this.ddRankingCriteria.RootElement.StretchVertically = true;
             this.ddRankingCriteria.ShowImageInEditorArea = true;
             this.ddRankingCriteria.Size = new System.Drawing.Size(209, 20);
             this.ddRankingCriteria.TabIndex = 25;
@@ -920,8 +1095,15 @@
             // 
             // btnRnkngSave
             // 
+            this.btnRnkngSave.BackColor = System.Drawing.SystemColors.ControlLightLight;
             this.btnRnkngSave.Location = new System.Drawing.Point(417, 159);
             this.btnRnkngSave.Name = "btnRnkngSave";
+            // 
+            // 
+            // 
+            this.btnRnkngSave.RootElement.AccessibleDescription = null;
+            this.btnRnkngSave.RootElement.AccessibleName = null;
+            this.btnRnkngSave.RootElement.ControlBounds = new System.Drawing.Rectangle(0, 0, 130, 24);
             this.btnRnkngSave.Size = new System.Drawing.Size(66, 24);
             this.btnRnkngSave.TabIndex = 24;
             this.btnRnkngSave.Text = "Save";
@@ -929,11 +1111,20 @@
             // 
             // ddlOppRank4
             // 
+            this.ddlOppRank4.BackColor = System.Drawing.SystemColors.ControlLightLight;
             this.ddlOppRank4.DropDownAnimationEnabled = true;
             this.ddlOppRank4.Enabled = false;
             this.ddlOppRank4.Location = new System.Drawing.Point(187, 163);
             this.ddlOppRank4.MaxDropDownItems = 0;
             this.ddlOppRank4.Name = "ddlOppRank4";
+            // 
+            // 
+            // 
+            this.ddlOppRank4.RootElement.AccessibleDescription = null;
+            this.ddlOppRank4.RootElement.AccessibleName = null;
+            this.ddlOppRank4.RootElement.ControlBounds = new System.Drawing.Rectangle(0, 0, 106, 20);
+            this.ddlOppRank4.RootElement.Enabled = false;
+            this.ddlOppRank4.RootElement.StretchVertically = true;
             this.ddlOppRank4.ShowImageInEditorArea = true;
             this.ddlOppRank4.Size = new System.Drawing.Size(209, 20);
             this.ddlOppRank4.TabIndex = 22;
@@ -941,11 +1132,20 @@
             // 
             // ddlOppRank3
             // 
+            this.ddlOppRank3.BackColor = System.Drawing.SystemColors.ControlLightLight;
             this.ddlOppRank3.DropDownAnimationEnabled = true;
             this.ddlOppRank3.Enabled = false;
             this.ddlOppRank3.Location = new System.Drawing.Point(187, 126);
             this.ddlOppRank3.MaxDropDownItems = 0;
             this.ddlOppRank3.Name = "ddlOppRank3";
+            // 
+            // 
+            // 
+            this.ddlOppRank3.RootElement.AccessibleDescription = null;
+            this.ddlOppRank3.RootElement.AccessibleName = null;
+            this.ddlOppRank3.RootElement.ControlBounds = new System.Drawing.Rectangle(0, 0, 106, 20);
+            this.ddlOppRank3.RootElement.Enabled = false;
+            this.ddlOppRank3.RootElement.StretchVertically = true;
             this.ddlOppRank3.ShowImageInEditorArea = true;
             this.ddlOppRank3.Size = new System.Drawing.Size(209, 20);
             this.ddlOppRank3.TabIndex = 21;
@@ -953,11 +1153,20 @@
             // 
             // ddlOppRank2
             // 
+            this.ddlOppRank2.BackColor = System.Drawing.SystemColors.ControlLightLight;
             this.ddlOppRank2.DropDownAnimationEnabled = true;
             this.ddlOppRank2.Enabled = false;
             this.ddlOppRank2.Location = new System.Drawing.Point(187, 89);
             this.ddlOppRank2.MaxDropDownItems = 0;
             this.ddlOppRank2.Name = "ddlOppRank2";
+            // 
+            // 
+            // 
+            this.ddlOppRank2.RootElement.AccessibleDescription = null;
+            this.ddlOppRank2.RootElement.AccessibleName = null;
+            this.ddlOppRank2.RootElement.ControlBounds = new System.Drawing.Rectangle(0, 0, 106, 20);
+            this.ddlOppRank2.RootElement.Enabled = false;
+            this.ddlOppRank2.RootElement.StretchVertically = true;
             this.ddlOppRank2.ShowImageInEditorArea = true;
             this.ddlOppRank2.Size = new System.Drawing.Size(209, 20);
             this.ddlOppRank2.TabIndex = 20;
@@ -965,10 +1174,18 @@
             // 
             // ddlOppRank1
             // 
+            this.ddlOppRank1.BackColor = System.Drawing.SystemColors.ControlLightLight;
             this.ddlOppRank1.DropDownAnimationEnabled = true;
             this.ddlOppRank1.Location = new System.Drawing.Point(187, 52);
             this.ddlOppRank1.MaxDropDownItems = 0;
             this.ddlOppRank1.Name = "ddlOppRank1";
+            // 
+            // 
+            // 
+            this.ddlOppRank1.RootElement.AccessibleDescription = null;
+            this.ddlOppRank1.RootElement.AccessibleName = null;
+            this.ddlOppRank1.RootElement.ControlBounds = new System.Drawing.Rectangle(0, 0, 106, 20);
+            this.ddlOppRank1.RootElement.StretchVertically = true;
             this.ddlOppRank1.ShowImageInEditorArea = true;
             this.ddlOppRank1.Size = new System.Drawing.Size(209, 20);
             this.ddlOppRank1.TabIndex = 19;
@@ -979,7 +1196,7 @@
             this.lblOpp4.AutoSize = true;
             this.lblOpp4.Location = new System.Drawing.Point(39, 163);
             this.lblOpp4.Name = "lblOpp4";
-            this.lblOpp4.Size = new System.Drawing.Size(86, 13);
+            this.lblOpp4.Size = new System.Drawing.Size(102, 17);
             this.lblOpp4.TabIndex = 4;
             this.lblOpp4.Text = "Opportunity 4 :";
             // 
@@ -988,7 +1205,7 @@
             this.lblOpp3.AutoSize = true;
             this.lblOpp3.Location = new System.Drawing.Point(39, 126);
             this.lblOpp3.Name = "lblOpp3";
-            this.lblOpp3.Size = new System.Drawing.Size(86, 13);
+            this.lblOpp3.Size = new System.Drawing.Size(102, 17);
             this.lblOpp3.TabIndex = 3;
             this.lblOpp3.Text = "Opportunity 3 :";
             // 
@@ -997,7 +1214,7 @@
             this.lblOpp2.AutoSize = true;
             this.lblOpp2.Location = new System.Drawing.Point(39, 89);
             this.lblOpp2.Name = "lblOpp2";
-            this.lblOpp2.Size = new System.Drawing.Size(86, 13);
+            this.lblOpp2.Size = new System.Drawing.Size(102, 17);
             this.lblOpp2.TabIndex = 2;
             this.lblOpp2.Text = "Opportunity 2 :";
             // 
@@ -1006,7 +1223,7 @@
             this.lblOpp1.AutoSize = true;
             this.lblOpp1.Location = new System.Drawing.Point(39, 52);
             this.lblOpp1.Name = "lblOpp1";
-            this.lblOpp1.Size = new System.Drawing.Size(86, 13);
+            this.lblOpp1.Size = new System.Drawing.Size(102, 17);
             this.lblOpp1.TabIndex = 1;
             this.lblOpp1.Text = "Opportunity 1 :";
             // 
@@ -1015,7 +1232,7 @@
             this.label12.AutoSize = true;
             this.label12.Location = new System.Drawing.Point(39, 15);
             this.label12.Name = "label12";
-            this.label12.Size = new System.Drawing.Size(96, 13);
+            this.label12.Size = new System.Drawing.Size(117, 17);
             this.label12.TabIndex = 0;
             this.label12.Text = "Ranking Criteria :";
             // 
@@ -1063,6 +1280,9 @@
             // 
             // 
             // 
+            this.radGroupBox1.RootElement.AccessibleDescription = null;
+            this.radGroupBox1.RootElement.AccessibleName = null;
+            this.radGroupBox1.RootElement.ControlBounds = new System.Drawing.Rectangle(0, 0, 200, 100);
             this.radGroupBox1.RootElement.Padding = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.radGroupBox1.Size = new System.Drawing.Size(768, 551);
             this.radGroupBox1.TabIndex = 5;
@@ -1071,10 +1291,17 @@
             // grdOpportunities
             // 
             this.grdOpportunities.AutoScroll = true;
+            this.grdOpportunities.BackColor = System.Drawing.SystemColors.ControlLightLight;
             this.grdOpportunities.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.grdOpportunities.Font = new System.Drawing.Font("Arial Narrow", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.grdOpportunities.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.grdOpportunities.Location = new System.Drawing.Point(2, 36);
             this.grdOpportunities.Name = "grdOpportunities";
+            // 
+            // 
+            // 
+            this.grdOpportunities.RootElement.AccessibleDescription = null;
+            this.grdOpportunities.RootElement.AccessibleName = null;
+            this.grdOpportunities.RootElement.ControlBounds = new System.Drawing.Rectangle(0, 0, 240, 150);
             this.grdOpportunities.Size = new System.Drawing.Size(764, 484);
             this.grdOpportunities.TabIndex = 2;
             // 
@@ -1090,9 +1317,16 @@
             // btnRun
             // 
             this.btnRun.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnRun.BackColor = System.Drawing.SystemColors.ControlLightLight;
             this.btnRun.Font = new System.Drawing.Font("Arial", 8F);
             this.btnRun.Location = new System.Drawing.Point(692, 5);
             this.btnRun.Name = "btnRun";
+            // 
+            // 
+            // 
+            this.btnRun.RootElement.AccessibleDescription = null;
+            this.btnRun.RootElement.AccessibleName = null;
+            this.btnRun.RootElement.ControlBounds = new System.Drawing.Rectangle(0, 0, 130, 24);
             this.btnRun.Size = new System.Drawing.Size(61, 24);
             this.btnRun.TabIndex = 3;
             this.btnRun.Text = "Run";
@@ -1112,15 +1346,24 @@
             // 
             // radTextBox2
             // 
+            this.radTextBox2.BackColor = System.Drawing.SystemColors.ControlLightLight;
             this.radTextBox2.Location = new System.Drawing.Point(147, 51);
             this.radTextBox2.MaxLength = 23;
             this.radTextBox2.Name = "radTextBox2";
+            // 
+            // 
+            // 
+            this.radTextBox2.RootElement.AccessibleDescription = null;
+            this.radTextBox2.RootElement.AccessibleName = null;
+            this.radTextBox2.RootElement.ControlBounds = new System.Drawing.Rectangle(0, 0, 100, 20);
+            this.radTextBox2.RootElement.StretchVertically = true;
             this.radTextBox2.Size = new System.Drawing.Size(433, 20);
             this.radTextBox2.TabIndex = 3;
             this.radTextBox2.TabStop = false;
             // 
             // radTextBox1
             // 
+            this.radTextBox1.BackColor = System.Drawing.SystemColors.ControlLightLight;
             this.radTextBox1.Location = new System.Drawing.Point(147, 91);
             this.radTextBox1.MaxLength = 500;
             this.radTextBox1.Multiline = true;
@@ -1128,6 +1371,9 @@
             // 
             // 
             // 
+            this.radTextBox1.RootElement.AccessibleDescription = null;
+            this.radTextBox1.RootElement.AccessibleName = null;
+            this.radTextBox1.RootElement.ControlBounds = new System.Drawing.Rectangle(0, 0, 100, 20);
             this.radTextBox1.RootElement.StretchVertically = true;
             this.radTextBox1.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
             this.radTextBox1.Size = new System.Drawing.Size(433, 98);
@@ -1136,11 +1382,19 @@
             // 
             // radDropDownList1
             // 
+            this.radDropDownList1.BackColor = System.Drawing.SystemColors.ControlLightLight;
             this.radDropDownList1.DropDownAnimationEnabled = true;
             this.radDropDownList1.Font = new System.Drawing.Font("Arial", 8.25F);
             this.radDropDownList1.Location = new System.Drawing.Point(147, 202);
             this.radDropDownList1.MaxDropDownItems = 0;
             this.radDropDownList1.Name = "radDropDownList1";
+            // 
+            // 
+            // 
+            this.radDropDownList1.RootElement.AccessibleDescription = null;
+            this.radDropDownList1.RootElement.AccessibleName = null;
+            this.radDropDownList1.RootElement.ControlBounds = new System.Drawing.Rectangle(0, 0, 106, 20);
+            this.radDropDownList1.RootElement.StretchVertically = true;
             this.radDropDownList1.ShowImageInEditorArea = true;
             this.radDropDownList1.Size = new System.Drawing.Size(186, 18);
             this.radDropDownList1.TabIndex = 15;
@@ -1154,12 +1408,9 @@
             this.Size = new System.Drawing.Size(789, 597);
             this.Load += new System.EventHandler(this.CntrlRecommendation_Load);
             ((System.ComponentModel.ISupportInitialize)(this.pgVRecommendation)).EndInit();
-            this.pgVRecommendation.ResumeLayout(false);
             this.pgRcmndSettings.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.mvmntwindowMainpanel)).EndInit();
-            this.mvmntwindowMainpanel.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.gbGMain)).EndInit();
-            this.gbGMain.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.grdGrouping.MasterTemplate)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.grdGrouping)).EndInit();
             this.panel5.ResumeLayout(false);
@@ -1171,14 +1422,11 @@
             ((System.ComponentModel.ISupportInitialize)(this.gridtpdetails.MasterTemplate)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridtpdetails)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pnMWindow)).EndInit();
-            this.pnMWindow.ResumeLayout(false);
-            this.pnMWindow.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.radLabel1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.btnView)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.radLabel2)).EndInit();
             this.pgOpportunityMapping.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.gbMain)).EndInit();
-            this.gbMain.ResumeLayout(false);
             this.pnFill.ResumeLayout(false);
             this.pnFill.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.ddlOpportunityType)).EndInit();
@@ -1193,7 +1441,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.txtDesc)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtName)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gbOpportunityList)).EndInit();
-            this.gbOpportunityList.ResumeLayout(false);
             this.panel1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.grdOppList.MasterTemplate)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.grdOppList)).EndInit();
@@ -1203,7 +1450,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.btnNew)).EndInit();
             this.pgRanking.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.gbNewRanking)).EndInit();
-            this.gbNewRanking.ResumeLayout(false);
             this.panel4.ResumeLayout(false);
             this.panel4.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.ddRankingCriteria)).EndInit();
@@ -1214,7 +1460,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.ddlOppRank1)).EndInit();
             this.pgOppDetails.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.radGroupBox1)).EndInit();
-            this.radGroupBox1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.grdOpportunities.MasterTemplate)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.grdOpportunities)).EndInit();
             this.panel6.ResumeLayout(false);

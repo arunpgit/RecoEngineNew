@@ -270,9 +270,9 @@ namespace RecoEngine_BI
                 if (Common.iDBType == 3)
                 {
                     string str = "";
-                    str = "Delete from TRE_RANKING ";
+                    str = "Delete from TRE_RANKING"+ iProjectid;
                         ((MySqlDBManager)Common.dbMgr).ExecuteNonQuery(CommandType.Text, str);
-                    ((MySqlDBManager)Common.dbMgr).savepotentialRanking(iProjectid);
+                    ((MySqlDBManager)Common.dbMgr).savepotentialRankingExport(iProjectid);
                     
 
                 }

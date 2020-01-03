@@ -38,6 +38,7 @@ namespace RecoEngine
         private string strBaseCustomers;
 
         private bool bIsFixedCustomers;
+        string strMainFilter = "";
 
         private bool bIsInsertintoDBs;
 
@@ -84,6 +85,67 @@ namespace RecoEngine
             }
         }
 
+        private void btnRun_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                if (RadMessageBox.Show(this, "This will apply the rules on the entire dataset, are you sure you want to continue", "Confirmation", MessageBoxButtons.YesNo, RadMessageIcon.Info).ToString() == "Yes")
+                {
+                    if (this.objRanking.fnRankingcriteria(Common.iProjectID).Rows.Count <= 0)
+                    {
+                        RadMessageBox.Show(this, "Select the  Ranking Criteria ,Inorder to run Opportunities ", "Information", MessageBoxButtons.OK, RadMessageIcon.Error, MessageBoxDefaultButton.Button1);
+                        return;
+                    }
+                    else
+                    {
+                        this.alert = new AlertForm();
+                        this.alert.SetMessage("Loading data. Please wait...");
+                        this.alert.TopMost = true;
+                        this.alert.StartPosition = FormStartPosition.CenterScreen;
+                        this.alert.Show();
+                        this.alert.Refresh();
+                        this.fnCreateView();
+                        string str = this.clstreDetails.fnBuildTimePeriod(Common.timePeriods.strtp1);
+                        string str1 = this.clstreDetails.fnBuildTimePeriod(Common.timePeriods.strtp2);
+                        this.clstreDetails.fnDeleteTreOppfrmExport();
+                        if (this.ClsObj.fnRunOPoortunitiesfrmProcedure(Common.iProjectID, Common.strTableName, str, str1))
+                        {
+                            this.objRanking.fnMainRankingfrmExport(Common.iProjectID);
+                        }
+                        this.alert.Close();
+                    }
+                }
+            }
+            catch (Exception exception1)
+            {
+                Exception exception = exception1;
+                this.alert.Close();
+                MessageBox.Show(exception.Message);
+            }
+        }
+        private void fnCreateView()
+        {
+            string str = "";
+            clsDataSource _clsDataSource = new clsDataSource();
+            this.strMainFilter = _clsDataSource.fnselectFilterCondition(Common.iProjectID);
+            DataTable dataTable = _clsDataSource.fnGetTreDetailsSchema(Common.strTableName);
+            foreach (DataRow row in dataTable.Rows)
+            {
+                str = string.Concat(str, row[0].ToString());
+                str = string.Concat(str, ",");
+            }
+            dataTable = _clsDataSource.fnGetCalaculatedColMappingData(Common.iProjectID, Common.strTableName);
+            foreach (DataRow dataRow in dataTable.Rows)
+            {
+                str = string.Concat(str, dataRow["COMBINE_COLUMNS"].ToString(), " ", dataRow["COLNAME"].ToString());
+                str = string.Concat(str, ",");
+            }
+            if (str.Length > 0)
+            {
+                str = str.Remove(str.Length - 1, 1);
+            }
+            this.clstreDetails.fnCreateTableView(Common.strTableName, str, this.strMainFilter);
+        }
         private void btnRunPrjct_Click(object sender, EventArgs e)
         {
             try

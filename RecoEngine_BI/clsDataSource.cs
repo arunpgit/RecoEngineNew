@@ -1708,6 +1708,9 @@ namespace RecoEngine_BI
                         str = string.Concat(str, " ORDER BY rand() Limit 5000) K WHERE C.CUSTOMER=K.RNDMCUSTOMER ");
                         ((MySqlDBManager)Common.dbMgr).ExecuteNonQuery(CommandType.Text, str);
                     }
+                    str = " CREATE INDEX idx_randomcust ON tre_random" + ProjectId + " (Customer)";
+                    if (Common.iDBType == (int)Enums.DBType.Mysql)
+                        ((MySqlDBManager)Common.dbMgr).ExecuteScalar(CommandType.Text, str);
                     if (num == 0 && str5 != "")
                     {
                         str1 = string.Concat(str1, "TIMEPERIOD_ID int");

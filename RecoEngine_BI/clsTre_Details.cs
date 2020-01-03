@@ -632,7 +632,7 @@ namespace RecoEngine_BI
                 string strMainfilter = "";
                 if (!bIsONMain)
                     strTabName = "TRE_RANDOM"+ iProjectId;
-                if (strTabName != "TRE_RANDOM"+ iProjectId)
+                if (strTabName.ToUpperInvariant() != "TRE_RANDOM"+ iProjectId)
                 {
                     strTabName = strTabName + "_V";
                     DataTable dt = new DataTable();
@@ -799,10 +799,6 @@ namespace RecoEngine_BI
                     {
                         ((MySqlDBManager)Common.dbMgr).ExecuteNonQuery(CommandType.Text, strInsertATable);
 
-                      // string index= "CREATE INDEX ixweklya ON ETS_ADM_WEEKLY_A(Customer)";
-
-                      //  ((MySqlDBManager)Common.dbMgr).ExecuteNonQuery(CommandType.Text, index);
-
                     }
                     else
                     {
@@ -871,13 +867,11 @@ namespace RecoEngine_BI
                     for (int i = 0; i < dt.Rows.Count; i++)
                     {
                         if (strCol != "")
-                            //strCol += ",";
-
-                            strCol += dt.Rows[i]["OPP_NAME"].ToString() + "_DELTA," + dt.Rows[i]["OPP_NAME"].ToString() + "_STATUS," + dt.Rows[i]["OPP_NAME"].ToString() + "_PNTL,";
+                    strCol += dt.Rows[i]["OPP_NAME"].ToString() + "_DELTA," + dt.Rows[i]["OPP_NAME"].ToString() + "_STATUS," + dt.Rows[i]["OPP_NAME"].ToString() + "_PNTL,";
                     }
 
                     strCol = strCol.Remove(strCol.Length - 1);
-                    strSql = "Select WEEK, " + strCol + ",Rank1,Rank1_Action,Rank2,Rank2_Action,Rank3,Rank3_Action,Rank4,Rank4_Action from  tre_random"+iProjectId+ "  RD   join  TRE_OPPORTUNITYEXPORT T ON  RD.CUSTOMER=T.CUSTOMER  Left Join Tre_Ranking"+iProjectId+" R  ON R.CUSTOMER=T.CUSTOMER WHERE RD.WEEK =(SELECT  WEEK FROM TRE_OPPORTUNITYEXPORT LIMIT 1)";
+                    strSql = "Select T.WEEK, " + strCol + ",Rank1,Rank1_Action,Rank2,Rank2_Action,Rank3,Rank3_Action,Rank4,Rank4_Action from  tre_random"+iProjectId+ "  RD   join  TRE_OPPORTUNITYEXPORT T ON  RD.CUSTOMER=T.CUSTOMER  AND RD.WEEK=T.WEEK  Join Tre_Ranking"+iProjectId+" R  ON R.CUSTOMER=RD.CUSTOMER ";
                     if (Common.iDBType == (int)Enums.DBType.Oracle)
                         dtOpp = ((OraDBManager)Common.dbMgr).ExecuteDataTable(CommandType.Text, strSql);
                     else if (Common.iDBType == (int)Enums.DBType.SQl)
@@ -2081,8 +2075,20 @@ namespace RecoEngine_BI
                 }
                 else
                 {
-                    
-                        string strSql = "Create Table " + TableName + "_V as Select " + Columns + " from " + TableName;
+                    string strSql = " SELECT count(1) FROM information_schema.columns c WHERE c.table_name = '"+TableName+"_V' AND c.table_schema  = 'recousr' ";
+                    if (Common.iDBType == 3)
+                    {
+                        int i = int.Parse(((MySqlDBManager)Common.dbMgr).ExecuteScalar(CommandType.Text, strSql));
+
+                        if (i > 0)
+                        {
+                            strSql = "drop table " + TableName + "_V";
+                            if (Common.iDBType == (int)Enums.DBType.Mysql)
+                                ((MySqlDBManager)Common.dbMgr).ExecuteScalar(CommandType.Text, strSql);
+                        }
+                    }
+
+                     strSql = "Create Table " + TableName + "_V as Select " + Columns + " from " + TableName;
                         ((MySqlDBManager)Common.dbMgr).ExecuteNonQuery(CommandType.Text, strSql);
 
                         strSql = "CREATE INDEX " + TableName + "_V_IX on " + TableName + "_V" + "(CUSTOMER)";

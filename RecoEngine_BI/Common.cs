@@ -222,7 +222,7 @@ namespace RecoEngine_BI
             {
                 dbMgr = new OraDBManager(sConnStr);
             }
-            else if (iDBType == (int)Enums.DBType.Oracle)
+            else if (iDBType == (int)Enums.DBType.SQl)
                 dbMgr = new DBManager(sConnStr);
             else if (iDBType == (int)Enums.DBType.Mysql)
                 dbMgr = new MySqlDBManager(sConnStr);

@@ -158,9 +158,30 @@ namespace RecoEngine_BI
                     ((DBManager)Common.dbMgr).ExecuteScalar(CommandType.Text, strSql);
                 strSql = "drop table tre_random" + iProjectId;
 
-               if (Common.iDBType == (int)Enums.DBType.Mysql)
-                    ((MySqlDBManager)Common.dbMgr).ExecuteScalar(CommandType.Text, strSql);
-                strSql = "drop table tre_ranking" + iProjectId;
+                strSql = " SELECT count(1) FROM information_schema.columns c WHERE c.table_name = 'tre_random" + iProjectId+"' AND c.table_schema  = 'recousr' ";
+                if (Common.iDBType == 3)
+                {
+                    int i = int.Parse(((MySqlDBManager)Common.dbMgr).ExecuteScalar(CommandType.Text, strSql));
+
+                    if (i > 0)
+                    {
+                        strSql = "drop table tre_random" + iProjectId;
+                        if (Common.iDBType == (int)Enums.DBType.Mysql)
+                            ((MySqlDBManager)Common.dbMgr).ExecuteScalar(CommandType.Text, strSql);
+                    }
+                }
+                strSql = " SELECT count(1) FROM information_schema.columns c WHERE c.table_name = 'tre_ranking" + iProjectId + "' AND c.table_schema  = 'recousr' ";
+                if (Common.iDBType == 3)
+                {
+                    int i = int.Parse(((MySqlDBManager)Common.dbMgr).ExecuteScalar(CommandType.Text, strSql));
+
+                    if (i > 0)
+                    {
+                        strSql = "drop table tre_ranking" + iProjectId;
+                        if (Common.iDBType == (int)Enums.DBType.Mysql)
+                            ((MySqlDBManager)Common.dbMgr).ExecuteScalar(CommandType.Text, strSql);
+                    }
+                }
 
                 if (Common.iDBType == (int)Enums.DBType.Mysql)
                     ((MySqlDBManager)Common.dbMgr).ExecuteScalar(CommandType.Text, strSql);
@@ -200,7 +221,6 @@ namespace RecoEngine_BI
 
                     strSql = "SELECT max(project_id) as projectid FROM projects";
                    int newProjectId= int.Parse(((MySqlDBManager)Common.dbMgr).ExecuteScalar(CommandType.Text, strSql));
-
                     strSql = " CREATE TABLE tre_ranking" + newProjectId + " (";
                     strSql += "   CUSTOMER varchar(100) DEFAULT NULL,";
                     strSql += "   RANK1_ACTION varchar(100) DEFAULT NULL, ";
@@ -213,7 +233,10 @@ namespace RecoEngine_BI
                     strSql += "   RANK4 int(11) DEFAULT NULL )  ";
                     if (Common.iDBType == (int)Enums.DBType.Mysql)
                         ((MySqlDBManager)Common.dbMgr).ExecuteScalar(CommandType.Text, strSql);
-
+                    strSql = " CREATE INDEX idx_rankingcust ON tre_ranking" + newProjectId + " (Customer)";
+                    if (Common.iDBType == (int)Enums.DBType.Mysql)
+                        ((MySqlDBManager)Common.dbMgr).ExecuteScalar(CommandType.Text, strSql);
+       
 
                 }
                 else
@@ -257,6 +280,8 @@ namespace RecoEngine_BI
 
                 if (Common.iDBType == (int)Enums.DBType.Oracle)
                     dt = ((OraDBManager)Common.dbMgr).ExecuteDataTable(CommandType.Text, strSql);
+                else if(Common.iDBType == (int)Enums.DBType.Mysql)
+                           dt = ((MySqlDBManager)Common.dbMgr).ExecuteDataTable(CommandType.Text, strSql);
                 else
                 {
                     dt = ((DBManager)Common.dbMgr).ExecuteDataTable(CommandType.Text, strSql);

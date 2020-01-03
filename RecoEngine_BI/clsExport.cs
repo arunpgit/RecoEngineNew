@@ -115,7 +115,16 @@ namespace RecoEngine_BI
                 object obj2 = str;
                 object[] objArray2 = new object[] { obj2, " (SELECT Count(1) as Campaigns from Campaigns where PROJECT_ID=", iProjectID, " AND ISACTIVE=1)C " };
                 str = string.Concat(objArray2);
-                dataTable1 = (Common.iDBType != 1 ? ((DBManager)Common.dbMgr).ExecuteDataTable(CommandType.Text, str) : ((OraDBManager)Common.dbMgr).ExecuteDataTable(CommandType.Text, str));
+                if (Common.iDBType == 3)
+                {
+                    dataTable1 =  ((MySqlDBManager)Common.dbMgr).ExecuteDataTable(CommandType.Text, str);
+
+                }
+                else
+                {
+                    dataTable1 = (Common.iDBType != 1 ? ((DBManager)Common.dbMgr).ExecuteDataTable(CommandType.Text, str) : ((OraDBManager)Common.dbMgr).ExecuteDataTable(CommandType.Text, str));
+                }
+
                 dataTable = dataTable1;
             }
             catch (Exception exception)
