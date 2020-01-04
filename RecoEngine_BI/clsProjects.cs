@@ -170,9 +170,10 @@ namespace RecoEngine_BI
                             ((MySqlDBManager)Common.dbMgr).ExecuteScalar(CommandType.Text, strSql);
                     }
                 }
-                strSql = " SELECT count(1) FROM information_schema.columns c WHERE c.table_name = 'tre_ranking" + iProjectId + "' AND c.table_schema  = 'recousr' ";
                 if (Common.iDBType == 3)
                 {
+                    strSql = " SELECT count(1) FROM information_schema.columns c WHERE c.table_name = 'tre_ranking" + iProjectId + "' AND c.table_schema  = 'recousr' ";
+
                     int i = int.Parse(((MySqlDBManager)Common.dbMgr).ExecuteScalar(CommandType.Text, strSql));
 
                     if (i > 0)
@@ -181,10 +182,72 @@ namespace RecoEngine_BI
                         if (Common.iDBType == (int)Enums.DBType.Mysql)
                             ((MySqlDBManager)Common.dbMgr).ExecuteScalar(CommandType.Text, strSql);
                     }
-                }
 
-                if (Common.iDBType == (int)Enums.DBType.Mysql)
-                    ((MySqlDBManager)Common.dbMgr).ExecuteScalar(CommandType.Text, strSql);
+                    strSql = " SELECT count(1) FROM information_schema.columns c WHERE c.table_name = 'ETS_TRE_X_SELL_PNTL" + iProjectId + "' AND c.table_schema  = 'recousr' ";
+
+                    i = int.Parse(((MySqlDBManager)Common.dbMgr).ExecuteScalar(CommandType.Text, strSql));
+
+                    if (i > 0)
+                    {
+                        strSql = "drop table ETS_TRE_X_SELL_PNTL" + iProjectId;
+                        if (Common.iDBType == (int)Enums.DBType.Mysql)
+                            ((MySqlDBManager)Common.dbMgr).ExecuteScalar(CommandType.Text, strSql);
+                    }
+                    strSql = " SELECT count(1) FROM information_schema.columns c WHERE c.table_name = 'ETS_TRE_ADM_WEEKLY_A" + iProjectId + "' AND c.table_schema  = 'recousr' ";
+
+                    i = int.Parse(((MySqlDBManager)Common.dbMgr).ExecuteScalar(CommandType.Text, strSql));
+
+                    if (i > 0)
+                    {
+                        strSql = "drop table ETS_TRE_ADM_WEEKLY_A" + iProjectId;
+                        if (Common.iDBType == (int)Enums.DBType.Mysql)
+                            ((MySqlDBManager)Common.dbMgr).ExecuteScalar(CommandType.Text, strSql);
+                    }
+                    strSql = " SELECT count(1) FROM information_schema.columns c WHERE c.table_name = 'ETS_TRE_ADM_WEEKLY_B" + iProjectId + "' AND c.table_schema  = 'recousr' ";
+
+                    i = int.Parse(((MySqlDBManager)Common.dbMgr).ExecuteScalar(CommandType.Text, strSql));
+
+                    if (i > 0)
+                    {
+                        strSql = "drop table ETS_TRE_ADM_WEEKLY_B" + iProjectId;
+                        if (Common.iDBType == (int)Enums.DBType.Mysql)
+                            ((MySqlDBManager)Common.dbMgr).ExecuteScalar(CommandType.Text, strSql);
+                    }
+                    strSql = " SELECT count(1) FROM information_schema.columns c WHERE c.table_name = 'ETS_TRE_BASE" + iProjectId + "' AND c.table_schema  = 'recousr' ";
+
+                    i = int.Parse(((MySqlDBManager)Common.dbMgr).ExecuteScalar(CommandType.Text, strSql));
+
+                    if (i > 0)
+                    {
+                        strSql = "drop table ETS_TRE_BASE" + iProjectId;
+                        if (Common.iDBType == (int)Enums.DBType.Mysql)
+                            ((MySqlDBManager)Common.dbMgr).ExecuteScalar(CommandType.Text, strSql);
+                    }
+                    strSql = " SELECT count(1) FROM information_schema.columns c WHERE c.table_name = 'ETS_TRE_BASED" + iProjectId + "' AND c.table_schema  = 'recousr' ";
+
+                    i = int.Parse(((MySqlDBManager)Common.dbMgr).ExecuteScalar(CommandType.Text, strSql));
+
+                    if (i > 0)
+                    {
+                        strSql = "drop table ETS_TRE_BASED" + iProjectId;
+                        if (Common.iDBType == (int)Enums.DBType.Mysql)
+                            ((MySqlDBManager)Common.dbMgr).ExecuteScalar(CommandType.Text, strSql);
+                    }
+                    strSql = " SELECT count(1) FROM information_schema.columns c WHERE c.table_name = 'ETS_TRE_BASEP" + iProjectId + "' AND c.table_schema  = 'recousr' ";
+
+                    i = int.Parse(((MySqlDBManager)Common.dbMgr).ExecuteScalar(CommandType.Text, strSql));
+
+                    if (i > 0)
+                    {
+                        strSql = "drop table ETS_TRE_BASEP" + iProjectId;
+                        if (Common.iDBType == (int)Enums.DBType.Mysql)
+                            ((MySqlDBManager)Common.dbMgr).ExecuteScalar(CommandType.Text, strSql);
+                    }
+
+
+                                                                                                                                                                                                                      }
+
+                
 
             }
             catch (Exception ex)

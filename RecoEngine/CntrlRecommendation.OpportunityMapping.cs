@@ -389,9 +389,9 @@ namespace RecoEngine
                     //}
 
                 }
-                // saving Opportunity Potentail
-                if (bIsPtnlModified)
-                    clsTObj.fnSaveOPPPotential(Common.sOpportunityName, iOpportunityId, Common.strTableName, strPntlExpression);
+                //// saving Opportunity Potentail
+               if (bIsPtnlModified)
+                  clsTObj.fnSaveOPPPotential(Common.sOpportunityName, iOpportunityId, Common.strTableName, strPntlExpression);
             }
             catch (Exception ex)
             {
@@ -556,7 +556,7 @@ namespace RecoEngine
                 clsOpportunities clsObj = new clsOpportunities();
                 // frmExpressEditor frm = new frmExpressEditor();
                 DataTable dt = new DataTable();
-                DataTable dtSource = clsObj.fnGetBaseColumns(ref dt);
+                DataTable dtSource = clsObj.fnGetBaseColumns(ref dt,Common.iProjectID);
 
                 //if (dtSource.Rows.Count == 0)
                 //{
@@ -567,7 +567,7 @@ namespace RecoEngine
 
                 // dtSource.Columns.Add(new DataColumn("OPPValue", typeof(decimal)));
 
-                using (var frm = new frmExpressEditor((int)Enums.ExpressionType.Opp_ptnl, "ETS_TRE_BASE2", strPntlExpression))
+                using (var frm = new frmExpressEditor((int)Enums.ExpressionType.Opp_ptnl, "ETS_TRE_BASED"+Common.iProjectID, strPntlExpression))
                 {
                     frm._fieldDict = Common.GetDict(dtSource);
                     frm.AvailableFields = frm._fieldDict.ToList<KeyValuePair<string, Type>>();

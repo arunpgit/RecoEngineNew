@@ -506,7 +506,7 @@ namespace RecoEngine_BI
                         object[] item = new object[] { obj, " SELECT ", dataRow["CAMPAIGN_ID"], ",  A.Customer FROM tre_opportunity  A " };
                         str = string.Concat(item);
                         str = string.Concat(str, " LEFT JOIN (SELECT  CUSTOMER , WEEK FROM  ", strTabName, " ) D ON D.CUSTOMER=A.CUSTOMER ");
-                        str = string.Concat(str, " wHERE  A.Customer IN (SELECT CUSTOMER FROM ETS_TRE_BASE3  WHERE ");
+                        str = string.Concat(str, " wHERE  A.Customer IN (SELECT CUSTOMER FROM ETS_TRE_BASEP  WHERE ");
                         if (dataRow["ELIGIBILITY"].ToString() != "")
                         {
                             str = string.Concat(str, dataRow["ELIGIBILITY"], " and ");
@@ -559,7 +559,7 @@ namespace RecoEngine_BI
                             object[] item = new object[] { obj, " SELECT ", dataRow["CAMPAIGN_ID"], ",  A.Customer FROM tre_opportunity  A " };
                             str = string.Concat(item);
                             str = string.Concat(str, " LEFT JOIN (SELECT  CUSTOMER , WEEK FROM  ", strTabName, " ) D ON D.CUSTOMER=A.CUSTOMER ");
-                            str = string.Concat(str, " wHERE  A.Customer IN (SELECT CUSTOMER FROM ETS_TRE_BASE3  WHERE ");
+                            str = string.Concat(str, " wHERE  A.Customer IN (SELECT CUSTOMER FROM ETS_TRE_BASEP  WHERE ");
                             if (dataRow["ELIGIBILITY"].ToString() != "")
                             {
                                 str = string.Concat(str, dataRow["ELIGIBILITY"], " and ");

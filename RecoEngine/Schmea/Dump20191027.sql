@@ -270,13 +270,13 @@ CREATE TABLE `ets_tre_base` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Table structure for table `ets_tre_base2`
+-- Table structure for table `ETS_TRE_BASED`
 --
 
-DROP TABLE IF EXISTS `ets_tre_base2`;
+DROP TABLE IF EXISTS `ETS_TRE_BASED`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `ets_tre_base2` (
+CREATE TABLE `ETS_TRE_BASED` (
   `customer` bigint(20) DEFAULT NULL,
   `DECILE` bigint(20) DEFAULT NULL,
   `A_TOTAL_BALANCE_INITIAL` double DEFAULT NULL,
@@ -349,13 +349,13 @@ CREATE TABLE `ets_tre_base2` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Table structure for table `ets_tre_base3`
+-- Table structure for table `ETS_TRE_BASEP`
 --
 
-DROP TABLE IF EXISTS `ets_tre_base3`;
+DROP TABLE IF EXISTS `ETS_TRE_BASEP`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `ets_tre_base3` (
+CREATE TABLE `ETS_TRE_BASEP` (
   `customer` bigint(20) DEFAULT NULL,
   `DECILE` bigint(20) DEFAULT NULL,
   `A_TOTAL_BALANCE_INITIAL` double DEFAULT NULL,

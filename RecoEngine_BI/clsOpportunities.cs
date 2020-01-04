@@ -458,7 +458,7 @@ namespace RecoEngine_BI
                 throw ex;
             }
         }
-        public DataTable fnGetBaseColumns(ref DataTable dtSchema)
+        public DataTable fnGetBaseColumns(ref DataTable dtSchema,int iProjectId )
         {
             try
             {
@@ -469,12 +469,12 @@ namespace RecoEngine_BI
 
                 if (Common.iDBType == (int)Enums.DBType.Oracle)
                 {
-                    strSql = "select * from ETS_TRE_BASE2 where ROWNUM <= 2";
+                    strSql = "select * from ETS_TRE_BASED"+ iProjectId + " where ROWNUM <= 2";
                     dt = ((OraDBManager)Common.dbMgr).ExecuteDataTable(CommandType.Text, strSql);
                 }
                 else if (Common.iDBType == (int)Enums.DBType.Mysql)
                 {
-                    strSql = "select  * from ETS_TRE_BASE2 limit 1";
+                    strSql = "select  * from ETS_TRE_BASED" + iProjectId + " limit 1";
                     dt = ((MySqlDBManager)Common.dbMgr).ExecuteDataTable(CommandType.Text, strSql);
                 }
                 DataTableReader dr = new DataTableReader(dt);
@@ -617,8 +617,6 @@ namespace RecoEngine_BI
                 strSql += " LEFT JOIN TRE_TIMEPERIOD TT ON TT.T1='" + Timeperiod1 + "' AND TT.T2='" + Timeperiod2 + "'";
                 strSql += " WHERE O.PROJECT_ID= " + iProjectId;
                 //strSql += " AND O.ISONMAIN=1";
-
-                dt = ((OraDBManager)Common.dbMgr).ExecuteDataTable(CommandType.Text, strSql);
 
                 if (Common.iDBType == (int)Enums.DBType.Oracle)
                 {
@@ -863,35 +861,42 @@ namespace RecoEngine_BI
                 {
 
                     strSql = "Select count(1) from information_schema.columns c where c.table_name = 'ets_tre_base_d'";
-                   int iCount = int.Parse(((MySqlDBManager)Common.dbMgr).ExecuteScalar(CommandType.Text, strSql));
-                    if(iCount >0)
+                    int iCount = int.Parse(((MySqlDBManager)Common.dbMgr).ExecuteScalar(CommandType.Text, strSql));
+                    if (iCount > 0)
                     {
                         strSql = "Drop table ets_tre_base_d ";
                         ((MySqlDBManager)Common.dbMgr).ExecuteNonQuery(CommandType.Text, strSql);
 
                     }
-                    string BaseTable = "'ets_tre_base'";
+                    string BaseTable = "'ets_tre_base" + iProjectId + "'";
                     strSql = " CALL `recousr`.`TRE_GET_DELTASTATUS`(";
-                    strSql += BaseTable+","+ iProjectId + ")";
-                   
-                  
+                    strSql += BaseTable + "," + iProjectId + ")";
+
+
+                    ((MySqlDBManager)Common.dbMgr).ExecuteNonQuery(CommandType.Text, strSql);
+                    strSql = "Select count(1) from information_schema.columns c where c.table_name = 'tre_opportunityexport'";
+                    iCount = int.Parse(((MySqlDBManager)Common.dbMgr).ExecuteScalar(CommandType.Text, strSql));
+                    if (iCount > 0)
+                    {
+                        strSql = "Drop table tre_opportunityexport ";
                         ((MySqlDBManager)Common.dbMgr).ExecuteNonQuery(CommandType.Text, strSql);
 
-
+                        //}
+                    }
                     //((OraDBManager)Common.dbMgr).ExecuteNonQuery(CommandType.Text, strSql);
-                    if(isForSample)
-                        
-                    strSql = " CALL `recousr`.`TRE_GET_PTNL`('Tre_random"+iProjectId+"' ,"+ objclsTreDetails.fnMaxWeek(strTabName)+")";
-                    else
+                    if (isForSample)
 
-                    strSql = " CALL `recousr`.`TRE_GET_PTNL`('" + strTabName + "_V' ," + objclsTreDetails.fnMaxWeek(strTabName) + ")";
+                            strSql = " CALL `recousr`.`TRE_GET_PTNL`('Tre_random" + iProjectId + "' ," + objclsTreDetails.fnMaxWeek(strTabName) + ","+ iProjectId + ")";
+                        else
+
+                            strSql = " CALL `recousr`.`TRE_GET_PTNL`('" + strTabName + "_V' ," + objclsTreDetails.fnMaxWeek(strTabName) + "," + iProjectId + ")";
                     ((MySqlDBManager)Common.dbMgr).ExecuteNonQuery(CommandType.Text, strSql);
-                   }
-                
+                    
+                }
 
                 // //((OraDBManager)Common.dbMgr).CommitTrans();
                 return true;
-
+                
             }
             catch (Exception ex)
             {

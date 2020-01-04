@@ -391,8 +391,8 @@ namespace RecoEngine_BI
                     string str7 = "";
                     string str8 = "";
                     string str9 = "Create Table ETS_TRE_BASE (";
-                    string str10 = "Create Table ETS_TRE_BASE2 (";
-                    string str11 = "Create Table ETS_TRE_BASE3 (";
+                    string str10 = "Create Table ETS_TRE_BASED (";
+                    string str11 = "Create Table ETS_TRE_BASEP (";
                     string str12 = "";
                     string str13 = "";
                     string str14 = "";
@@ -431,24 +431,24 @@ namespace RecoEngine_BI
                         str = " DROP TABLE ETS_TRE_BASE";
                         ((OraDBManager)Common.dbMgr).ExecuteNonQuery(CommandType.Text, str);
                     }
-                    str = " Select count(1) from user_tab_columns where upper(table_name) = 'ETS_TRE_BASE2'";
+                    str = " Select count(1) from user_tab_columns where upper(table_name) = 'ETS_TRE_BASED'";
                     if (Common.iDBType == 1)
                     {
                         num3 = int.Parse(((OraDBManager)Common.dbMgr).ExecuteScalar(CommandType.Text, str));
                     }
                     if (num3 >= 1)
                     {
-                        str = " DROP TABLE ETS_TRE_BASE2";
+                        str = " DROP TABLE ETS_TRE_BASED";
                         ((OraDBManager)Common.dbMgr).ExecuteNonQuery(CommandType.Text, str);
                     }
-                    str = " Select count(1) from user_tab_columns where upper(table_name) = 'ETS_TRE_BASE3'";
+                    str = " Select count(1) from user_tab_columns where upper(table_name) = 'ETS_TRE_BASEP'";
                     if (Common.iDBType == 1)
                     {
                         num3 = int.Parse(((OraDBManager)Common.dbMgr).ExecuteScalar(CommandType.Text, str));
                     }
                     if (num3 >= 1)
                     {
-                        str = " DROP TABLE ETS_TRE_BASE3";
+                        str = " DROP TABLE ETS_TRE_BASEP";
                         ((OraDBManager)Common.dbMgr).ExecuteNonQuery(CommandType.Text, str);
                     }
                     str = " Select count(1) from user_tab_columns where upper(table_name) = 'ETS_TRE_X_SELL_PTNL'";
@@ -486,12 +486,12 @@ namespace RecoEngine_BI
                     {
                         num2 = int.Parse(((OraDBManager)Common.dbMgr).ExecuteScalar(CommandType.Text, str));
                     }
-                    str = " SELECT count(1) FROM ALL_TABLES where table_name = 'ETS_TRE_BASE2' ";
+                    str = " SELECT count(1) FROM ALL_TABLES where table_name = 'ETS_TRE_BASED' ";
                     if (Common.iDBType == 1)
                     {
                         int.Parse(((OraDBManager)Common.dbMgr).ExecuteScalar(CommandType.Text, str));
                     }
-                    str = " SELECT count(1) FROM ALL_TABLES where table_name = 'ETS_TRE_BASE3' ";
+                    str = " SELECT count(1) FROM ALL_TABLES where table_name = 'ETS_TRE_BASEP' ";
                     if (Common.iDBType == 1)
                     {
                         int.Parse(((OraDBManager)Common.dbMgr).ExecuteScalar(CommandType.Text, str));
@@ -537,27 +537,27 @@ namespace RecoEngine_BI
                                     ((OraDBManager)Common.dbMgr).ExecuteNonQuery(CommandType.Text, str);
                                     str = string.Concat(" Alter Table ETS_TRE_BASE drop column X_", dataRow[0].ToString().ToUpper());
                                     ((OraDBManager)Common.dbMgr).ExecuteNonQuery(CommandType.Text, str);
-                                    str = string.Concat(" Alter Table ETS_TRE_BASE2 drop column A_", dataRow[0].ToString().ToUpper());
+                                    str = string.Concat(" Alter Table ETS_TRE_BASED drop column A_", dataRow[0].ToString().ToUpper());
                                     ((OraDBManager)Common.dbMgr).ExecuteNonQuery(CommandType.Text, str);
-                                    str = string.Concat(" Alter Table ETS_TRE_BASE2 drop column B_", dataRow[0].ToString().ToUpper());
+                                    str = string.Concat(" Alter Table ETS_TRE_BASED drop column B_", dataRow[0].ToString().ToUpper());
                                     ((OraDBManager)Common.dbMgr).ExecuteNonQuery(CommandType.Text, str);
-                                    str = string.Concat(" Alter Table ETS_TRE_BASE2 drop column D_", dataRow[0].ToString().ToUpper());
+                                    str = string.Concat(" Alter Table ETS_TRE_BASED drop column D_", dataRow[0].ToString().ToUpper());
                                     ((OraDBManager)Common.dbMgr).ExecuteNonQuery(CommandType.Text, str);
-                                    str = string.Concat(" Alter Table ETS_TRE_BASE2 drop column X_", dataRow[0].ToString().ToUpper());
+                                    str = string.Concat(" Alter Table ETS_TRE_BASED drop column X_", dataRow[0].ToString().ToUpper());
                                     ((OraDBManager)Common.dbMgr).ExecuteNonQuery(CommandType.Text, str);
-                                    str = string.Concat(" Alter Table ETS_TRE_BASE2 drop column S_", dataRow[0].ToString().ToUpper());
+                                    str = string.Concat(" Alter Table ETS_TRE_BASED drop column S_", dataRow[0].ToString().ToUpper());
                                     ((OraDBManager)Common.dbMgr).ExecuteNonQuery(CommandType.Text, str);
-                                    str = string.Concat(" Alter Table ETS_TRE_BASE3 drop column A_", dataRow[0].ToString().ToUpper());
+                                    str = string.Concat(" Alter Table ETS_TRE_BASEP drop column A_", dataRow[0].ToString().ToUpper());
                                     ((OraDBManager)Common.dbMgr).ExecuteNonQuery(CommandType.Text, str);
-                                    str = string.Concat(" Alter Table ETS_TRE_BASE3 drop column B_", dataRow[0].ToString().ToUpper());
+                                    str = string.Concat(" Alter Table ETS_TRE_BASEP drop column B_", dataRow[0].ToString().ToUpper());
                                     ((OraDBManager)Common.dbMgr).ExecuteNonQuery(CommandType.Text, str);
-                                    str = string.Concat(" Alter Table ETS_TRE_BASE3 drop column D_", dataRow[0].ToString().ToUpper());
+                                    str = string.Concat(" Alter Table ETS_TRE_BASEP drop column D_", dataRow[0].ToString().ToUpper());
                                     ((OraDBManager)Common.dbMgr).ExecuteNonQuery(CommandType.Text, str);
-                                    str = string.Concat(" Alter Table ETS_TRE_BASE3 drop column X_", dataRow[0].ToString().ToUpper());
+                                    str = string.Concat(" Alter Table ETS_TRE_BASEP drop column X_", dataRow[0].ToString().ToUpper());
                                     ((OraDBManager)Common.dbMgr).ExecuteNonQuery(CommandType.Text, str);
-                                    str = string.Concat(" Alter Table ETS_TRE_BASE3 drop column S_", dataRow[0].ToString().ToUpper());
+                                    str = string.Concat(" Alter Table ETS_TRE_BASEP drop column S_", dataRow[0].ToString().ToUpper());
                                     ((OraDBManager)Common.dbMgr).ExecuteNonQuery(CommandType.Text, str);
-                                    str = string.Concat(" Alter Table ETS_TRE_BASE3 drop column P_", dataRow[0].ToString().ToUpper());
+                                    str = string.Concat(" Alter Table ETS_TRE_BASEP drop column P_", dataRow[0].ToString().ToUpper());
                                     ((OraDBManager)Common.dbMgr).ExecuteNonQuery(CommandType.Text, str);
                                 }
                                 str = string.Concat(" Select count(1) from user_tab_columns where upper(table_name) = 'ETS_ADM_WEEKLY_A' and upper(column_name) = '", dataRow[0].ToString().ToUpper(), "'");
@@ -590,24 +590,24 @@ namespace RecoEngine_BI
                                     str = string.Concat(" Alter Table ETS_TRE_BASE drop column ", dataRow[0].ToString());
                                     ((OraDBManager)Common.dbMgr).ExecuteNonQuery(CommandType.Text, str);
                                 }
-                                str = string.Concat(" Select count(1) from user_tab_columns where table_name = 'ETS_TRE_BASE2' and upper(column_name) = '", dataRow[0].ToString().ToUpper(), "'");
+                                str = string.Concat(" Select count(1) from user_tab_columns where table_name = 'ETS_TRE_BASED' and upper(column_name) = '", dataRow[0].ToString().ToUpper(), "'");
                                 if (Common.iDBType == 1)
                                 {
                                     num3 = int.Parse(((OraDBManager)Common.dbMgr).ExecuteScalar(CommandType.Text, str));
                                 }
                                 if (num3 > 0)
                                 {
-                                    str = string.Concat(" Alter Table ETS_TRE_BASE2 drop column ", dataRow[0].ToString());
+                                    str = string.Concat(" Alter Table ETS_TRE_BASED drop column ", dataRow[0].ToString());
                                     ((OraDBManager)Common.dbMgr).ExecuteNonQuery(CommandType.Text, str);
                                 }
-                                str = string.Concat(" Select count(1) from user_tab_columns where table_name = 'ETS_TRE_BASE3' and upper(column_name) = '", dataRow[0].ToString().ToUpper(), "'");
+                                str = string.Concat(" Select count(1) from user_tab_columns where table_name = 'ETS_TRE_BASEP' and upper(column_name) = '", dataRow[0].ToString().ToUpper(), "'");
                                 if (Common.iDBType == 1)
                                 {
                                     num3 = int.Parse(((OraDBManager)Common.dbMgr).ExecuteScalar(CommandType.Text, str));
                                 }
                                 if (num3 > 0)
                                 {
-                                    str = string.Concat(" Alter Table ETS_TRE_BASE3 drop column ", dataRow[0].ToString());
+                                    str = string.Concat(" Alter Table ETS_TRE_BASEP drop column ", dataRow[0].ToString());
                                     ((OraDBManager)Common.dbMgr).ExecuteNonQuery(CommandType.Text, str);
                                 }
                             }
@@ -716,27 +716,27 @@ namespace RecoEngine_BI
                                             ((OraDBManager)Common.dbMgr).ExecuteNonQuery(CommandType.Text, str);
                                             str = string.Concat(" Alter Table ETS_TRE_BASE add D_", dataRow[0].ToString(), str17);
                                             ((OraDBManager)Common.dbMgr).ExecuteNonQuery(CommandType.Text, str);
-                                            str = string.Concat(" Alter Table ETS_TRE_BASE2 add A_", dataRow[0].ToString(), str17);
+                                            str = string.Concat(" Alter Table ETS_TRE_BASED add A_", dataRow[0].ToString(), str17);
                                             ((OraDBManager)Common.dbMgr).ExecuteNonQuery(CommandType.Text, str);
-                                            str = string.Concat(" Alter Table ETS_TRE_BASE2 add B_", dataRow[0].ToString(), str17);
+                                            str = string.Concat(" Alter Table ETS_TRE_BASED add B_", dataRow[0].ToString(), str17);
                                             ((OraDBManager)Common.dbMgr).ExecuteNonQuery(CommandType.Text, str);
-                                            str = string.Concat(" Alter Table ETS_TRE_BASE2 add X_", dataRow[0].ToString(), str17);
+                                            str = string.Concat(" Alter Table ETS_TRE_BASED add X_", dataRow[0].ToString(), str17);
                                             ((OraDBManager)Common.dbMgr).ExecuteNonQuery(CommandType.Text, str);
-                                            str = string.Concat(" Alter Table ETS_TRE_BASE2 add D_", dataRow[0].ToString(), str17);
+                                            str = string.Concat(" Alter Table ETS_TRE_BASED add D_", dataRow[0].ToString(), str17);
                                             ((OraDBManager)Common.dbMgr).ExecuteNonQuery(CommandType.Text, str);
-                                            str = string.Concat(" Alter Table ETS_TRE_BASE2 add S_", dataRow[0].ToString(), " varchar(200) ");
+                                            str = string.Concat(" Alter Table ETS_TRE_BASED add S_", dataRow[0].ToString(), " varchar(200) ");
                                             ((OraDBManager)Common.dbMgr).ExecuteNonQuery(CommandType.Text, str);
-                                            str = string.Concat(" Alter Table ETS_TRE_BASE3 add A_", dataRow[0].ToString(), str17);
+                                            str = string.Concat(" Alter Table ETS_TRE_BASEP add A_", dataRow[0].ToString(), str17);
                                             ((OraDBManager)Common.dbMgr).ExecuteNonQuery(CommandType.Text, str);
-                                            str = string.Concat(" Alter Table ETS_TRE_BASE3 add B_", dataRow[0].ToString(), str17);
+                                            str = string.Concat(" Alter Table ETS_TRE_BASEP add B_", dataRow[0].ToString(), str17);
                                             ((OraDBManager)Common.dbMgr).ExecuteNonQuery(CommandType.Text, str);
-                                            str = string.Concat(" Alter Table ETS_TRE_BASE3 add X_", dataRow[0].ToString(), str17);
+                                            str = string.Concat(" Alter Table ETS_TRE_BASEP add X_", dataRow[0].ToString(), str17);
                                             ((OraDBManager)Common.dbMgr).ExecuteNonQuery(CommandType.Text, str);
-                                            str = string.Concat(" Alter Table ETS_TRE_BASE3 add D_", dataRow[0].ToString(), str17);
+                                            str = string.Concat(" Alter Table ETS_TRE_BASEP add D_", dataRow[0].ToString(), str17);
                                             ((OraDBManager)Common.dbMgr).ExecuteNonQuery(CommandType.Text, str);
-                                            str = string.Concat(" Alter Table ETS_TRE_BASE3 add S_", dataRow[0].ToString(), " varchar(200) ");
+                                            str = string.Concat(" Alter Table ETS_TRE_BASEP add S_", dataRow[0].ToString(), " varchar(200) ");
                                             ((OraDBManager)Common.dbMgr).ExecuteNonQuery(CommandType.Text, str);
-                                            str = string.Concat(" Alter Table ETS_TRE_BASE3 add P_", dataRow[0].ToString(), str17);
+                                            str = string.Concat(" Alter Table ETS_TRE_BASEP add P_", dataRow[0].ToString(), str17);
                                             ((OraDBManager)Common.dbMgr).ExecuteNonQuery(CommandType.Text, str);
                                         }
                                         else
@@ -820,9 +820,9 @@ namespace RecoEngine_BI
                                         ((OraDBManager)Common.dbMgr).ExecuteNonQuery(CommandType.Text, str);
                                         str = string.Concat(" Alter Table ETS_TRE_BASE add ", dataRow[0].ToString().ToUpper(), str17);
                                         ((OraDBManager)Common.dbMgr).ExecuteNonQuery(CommandType.Text, str);
-                                        str = string.Concat(" Alter Table ETS_TRE_BASE2 add ", dataRow[0].ToString().ToUpper(), str17);
+                                        str = string.Concat(" Alter Table ETS_TRE_BASED add ", dataRow[0].ToString().ToUpper(), str17);
                                         ((OraDBManager)Common.dbMgr).ExecuteNonQuery(CommandType.Text, str);
-                                        str = string.Concat(" Alter Table ETS_TRE_BASE3 add ", dataRow[0].ToString().ToUpper(), str17);
+                                        str = string.Concat(" Alter Table ETS_TRE_BASEP add ", dataRow[0].ToString().ToUpper(), str17);
                                         ((OraDBManager)Common.dbMgr).ExecuteNonQuery(CommandType.Text, str);
                                     }
                                     else
@@ -888,24 +888,24 @@ namespace RecoEngine_BI
                             str = string.Concat(" Alter Table ETS_TRE_BASE drop column ", dataRow1[0].ToString().ToUpper());
                             ((OraDBManager)Common.dbMgr).ExecuteNonQuery(CommandType.Text, str);
                         }
-                        str = string.Concat(" Select count(1) from user_tab_columns where table_name = 'ETS_TRE_BASE2' and upper(column_name) = '", dataRow1[0].ToString().ToUpper(), "'");
+                        str = string.Concat(" Select count(1) from user_tab_columns where table_name = 'ETS_TRE_BASED' and upper(column_name) = '", dataRow1[0].ToString().ToUpper(), "'");
                         if (Common.iDBType == 1)
                         {
                             num3 = int.Parse(((OraDBManager)Common.dbMgr).ExecuteScalar(CommandType.Text, str));
                         }
                         if (num3 > 0)
                         {
-                            str = string.Concat(" Alter Table ETS_TRE_BASE2 drop column ", dataRow1[0].ToString().ToUpper());
+                            str = string.Concat(" Alter Table ETS_TRE_BASED drop column ", dataRow1[0].ToString().ToUpper());
                             ((OraDBManager)Common.dbMgr).ExecuteNonQuery(CommandType.Text, str);
                         }
-                        str = string.Concat(" Select count(1) from user_tab_columns where table_name = 'ETS_TRE_BASE3' and upper(column_name) = '", dataRow1[0].ToString().ToUpper(), "'");
+                        str = string.Concat(" Select count(1) from user_tab_columns where table_name = 'ETS_TRE_BASEP' and upper(column_name) = '", dataRow1[0].ToString().ToUpper(), "'");
                         if (Common.iDBType == 1)
                         {
                             num3 = int.Parse(((OraDBManager)Common.dbMgr).ExecuteScalar(CommandType.Text, str));
                         }
                         if (num3 > 0)
                         {
-                            str = string.Concat(" Alter Table ETS_TRE_BASE3 drop column ", dataRow1[0].ToString().ToUpper());
+                            str = string.Concat(" Alter Table ETS_TRE_BASEP drop column ", dataRow1[0].ToString().ToUpper());
                             ((OraDBManager)Common.dbMgr).ExecuteNonQuery(CommandType.Text, str);
                         }
                         str = string.Concat(" Select count(1) from user_tab_columns where table_name = 'ETS_ADM_WEEKLY_A' and upper(column_name) = 'A_", dataRow1[0].ToString().ToUpper(), "'");
@@ -927,30 +927,30 @@ namespace RecoEngine_BI
                             ((OraDBManager)Common.dbMgr).ExecuteNonQuery(CommandType.Text, str);
                             str = string.Concat(" Alter Table ETS_TRE_BASE drop column X_", dataRow1[0].ToString().ToUpper());
                             ((OraDBManager)Common.dbMgr).ExecuteNonQuery(CommandType.Text, str);
-                            str = string.Concat(" Alter Table ETS_TRE_BASE2 drop column A_", dataRow1[0].ToString().ToUpper());
+                            str = string.Concat(" Alter Table ETS_TRE_BASED drop column A_", dataRow1[0].ToString().ToUpper());
                             ((OraDBManager)Common.dbMgr).ExecuteNonQuery(CommandType.Text, str);
-                            str = string.Concat(" Alter Table ETS_TRE_BASE2 drop column B_", dataRow1[0].ToString().ToUpper());
+                            str = string.Concat(" Alter Table ETS_TRE_BASED drop column B_", dataRow1[0].ToString().ToUpper());
                             ((OraDBManager)Common.dbMgr).ExecuteNonQuery(CommandType.Text, str);
-                            str = string.Concat(" Alter Table ETS_TRE_BASE2 drop column D_", dataRow1[0].ToString().ToUpper());
+                            str = string.Concat(" Alter Table ETS_TRE_BASED drop column D_", dataRow1[0].ToString().ToUpper());
                             ((OraDBManager)Common.dbMgr).ExecuteNonQuery(CommandType.Text, str);
-                            str = string.Concat(" Alter Table ETS_TRE_BASE2 drop column X_", dataRow1[0].ToString().ToUpper());
+                            str = string.Concat(" Alter Table ETS_TRE_BASED drop column X_", dataRow1[0].ToString().ToUpper());
                             ((OraDBManager)Common.dbMgr).ExecuteNonQuery(CommandType.Text, str);
-                            str = string.Concat(" Alter Table ETS_TRE_BASE2 drop column S_", dataRow1[0].ToString().ToUpper());
+                            str = string.Concat(" Alter Table ETS_TRE_BASED drop column S_", dataRow1[0].ToString().ToUpper());
                             ((OraDBManager)Common.dbMgr).ExecuteNonQuery(CommandType.Text, str);
-                            str = string.Concat(" Alter Table ETS_TRE_BASE3 drop column A_", dataRow1[0].ToString().ToUpper());
+                            str = string.Concat(" Alter Table ETS_TRE_BASEP drop column A_", dataRow1[0].ToString().ToUpper());
                             ((OraDBManager)Common.dbMgr).ExecuteNonQuery(CommandType.Text, str);
-                            str = string.Concat(" Alter Table ETS_TRE_BASE3 drop column B_", dataRow1[0].ToString().ToUpper());
+                            str = string.Concat(" Alter Table ETS_TRE_BASEP drop column B_", dataRow1[0].ToString().ToUpper());
                             ((OraDBManager)Common.dbMgr).ExecuteNonQuery(CommandType.Text, str);
-                            str = string.Concat(" Alter Table ETS_TRE_BASE3 drop column D_", dataRow1[0].ToString().ToUpper());
+                            str = string.Concat(" Alter Table ETS_TRE_BASEP drop column D_", dataRow1[0].ToString().ToUpper());
                             ((OraDBManager)Common.dbMgr).ExecuteNonQuery(CommandType.Text, str);
-                            str = string.Concat(" Alter Table ETS_TRE_BASE3 drop column X_", dataRow1[0].ToString().ToUpper());
+                            str = string.Concat(" Alter Table ETS_TRE_BASEP drop column X_", dataRow1[0].ToString().ToUpper());
                             ((OraDBManager)Common.dbMgr).ExecuteNonQuery(CommandType.Text, str);
-                            str = string.Concat(" Alter Table ETS_TRE_BASE3 drop column S_", dataRow1[0].ToString().ToUpper());
+                            str = string.Concat(" Alter Table ETS_TRE_BASEP drop column S_", dataRow1[0].ToString().ToUpper());
                             ((OraDBManager)Common.dbMgr).ExecuteNonQuery(CommandType.Text, str);
-                            str = string.Concat(" Alter Table ETS_TRE_BASE3 drop column P_", dataRow1[0].ToString().ToUpper());
+                            str = string.Concat(" Alter Table ETS_TRE_BASEP drop column P_", dataRow1[0].ToString().ToUpper());
                             ((OraDBManager)Common.dbMgr).ExecuteNonQuery(CommandType.Text, str);
                         }
-                        str = string.Concat(" Select count(1) from user_tab_columns where table_name = 'ETS_TRE_BASE2' and upper(column_name) = 'X_", dataRow1[0].ToString().ToUpper(), "'");
+                        str = string.Concat(" Select count(1) from user_tab_columns where table_name = 'ETS_TRE_BASED' and upper(column_name) = 'X_", dataRow1[0].ToString().ToUpper(), "'");
                         if (Common.iDBType == 1)
                         {
                             num3 = int.Parse(((OraDBManager)Common.dbMgr).ExecuteScalar(CommandType.Text, str));
@@ -959,11 +959,11 @@ namespace RecoEngine_BI
                         {
                             continue;
                         }
-                        str = string.Concat(" Alter Table ETS_TRE_BASE2 drop column D_", dataRow1[0].ToString().ToUpper());
+                        str = string.Concat(" Alter Table ETS_TRE_BASED drop column D_", dataRow1[0].ToString().ToUpper());
                         ((OraDBManager)Common.dbMgr).ExecuteNonQuery(CommandType.Text, str);
-                        str = string.Concat(" Alter Table ETS_TRE_BASE2 drop column X_", dataRow1[0].ToString().ToUpper());
+                        str = string.Concat(" Alter Table ETS_TRE_BASED drop column X_", dataRow1[0].ToString().ToUpper());
                         ((OraDBManager)Common.dbMgr).ExecuteNonQuery(CommandType.Text, str);
-                        str = string.Concat(" Alter Table ETS_TRE_BASE2 drop column S_", dataRow1[0].ToString().ToUpper());
+                        str = string.Concat(" Alter Table ETS_TRE_BASED drop column S_", dataRow1[0].ToString().ToUpper());
                         ((OraDBManager)Common.dbMgr).ExecuteNonQuery(CommandType.Text, str);
                     }
                     str15 = str15.Substring(0, str15.Length - 1);
@@ -1109,17 +1109,17 @@ namespace RecoEngine_BI
                 {
 
                     string str = "";
-                    string str1 = "Create Table ETS_ADM_WEEKLY_A (";
-                    string str2 = "Create Table ETS_ADM_WEEKLY_B (";
+                    string str1 = "Create Table ETS_ADM_WEEKLY_A"+ProjectId+" (";
+                    string str2 = "Create Table ETS_ADM_WEEKLY_B" + ProjectId + " (";
                     string str3 = "";
                     string str4 = "";
                     string str5 = "";
                     string str6 = "";
                     string str7 = "";
                     string str8 = "";
-                    string str9 = "Create Table ETS_TRE_BASE (";
-                    string str10 = "Create Table ETS_TRE_BASE2 (";
-                    string str11 = "Create Table ETS_TRE_BASE3 (";
+                    string str9 = "Create Table ETS_TRE_BASE" + ProjectId + " (";
+                    string str10 = "Create Table ETS_TRE_BASED" + ProjectId + "  (";
+                    string str11 = "Create Table ETS_TRE_BASEP" + ProjectId + "  (";
                     string str12 = "";
                     string str13 = "";
                     string str14 = "";
@@ -1128,64 +1128,64 @@ namespace RecoEngine_BI
                     int num2 = 0;
                     string str15 = "";
                     int num3 = 0;
-                    str = " Select count(1) FROM information_schema.columns c WHERE c.table_name = 'ETS_ADM_WEEKLY_A' AND c.table_schema  = 'recousr'";
+                    str = " Select count(1) FROM information_schema.columns c WHERE c.table_name = 'ETS_ADM_WEEKLY_A"+ ProjectId + "' AND c.table_schema  = 'recousr'";
                     if (Common.iDBType == 3)
                     {
                         num3 = int.Parse(((MySqlDBManager)Common.dbMgr).ExecuteScalar(CommandType.Text, str));
                     }
                     if (num3 >= 1)
                     {
-                        str = " DROP TABLE ETS_ADM_WEEKLY_A";
+                        str = " DROP TABLE ETS_ADM_WEEKLY_A" + ProjectId;
                         ((MySqlDBManager)Common.dbMgr).ExecuteNonQuery(CommandType.Text, str);
                     }
-                    str = " Select count(1) FROM information_schema.columns c WHERE c.table_name = 'ETS_ADM_WEEKLY_B' AND c.table_schema  = 'recousr'";
+                    str = " Select count(1) FROM information_schema.columns c WHERE c.table_name = 'ETS_ADM_WEEKLY_B" + ProjectId + "' AND c.table_schema  = 'recousr'";
                     if (Common.iDBType == 3)
                     {
                         num3 = int.Parse(((MySqlDBManager)Common.dbMgr).ExecuteScalar(CommandType.Text, str));
                     }
                     if (num3 >= 1)
                     {
-                        str = " DROP TABLE ETS_ADM_WEEKLY_B";
+                        str = " DROP TABLE ETS_ADM_WEEKLY_B" + ProjectId;
                         ((MySqlDBManager)Common.dbMgr).ExecuteNonQuery(CommandType.Text, str);
                     }
-                    str = " Select count(1) FROM information_schema.columns c WHERE c.table_name = 'ETS_TRE_BASE' AND c.table_schema  = 'recousr'";
+                    str = " Select count(1) FROM information_schema.columns c WHERE c.table_name = 'ETS_TRE_BASE" + ProjectId + "' AND c.table_schema  = 'recousr'";
                     if (Common.iDBType == 3)
                     {
                         num3 = int.Parse(((MySqlDBManager)Common.dbMgr).ExecuteScalar(CommandType.Text, str));
                     }
                     if (num3 >= 1)
                     {
-                        str = " DROP TABLE ETS_TRE_BASE";
+                        str = " DROP TABLE ETS_TRE_BASE" + ProjectId;
                         ((MySqlDBManager)Common.dbMgr).ExecuteNonQuery(CommandType.Text, str);
                     }
-                    str = " Select count(1) FROM information_schema.columns c WHERE c.table_name = 'ETS_TRE_BASE2' AND c.table_schema  = 'recousr'";
+                    str = " Select count(1) FROM information_schema.columns c WHERE c.table_name = 'ETS_TRE_BASED" + ProjectId + "' AND c.table_schema  = 'recousr'";
                     if (Common.iDBType == 3)
                     {
                         num3 = int.Parse(((MySqlDBManager)Common.dbMgr).ExecuteScalar(CommandType.Text, str));
                     }
                     if (num3 >= 1)
                     {
-                        str = " DROP TABLE ETS_TRE_BASE2";
+                        str = " DROP TABLE ETS_TRE_BASED" + ProjectId;
                         ((MySqlDBManager)Common.dbMgr).ExecuteNonQuery(CommandType.Text, str);
                     }
-                    str = " Select count(1) FROM information_schema.columns c WHERE c.table_name = 'ETS_TRE_BASE3' AND c.table_schema  = 'recousr'";
+                    str = " Select count(1) FROM information_schema.columns c WHERE c.table_name = 'ETS_TRE_BASEP" + ProjectId + "' AND c.table_schema  = 'recousr'";
                     if (Common.iDBType == 3)
                     {
                         num3 = int.Parse(((MySqlDBManager)Common.dbMgr).ExecuteScalar(CommandType.Text, str));
                     }
                     if (num3 >= 1)
                     {
-                        str = " DROP TABLE ETS_TRE_BASE3";
+                        str = " DROP TABLE ETS_TRE_BASEP" + ProjectId;
                         ((MySqlDBManager)Common.dbMgr).ExecuteNonQuery(CommandType.Text, str);
                     }
-                    str = " Select count(1) FROM information_schema.columns c WHERE c.table_name = 'ETS_TRE_X_SELL_PTNL' AND c.table_schema  = 'recousr'";
+                    str = " Select count(1) FROM information_schema.columns c WHERE c.table_name = 'ETS_TRE_X_SELL_PTNL" + ProjectId + "' AND c.table_schema  = 'recousr'";
                     if (Common.iDBType == 3)
                     {
                         num3 = int.Parse(((MySqlDBManager)Common.dbMgr).ExecuteScalar(CommandType.Text, str));
                     }
                     if (num3 >= 1)
                     {
-                        str = " DROP TABLE ETS_TRE_X_SELL_PTNL";
+                        str = " DROP TABLE ETS_TRE_X_SELL_PTNL" + ProjectId;
                         ((MySqlDBManager)Common.dbMgr).ExecuteNonQuery(CommandType.Text, str);
                     }
                     str = " Select count(1) FROM information_schema.columns c WHERE c.table_name = 'TRE_OPPORTUNITY' AND c.table_schema  = 'recousr'";
@@ -1198,27 +1198,27 @@ namespace RecoEngine_BI
                         str = " DROP TABLE TRE_OPPORTUNITY";
                         ((MySqlDBManager)Common.dbMgr).ExecuteNonQuery(CommandType.Text, str);
                     }
-                    str = " SELECT count(1) FROM information_schema.columns c WHERE c.table_name = 'ETS_ADM_WEEKLY_A' AND c.table_schema  = 'recousr' ";
+                    str = " SELECT count(1) FROM information_schema.columns c WHERE c.table_name = 'ETS_ADM_WEEKLY_A" + ProjectId + "' AND c.table_schema  = 'recousr' ";
                     if (Common.iDBType == 3)
                     {
                         num = int.Parse(((MySqlDBManager)Common.dbMgr).ExecuteScalar(CommandType.Text, str));
                     }
-                    str = " SELECT count(1) FROM information_schema.columns c WHERE c.table_name = 'ETS_TRE_X_SELL_PNTL' AND c.table_schema  = 'recousr' ";
+                    str = " SELECT count(1) FROM information_schema.columns c WHERE c.table_name = 'ETS_TRE_X_SELL_PNTL" + ProjectId + "' AND c.table_schema  = 'recousr' ";
                     if (Common.iDBType == 3)
                     {
                         num1 = int.Parse(((MySqlDBManager)Common.dbMgr).ExecuteScalar(CommandType.Text, str));
                     }
-                    str = " SELECT count(1) FROM information_schema.columns c WHERE c.table_name = 'ETS_TRE_BASE' AND c.table_schema  = 'recousr' ";
+                    str = " SELECT count(1) FROM information_schema.columns c WHERE c.table_name = 'ETS_TRE_BASE" + ProjectId + "' AND c.table_schema  = 'recousr' ";
                     if (Common.iDBType == 3)
                     {
                         num2 = int.Parse(((MySqlDBManager)Common.dbMgr).ExecuteScalar(CommandType.Text, str));
                     }
-                    str = " SELECT count(1) FROM information_schema.columns c WHERE c.table_name = 'ETS_TRE_BASE2' AND c.table_schema  = 'recousr' ";
+                    str = " SELECT count(1) FROM information_schema.columns c WHERE c.table_name = 'ETS_TRE_BASED" + ProjectId + "' AND c.table_schema  = 'recousr' ";
                     if (Common.iDBType == 3)
                     {
                         int.Parse(((MySqlDBManager)Common.dbMgr).ExecuteScalar(CommandType.Text, str));
                     }
-                    str = " SELECT count(1) FROM information_schema.columns c WHERE c.table_name = 'ETS_TRE_BASE3' AND c.table_schema  = 'recousr' ";
+                    str = " SELECT count(1) FROM information_schema.columns c WHERE c.table_name = 'ETS_TRE_BASEP" + ProjectId + "' AND c.table_schema  = 'recousr' ";
                     if (Common.iDBType == 3)
                     {
                         int.Parse(((MySqlDBManager)Common.dbMgr).ExecuteScalar(CommandType.Text, str));
@@ -1252,57 +1252,57 @@ namespace RecoEngine_BI
                                 
                                 if (num3 > 0)
                                 {
-                                    str = string.Concat(" Alter Table ETS_ADM_WEEKLY_A drop column A_", dataRow[0].ToString().ToUpper());
+                                    str = string.Concat(" Alter Table ETS_ADM_WEEKLY_A" + ProjectId + " drop column A_", dataRow[0].ToString().ToUpper());
                                     ((MySqlDBManager)Common.dbMgr).ExecuteNonQuery(CommandType.Text, str);
-                                    str = string.Concat(" Alter Table ETS_ADM_WEEKLY_B drop column B_", dataRow[0].ToString().ToUpper());
+                                    str = string.Concat(" Alter Table ETS_ADM_WEEKLY_B" + ProjectId + " drop column B_", dataRow[0].ToString().ToUpper());
                                     ((MySqlDBManager)Common.dbMgr).ExecuteNonQuery(CommandType.Text, str);
-                                    str = string.Concat(" Alter Table ETS_TRE_BASE drop column A_", dataRow[0].ToString().ToUpper());
+                                    str = string.Concat(" Alter Table ETS_TRE_BASE" + ProjectId + " drop column A_", dataRow[0].ToString().ToUpper());
                                     ((MySqlDBManager)Common.dbMgr).ExecuteNonQuery(CommandType.Text, str);
-                                    str = string.Concat(" Alter Table ETS_TRE_BASE drop column B_", dataRow[0].ToString().ToUpper());
+                                    str = string.Concat(" Alter Table ETS_TRE_BASE" + ProjectId + " drop column B_", dataRow[0].ToString().ToUpper());
                                     ((MySqlDBManager)Common.dbMgr).ExecuteNonQuery(CommandType.Text, str);
-                                    str = string.Concat(" Alter Table ETS_TRE_BASE drop column D_", dataRow[0].ToString().ToUpper());
+                                    str = string.Concat(" Alter Table ETS_TRE_BASE" + ProjectId + " drop column D_", dataRow[0].ToString().ToUpper());
                                     ((MySqlDBManager)Common.dbMgr).ExecuteNonQuery(CommandType.Text, str);
-                                    str = string.Concat(" Alter Table ETS_TRE_BASE drop column X_", dataRow[0].ToString().ToUpper());
+                                    str = string.Concat(" Alter Table ETS_TRE_BASE" + ProjectId + " drop column X_", dataRow[0].ToString().ToUpper());
                                     ((MySqlDBManager)Common.dbMgr).ExecuteNonQuery(CommandType.Text, str);
-                                    str = string.Concat(" Alter Table ETS_TRE_BASE2 drop column A_", dataRow[0].ToString().ToUpper());
+                                    str = string.Concat(" Alter Table ETS_TRE_BASED" + ProjectId + " drop column A_", dataRow[0].ToString().ToUpper());
                                     ((MySqlDBManager)Common.dbMgr).ExecuteNonQuery(CommandType.Text, str);
-                                    str = string.Concat(" Alter Table ETS_TRE_BASE2 drop column B_", dataRow[0].ToString().ToUpper());
+                                    str = string.Concat(" Alter Table ETS_TRE_BASED" + ProjectId + " drop column B_", dataRow[0].ToString().ToUpper());
                                     ((MySqlDBManager)Common.dbMgr).ExecuteNonQuery(CommandType.Text, str);
-                                    str = string.Concat(" Alter Table ETS_TRE_BASE2 drop column D_", dataRow[0].ToString().ToUpper());
+                                    str = string.Concat(" Alter Table ETS_TRE_BASED" + ProjectId + " drop column D_", dataRow[0].ToString().ToUpper());
                                     ((MySqlDBManager)Common.dbMgr).ExecuteNonQuery(CommandType.Text, str);
-                                    str = string.Concat(" Alter Table ETS_TRE_BASE2 drop column X_", dataRow[0].ToString().ToUpper());
+                                    str = string.Concat(" Alter Table ETS_TRE_BASED" + ProjectId + " drop column X_", dataRow[0].ToString().ToUpper());
                                     ((MySqlDBManager)Common.dbMgr).ExecuteNonQuery(CommandType.Text, str);
-                                    str = string.Concat(" Alter Table ETS_TRE_BASE2 drop column S_", dataRow[0].ToString().ToUpper());
+                                    str = string.Concat(" Alter Table ETS_TRE_BASED" + ProjectId + " drop column S_", dataRow[0].ToString().ToUpper());
                                     ((MySqlDBManager)Common.dbMgr).ExecuteNonQuery(CommandType.Text, str);
-                                    str = string.Concat(" Alter Table ETS_TRE_BASE3 drop column A_", dataRow[0].ToString().ToUpper());
+                                    str = string.Concat(" Alter Table ETS_TRE_BASEP" + ProjectId + " drop column A_", dataRow[0].ToString().ToUpper());
                                     ((MySqlDBManager)Common.dbMgr).ExecuteNonQuery(CommandType.Text, str);
-                                    str = string.Concat(" Alter Table ETS_TRE_BASE3 drop column B_", dataRow[0].ToString().ToUpper());
+                                    str = string.Concat(" Alter Table ETS_TRE_BASEP" + ProjectId + " drop column B_", dataRow[0].ToString().ToUpper());
                                     ((MySqlDBManager)Common.dbMgr).ExecuteNonQuery(CommandType.Text, str);
-                                    str = string.Concat(" Alter Table ETS_TRE_BASE3 drop column D_", dataRow[0].ToString().ToUpper());
+                                    str = string.Concat(" Alter Table ETS_TRE_BASEP" + ProjectId + " drop column D_", dataRow[0].ToString().ToUpper());
                                     ((MySqlDBManager)Common.dbMgr).ExecuteNonQuery(CommandType.Text, str);
-                                    str = string.Concat(" Alter Table ETS_TRE_BASE3 drop column X_", dataRow[0].ToString().ToUpper());
+                                    str = string.Concat(" Alter Table ETS_TRE_BASEP" + ProjectId + " drop column X_", dataRow[0].ToString().ToUpper());
                                     ((MySqlDBManager)Common.dbMgr).ExecuteNonQuery(CommandType.Text, str);
-                                    str = string.Concat(" Alter Table ETS_TRE_BASE3 drop column S_", dataRow[0].ToString().ToUpper());
+                                    str = string.Concat(" Alter Table ETS_TRE_BASEP" + ProjectId + " drop column S_", dataRow[0].ToString().ToUpper());
                                     ((MySqlDBManager)Common.dbMgr).ExecuteNonQuery(CommandType.Text, str);
-                                    str = string.Concat(" Alter Table ETS_TRE_BASE3 drop column P_", dataRow[0].ToString().ToUpper());
+                                    str = string.Concat(" Alter Table ETS_TRE_BASEP" + ProjectId + " drop column P_", dataRow[0].ToString().ToUpper());
                                     ((MySqlDBManager)Common.dbMgr).ExecuteNonQuery(CommandType.Text, str);
                                 }
-                                str = string.Concat(" Select count(1) from information_schema.columns c WHERE c.table_name = 'ETS_ADM_WEEKLY_A' and c.column_name = '", dataRow[0].ToString().ToUpper(), "'");
+                                str = string.Concat(" Select count(1) from information_schema.columns c WHERE c.table_name = 'ETS_ADM_WEEKLY_A" + ProjectId + "' and c.column_name = '", dataRow[0].ToString().ToUpper(), "'");
                                 
                                     num3 = int.Parse(((MySqlDBManager)Common.dbMgr).ExecuteScalar(CommandType.Text, str));
                                 
                                 if (num3 > 0)
                                 {
-                                    str = string.Concat(" Alter Table ETS_ADM_WEEKLY_A drop column ", dataRow[0].ToString().ToUpper());
+                                    str = string.Concat(" Alter Table ETS_ADM_WEEKLY_A" + ProjectId + " drop column ", dataRow[0].ToString().ToUpper());
                                     ((MySqlDBManager)Common.dbMgr).ExecuteNonQuery(CommandType.Text, str);
                                 }
-                                str = string.Concat(" Select count(1) from information_schema.columns c WHERE c.table_name = 'ETS_ADM_WEEKLY_B' and c.column_name = '", dataRow[0].ToString().ToUpper(), "'");
+                                str = string.Concat(" Select count(1) from information_schema.columns c WHERE c.table_name = 'ETS_ADM_WEEKLY_B" + ProjectId + "' and c.column_name = '", dataRow[0].ToString().ToUpper(), "'");
                                 
                                     num3 = int.Parse(((MySqlDBManager)Common.dbMgr).ExecuteScalar(CommandType.Text, str));
                                 
                                 if (num3 > 0)
                                 {
-                                    str = string.Concat(" Alter Table ETS_ADM_WEEKLY_B drop column ", dataRow[0].ToString().ToUpper());
+                                    str = string.Concat(" Alter Table ETS_ADM_WEEKLY_B" + ProjectId + " drop column ", dataRow[0].ToString().ToUpper());
                                     ((MySqlDBManager)Common.dbMgr).ExecuteNonQuery(CommandType.Text, str);
                                 }
                                 str = string.Concat(" Select count(1) from information_schema.columns c WHERE c.table_name = 'ETS_TRE_BASE' and c.column_name = '", dataRow[0].ToString().ToUpper(), "'");
@@ -1310,35 +1310,35 @@ namespace RecoEngine_BI
                                 
                                 if (num3 > 0)
                                 {
-                                    str = string.Concat(" Alter Table ETS_TRE_BASE drop column ", dataRow[0].ToString());
+                                    str = string.Concat(" Alter Table ETS_TRE_BASE" + ProjectId + " drop column ", dataRow[0].ToString());
                                     ((MySqlDBManager)Common.dbMgr).ExecuteNonQuery(CommandType.Text, str);
                                 }
-                                str = string.Concat(" Select count(1) from information_schema.columns c WHERE c.table_name = 'ETS_TRE_BASE2' and c.column_name = '", dataRow[0].ToString().ToUpper(), "'");
+                                str = string.Concat(" Select count(1) from information_schema.columns c WHERE c.table_name = 'ETS_TRE_BASED' and c.column_name = '", dataRow[0].ToString().ToUpper(), "'");
                                  num3 = int.Parse(((MySqlDBManager)Common.dbMgr).ExecuteScalar(CommandType.Text, str));
                                 
                                 if (num3 > 0)
                                 {
-                                    str = string.Concat(" Alter Table ETS_TRE_BASE2 drop column ", dataRow[0].ToString());
+                                    str = string.Concat(" Alter Table ETS_TRE_BASED" + ProjectId + " drop column ", dataRow[0].ToString());
                                     ((MySqlDBManager)Common.dbMgr).ExecuteNonQuery(CommandType.Text, str);
                                 }
-                                str = string.Concat(" Select count(1) from information_schema.columns c WHERE c.table_name = 'ETS_TRE_BASE3' and c.column_name = '", dataRow[0].ToString().ToUpper(), "'");
+                                str = string.Concat(" Select count(1) from information_schema.columns c WHERE c.table_name = 'ETS_TRE_BASEP' and c.column_name = '", dataRow[0].ToString().ToUpper(), "'");
                                
                                     num3 = int.Parse(((MySqlDBManager)Common.dbMgr).ExecuteScalar(CommandType.Text, str));
                                 
                                 if (num3 > 0)
                                 {
-                                    str = string.Concat(" Alter Table ETS_TRE_BASE3 drop column ", dataRow[0].ToString());
+                                    str = string.Concat(" Alter Table ETS_TRE_BASEP" + ProjectId + " drop column ", dataRow[0].ToString());
                                     ((MySqlDBManager)Common.dbMgr).ExecuteNonQuery(CommandType.Text, str);
                                 }
                             }
                             if (num1 > 0)
                             {
-                                str = string.Concat(" Select count(1) from information_schema.columns c WHERE c.table_name = 'ETS_TRE_X_SELL_PNTL' and c.column_name = 'X_", dataRow[0].ToString().ToUpper(), "'");
+                                str = string.Concat(" Select count(1) from information_schema.columns c WHERE c.table_name = 'ETS_TRE_X_SELL_PNTL" + ProjectId + "' and c.column_name = 'X_", dataRow[0].ToString().ToUpper(), "'");
                                  num3 = int.Parse(((MySqlDBManager)Common.dbMgr).ExecuteScalar(CommandType.Text, str));
                                 
                                 if (num3 > 0)
                                 {
-                                    str = string.Concat(" Alter Table ETS_TRE_X_SELL_PNTL drop column X_", dataRow[0].ToString());
+                                    str = string.Concat(" Alter Table ETS_TRE_X_SELL_PNTL" + ProjectId + " drop column X_", dataRow[0].ToString());
                                     ((MySqlDBManager)Common.dbMgr).ExecuteNonQuery(CommandType.Text, str);
                                 }
                             }
@@ -1410,39 +1410,39 @@ namespace RecoEngine_BI
                                     {
                                         if (num != 0)
                                         {
-                                            str = string.Concat(" Alter Table ETS_ADM_WEEKLY_A add A_", dataRow[0].ToString(), str17);
+                                            str = string.Concat(" Alter Table ETS_ADM_WEEKLY_A" + ProjectId + " add A_", dataRow[0].ToString(), str17);
                                             ((MySqlDBManager)Common.dbMgr).ExecuteNonQuery(CommandType.Text, str);
-                                            str = string.Concat(" Alter Table ETS_ADM_WEEKLY_B add B_", dataRow[0].ToString(), str17);
+                                            str = string.Concat(" Alter Table ETS_ADM_WEEKLY_B" + ProjectId + " add B_", dataRow[0].ToString(), str17);
                                             ((MySqlDBManager)Common.dbMgr).ExecuteNonQuery(CommandType.Text, str);
-                                            str = string.Concat(" Alter Table ETS_TRE_BASE add A_", dataRow[0].ToString(), str17);
+                                            str = string.Concat(" Alter Table ETS_TRE_BASE" + ProjectId + " add A_", dataRow[0].ToString(), str17);
                                             ((MySqlDBManager)Common.dbMgr).ExecuteNonQuery(CommandType.Text, str);
-                                            str = string.Concat(" Alter Table ETS_TRE_BASE add B_", dataRow[0].ToString(), str17);
+                                            str = string.Concat(" Alter Table ETS_TRE_BASE" + ProjectId + " add B_", dataRow[0].ToString(), str17);
                                             ((MySqlDBManager)Common.dbMgr).ExecuteNonQuery(CommandType.Text, str);
-                                            str = string.Concat(" Alter Table ETS_TRE_BASE add X_", dataRow[0].ToString(), str17);
+                                            str = string.Concat(" Alter Table ETS_TRE_BASE" + ProjectId + " add X_", dataRow[0].ToString(), str17);
                                             ((MySqlDBManager)Common.dbMgr).ExecuteNonQuery(CommandType.Text, str);
-                                            str = string.Concat(" Alter Table ETS_TRE_BASE add D_", dataRow[0].ToString(), str17);
+                                            str = string.Concat(" Alter Table ETS_TRE_BASE" + ProjectId + " add D_", dataRow[0].ToString(), str17);
                                             ((MySqlDBManager)Common.dbMgr).ExecuteNonQuery(CommandType.Text, str);
-                                            str = string.Concat(" Alter Table ETS_TRE_BASE2 add A_", dataRow[0].ToString(), str17);
+                                            str = string.Concat(" Alter Table ETS_TRE_BASED" + ProjectId + " add A_", dataRow[0].ToString(), str17);
                                             ((MySqlDBManager)Common.dbMgr).ExecuteNonQuery(CommandType.Text, str);
-                                            str = string.Concat(" Alter Table ETS_TRE_BASE2 add B_", dataRow[0].ToString(), str17);
+                                            str = string.Concat(" Alter Table ETS_TRE_BASED" + ProjectId + " add B_", dataRow[0].ToString(), str17);
                                             ((MySqlDBManager)Common.dbMgr).ExecuteNonQuery(CommandType.Text, str);
-                                            str = string.Concat(" Alter Table ETS_TRE_BASE2 add X_", dataRow[0].ToString(), str17);
+                                            str = string.Concat(" Alter Table ETS_TRE_BASED" + ProjectId + "  add X_", dataRow[0].ToString(), str17);
                                             ((MySqlDBManager)Common.dbMgr).ExecuteNonQuery(CommandType.Text, str);
-                                            str = string.Concat(" Alter Table ETS_TRE_BASE2 add D_", dataRow[0].ToString(), str17);
+                                            str = string.Concat(" Alter Table ETS_TRE_BASED" + ProjectId + "  add D_", dataRow[0].ToString(), str17);
                                             ((MySqlDBManager)Common.dbMgr).ExecuteNonQuery(CommandType.Text, str);
-                                            str = string.Concat(" Alter Table ETS_TRE_BASE2 add S_", dataRow[0].ToString(), " varchar(200) ");
+                                            str = string.Concat(" Alter Table ETS_TRE_BASED" + ProjectId + "  add S_", dataRow[0].ToString(), " varchar(200) ");
                                             ((MySqlDBManager)Common.dbMgr).ExecuteNonQuery(CommandType.Text, str);
-                                            str = string.Concat(" Alter Table ETS_TRE_BASE3 add A_", dataRow[0].ToString(), str17);
+                                            str = string.Concat(" Alter Table ETS_TRE_BASEP" + ProjectId + " add A_", dataRow[0].ToString(), str17);
                                             ((MySqlDBManager)Common.dbMgr).ExecuteNonQuery(CommandType.Text, str);
-                                            str = string.Concat(" Alter Table ETS_TRE_BASE3 add B_", dataRow[0].ToString(), str17);
+                                            str = string.Concat(" Alter Table ETS_TRE_BASEP" + ProjectId + "  add B_", dataRow[0].ToString(), str17);
                                             ((MySqlDBManager)Common.dbMgr).ExecuteNonQuery(CommandType.Text, str);
-                                            str = string.Concat(" Alter Table ETS_TRE_BASE3 add X_", dataRow[0].ToString(), str17);
+                                            str = string.Concat(" Alter Table ETS_TRE_BASEP" + ProjectId + " add X_", dataRow[0].ToString(), str17);
                                             ((MySqlDBManager)Common.dbMgr).ExecuteNonQuery(CommandType.Text, str);
-                                            str = string.Concat(" Alter Table ETS_TRE_BASE3 add D_", dataRow[0].ToString(), str17);
+                                            str = string.Concat(" Alter Table ETS_TRE_BASEP" + ProjectId + "  add D_", dataRow[0].ToString(), str17);
                                             ((MySqlDBManager)Common.dbMgr).ExecuteNonQuery(CommandType.Text, str);
-                                            str = string.Concat(" Alter Table ETS_TRE_BASE3 add S_", dataRow[0].ToString(), " varchar(200) ");
+                                            str = string.Concat(" Alter Table ETS_TRE_BASEP" + ProjectId + "  add S_", dataRow[0].ToString(), " varchar(200) ");
                                             ((MySqlDBManager)Common.dbMgr).ExecuteNonQuery(CommandType.Text, str);
-                                            str = string.Concat(" Alter Table ETS_TRE_BASE3 add P_", dataRow[0].ToString(), str17);
+                                            str = string.Concat(" Alter Table ETS_TRE_BASEP" + ProjectId + "  add P_", dataRow[0].ToString(), str17);
                                             ((MySqlDBManager)Common.dbMgr).ExecuteNonQuery(CommandType.Text, str);
                                         }
                                         else
@@ -1481,7 +1481,7 @@ namespace RecoEngine_BI
                                         }
                                     }
                                 }
-                                str = string.Concat(" Select count(1) from information_schema.columns c WHERE c.table_name = 'ETS_TRE_X_SELL_PNTL' and c.column_name = 'X_", dataRow[0].ToString().ToUpper(), "'");
+                                str = string.Concat(" Select count(1) from information_schema.columns c WHERE c.table_name = 'ETS_TRE_X_SELL_PNTL" + ProjectId + "' and c.column_name = 'X_", dataRow[0].ToString().ToUpper(), "'");
                                 
                                     num3 = int.Parse(((MySqlDBManager)Common.dbMgr).ExecuteScalar(CommandType.Text, str));
                                 
@@ -1489,7 +1489,7 @@ namespace RecoEngine_BI
                                 {
                                     if (num1 != 0)
                                     {
-                                        str = string.Concat(" Alter Table ETS_TRE_X_SELL_PNTL add X_", dataRow[0].ToString().ToUpper(), str17);
+                                        str = string.Concat(" Alter Table ETS_TRE_X_SELL_PNTL" + ProjectId + " add X_", dataRow[0].ToString().ToUpper(), str17);
                                         ((MySqlDBManager)Common.dbMgr).ExecuteNonQuery(CommandType.Text, str);
                                     }
                                     else
@@ -1508,7 +1508,7 @@ namespace RecoEngine_BI
                             }
                             else if (dataRow["type"].ToString() == 4.ToString())
                             {
-                                str = string.Concat(" Select count(1) from information_schema.columns c WHERE c.table_name = 'ETS_ADM_WEEKLY_A' and c.column_name = '", dataRow[0].ToString().ToUpper(), "'");
+                                str = string.Concat(" Select count(1) from information_schema.columns c WHERE c.table_name = 'ETS_ADM_WEEKLY_A" + ProjectId + "' and c.column_name = '", dataRow[0].ToString().ToUpper(), "'");
                               
                                     num3 = int.Parse(((MySqlDBManager)Common.dbMgr).ExecuteScalar(CommandType.Text, str));
                                 
@@ -1516,13 +1516,13 @@ namespace RecoEngine_BI
                                 {
                                     if (num != 0)
                                     {
-                                        str = string.Concat(" Alter Table ETS_ADM_WEEKLY_A add ", dataRow[0].ToString().ToUpper(), str17);
+                                        str = string.Concat(" Alter Table ETS_ADM_WEEKLY_A" + ProjectId + " add ", dataRow[0].ToString().ToUpper(), str17);
                                         ((MySqlDBManager)Common.dbMgr).ExecuteNonQuery(CommandType.Text, str);
-                                        str = string.Concat(" Alter Table ETS_TRE_BASE add ", dataRow[0].ToString().ToUpper(), str17);
+                                        str = string.Concat(" Alter Table ETS_TRE_BASE" + ProjectId + " add ", dataRow[0].ToString().ToUpper(), str17);
                                         ((MySqlDBManager)Common.dbMgr).ExecuteNonQuery(CommandType.Text, str);
-                                        str = string.Concat(" Alter Table ETS_TRE_BASE2 add ", dataRow[0].ToString().ToUpper(), str17);
+                                        str = string.Concat(" Alter Table ETS_TRE_BASED" + ProjectId + " add ", dataRow[0].ToString().ToUpper(), str17);
                                         ((MySqlDBManager)Common.dbMgr).ExecuteNonQuery(CommandType.Text, str);
-                                        str = string.Concat(" Alter Table ETS_TRE_BASE3 add ", dataRow[0].ToString().ToUpper(), str17);
+                                        str = string.Concat(" Alter Table ETS_TRE_BASEP" + ProjectId + " add ", dataRow[0].ToString().ToUpper(), str17);
                                         ((MySqlDBManager)Common.dbMgr).ExecuteNonQuery(CommandType.Text, str);
                                     }
                                     else
@@ -1537,7 +1537,7 @@ namespace RecoEngine_BI
                             }
                             else if (dataRow["type"].ToString() == 1.ToString())
                             {
-                                str = string.Concat(" Select count(1) from information_schema.columns c WHERE c.table_name = 'ETS_ADM_WEEKLY_A' and c.column_name = '", dataRow[0].ToString().ToUpper(), "'");
+                                str = string.Concat(" Select count(1) from information_schema.columns c WHERE c.table_name = 'ETS_ADM_WEEKLY_A" + ProjectId + "' and c.column_name = '", dataRow[0].ToString().ToUpper(), "'");
                                
                                     num3 = int.Parse(((MySqlDBManager)Common.dbMgr).ExecuteScalar(CommandType.Text, str));
                                 
@@ -1545,9 +1545,9 @@ namespace RecoEngine_BI
                                 {
                                     if (num != 0)
                                     {
-                                        str = string.Concat(" Alter Table ETS_ADM_WEEKLY_A add ", dataRow[0].ToString().ToUpper(), str17);
+                                        str = string.Concat(" Alter Table ETS_ADM_WEEKLY_A" + ProjectId + "add ", dataRow[0].ToString().ToUpper(), str17);
                                         ((MySqlDBManager)Common.dbMgr).ExecuteNonQuery(CommandType.Text, str);
-                                        str = string.Concat(" Alter Table ETS_ADM_WEEKLY_B add ", dataRow[0].ToString().ToUpper(), str17);
+                                        str = string.Concat(" Alter Table ETS_ADM_WEEKLY_B" + ProjectId + " add ", dataRow[0].ToString().ToUpper(), str17);
                                         ((MySqlDBManager)Common.dbMgr).ExecuteNonQuery(CommandType.Text, str);
                                     }
                                     else
@@ -1574,82 +1574,82 @@ namespace RecoEngine_BI
                         }
                         if (num3 > 0)
                         {
-                            str = string.Concat(" Alter Table ETS_ADM_WEEKLY_A drop column ", dataRow1[0].ToString().ToUpper());
+                            str = string.Concat(" Alter Table ETS_ADM_WEEKLY_A" + ProjectId + " drop column ", dataRow1[0].ToString().ToUpper());
                             ((MySqlDBManager)Common.dbMgr).ExecuteNonQuery(CommandType.Text, str);
                         }
-                        str = string.Concat(" Select count(1) from information_schema.columns c WHERE c.table_name = 'ETS_TRE_BASE' and c.column_name = '", dataRow1[0].ToString().ToUpper(), "'");
+                        str = string.Concat(" Select count(1) from information_schema.columns c WHERE c.table_name = 'ETS_TRE_BASE" + ProjectId + "' and c.column_name = '", dataRow1[0].ToString().ToUpper(), "'");
                         if (Common.iDBType == 3)
                         {
                             num3 = int.Parse(((MySqlDBManager)Common.dbMgr).ExecuteScalar(CommandType.Text, str));
                         }
                         if (num3 > 0)
                         {
-                            str = string.Concat(" Alter Table ETS_TRE_BASE drop column ", dataRow1[0].ToString().ToUpper());
+                            str = string.Concat(" Alter Table ETS_TRE_BASE" + ProjectId + " drop column ", dataRow1[0].ToString().ToUpper());
                             ((MySqlDBManager)Common.dbMgr).ExecuteNonQuery(CommandType.Text, str);
                         }
-                        str = string.Concat(" Select count(1) from information_schema.columns c WHERE c.table_name = 'ETS_TRE_BASE2' and c.column_name = '", dataRow1[0].ToString().ToUpper(), "'");
+                        str = string.Concat(" Select count(1) from information_schema.columns c WHERE c.table_name = 'ETS_TRE_BASED" + ProjectId + "' and c.column_name = '", dataRow1[0].ToString().ToUpper(), "'");
                         if (Common.iDBType == 3)
                         {
                             num3 = int.Parse(((MySqlDBManager)Common.dbMgr).ExecuteScalar(CommandType.Text, str));
                         }
                         if (num3 > 0)
                         {
-                            str = string.Concat(" Alter Table ETS_TRE_BASE2 drop column ", dataRow1[0].ToString().ToUpper());
+                            str = string.Concat(" Alter Table ETS_TRE_BASED drop column ", dataRow1[0].ToString().ToUpper());
                             ((MySqlDBManager)Common.dbMgr).ExecuteNonQuery(CommandType.Text, str);
                         }
-                        str = string.Concat(" Select count(1) from information_schema.columns c WHERE c.table_name = 'ETS_TRE_BASE3' and c.column_name = '", dataRow1[0].ToString().ToUpper(), "'");
+                        str = string.Concat(" Select count(1) from information_schema.columns c WHERE c.table_name = 'ETS_TRE_BASEP"+ ProjectId + "' and c.column_name = '", dataRow1[0].ToString().ToUpper(), "'");
                         if (Common.iDBType == 3)
                         {
                             num3 = int.Parse(((MySqlDBManager)Common.dbMgr).ExecuteScalar(CommandType.Text, str));
                         }
                         if (num3 > 0)
                         {
-                            str = string.Concat(" Alter Table ETS_TRE_BASE3 drop column ", dataRow1[0].ToString().ToUpper());
+                            str = string.Concat(" Alter Table ETS_TRE_BASEP" + ProjectId + " drop column ", dataRow1[0].ToString().ToUpper());
                             ((MySqlDBManager)Common.dbMgr).ExecuteNonQuery(CommandType.Text, str);
                         }
-                        str = string.Concat(" Select count(1) from information_schema.columns C where table_name = 'ETS_ADM_WEEKLY_A' and c.column_name = 'A_", dataRow1[0].ToString().ToUpper(), "'");
+                        str = string.Concat(" Select count(1) from information_schema.columns C where table_name = 'ETS_ADM_WEEKLY_A" + ProjectId + "' and c.column_name = 'A_", dataRow1[0].ToString().ToUpper(), "'");
                         if (Common.iDBType == 3)
                         {
                             num3 = int.Parse(((MySqlDBManager)Common.dbMgr).ExecuteScalar(CommandType.Text, str));
                         }
                         if (num3 > 0)
                         {
-                            str = string.Concat(" Alter Table ETS_ADM_WEEKLY_A drop column A_", dataRow1[0].ToString().ToUpper());
+                            str = string.Concat(" Alter Table ETS_ADM_WEEKLY_A" + ProjectId + "drop column A_", dataRow1[0].ToString().ToUpper());
                             ((MySqlDBManager)Common.dbMgr).ExecuteNonQuery(CommandType.Text, str);
-                            str = string.Concat(" Alter Table ETS_ADM_WEEKLY_B drop column B_", dataRow1[0].ToString().ToUpper());
+                            str = string.Concat(" Alter Table ETS_ADM_WEEKLY_B" + ProjectId + "drop column B_", dataRow1[0].ToString().ToUpper());
                             ((MySqlDBManager)Common.dbMgr).ExecuteNonQuery(CommandType.Text, str);
-                            str = string.Concat(" Alter Table ETS_TRE_BASE drop column A_", dataRow1[0].ToString().ToUpper());
+                            str = string.Concat(" Alter Table ETS_TRE_BASE" + ProjectId + "drop column A_", dataRow1[0].ToString().ToUpper());
                             ((MySqlDBManager)Common.dbMgr).ExecuteNonQuery(CommandType.Text, str);
-                            str = string.Concat(" Alter Table ETS_TRE_BASE drop column B_", dataRow1[0].ToString().ToUpper());
+                            str = string.Concat(" Alter Table ETS_TRE_BASE" + ProjectId + "drop column B_", dataRow1[0].ToString().ToUpper());
                             ((MySqlDBManager)Common.dbMgr).ExecuteNonQuery(CommandType.Text, str);
-                            str = string.Concat(" Alter Table ETS_TRE_BASE drop column D_", dataRow1[0].ToString().ToUpper());
+                            str = string.Concat(" Alter Table ETS_TRE_BASE" + ProjectId + " drop column D_", dataRow1[0].ToString().ToUpper());
                             ((MySqlDBManager)Common.dbMgr).ExecuteNonQuery(CommandType.Text, str);
-                            str = string.Concat(" Alter Table ETS_TRE_BASE drop column X_", dataRow1[0].ToString().ToUpper());
+                            str = string.Concat(" Alter Table ETS_TRE_BASE" + ProjectId + " drop column X_", dataRow1[0].ToString().ToUpper());
                             ((MySqlDBManager)Common.dbMgr).ExecuteNonQuery(CommandType.Text, str);
-                            str = string.Concat(" Alter Table ETS_TRE_BASE2 drop column A_", dataRow1[0].ToString().ToUpper());
+                            str = string.Concat(" Alter Table ETS_TRE_BASED" + ProjectId + " drop column A_", dataRow1[0].ToString().ToUpper());
                             ((MySqlDBManager)Common.dbMgr).ExecuteNonQuery(CommandType.Text, str);
-                            str = string.Concat(" Alter Table ETS_TRE_BASE2 drop column B_", dataRow1[0].ToString().ToUpper());
+                            str = string.Concat(" Alter Table ETS_TRE_BASED" + ProjectId + " drop column B_", dataRow1[0].ToString().ToUpper());
                             ((MySqlDBManager)Common.dbMgr).ExecuteNonQuery(CommandType.Text, str);
-                            str = string.Concat(" Alter Table ETS_TRE_BASE2 drop column D_", dataRow1[0].ToString().ToUpper());
+                            str = string.Concat(" Alter Table ETS_TRE_BASED" + ProjectId + " drop column D_", dataRow1[0].ToString().ToUpper());
                             ((MySqlDBManager)Common.dbMgr).ExecuteNonQuery(CommandType.Text, str);
-                            str = string.Concat(" Alter Table ETS_TRE_BASE2 drop column X_", dataRow1[0].ToString().ToUpper());
+                            str = string.Concat(" Alter Table ETS_TRE_BASED" + ProjectId + " drop column X_", dataRow1[0].ToString().ToUpper());
                             ((MySqlDBManager)Common.dbMgr).ExecuteNonQuery(CommandType.Text, str);
-                            str = string.Concat(" Alter Table ETS_TRE_BASE2 drop column S_", dataRow1[0].ToString().ToUpper());
+                            str = string.Concat(" Alter Table ETS_TRE_BASED" + ProjectId + " drop column S_", dataRow1[0].ToString().ToUpper());
                             ((MySqlDBManager)Common.dbMgr).ExecuteNonQuery(CommandType.Text, str);
-                            str = string.Concat(" Alter Table ETS_TRE_BASE3 drop column A_", dataRow1[0].ToString().ToUpper());
+                            str = string.Concat(" Alter Table ETS_TRE_BASEP" + ProjectId + " drop column A_", dataRow1[0].ToString().ToUpper());
                             ((MySqlDBManager)Common.dbMgr).ExecuteNonQuery(CommandType.Text, str);
-                            str = string.Concat(" Alter Table ETS_TRE_BASE3 drop column B_", dataRow1[0].ToString().ToUpper());
+                            str = string.Concat(" Alter Table ETS_TRE_BASEP" + ProjectId + " drop column B_", dataRow1[0].ToString().ToUpper());
                             ((MySqlDBManager)Common.dbMgr).ExecuteNonQuery(CommandType.Text, str);
-                            str = string.Concat(" Alter Table ETS_TRE_BASE3 drop column D_", dataRow1[0].ToString().ToUpper());
+                            str = string.Concat(" Alter Table ETS_TRE_BASEP" + ProjectId + " drop column D_", dataRow1[0].ToString().ToUpper());
                             ((MySqlDBManager)Common.dbMgr).ExecuteNonQuery(CommandType.Text, str);
-                            str = string.Concat(" Alter Table ETS_TRE_BASE3 drop column X_", dataRow1[0].ToString().ToUpper());
+                            str = string.Concat(" Alter Table ETS_TRE_BASEP" + ProjectId + "drop column X_", dataRow1[0].ToString().ToUpper());
                             ((MySqlDBManager)Common.dbMgr).ExecuteNonQuery(CommandType.Text, str);
-                            str = string.Concat(" Alter Table ETS_TRE_BASE3 drop column S_", dataRow1[0].ToString().ToUpper());
+                            str = string.Concat(" Alter Table ETS_TRE_BASEP" + ProjectId + " drop column S_", dataRow1[0].ToString().ToUpper());
                             ((MySqlDBManager)Common.dbMgr).ExecuteNonQuery(CommandType.Text, str);
-                            str = string.Concat(" Alter Table ETS_TRE_BASE3 drop column P_", dataRow1[0].ToString().ToUpper());
+                            str = string.Concat(" Alter Table ETS_TRE_BASEP" + ProjectId + " drop column P_", dataRow1[0].ToString().ToUpper());
                             ((MySqlDBManager)Common.dbMgr).ExecuteNonQuery(CommandType.Text, str);
                         }
-                        str = string.Concat(" Select count(1) from information_schema.columns c WHERE c.table_name = 'ETS_TRE_BASE2' and c.column_name = 'X_", dataRow1[0].ToString().ToUpper(), "'");
+                        str = string.Concat(" Select count(1) from information_schema.columns c WHERE c.table_name = 'ETS_TRE_BASED" + ProjectId + "' and c.column_name = 'X_", dataRow1[0].ToString().ToUpper(), "'");
                         if (Common.iDBType == 3)
                         {
                             num3 = int.Parse(((MySqlDBManager)Common.dbMgr).ExecuteScalar(CommandType.Text, str));
@@ -1658,11 +1658,11 @@ namespace RecoEngine_BI
                         {
                             continue;
                         }
-                        str = string.Concat(" Alter Table ETS_TRE_BASE2 drop column D_", dataRow1[0].ToString().ToUpper());
+                        str = string.Concat(" Alter Table ETS_TRE_BASED" + ProjectId + " drop column D_", dataRow1[0].ToString().ToUpper());
                         ((MySqlDBManager)Common.dbMgr).ExecuteNonQuery(CommandType.Text, str);
-                        str = string.Concat(" Alter Table ETS_TRE_BASE2 drop column X_", dataRow1[0].ToString().ToUpper());
+                        str = string.Concat(" Alter Table ETS_TRE_BASED" + ProjectId + " drop column X_", dataRow1[0].ToString().ToUpper());
                         ((MySqlDBManager)Common.dbMgr).ExecuteNonQuery(CommandType.Text, str);
-                        str = string.Concat(" Alter Table ETS_TRE_BASE2 drop column S_", dataRow1[0].ToString().ToUpper());
+                        str = string.Concat(" Alter Table ETS_TRE_BASED" + ProjectId + " drop column S_", dataRow1[0].ToString().ToUpper());
                         ((MySqlDBManager)Common.dbMgr).ExecuteNonQuery(CommandType.Text, str);
                     }
                     str15 = str15.Substring(0, str15.Length - 1);
@@ -1675,11 +1675,11 @@ namespace RecoEngine_BI
                         str = " DROP TABLE TRE_RANDOM"+ProjectId ;
                         ((MySqlDBManager)Common.dbMgr).ExecuteNonQuery(CommandType.Text, str);
                     }
-                    str = "Select count(1) from information_schema.columns c WHERE c.table_name = 'ETS_ADM_WEEKLY_A'";
+                    str = "Select count(1) from information_schema.columns c WHERE c.table_name = 'ETS_ADM_WEEKLY_A" + ProjectId + "'";
                    
                         num3 = int.Parse(((MySqlDBManager)Common.dbMgr).ExecuteScalar(CommandType.Text, str));
                     
-                    str = " Select count(1) from ETS_ADM_WEEKLY_A";
+                    str = " Select count(1) from ETS_ADM_WEEKLY_A" + ProjectId + "";
                     if (num3 > 0)
                     {
                         num3 = int.Parse(((MySqlDBManager)Common.dbMgr).ExecuteScalar(CommandType.Text, str));
@@ -1730,8 +1730,8 @@ namespace RecoEngine_BI
                         }
                         str2 = string.Concat(str2, ",", str6, ") ");
                         
-                            ((MySqlDBManager)Common.dbMgr).ExecuteScalar(CommandType.Text, str1 + ";" + "ALTER TABLE `recousr`.`ets_adm_weekly_a` ADD INDEX `customer` (`CUSTOMER` ASC); ");
-                        ((MySqlDBManager)Common.dbMgr).ExecuteScalar(CommandType.Text, str2 + ";" + "ALTER TABLE `recousr`.`ets_adm_weekly_b` ADD INDEX `customer` (`CUSTOMER` ASC); ");
+                            ((MySqlDBManager)Common.dbMgr).ExecuteScalar(CommandType.Text, str1 + ";" + "ALTER TABLE `recousr`.`ets_adm_weekly_a" + ProjectId + "` ADD INDEX `customer` (`CUSTOMER` ASC); ");
+                        ((MySqlDBManager)Common.dbMgr).ExecuteScalar(CommandType.Text, str2 + ";" + "ALTER TABLE `recousr`.`ets_adm_weekly_b" + ProjectId + "` ADD INDEX `customer` (`CUSTOMER` ASC); ");
 
                     }
                     string str21 = "";
@@ -1757,9 +1757,9 @@ namespace RecoEngine_BI
                         str = "CREATE TABLE TRE_OPPORTUNITY ( CUSTOMER varchar(50) ,";
                         str = string.Concat(str, "WEEK int   )  ");
                      
-                            ((MySqlDBManager)Common.dbMgr).ExecuteNonQuery(CommandType.Text, str9+";"+ "ALTER TABLE `recousr`.`ets_tre_base` ADD INDEX `customer` (`CUSTOMER` ASC, `DECILE` ASC); ");
-                            ((MySqlDBManager)Common.dbMgr).ExecuteNonQuery(CommandType.Text, str10 + ";" + "ALTER TABLE `recousr`.`ets_tre_base2` ADD INDEX `customer` (`CUSTOMER` ASC, `DECILE` ASC);");
-                            ((MySqlDBManager)Common.dbMgr).ExecuteNonQuery(CommandType.Text, str11+";" + "ALTER TABLE `recousr`.`ets_tre_base3` ADD INDEX `customer` (`CUSTOMER` ASC, `DECILE` ASC);");
+                            ((MySqlDBManager)Common.dbMgr).ExecuteNonQuery(CommandType.Text, str9+";"+ "ALTER TABLE `recousr`.`ets_tre_base" + ProjectId + "` ADD INDEX `customer` (`CUSTOMER` ASC, `DECILE` ASC); ");
+                            ((MySqlDBManager)Common.dbMgr).ExecuteNonQuery(CommandType.Text, str10 + ";" + "ALTER TABLE `recousr`.`ETS_TRE_BASED" + ProjectId + "` ADD INDEX `customer` (`CUSTOMER` ASC, `DECILE` ASC);");
+                            ((MySqlDBManager)Common.dbMgr).ExecuteNonQuery(CommandType.Text, str11+";" + "ALTER TABLE `recousr`.`ETS_TRE_BASEP" + ProjectId + "` ADD INDEX `customer` (`CUSTOMER` ASC, `DECILE` ASC);");
                         ((MySqlDBManager)Common.dbMgr).ExecuteNonQuery(CommandType.Text, str + ";" + "ALTER TABLE `recousr`.`TRE_OPPORTUNITY` ADD INDEX `customer` (`CUSTOMER` ASC);");
 
                     }
@@ -1767,7 +1767,7 @@ namespace RecoEngine_BI
                     {
                         if (str7 != "")
                         {
-                            str7 = string.Concat("CREATE TABLE ETS_TRE_X_SELL_PNTL(TIMEPERIOD varchar(50),SEGMENTCOLNAME varchar(50),CURRENTSEGMENT VARCHAR(50), ", str7, ",Index(CURRENTSEGMENT)) ");
+                            str7 = string.Concat("CREATE TABLE ETS_TRE_X_SELL_PNTL" + ProjectId + "(TIMEPERIOD varchar(50),SEGMENTCOLNAME varchar(50),CURRENTSEGMENT VARCHAR(50), ", str7, ",Index(CURRENTSEGMENT)) ");
                         }
                         if (Common.iDBType == 3)
                         {

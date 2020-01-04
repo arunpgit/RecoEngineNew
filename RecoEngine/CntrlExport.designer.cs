@@ -22,10 +22,12 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(CntrlExport));
+            System.Windows.Forms.Button btnRankingsExport;
             this.gbMain = new Telerik.WinControls.UI.RadGroupBox();
             this.panel1 = new System.Windows.Forms.Panel();
             this.radLabel1 = new Telerik.WinControls.UI.RadLabel();
             this.radLabel2 = new Telerik.WinControls.UI.RadLabel();
+            this.cntrlchkDropDowntp2 = new RecoEngine.CntrlchkDropDown();
             this.chkddlTP1 = new RecoEngine.CntrlchkDropDown();
             this.radLabel3 = new Telerik.WinControls.UI.RadLabel();
             this.btnRunPrjct = new Telerik.WinControls.UI.RadButton();
@@ -65,7 +67,6 @@
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.rbtnRunProject = new Telerik.WinControls.UI.RadButton();
-            this.rbtnRunRanking = new Telerik.WinControls.UI.RadButton();
             this.gbTop = new Telerik.WinControls.UI.RadGroupBox();
             this.lblCampaign = new System.Windows.Forms.Label();
             this.lblSegment = new System.Windows.Forms.Label();
@@ -80,7 +81,7 @@
             this.label12 = new System.Windows.Forms.Label();
             this.label9 = new System.Windows.Forms.Label();
             this.label13 = new System.Windows.Forms.Label();
-            this.cntrlchkDropDowntp2 = new RecoEngine.CntrlchkDropDown();
+            btnRankingsExport = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.gbMain)).BeginInit();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.radLabel1)).BeginInit();
@@ -90,7 +91,6 @@
             this.pnBottom.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.radLabel6)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.rbtnRunProject)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.rbtnRunRanking)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gbTop)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox4)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
@@ -135,8 +135,10 @@
             // panel1
             // 
             this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panel1.Controls.Add(btnRankingsExport);
             this.panel1.Controls.Add(this.radLabel1);
             this.panel1.Controls.Add(this.radLabel2);
+            this.panel1.Controls.Add(this.cntrlchkDropDowntp2);
             this.panel1.Controls.Add(this.chkddlTP1);
             this.panel1.Controls.Add(this.radLabel3);
             this.panel1.Controls.Add(this.btnRunPrjct);
@@ -176,6 +178,15 @@
             this.radLabel2.TabIndex = 102;
             this.radLabel2.Text = "Time Period2";
             // 
+            // cntrlchkDropDowntp2
+            // 
+            this.cntrlchkDropDowntp2.Location = new System.Drawing.Point(180, 92);
+            this.cntrlchkDropDowntp2.MultipleSelection = false;
+            this.cntrlchkDropDowntp2.Name = "cntrlchkDropDowntp2";
+            this.cntrlchkDropDowntp2.Size = new System.Drawing.Size(207, 22);
+            this.cntrlchkDropDowntp2.TabIndex = 101;
+            this.cntrlchkDropDowntp2.TimePeriodControl = true;
+            // 
             // chkddlTP1
             // 
             this.chkddlTP1.Location = new System.Drawing.Point(180, 54);
@@ -210,7 +221,7 @@
             // 
             this.btnRunPrjct.RootElement.AccessibleDescription = null;
             this.btnRunPrjct.RootElement.AccessibleName = null;
-            this.btnRunPrjct.RootElement.ControlBounds = new System.Drawing.Rectangle(799, 54, 130, 24);
+            this.btnRunPrjct.RootElement.ControlBounds = new System.Drawing.Rectangle(0, 0, 130, 24);
             this.btnRunPrjct.Size = new System.Drawing.Size(97, 32);
             this.btnRunPrjct.TabIndex = 98;
             this.btnRunPrjct.Text = "Run Project";
@@ -220,7 +231,7 @@
             // 
             this.lblProject.AutoSize = true;
             this.lblProject.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Bold);
-            this.lblProject.Location = new System.Drawing.Point(656, 13);
+            this.lblProject.Location = new System.Drawing.Point(652, 13);
             this.lblProject.Name = "lblProject";
             this.lblProject.Size = new System.Drawing.Size(132, 25);
             this.lblProject.TabIndex = 71;
@@ -271,7 +282,6 @@
             this.pnBottom.Controls.Add(this.label2);
             this.pnBottom.Controls.Add(this.label1);
             this.pnBottom.Controls.Add(this.rbtnRunProject);
-            this.pnBottom.Controls.Add(this.rbtnRunRanking);
             this.pnBottom.Dock = System.Windows.Forms.DockStyle.Top;
             this.pnBottom.Location = new System.Drawing.Point(2, 171);
             this.pnBottom.Name = "pnBottom";
@@ -612,27 +622,11 @@
             // 
             this.rbtnRunProject.RootElement.AccessibleDescription = null;
             this.rbtnRunProject.RootElement.AccessibleName = null;
-            this.rbtnRunProject.RootElement.ControlBounds = new System.Drawing.Rectangle(799, 170, 130, 24);
+            this.rbtnRunProject.RootElement.ControlBounds = new System.Drawing.Rectangle(0, 0, 130, 24);
             this.rbtnRunProject.Size = new System.Drawing.Size(97, 32);
-            this.rbtnRunProject.TabIndex = 98;
-            this.rbtnRunProject.Text = "run projects";
+            this.rbtnRunProject.TabIndex = 13;
+            this.rbtnRunProject.Text = "Save";
             this.rbtnRunProject.Click += new System.EventHandler(this.btnSaveExports_Click);
-            // 
-            // rbtnRunRanking
-            // 
-            this.rbtnRunRanking.BackColor = System.Drawing.SystemColors.ControlLightLight;
-            this.rbtnRunRanking.Location = new System.Drawing.Point(799, 10);
-            this.rbtnRunRanking.Name = "rbtnRunRanking";
-            // 
-            // 
-            // 
-            this.rbtnRunRanking.RootElement.AccessibleDescription = null;
-            this.rbtnRunRanking.RootElement.AccessibleName = null;
-            this.rbtnRunRanking.RootElement.ControlBounds = new System.Drawing.Rectangle(799, 60, 130, 24);
-            this.rbtnRunRanking.Size = new System.Drawing.Size(97, 32);
-            this.rbtnRunRanking.TabIndex = 98;
-            this.rbtnRunRanking.Text = "Run Ranking";
-            this.rbtnRunRanking.Click += new System.EventHandler(this.btnRun_Click);
             // 
             // gbTop
             // 
@@ -665,7 +659,7 @@
             // 
             this.gbTop.RootElement.AccessibleDescription = null;
             this.gbTop.RootElement.AccessibleName = null;
-            this.gbTop.RootElement.ControlBounds = new System.Drawing.Rectangle(2, 41, 200, 100);
+            this.gbTop.RootElement.ControlBounds = new System.Drawing.Rectangle(0, 0, 200, 100);
             this.gbTop.RootElement.Padding = new System.Windows.Forms.Padding(2);
             this.gbTop.Size = new System.Drawing.Size(920, 130);
             this.gbTop.TabIndex = 2;
@@ -674,7 +668,7 @@
             // 
             this.lblCampaign.AutoSize = true;
             this.lblCampaign.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblCampaign.Location = new System.Drawing.Point(684, 14);
+            this.lblCampaign.Location = new System.Drawing.Point(680, 10);
             this.lblCampaign.Name = "lblCampaign";
             this.lblCampaign.Size = new System.Drawing.Size(31, 28);
             this.lblCampaign.TabIndex = 35;
@@ -684,7 +678,7 @@
             // 
             this.lblSegment.AutoSize = true;
             this.lblSegment.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblSegment.Location = new System.Drawing.Point(394, 14);
+            this.lblSegment.Location = new System.Drawing.Point(390, 10);
             this.lblSegment.Name = "lblSegment";
             this.lblSegment.Size = new System.Drawing.Size(20, 28);
             this.lblSegment.TabIndex = 34;
@@ -694,7 +688,7 @@
             // 
             this.lblOffer.AutoSize = true;
             this.lblOffer.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblOffer.Location = new System.Drawing.Point(538, 14);
+            this.lblOffer.Location = new System.Drawing.Point(534, 10);
             this.lblOffer.Name = "lblOffer";
             this.lblOffer.Size = new System.Drawing.Size(23, 28);
             this.lblOffer.TabIndex = 33;
@@ -704,7 +698,7 @@
             // 
             this.lblCustomers.AutoSize = true;
             this.lblCustomers.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblCustomers.Location = new System.Drawing.Point(240, 14);
+            this.lblCustomers.Location = new System.Drawing.Point(236, 10);
             this.lblCustomers.Name = "lblCustomers";
             this.lblCustomers.Size = new System.Drawing.Size(31, 28);
             this.lblCustomers.TabIndex = 32;
@@ -715,7 +709,7 @@
             this.label11.AutoSize = true;
             this.label11.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.label11.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label11.Location = new System.Drawing.Point(666, 100);
+            this.label11.Location = new System.Drawing.Point(662, 96);
             this.label11.Name = "label11";
             this.label11.Size = new System.Drawing.Size(95, 23);
             this.label11.TabIndex = 31;
@@ -725,7 +719,7 @@
             // 
             this.label10.AutoSize = true;
             this.label10.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label10.Location = new System.Drawing.Point(529, 100);
+            this.label10.Location = new System.Drawing.Point(525, 96);
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(55, 23);
             this.label10.TabIndex = 30;
@@ -774,7 +768,7 @@
             // 
             this.label12.AutoSize = true;
             this.label12.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label12.Location = new System.Drawing.Point(223, 99);
+            this.label12.Location = new System.Drawing.Point(219, 95);
             this.label12.Name = "label12";
             this.label12.Size = new System.Drawing.Size(91, 23);
             this.label12.TabIndex = 25;
@@ -784,7 +778,7 @@
             // 
             this.label9.AutoSize = true;
             this.label9.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label9.Location = new System.Drawing.Point(373, 100);
+            this.label9.Location = new System.Drawing.Point(369, 96);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(85, 23);
             this.label9.TabIndex = 24;
@@ -802,14 +796,17 @@
             this.label13.Text = "Control Panel";
             this.label13.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
-            // cntrlchkDropDowntp2
+            // btnRankingsExport
             // 
-            this.cntrlchkDropDowntp2.Location = new System.Drawing.Point(180, 92);
-            this.cntrlchkDropDowntp2.MultipleSelection = false;
-            this.cntrlchkDropDowntp2.Name = "cntrlchkDropDowntp2";
-            this.cntrlchkDropDowntp2.Size = new System.Drawing.Size(207, 22);
-            this.cntrlchkDropDowntp2.TabIndex = 101;
-            this.cntrlchkDropDowntp2.TimePeriodControl = true;
+            btnRankingsExport.BackColor = System.Drawing.SystemColors.ActiveCaption;
+            btnRankingsExport.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
+            btnRankingsExport.Location = new System.Drawing.Point(726, 107);
+            btnRankingsExport.Name = "btnRankingsExport";
+            btnRankingsExport.Size = new System.Drawing.Size(170, 36);
+            btnRankingsExport.TabIndex = 104;
+            btnRankingsExport.Text = "RunRankings";
+            btnRankingsExport.UseVisualStyleBackColor = false;
+            btnRankingsExport.Click += new System.EventHandler(this.btnRankingsExport_Click);
             // 
             // CntrlExport
             // 
@@ -830,7 +827,6 @@
             this.pnBottom.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.radLabel6)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.rbtnRunProject)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.rbtnRunRanking)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gbTop)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox4)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).EndInit();
@@ -884,7 +880,6 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label1;
         private Telerik.WinControls.UI.RadButton rbtnRunProject;
-        private Telerik.WinControls.UI.RadButton rbtnRunRanking;
         private System.Windows.Forms.Panel panel1;
         private Telerik.WinControls.UI.RadLabel radLabel3;
         private Telerik.WinControls.UI.RadButton btnRunPrjct;
@@ -901,8 +896,5 @@
         private Telerik.WinControls.UI.RadLabel radLabel2;
         private CntrlchkDropDown cntrlchkDropDowntp2;
         private CntrlchkDropDown chkddlTP1;
-
-
-
     }
 }
