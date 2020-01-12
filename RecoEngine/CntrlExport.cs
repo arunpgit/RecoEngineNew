@@ -523,7 +523,8 @@ namespace RecoEngine
 
         private void btnRankingsExport_Click(object sender, EventArgs e)
         {
-            
+            this.alert = new AlertForm();
+            this.alert.SetMessage("Loading data. Please wait...");
             Common.iProjectID = Convert.ToInt16(cmbProject.SelectedValue);
             string str = this.chkddlTP1.m_TextBox.Text.ToString();
             char[] chrArray = new char[] { ';' };
@@ -553,8 +554,7 @@ namespace RecoEngine
             this.clstreDetails.fnCreateTableView(Common.strTableName, str2, str3);
             string str4 = this.clstreDetails.fnBuildTimePeriod(Common.timePeriods.strtp1);
             string str5 = this.clstreDetails.fnBuildTimePeriod(Common.timePeriods.strtp2);
-            this.alert = new AlertForm();
-            this.alert.SetMessage("Loading data. Please wait...");
+         
             this.alert.TopMost = true;
             this.alert.StartPosition = FormStartPosition.CenterScreen;
             this.alert.Show();

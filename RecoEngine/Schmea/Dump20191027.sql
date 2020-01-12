@@ -149,13 +149,61 @@ CREATE TABLE `customer_pntl` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Table structure for table `ets_adm_weekly_a`
+-- Table structure for table `ets_adm_weekly_a10`
 --
 
-DROP TABLE IF EXISTS `ets_adm_weekly_a`;
+DROP TABLE IF EXISTS `ets_adm_weekly_a10`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `ets_adm_weekly_a` (
+CREATE TABLE `ets_adm_weekly_a10` (
+  `TIMEPERIOD_ID` int(11) DEFAULT NULL,
+  `customer` bigint(20) DEFAULT NULL,
+  `DECILE` bigint(20) DEFAULT NULL,
+  `A_REV_VCE_INT` double DEFAULT NULL,
+  `A_REV_DATA` double DEFAULT NULL,
+  `A_ON_NET_OUTGOING_SECS` double DEFAULT NULL,
+  `A_OFF_NET_OUTGOING_SECS` double DEFAULT NULL,
+  `A_INT_OUTGOING_SECS` double DEFAULT NULL,
+  `A_INT_MOC_COUNTRIES` bigint(20) DEFAULT NULL,
+  `A_INT_MTC_COUNTRIES` bigint(20) DEFAULT NULL,
+  `A_DATA_ALL_KB` double DEFAULT NULL,
+  `A_RCH_ALL_AMOUNT` double DEFAULT NULL,
+  KEY `customer` (`customer`)
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `ets_adm_weekly_a11`
+--
+
+DROP TABLE IF EXISTS `ets_adm_weekly_a11`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `ets_adm_weekly_a11` (
+  `TIMEPERIOD_ID` int(11) DEFAULT NULL,
+  `customer` bigint(20) DEFAULT NULL,
+  `DECILE` bigint(20) DEFAULT NULL,
+  `A_REV_VCE_INT` double DEFAULT NULL,
+  `A_REV_DATA` double DEFAULT NULL,
+  `A_ON_NET_OUTGOING_SECS` double DEFAULT NULL,
+  `A_OFF_NET_OUTGOING_SECS` double DEFAULT NULL,
+  `A_INT_OUTGOING_SECS` double DEFAULT NULL,
+  `A_INT_MOC_COUNTRIES` bigint(20) DEFAULT NULL,
+  `A_INT_MTC_COUNTRIES` bigint(20) DEFAULT NULL,
+  `A_DATA_ALL_KB` double DEFAULT NULL,
+  `A_RCH_ALL_AMOUNT` double DEFAULT NULL,
+  KEY `customer` (`customer`)
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `ets_adm_weekly_a12`
+--
+
+DROP TABLE IF EXISTS `ets_adm_weekly_a12`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `ets_adm_weekly_a12` (
   `TIMEPERIOD_ID` int(11) DEFAULT NULL,
   `customer` bigint(20) DEFAULT NULL,
   `DECILE` bigint(20) DEFAULT NULL,
@@ -177,13 +225,164 @@ CREATE TABLE `ets_adm_weekly_a` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Table structure for table `ets_adm_weekly_b`
+-- Table structure for table `ets_adm_weekly_a13`
 --
 
-DROP TABLE IF EXISTS `ets_adm_weekly_b`;
+DROP TABLE IF EXISTS `ets_adm_weekly_a13`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `ets_adm_weekly_b` (
+CREATE TABLE `ets_adm_weekly_a13` (
+  `TIMEPERIOD_ID` int(11) DEFAULT NULL,
+  `customer` bigint(20) DEFAULT NULL,
+  `DECILE` bigint(20) DEFAULT NULL,
+  `A_ARPU` double DEFAULT NULL,
+  `A_REV_VCE_ONNET` double DEFAULT NULL,
+  `A_REV_VCE_OFFNET` double DEFAULT NULL,
+  `A_REV_VCE_INT` double DEFAULT NULL,
+  `A_REV_DATA` double DEFAULT NULL,
+  `A_ON_NET_OUTGOING_SECS` double DEFAULT NULL,
+  KEY `customer` (`customer`)
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `ets_adm_weekly_a14`
+--
+
+DROP TABLE IF EXISTS `ets_adm_weekly_a14`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `ets_adm_weekly_a14` (
+  `TIMEPERIOD_ID` int(11) DEFAULT NULL,
+  `customer` bigint(20) DEFAULT NULL,
+  `DECILE` bigint(20) DEFAULT NULL,
+  `A_TOTAL_BALANCE_INITIAL` double DEFAULT NULL,
+  `A_ARPU` double DEFAULT NULL,
+  `A_REV_VCE_ONNET` double DEFAULT NULL,
+  `A_REV_VCE_OFFNET` double DEFAULT NULL,
+  `A_REV_VCE_INT` double DEFAULT NULL,
+  `A_REV_DATA` double DEFAULT NULL,
+  `A_ON_NET_OUTGOING_SECS` double DEFAULT NULL,
+  `A_OFF_NET_OUTGOING_SECS` double DEFAULT NULL,
+  `A_INT_OUTGOING_SECS` double DEFAULT NULL,
+  `A_INT_MOC_COUNTRIES` bigint(20) DEFAULT NULL,
+  `A_INT_MTC_COUNTRIES` bigint(20) DEFAULT NULL,
+  `A_DATA_ALL_KB` double DEFAULT NULL,
+  `A_RCH_ALL_AMOUNT` double DEFAULT NULL,
+  KEY `customer` (`customer`)
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `ets_adm_weekly_a15`
+--
+
+DROP TABLE IF EXISTS `ets_adm_weekly_a15`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `ets_adm_weekly_a15` (
+  `TIMEPERIOD_ID` int(11) DEFAULT NULL,
+  `customer` bigint(20) DEFAULT NULL,
+  `DECILE` bigint(20) DEFAULT NULL,
+  `A_TOTAL_BALANCE_INITIAL` double DEFAULT NULL,
+  `A_ARPU` double DEFAULT NULL,
+  `A_REV_VCE_ONNET` double DEFAULT NULL,
+  `A_REV_VCE_OFFNET` double DEFAULT NULL,
+  `A_REV_VCE_INT` double DEFAULT NULL,
+  `A_REV_DATA` double DEFAULT NULL,
+  `A_ON_NET_OUTGOING_SECS` double DEFAULT NULL,
+  `A_OFF_NET_OUTGOING_SECS` double DEFAULT NULL,
+  `A_INT_OUTGOING_SECS` double DEFAULT NULL,
+  `A_INT_MOC_COUNTRIES` bigint(20) DEFAULT NULL,
+  `A_INT_MTC_COUNTRIES` bigint(20) DEFAULT NULL,
+  `A_DATA_ALL_KB` double DEFAULT NULL,
+  `A_RCH_ALL_AMOUNT` double DEFAULT NULL,
+  KEY `customer` (`customer`)
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `ets_adm_weekly_a17`
+--
+
+DROP TABLE IF EXISTS `ets_adm_weekly_a17`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `ets_adm_weekly_a17` (
+  `TIMEPERIOD_ID` int(11) DEFAULT NULL,
+  `customer` bigint(20) DEFAULT NULL,
+  `DECILE` bigint(20) DEFAULT NULL,
+  `A_TOTAL_BALANCE_INITIAL` double DEFAULT NULL,
+  `A_ARPU` double DEFAULT NULL,
+  `A_REV_VCE_ONNET` double DEFAULT NULL,
+  `A_REV_VCE_OFFNET` double DEFAULT NULL,
+  `A_REV_VCE_INT` double DEFAULT NULL,
+  `A_REV_DATA` double DEFAULT NULL,
+  `A_ON_NET_OUTGOING_SECS` double DEFAULT NULL,
+  `A_OFF_NET_OUTGOING_SECS` double DEFAULT NULL,
+  `A_INT_OUTGOING_SECS` double DEFAULT NULL,
+  `A_INT_MOC_COUNTRIES` bigint(20) DEFAULT NULL,
+  `A_INT_MTC_COUNTRIES` bigint(20) DEFAULT NULL,
+  `A_DATA_ALL_KB` double DEFAULT NULL,
+  `A_RCH_ALL_AMOUNT` double DEFAULT NULL,
+  KEY `customer` (`customer`)
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `ets_adm_weekly_b10`
+--
+
+DROP TABLE IF EXISTS `ets_adm_weekly_b10`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `ets_adm_weekly_b10` (
+  `TIMEPERIOD_ID` int(11) DEFAULT NULL,
+  `customer` bigint(20) DEFAULT NULL,
+  `B_REV_VCE_INT` double DEFAULT NULL,
+  `B_REV_DATA` double DEFAULT NULL,
+  `B_ON_NET_OUTGOING_SECS` double DEFAULT NULL,
+  `B_OFF_NET_OUTGOING_SECS` double DEFAULT NULL,
+  `B_INT_OUTGOING_SECS` double DEFAULT NULL,
+  `B_INT_MOC_COUNTRIES` bigint(20) DEFAULT NULL,
+  `B_INT_MTC_COUNTRIES` bigint(20) DEFAULT NULL,
+  `B_DATA_ALL_KB` double DEFAULT NULL,
+  `B_RCH_ALL_AMOUNT` double DEFAULT NULL,
+  KEY `customer` (`customer`)
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `ets_adm_weekly_b11`
+--
+
+DROP TABLE IF EXISTS `ets_adm_weekly_b11`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `ets_adm_weekly_b11` (
+  `TIMEPERIOD_ID` int(11) DEFAULT NULL,
+  `customer` bigint(20) DEFAULT NULL,
+  `B_REV_VCE_INT` double DEFAULT NULL,
+  `B_REV_DATA` double DEFAULT NULL,
+  `B_ON_NET_OUTGOING_SECS` double DEFAULT NULL,
+  `B_OFF_NET_OUTGOING_SECS` double DEFAULT NULL,
+  `B_INT_OUTGOING_SECS` double DEFAULT NULL,
+  `B_INT_MOC_COUNTRIES` bigint(20) DEFAULT NULL,
+  `B_INT_MTC_COUNTRIES` bigint(20) DEFAULT NULL,
+  `B_DATA_ALL_KB` double DEFAULT NULL,
+  `B_RCH_ALL_AMOUNT` double DEFAULT NULL,
+  KEY `customer` (`customer`)
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `ets_adm_weekly_b12`
+--
+
+DROP TABLE IF EXISTS `ets_adm_weekly_b12`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `ets_adm_weekly_b12` (
   `TIMEPERIOD_ID` int(11) DEFAULT NULL,
   `customer` bigint(20) DEFAULT NULL,
   `B_TOTAL_BALANCE_INITIAL` double DEFAULT NULL,
@@ -204,13 +403,114 @@ CREATE TABLE `ets_adm_weekly_b` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Table structure for table `ets_tre_base`
+-- Table structure for table `ets_adm_weekly_b13`
 --
 
-DROP TABLE IF EXISTS `ets_tre_base`;
+DROP TABLE IF EXISTS `ets_adm_weekly_b13`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `ets_tre_base` (
+CREATE TABLE `ets_adm_weekly_b13` (
+  `TIMEPERIOD_ID` int(11) DEFAULT NULL,
+  `customer` bigint(20) DEFAULT NULL,
+  `B_ARPU` double DEFAULT NULL,
+  `B_REV_VCE_ONNET` double DEFAULT NULL,
+  `B_REV_VCE_OFFNET` double DEFAULT NULL,
+  `B_REV_VCE_INT` double DEFAULT NULL,
+  `B_REV_DATA` double DEFAULT NULL,
+  `B_ON_NET_OUTGOING_SECS` double DEFAULT NULL,
+  KEY `customer` (`customer`)
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `ets_adm_weekly_b14`
+--
+
+DROP TABLE IF EXISTS `ets_adm_weekly_b14`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `ets_adm_weekly_b14` (
+  `TIMEPERIOD_ID` int(11) DEFAULT NULL,
+  `customer` bigint(20) DEFAULT NULL,
+  `B_TOTAL_BALANCE_INITIAL` double DEFAULT NULL,
+  `B_ARPU` double DEFAULT NULL,
+  `B_REV_VCE_ONNET` double DEFAULT NULL,
+  `B_REV_VCE_OFFNET` double DEFAULT NULL,
+  `B_REV_VCE_INT` double DEFAULT NULL,
+  `B_REV_DATA` double DEFAULT NULL,
+  `B_ON_NET_OUTGOING_SECS` double DEFAULT NULL,
+  `B_OFF_NET_OUTGOING_SECS` double DEFAULT NULL,
+  `B_INT_OUTGOING_SECS` double DEFAULT NULL,
+  `B_INT_MOC_COUNTRIES` bigint(20) DEFAULT NULL,
+  `B_INT_MTC_COUNTRIES` bigint(20) DEFAULT NULL,
+  `B_DATA_ALL_KB` double DEFAULT NULL,
+  `B_RCH_ALL_AMOUNT` double DEFAULT NULL,
+  KEY `customer` (`customer`)
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `ets_adm_weekly_b15`
+--
+
+DROP TABLE IF EXISTS `ets_adm_weekly_b15`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `ets_adm_weekly_b15` (
+  `TIMEPERIOD_ID` int(11) DEFAULT NULL,
+  `customer` bigint(20) DEFAULT NULL,
+  `B_TOTAL_BALANCE_INITIAL` double DEFAULT NULL,
+  `B_ARPU` double DEFAULT NULL,
+  `B_REV_VCE_ONNET` double DEFAULT NULL,
+  `B_REV_VCE_OFFNET` double DEFAULT NULL,
+  `B_REV_VCE_INT` double DEFAULT NULL,
+  `B_REV_DATA` double DEFAULT NULL,
+  `B_ON_NET_OUTGOING_SECS` double DEFAULT NULL,
+  `B_OFF_NET_OUTGOING_SECS` double DEFAULT NULL,
+  `B_INT_OUTGOING_SECS` double DEFAULT NULL,
+  `B_INT_MOC_COUNTRIES` bigint(20) DEFAULT NULL,
+  `B_INT_MTC_COUNTRIES` bigint(20) DEFAULT NULL,
+  `B_DATA_ALL_KB` double DEFAULT NULL,
+  `B_RCH_ALL_AMOUNT` double DEFAULT NULL,
+  KEY `customer` (`customer`)
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `ets_adm_weekly_b17`
+--
+
+DROP TABLE IF EXISTS `ets_adm_weekly_b17`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `ets_adm_weekly_b17` (
+  `TIMEPERIOD_ID` int(11) DEFAULT NULL,
+  `customer` bigint(20) DEFAULT NULL,
+  `B_TOTAL_BALANCE_INITIAL` double DEFAULT NULL,
+  `B_ARPU` double DEFAULT NULL,
+  `B_REV_VCE_ONNET` double DEFAULT NULL,
+  `B_REV_VCE_OFFNET` double DEFAULT NULL,
+  `B_REV_VCE_INT` double DEFAULT NULL,
+  `B_REV_DATA` double DEFAULT NULL,
+  `B_ON_NET_OUTGOING_SECS` double DEFAULT NULL,
+  `B_OFF_NET_OUTGOING_SECS` double DEFAULT NULL,
+  `B_INT_OUTGOING_SECS` double DEFAULT NULL,
+  `B_INT_MOC_COUNTRIES` bigint(20) DEFAULT NULL,
+  `B_INT_MTC_COUNTRIES` bigint(20) DEFAULT NULL,
+  `B_DATA_ALL_KB` double DEFAULT NULL,
+  `B_RCH_ALL_AMOUNT` double DEFAULT NULL,
+  KEY `customer` (`customer`)
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `ets_tre_base14`
+--
+
+DROP TABLE IF EXISTS `ets_tre_base14`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `ets_tre_base14` (
   `customer` bigint(20) DEFAULT NULL,
   `DECILE` bigint(20) DEFAULT NULL,
   `A_TOTAL_BALANCE_INITIAL` double DEFAULT NULL,
@@ -270,13 +570,289 @@ CREATE TABLE `ets_tre_base` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Table structure for table `ETS_TRE_BASED`
+-- Table structure for table `ets_tre_base15`
 --
 
-DROP TABLE IF EXISTS `ETS_TRE_BASED`;
+DROP TABLE IF EXISTS `ets_tre_base15`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `ETS_TRE_BASED` (
+CREATE TABLE `ets_tre_base15` (
+  `customer` bigint(20) DEFAULT NULL,
+  `DECILE` bigint(20) DEFAULT NULL,
+  `A_TOTAL_BALANCE_INITIAL` double DEFAULT NULL,
+  `B_TOTAL_BALANCE_INITIAL` double DEFAULT NULL,
+  `X_TOTAL_BALANCE_INITIAL` double DEFAULT NULL,
+  `D_TOTAL_BALANCE_INITIAL` double DEFAULT NULL,
+  `A_ARPU` double DEFAULT NULL,
+  `B_ARPU` double DEFAULT NULL,
+  `X_ARPU` double DEFAULT NULL,
+  `D_ARPU` double DEFAULT NULL,
+  `A_REV_VCE_ONNET` double DEFAULT NULL,
+  `B_REV_VCE_ONNET` double DEFAULT NULL,
+  `X_REV_VCE_ONNET` double DEFAULT NULL,
+  `D_REV_VCE_ONNET` double DEFAULT NULL,
+  `A_REV_VCE_OFFNET` double DEFAULT NULL,
+  `B_REV_VCE_OFFNET` double DEFAULT NULL,
+  `X_REV_VCE_OFFNET` double DEFAULT NULL,
+  `D_REV_VCE_OFFNET` double DEFAULT NULL,
+  `A_REV_VCE_INT` double DEFAULT NULL,
+  `B_REV_VCE_INT` double DEFAULT NULL,
+  `X_REV_VCE_INT` double DEFAULT NULL,
+  `D_REV_VCE_INT` double DEFAULT NULL,
+  `A_REV_DATA` double DEFAULT NULL,
+  `B_REV_DATA` double DEFAULT NULL,
+  `X_REV_DATA` double DEFAULT NULL,
+  `D_REV_DATA` double DEFAULT NULL,
+  `A_ON_NET_OUTGOING_SECS` double DEFAULT NULL,
+  `B_ON_NET_OUTGOING_SECS` double DEFAULT NULL,
+  `X_ON_NET_OUTGOING_SECS` double DEFAULT NULL,
+  `D_ON_NET_OUTGOING_SECS` double DEFAULT NULL,
+  `A_OFF_NET_OUTGOING_SECS` double DEFAULT NULL,
+  `B_OFF_NET_OUTGOING_SECS` double DEFAULT NULL,
+  `X_OFF_NET_OUTGOING_SECS` double DEFAULT NULL,
+  `D_OFF_NET_OUTGOING_SECS` double DEFAULT NULL,
+  `A_INT_OUTGOING_SECS` double DEFAULT NULL,
+  `B_INT_OUTGOING_SECS` double DEFAULT NULL,
+  `X_INT_OUTGOING_SECS` double DEFAULT NULL,
+  `D_INT_OUTGOING_SECS` double DEFAULT NULL,
+  `A_INT_MOC_COUNTRIES` bigint(20) DEFAULT NULL,
+  `B_INT_MOC_COUNTRIES` bigint(20) DEFAULT NULL,
+  `X_INT_MOC_COUNTRIES` bigint(20) DEFAULT NULL,
+  `D_INT_MOC_COUNTRIES` bigint(20) DEFAULT NULL,
+  `A_INT_MTC_COUNTRIES` bigint(20) DEFAULT NULL,
+  `B_INT_MTC_COUNTRIES` bigint(20) DEFAULT NULL,
+  `X_INT_MTC_COUNTRIES` bigint(20) DEFAULT NULL,
+  `D_INT_MTC_COUNTRIES` bigint(20) DEFAULT NULL,
+  `A_DATA_ALL_KB` double DEFAULT NULL,
+  `B_DATA_ALL_KB` double DEFAULT NULL,
+  `X_DATA_ALL_KB` double DEFAULT NULL,
+  `D_DATA_ALL_KB` double DEFAULT NULL,
+  `A_RCH_ALL_AMOUNT` double DEFAULT NULL,
+  `B_RCH_ALL_AMOUNT` double DEFAULT NULL,
+  `X_RCH_ALL_AMOUNT` double DEFAULT NULL,
+  `D_RCH_ALL_AMOUNT` double DEFAULT NULL,
+  KEY `customer` (`customer`,`DECILE`)
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `ets_tre_base17`
+--
+
+DROP TABLE IF EXISTS `ets_tre_base17`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `ets_tre_base17` (
+  `customer` bigint(20) DEFAULT NULL,
+  `DECILE` bigint(20) DEFAULT NULL,
+  `A_TOTAL_BALANCE_INITIAL` double DEFAULT NULL,
+  `B_TOTAL_BALANCE_INITIAL` double DEFAULT NULL,
+  `X_TOTAL_BALANCE_INITIAL` double DEFAULT NULL,
+  `D_TOTAL_BALANCE_INITIAL` double DEFAULT NULL,
+  `A_ARPU` double DEFAULT NULL,
+  `B_ARPU` double DEFAULT NULL,
+  `X_ARPU` double DEFAULT NULL,
+  `D_ARPU` double DEFAULT NULL,
+  `A_REV_VCE_ONNET` double DEFAULT NULL,
+  `B_REV_VCE_ONNET` double DEFAULT NULL,
+  `X_REV_VCE_ONNET` double DEFAULT NULL,
+  `D_REV_VCE_ONNET` double DEFAULT NULL,
+  `A_REV_VCE_OFFNET` double DEFAULT NULL,
+  `B_REV_VCE_OFFNET` double DEFAULT NULL,
+  `X_REV_VCE_OFFNET` double DEFAULT NULL,
+  `D_REV_VCE_OFFNET` double DEFAULT NULL,
+  `A_REV_VCE_INT` double DEFAULT NULL,
+  `B_REV_VCE_INT` double DEFAULT NULL,
+  `X_REV_VCE_INT` double DEFAULT NULL,
+  `D_REV_VCE_INT` double DEFAULT NULL,
+  `A_REV_DATA` double DEFAULT NULL,
+  `B_REV_DATA` double DEFAULT NULL,
+  `X_REV_DATA` double DEFAULT NULL,
+  `D_REV_DATA` double DEFAULT NULL,
+  `A_ON_NET_OUTGOING_SECS` double DEFAULT NULL,
+  `B_ON_NET_OUTGOING_SECS` double DEFAULT NULL,
+  `X_ON_NET_OUTGOING_SECS` double DEFAULT NULL,
+  `D_ON_NET_OUTGOING_SECS` double DEFAULT NULL,
+  `A_OFF_NET_OUTGOING_SECS` double DEFAULT NULL,
+  `B_OFF_NET_OUTGOING_SECS` double DEFAULT NULL,
+  `X_OFF_NET_OUTGOING_SECS` double DEFAULT NULL,
+  `D_OFF_NET_OUTGOING_SECS` double DEFAULT NULL,
+  `A_INT_OUTGOING_SECS` double DEFAULT NULL,
+  `B_INT_OUTGOING_SECS` double DEFAULT NULL,
+  `X_INT_OUTGOING_SECS` double DEFAULT NULL,
+  `D_INT_OUTGOING_SECS` double DEFAULT NULL,
+  `A_INT_MOC_COUNTRIES` bigint(20) DEFAULT NULL,
+  `B_INT_MOC_COUNTRIES` bigint(20) DEFAULT NULL,
+  `X_INT_MOC_COUNTRIES` bigint(20) DEFAULT NULL,
+  `D_INT_MOC_COUNTRIES` bigint(20) DEFAULT NULL,
+  `A_INT_MTC_COUNTRIES` bigint(20) DEFAULT NULL,
+  `B_INT_MTC_COUNTRIES` bigint(20) DEFAULT NULL,
+  `X_INT_MTC_COUNTRIES` bigint(20) DEFAULT NULL,
+  `D_INT_MTC_COUNTRIES` bigint(20) DEFAULT NULL,
+  `A_DATA_ALL_KB` double DEFAULT NULL,
+  `B_DATA_ALL_KB` double DEFAULT NULL,
+  `X_DATA_ALL_KB` double DEFAULT NULL,
+  `D_DATA_ALL_KB` double DEFAULT NULL,
+  `A_RCH_ALL_AMOUNT` double DEFAULT NULL,
+  `B_RCH_ALL_AMOUNT` double DEFAULT NULL,
+  `X_RCH_ALL_AMOUNT` double DEFAULT NULL,
+  `D_RCH_ALL_AMOUNT` double DEFAULT NULL,
+  KEY `customer` (`customer`,`DECILE`)
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `ets_tre_base2`
+--
+
+DROP TABLE IF EXISTS `ets_tre_base2`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `ets_tre_base2` (
+  `customer` bigint(20) DEFAULT NULL,
+  `DECILE` bigint(20) DEFAULT NULL,
+  `A_TOTAL_BALANCE_INITIAL` double DEFAULT NULL,
+  `B_TOTAL_BALANCE_INITIAL` double DEFAULT NULL,
+  `X_TOTAL_BALANCE_INITIAL` double DEFAULT NULL,
+  `D_TOTAL_BALANCE_INITIAL` double DEFAULT NULL,
+  `S_TOTAL_BALANCE_INITIAL` varchar(200) DEFAULT NULL,
+  `A_ARPU` double DEFAULT NULL,
+  `B_ARPU` double DEFAULT NULL,
+  `X_ARPU` double DEFAULT NULL,
+  `D_ARPU` double DEFAULT NULL,
+  `S_ARPU` varchar(200) DEFAULT NULL,
+  `A_REV_VCE_ONNET` double DEFAULT NULL,
+  `B_REV_VCE_ONNET` double DEFAULT NULL,
+  `X_REV_VCE_ONNET` double DEFAULT NULL,
+  `D_REV_VCE_ONNET` double DEFAULT NULL,
+  `S_REV_VCE_ONNET` varchar(200) DEFAULT NULL,
+  `A_REV_VCE_OFFNET` double DEFAULT NULL,
+  `B_REV_VCE_OFFNET` double DEFAULT NULL,
+  `X_REV_VCE_OFFNET` double DEFAULT NULL,
+  `D_REV_VCE_OFFNET` double DEFAULT NULL,
+  `S_REV_VCE_OFFNET` varchar(200) DEFAULT NULL,
+  KEY `customer` (`customer`,`DECILE`)
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `ets_tre_base3`
+--
+
+DROP TABLE IF EXISTS `ets_tre_base3`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `ets_tre_base3` (
+  `customer` bigint(20) DEFAULT NULL,
+  `DECILE` bigint(20) DEFAULT NULL,
+  `A_TOTAL_BALANCE_INITIAL` double DEFAULT NULL,
+  `B_TOTAL_BALANCE_INITIAL` double DEFAULT NULL,
+  `X_TOTAL_BALANCE_INITIAL` double DEFAULT NULL,
+  `D_TOTAL_BALANCE_INITIAL` double DEFAULT NULL,
+  `S_TOTAL_BALANCE_INITIAL` varchar(200) DEFAULT NULL,
+  `P_TOTAL_BALANCE_INITIAL` double DEFAULT NULL,
+  `A_ARPU` double DEFAULT NULL,
+  `B_ARPU` double DEFAULT NULL,
+  `X_ARPU` double DEFAULT NULL,
+  `D_ARPU` double DEFAULT NULL,
+  `S_ARPU` varchar(200) DEFAULT NULL,
+  `P_ARPU` double DEFAULT NULL,
+  `A_REV_VCE_ONNET` double DEFAULT NULL,
+  `B_REV_VCE_ONNET` double DEFAULT NULL,
+  `X_REV_VCE_ONNET` double DEFAULT NULL,
+  `D_REV_VCE_ONNET` double DEFAULT NULL,
+  `S_REV_VCE_ONNET` varchar(200) DEFAULT NULL,
+  `P_REV_VCE_ONNET` double DEFAULT NULL,
+  `A_REV_VCE_OFFNET` double DEFAULT NULL,
+  `B_REV_VCE_OFFNET` double DEFAULT NULL,
+  `X_REV_VCE_OFFNET` double DEFAULT NULL,
+  `D_REV_VCE_OFFNET` double DEFAULT NULL,
+  `S_REV_VCE_OFFNET` varchar(200) DEFAULT NULL,
+  `P_REV_VCE_OFFNET` double DEFAULT NULL,
+  KEY `customer` (`customer`,`DECILE`)
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `ets_tre_base_d`
+--
+
+DROP TABLE IF EXISTS `ets_tre_base_d`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `ets_tre_base_d` (
+  `customer` bigint(20) DEFAULT NULL,
+  `DECILE` bigint(20) DEFAULT NULL,
+  `A_TOTAL_BALANCE_INITIAL` double DEFAULT NULL,
+  `B_TOTAL_BALANCE_INITIAL` double DEFAULT NULL,
+  `X_TOTAL_BALANCE_INITIAL` double DEFAULT NULL,
+  `D_TOTAL_BALANCE_INITIAL` double DEFAULT NULL,
+  `A_ARPU` double DEFAULT NULL,
+  `B_ARPU` double DEFAULT NULL,
+  `X_ARPU` double DEFAULT NULL,
+  `D_ARPU` double DEFAULT NULL,
+  `A_REV_VCE_ONNET` double DEFAULT NULL,
+  `B_REV_VCE_ONNET` double DEFAULT NULL,
+  `X_REV_VCE_ONNET` double DEFAULT NULL,
+  `D_REV_VCE_ONNET` double DEFAULT NULL,
+  `A_REV_VCE_OFFNET` double DEFAULT NULL,
+  `B_REV_VCE_OFFNET` double DEFAULT NULL,
+  `X_REV_VCE_OFFNET` double DEFAULT NULL,
+  `D_REV_VCE_OFFNET` double DEFAULT NULL,
+  `A_REV_VCE_INT` double DEFAULT NULL,
+  `B_REV_VCE_INT` double DEFAULT NULL,
+  `X_REV_VCE_INT` double DEFAULT NULL,
+  `D_REV_VCE_INT` double DEFAULT NULL,
+  `A_REV_DATA` double DEFAULT NULL,
+  `B_REV_DATA` double DEFAULT NULL,
+  `X_REV_DATA` double DEFAULT NULL,
+  `D_REV_DATA` double DEFAULT NULL,
+  `A_ON_NET_OUTGOING_SECS` double DEFAULT NULL,
+  `B_ON_NET_OUTGOING_SECS` double DEFAULT NULL,
+  `X_ON_NET_OUTGOING_SECS` double DEFAULT NULL,
+  `D_ON_NET_OUTGOING_SECS` double DEFAULT NULL,
+  `A_OFF_NET_OUTGOING_SECS` double DEFAULT NULL,
+  `B_OFF_NET_OUTGOING_SECS` double DEFAULT NULL,
+  `X_OFF_NET_OUTGOING_SECS` double DEFAULT NULL,
+  `D_OFF_NET_OUTGOING_SECS` double DEFAULT NULL,
+  `A_INT_OUTGOING_SECS` double DEFAULT NULL,
+  `B_INT_OUTGOING_SECS` double DEFAULT NULL,
+  `X_INT_OUTGOING_SECS` double DEFAULT NULL,
+  `D_INT_OUTGOING_SECS` double DEFAULT NULL,
+  `A_INT_MOC_COUNTRIES` bigint(20) DEFAULT NULL,
+  `B_INT_MOC_COUNTRIES` bigint(20) DEFAULT NULL,
+  `X_INT_MOC_COUNTRIES` bigint(20) DEFAULT NULL,
+  `D_INT_MOC_COUNTRIES` bigint(20) DEFAULT NULL,
+  `A_INT_MTC_COUNTRIES` bigint(20) DEFAULT NULL,
+  `B_INT_MTC_COUNTRIES` bigint(20) DEFAULT NULL,
+  `X_INT_MTC_COUNTRIES` bigint(20) DEFAULT NULL,
+  `D_INT_MTC_COUNTRIES` bigint(20) DEFAULT NULL,
+  `A_DATA_ALL_KB` double DEFAULT NULL,
+  `B_DATA_ALL_KB` double DEFAULT NULL,
+  `X_DATA_ALL_KB` double DEFAULT NULL,
+  `D_DATA_ALL_KB` double DEFAULT NULL,
+  `A_RCH_ALL_AMOUNT` double DEFAULT NULL,
+  `B_RCH_ALL_AMOUNT` double DEFAULT NULL,
+  `X_RCH_ALL_AMOUNT` double DEFAULT NULL,
+  `D_RCH_ALL_AMOUNT` double DEFAULT NULL,
+  `S_DATA_ALL_KB` varchar(8) CHARACTER SET utf8mb4 NOT NULL DEFAULT '',
+  `S_ON_NET_OUTGOING_SECS` varchar(8) CHARACTER SET utf8mb4 NOT NULL DEFAULT '',
+  `S_OFF_NET_OUTGOING_SECS` varchar(8) CHARACTER SET utf8mb4 NOT NULL DEFAULT '',
+  `S_INT_OUTGOING_SECS` varchar(8) CHARACTER SET utf8mb4 NOT NULL DEFAULT '',
+  `S_RCH_ALL_AMOUNT` varchar(8) CHARACTER SET utf8mb4 NOT NULL DEFAULT '',
+  `S_ARPU` varchar(8) CHARACTER SET utf8mb4 NOT NULL DEFAULT '',
+  KEY `ETS_TRE_BASE_D_IX` (`customer`)
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `ets_tre_based14`
+--
+
+DROP TABLE IF EXISTS `ets_tre_based14`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `ets_tre_based14` (
   `customer` bigint(20) DEFAULT NULL,
   `DECILE` bigint(20) DEFAULT NULL,
   `A_TOTAL_BALANCE_INITIAL` double DEFAULT NULL,
@@ -349,13 +925,171 @@ CREATE TABLE `ETS_TRE_BASED` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Table structure for table `ETS_TRE_BASEP`
+-- Table structure for table `ets_tre_based15`
 --
 
-DROP TABLE IF EXISTS `ETS_TRE_BASEP`;
+DROP TABLE IF EXISTS `ets_tre_based15`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `ETS_TRE_BASEP` (
+CREATE TABLE `ets_tre_based15` (
+  `customer` bigint(20) DEFAULT NULL,
+  `DECILE` bigint(20) DEFAULT NULL,
+  `A_TOTAL_BALANCE_INITIAL` double DEFAULT NULL,
+  `B_TOTAL_BALANCE_INITIAL` double DEFAULT NULL,
+  `X_TOTAL_BALANCE_INITIAL` double DEFAULT NULL,
+  `D_TOTAL_BALANCE_INITIAL` double DEFAULT NULL,
+  `S_TOTAL_BALANCE_INITIAL` varchar(200) DEFAULT NULL,
+  `A_ARPU` double DEFAULT NULL,
+  `B_ARPU` double DEFAULT NULL,
+  `X_ARPU` double DEFAULT NULL,
+  `D_ARPU` double DEFAULT NULL,
+  `S_ARPU` varchar(200) DEFAULT NULL,
+  `A_REV_VCE_ONNET` double DEFAULT NULL,
+  `B_REV_VCE_ONNET` double DEFAULT NULL,
+  `X_REV_VCE_ONNET` double DEFAULT NULL,
+  `D_REV_VCE_ONNET` double DEFAULT NULL,
+  `S_REV_VCE_ONNET` varchar(200) DEFAULT NULL,
+  `A_REV_VCE_OFFNET` double DEFAULT NULL,
+  `B_REV_VCE_OFFNET` double DEFAULT NULL,
+  `X_REV_VCE_OFFNET` double DEFAULT NULL,
+  `D_REV_VCE_OFFNET` double DEFAULT NULL,
+  `S_REV_VCE_OFFNET` varchar(200) DEFAULT NULL,
+  `A_REV_VCE_INT` double DEFAULT NULL,
+  `B_REV_VCE_INT` double DEFAULT NULL,
+  `X_REV_VCE_INT` double DEFAULT NULL,
+  `D_REV_VCE_INT` double DEFAULT NULL,
+  `S_REV_VCE_INT` varchar(200) DEFAULT NULL,
+  `A_REV_DATA` double DEFAULT NULL,
+  `B_REV_DATA` double DEFAULT NULL,
+  `X_REV_DATA` double DEFAULT NULL,
+  `D_REV_DATA` double DEFAULT NULL,
+  `S_REV_DATA` varchar(200) DEFAULT NULL,
+  `A_ON_NET_OUTGOING_SECS` double DEFAULT NULL,
+  `B_ON_NET_OUTGOING_SECS` double DEFAULT NULL,
+  `X_ON_NET_OUTGOING_SECS` double DEFAULT NULL,
+  `D_ON_NET_OUTGOING_SECS` double DEFAULT NULL,
+  `S_ON_NET_OUTGOING_SECS` varchar(200) DEFAULT NULL,
+  `A_OFF_NET_OUTGOING_SECS` double DEFAULT NULL,
+  `B_OFF_NET_OUTGOING_SECS` double DEFAULT NULL,
+  `X_OFF_NET_OUTGOING_SECS` double DEFAULT NULL,
+  `D_OFF_NET_OUTGOING_SECS` double DEFAULT NULL,
+  `S_OFF_NET_OUTGOING_SECS` varchar(200) DEFAULT NULL,
+  `A_INT_OUTGOING_SECS` double DEFAULT NULL,
+  `B_INT_OUTGOING_SECS` double DEFAULT NULL,
+  `X_INT_OUTGOING_SECS` double DEFAULT NULL,
+  `D_INT_OUTGOING_SECS` double DEFAULT NULL,
+  `S_INT_OUTGOING_SECS` varchar(200) DEFAULT NULL,
+  `A_INT_MOC_COUNTRIES` bigint(20) DEFAULT NULL,
+  `B_INT_MOC_COUNTRIES` bigint(20) DEFAULT NULL,
+  `X_INT_MOC_COUNTRIES` bigint(20) DEFAULT NULL,
+  `D_INT_MOC_COUNTRIES` bigint(20) DEFAULT NULL,
+  `S_INT_MOC_COUNTRIES` varchar(200) DEFAULT NULL,
+  `A_INT_MTC_COUNTRIES` bigint(20) DEFAULT NULL,
+  `B_INT_MTC_COUNTRIES` bigint(20) DEFAULT NULL,
+  `X_INT_MTC_COUNTRIES` bigint(20) DEFAULT NULL,
+  `D_INT_MTC_COUNTRIES` bigint(20) DEFAULT NULL,
+  `S_INT_MTC_COUNTRIES` varchar(200) DEFAULT NULL,
+  `A_DATA_ALL_KB` double DEFAULT NULL,
+  `B_DATA_ALL_KB` double DEFAULT NULL,
+  `X_DATA_ALL_KB` double DEFAULT NULL,
+  `D_DATA_ALL_KB` double DEFAULT NULL,
+  `S_DATA_ALL_KB` varchar(200) DEFAULT NULL,
+  `A_RCH_ALL_AMOUNT` double DEFAULT NULL,
+  `B_RCH_ALL_AMOUNT` double DEFAULT NULL,
+  `X_RCH_ALL_AMOUNT` double DEFAULT NULL,
+  `D_RCH_ALL_AMOUNT` double DEFAULT NULL,
+  `S_RCH_ALL_AMOUNT` varchar(200) DEFAULT NULL,
+  KEY `customer` (`customer`,`DECILE`)
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `ets_tre_based17`
+--
+
+DROP TABLE IF EXISTS `ets_tre_based17`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `ets_tre_based17` (
+  `customer` bigint(20) DEFAULT NULL,
+  `DECILE` bigint(20) DEFAULT NULL,
+  `A_TOTAL_BALANCE_INITIAL` double DEFAULT NULL,
+  `B_TOTAL_BALANCE_INITIAL` double DEFAULT NULL,
+  `X_TOTAL_BALANCE_INITIAL` double DEFAULT NULL,
+  `D_TOTAL_BALANCE_INITIAL` double DEFAULT NULL,
+  `S_TOTAL_BALANCE_INITIAL` varchar(200) DEFAULT NULL,
+  `A_ARPU` double DEFAULT NULL,
+  `B_ARPU` double DEFAULT NULL,
+  `X_ARPU` double DEFAULT NULL,
+  `D_ARPU` double DEFAULT NULL,
+  `S_ARPU` varchar(200) DEFAULT NULL,
+  `A_REV_VCE_ONNET` double DEFAULT NULL,
+  `B_REV_VCE_ONNET` double DEFAULT NULL,
+  `X_REV_VCE_ONNET` double DEFAULT NULL,
+  `D_REV_VCE_ONNET` double DEFAULT NULL,
+  `S_REV_VCE_ONNET` varchar(200) DEFAULT NULL,
+  `A_REV_VCE_OFFNET` double DEFAULT NULL,
+  `B_REV_VCE_OFFNET` double DEFAULT NULL,
+  `X_REV_VCE_OFFNET` double DEFAULT NULL,
+  `D_REV_VCE_OFFNET` double DEFAULT NULL,
+  `S_REV_VCE_OFFNET` varchar(200) DEFAULT NULL,
+  `A_REV_VCE_INT` double DEFAULT NULL,
+  `B_REV_VCE_INT` double DEFAULT NULL,
+  `X_REV_VCE_INT` double DEFAULT NULL,
+  `D_REV_VCE_INT` double DEFAULT NULL,
+  `S_REV_VCE_INT` varchar(200) DEFAULT NULL,
+  `A_REV_DATA` double DEFAULT NULL,
+  `B_REV_DATA` double DEFAULT NULL,
+  `X_REV_DATA` double DEFAULT NULL,
+  `D_REV_DATA` double DEFAULT NULL,
+  `S_REV_DATA` varchar(200) DEFAULT NULL,
+  `A_ON_NET_OUTGOING_SECS` double DEFAULT NULL,
+  `B_ON_NET_OUTGOING_SECS` double DEFAULT NULL,
+  `X_ON_NET_OUTGOING_SECS` double DEFAULT NULL,
+  `D_ON_NET_OUTGOING_SECS` double DEFAULT NULL,
+  `S_ON_NET_OUTGOING_SECS` varchar(200) DEFAULT NULL,
+  `A_OFF_NET_OUTGOING_SECS` double DEFAULT NULL,
+  `B_OFF_NET_OUTGOING_SECS` double DEFAULT NULL,
+  `X_OFF_NET_OUTGOING_SECS` double DEFAULT NULL,
+  `D_OFF_NET_OUTGOING_SECS` double DEFAULT NULL,
+  `S_OFF_NET_OUTGOING_SECS` varchar(200) DEFAULT NULL,
+  `A_INT_OUTGOING_SECS` double DEFAULT NULL,
+  `B_INT_OUTGOING_SECS` double DEFAULT NULL,
+  `X_INT_OUTGOING_SECS` double DEFAULT NULL,
+  `D_INT_OUTGOING_SECS` double DEFAULT NULL,
+  `S_INT_OUTGOING_SECS` varchar(200) DEFAULT NULL,
+  `A_INT_MOC_COUNTRIES` bigint(20) DEFAULT NULL,
+  `B_INT_MOC_COUNTRIES` bigint(20) DEFAULT NULL,
+  `X_INT_MOC_COUNTRIES` bigint(20) DEFAULT NULL,
+  `D_INT_MOC_COUNTRIES` bigint(20) DEFAULT NULL,
+  `S_INT_MOC_COUNTRIES` varchar(200) DEFAULT NULL,
+  `A_INT_MTC_COUNTRIES` bigint(20) DEFAULT NULL,
+  `B_INT_MTC_COUNTRIES` bigint(20) DEFAULT NULL,
+  `X_INT_MTC_COUNTRIES` bigint(20) DEFAULT NULL,
+  `D_INT_MTC_COUNTRIES` bigint(20) DEFAULT NULL,
+  `S_INT_MTC_COUNTRIES` varchar(200) DEFAULT NULL,
+  `A_DATA_ALL_KB` double DEFAULT NULL,
+  `B_DATA_ALL_KB` double DEFAULT NULL,
+  `X_DATA_ALL_KB` double DEFAULT NULL,
+  `D_DATA_ALL_KB` double DEFAULT NULL,
+  `S_DATA_ALL_KB` varchar(200) DEFAULT NULL,
+  `A_RCH_ALL_AMOUNT` double DEFAULT NULL,
+  `B_RCH_ALL_AMOUNT` double DEFAULT NULL,
+  `X_RCH_ALL_AMOUNT` double DEFAULT NULL,
+  `D_RCH_ALL_AMOUNT` double DEFAULT NULL,
+  `S_RCH_ALL_AMOUNT` varchar(200) DEFAULT NULL,
+  KEY `customer` (`customer`,`DECILE`)
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `ets_tre_basep14`
+--
+
+DROP TABLE IF EXISTS `ets_tre_basep14`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `ets_tre_basep14` (
   `customer` bigint(20) DEFAULT NULL,
   `DECILE` bigint(20) DEFAULT NULL,
   `A_TOTAL_BALANCE_INITIAL` double DEFAULT NULL,
@@ -441,74 +1175,186 @@ CREATE TABLE `ETS_TRE_BASEP` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Table structure for table `ets_tre_base_d`
+-- Table structure for table `ets_tre_basep15`
 --
 
-DROP TABLE IF EXISTS `ets_tre_base_d`;
+DROP TABLE IF EXISTS `ets_tre_basep15`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `ets_tre_base_d` (
+CREATE TABLE `ets_tre_basep15` (
   `customer` bigint(20) DEFAULT NULL,
   `DECILE` bigint(20) DEFAULT NULL,
   `A_TOTAL_BALANCE_INITIAL` double DEFAULT NULL,
   `B_TOTAL_BALANCE_INITIAL` double DEFAULT NULL,
   `X_TOTAL_BALANCE_INITIAL` double DEFAULT NULL,
   `D_TOTAL_BALANCE_INITIAL` double DEFAULT NULL,
+  `S_TOTAL_BALANCE_INITIAL` varchar(200) DEFAULT NULL,
+  `P_TOTAL_BALANCE_INITIAL` double DEFAULT NULL,
   `A_ARPU` double DEFAULT NULL,
   `B_ARPU` double DEFAULT NULL,
   `X_ARPU` double DEFAULT NULL,
   `D_ARPU` double DEFAULT NULL,
+  `S_ARPU` varchar(200) DEFAULT NULL,
+  `P_ARPU` double DEFAULT NULL,
   `A_REV_VCE_ONNET` double DEFAULT NULL,
   `B_REV_VCE_ONNET` double DEFAULT NULL,
   `X_REV_VCE_ONNET` double DEFAULT NULL,
   `D_REV_VCE_ONNET` double DEFAULT NULL,
+  `S_REV_VCE_ONNET` varchar(200) DEFAULT NULL,
+  `P_REV_VCE_ONNET` double DEFAULT NULL,
   `A_REV_VCE_OFFNET` double DEFAULT NULL,
   `B_REV_VCE_OFFNET` double DEFAULT NULL,
   `X_REV_VCE_OFFNET` double DEFAULT NULL,
   `D_REV_VCE_OFFNET` double DEFAULT NULL,
+  `S_REV_VCE_OFFNET` varchar(200) DEFAULT NULL,
+  `P_REV_VCE_OFFNET` double DEFAULT NULL,
   `A_REV_VCE_INT` double DEFAULT NULL,
   `B_REV_VCE_INT` double DEFAULT NULL,
   `X_REV_VCE_INT` double DEFAULT NULL,
   `D_REV_VCE_INT` double DEFAULT NULL,
+  `S_REV_VCE_INT` varchar(200) DEFAULT NULL,
+  `P_REV_VCE_INT` double DEFAULT NULL,
   `A_REV_DATA` double DEFAULT NULL,
   `B_REV_DATA` double DEFAULT NULL,
   `X_REV_DATA` double DEFAULT NULL,
   `D_REV_DATA` double DEFAULT NULL,
+  `S_REV_DATA` varchar(200) DEFAULT NULL,
+  `P_REV_DATA` double DEFAULT NULL,
   `A_ON_NET_OUTGOING_SECS` double DEFAULT NULL,
   `B_ON_NET_OUTGOING_SECS` double DEFAULT NULL,
   `X_ON_NET_OUTGOING_SECS` double DEFAULT NULL,
   `D_ON_NET_OUTGOING_SECS` double DEFAULT NULL,
+  `S_ON_NET_OUTGOING_SECS` varchar(200) DEFAULT NULL,
+  `P_ON_NET_OUTGOING_SECS` double DEFAULT NULL,
   `A_OFF_NET_OUTGOING_SECS` double DEFAULT NULL,
   `B_OFF_NET_OUTGOING_SECS` double DEFAULT NULL,
   `X_OFF_NET_OUTGOING_SECS` double DEFAULT NULL,
   `D_OFF_NET_OUTGOING_SECS` double DEFAULT NULL,
+  `S_OFF_NET_OUTGOING_SECS` varchar(200) DEFAULT NULL,
+  `P_OFF_NET_OUTGOING_SECS` double DEFAULT NULL,
   `A_INT_OUTGOING_SECS` double DEFAULT NULL,
   `B_INT_OUTGOING_SECS` double DEFAULT NULL,
   `X_INT_OUTGOING_SECS` double DEFAULT NULL,
   `D_INT_OUTGOING_SECS` double DEFAULT NULL,
+  `S_INT_OUTGOING_SECS` varchar(200) DEFAULT NULL,
+  `P_INT_OUTGOING_SECS` double DEFAULT NULL,
   `A_INT_MOC_COUNTRIES` bigint(20) DEFAULT NULL,
   `B_INT_MOC_COUNTRIES` bigint(20) DEFAULT NULL,
   `X_INT_MOC_COUNTRIES` bigint(20) DEFAULT NULL,
   `D_INT_MOC_COUNTRIES` bigint(20) DEFAULT NULL,
+  `S_INT_MOC_COUNTRIES` varchar(200) DEFAULT NULL,
+  `P_INT_MOC_COUNTRIES` bigint(20) DEFAULT NULL,
   `A_INT_MTC_COUNTRIES` bigint(20) DEFAULT NULL,
   `B_INT_MTC_COUNTRIES` bigint(20) DEFAULT NULL,
   `X_INT_MTC_COUNTRIES` bigint(20) DEFAULT NULL,
   `D_INT_MTC_COUNTRIES` bigint(20) DEFAULT NULL,
+  `S_INT_MTC_COUNTRIES` varchar(200) DEFAULT NULL,
+  `P_INT_MTC_COUNTRIES` bigint(20) DEFAULT NULL,
   `A_DATA_ALL_KB` double DEFAULT NULL,
   `B_DATA_ALL_KB` double DEFAULT NULL,
   `X_DATA_ALL_KB` double DEFAULT NULL,
   `D_DATA_ALL_KB` double DEFAULT NULL,
+  `S_DATA_ALL_KB` varchar(200) DEFAULT NULL,
+  `P_DATA_ALL_KB` double DEFAULT NULL,
   `A_RCH_ALL_AMOUNT` double DEFAULT NULL,
   `B_RCH_ALL_AMOUNT` double DEFAULT NULL,
   `X_RCH_ALL_AMOUNT` double DEFAULT NULL,
   `D_RCH_ALL_AMOUNT` double DEFAULT NULL,
-  `S_DATA_ALL_KB` varchar(8) CHARACTER SET utf8mb4 NOT NULL DEFAULT '',
-  `S_ON_NET_OUTGOING_SECS` varchar(8) CHARACTER SET utf8mb4 NOT NULL DEFAULT '',
-  `S_OFF_NET_OUTGOING_SECS` varchar(8) CHARACTER SET utf8mb4 NOT NULL DEFAULT '',
-  `S_INT_OUTGOING_SECS` varchar(8) CHARACTER SET utf8mb4 NOT NULL DEFAULT '',
-  `S_RCH_ALL_AMOUNT` varchar(8) CHARACTER SET utf8mb4 NOT NULL DEFAULT '',
-  `S_ARPU` varchar(8) CHARACTER SET utf8mb4 NOT NULL DEFAULT '',
-  KEY `ETS_TRE_BASE_D_IX` (`customer`)
+  `S_RCH_ALL_AMOUNT` varchar(200) DEFAULT NULL,
+  `P_RCH_ALL_AMOUNT` double DEFAULT NULL,
+  KEY `customer` (`customer`,`DECILE`)
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `ets_tre_basep17`
+--
+
+DROP TABLE IF EXISTS `ets_tre_basep17`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `ets_tre_basep17` (
+  `customer` bigint(20) DEFAULT NULL,
+  `DECILE` bigint(20) DEFAULT NULL,
+  `A_TOTAL_BALANCE_INITIAL` double DEFAULT NULL,
+  `B_TOTAL_BALANCE_INITIAL` double DEFAULT NULL,
+  `X_TOTAL_BALANCE_INITIAL` double DEFAULT NULL,
+  `D_TOTAL_BALANCE_INITIAL` double DEFAULT NULL,
+  `S_TOTAL_BALANCE_INITIAL` varchar(200) DEFAULT NULL,
+  `P_TOTAL_BALANCE_INITIAL` double DEFAULT NULL,
+  `A_ARPU` double DEFAULT NULL,
+  `B_ARPU` double DEFAULT NULL,
+  `X_ARPU` double DEFAULT NULL,
+  `D_ARPU` double DEFAULT NULL,
+  `S_ARPU` varchar(200) DEFAULT NULL,
+  `P_ARPU` double DEFAULT NULL,
+  `A_REV_VCE_ONNET` double DEFAULT NULL,
+  `B_REV_VCE_ONNET` double DEFAULT NULL,
+  `X_REV_VCE_ONNET` double DEFAULT NULL,
+  `D_REV_VCE_ONNET` double DEFAULT NULL,
+  `S_REV_VCE_ONNET` varchar(200) DEFAULT NULL,
+  `P_REV_VCE_ONNET` double DEFAULT NULL,
+  `A_REV_VCE_OFFNET` double DEFAULT NULL,
+  `B_REV_VCE_OFFNET` double DEFAULT NULL,
+  `X_REV_VCE_OFFNET` double DEFAULT NULL,
+  `D_REV_VCE_OFFNET` double DEFAULT NULL,
+  `S_REV_VCE_OFFNET` varchar(200) DEFAULT NULL,
+  `P_REV_VCE_OFFNET` double DEFAULT NULL,
+  `A_REV_VCE_INT` double DEFAULT NULL,
+  `B_REV_VCE_INT` double DEFAULT NULL,
+  `X_REV_VCE_INT` double DEFAULT NULL,
+  `D_REV_VCE_INT` double DEFAULT NULL,
+  `S_REV_VCE_INT` varchar(200) DEFAULT NULL,
+  `P_REV_VCE_INT` double DEFAULT NULL,
+  `A_REV_DATA` double DEFAULT NULL,
+  `B_REV_DATA` double DEFAULT NULL,
+  `X_REV_DATA` double DEFAULT NULL,
+  `D_REV_DATA` double DEFAULT NULL,
+  `S_REV_DATA` varchar(200) DEFAULT NULL,
+  `P_REV_DATA` double DEFAULT NULL,
+  `A_ON_NET_OUTGOING_SECS` double DEFAULT NULL,
+  `B_ON_NET_OUTGOING_SECS` double DEFAULT NULL,
+  `X_ON_NET_OUTGOING_SECS` double DEFAULT NULL,
+  `D_ON_NET_OUTGOING_SECS` double DEFAULT NULL,
+  `S_ON_NET_OUTGOING_SECS` varchar(200) DEFAULT NULL,
+  `P_ON_NET_OUTGOING_SECS` double DEFAULT NULL,
+  `A_OFF_NET_OUTGOING_SECS` double DEFAULT NULL,
+  `B_OFF_NET_OUTGOING_SECS` double DEFAULT NULL,
+  `X_OFF_NET_OUTGOING_SECS` double DEFAULT NULL,
+  `D_OFF_NET_OUTGOING_SECS` double DEFAULT NULL,
+  `S_OFF_NET_OUTGOING_SECS` varchar(200) DEFAULT NULL,
+  `P_OFF_NET_OUTGOING_SECS` double DEFAULT NULL,
+  `A_INT_OUTGOING_SECS` double DEFAULT NULL,
+  `B_INT_OUTGOING_SECS` double DEFAULT NULL,
+  `X_INT_OUTGOING_SECS` double DEFAULT NULL,
+  `D_INT_OUTGOING_SECS` double DEFAULT NULL,
+  `S_INT_OUTGOING_SECS` varchar(200) DEFAULT NULL,
+  `P_INT_OUTGOING_SECS` double DEFAULT NULL,
+  `A_INT_MOC_COUNTRIES` bigint(20) DEFAULT NULL,
+  `B_INT_MOC_COUNTRIES` bigint(20) DEFAULT NULL,
+  `X_INT_MOC_COUNTRIES` bigint(20) DEFAULT NULL,
+  `D_INT_MOC_COUNTRIES` bigint(20) DEFAULT NULL,
+  `S_INT_MOC_COUNTRIES` varchar(200) DEFAULT NULL,
+  `P_INT_MOC_COUNTRIES` bigint(20) DEFAULT NULL,
+  `A_INT_MTC_COUNTRIES` bigint(20) DEFAULT NULL,
+  `B_INT_MTC_COUNTRIES` bigint(20) DEFAULT NULL,
+  `X_INT_MTC_COUNTRIES` bigint(20) DEFAULT NULL,
+  `D_INT_MTC_COUNTRIES` bigint(20) DEFAULT NULL,
+  `S_INT_MTC_COUNTRIES` varchar(200) DEFAULT NULL,
+  `P_INT_MTC_COUNTRIES` bigint(20) DEFAULT NULL,
+  `A_DATA_ALL_KB` double DEFAULT NULL,
+  `B_DATA_ALL_KB` double DEFAULT NULL,
+  `X_DATA_ALL_KB` double DEFAULT NULL,
+  `D_DATA_ALL_KB` double DEFAULT NULL,
+  `S_DATA_ALL_KB` varchar(200) DEFAULT NULL,
+  `P_DATA_ALL_KB` double DEFAULT NULL,
+  `A_RCH_ALL_AMOUNT` double DEFAULT NULL,
+  `B_RCH_ALL_AMOUNT` double DEFAULT NULL,
+  `X_RCH_ALL_AMOUNT` double DEFAULT NULL,
+  `D_RCH_ALL_AMOUNT` double DEFAULT NULL,
+  `S_RCH_ALL_AMOUNT` varchar(200) DEFAULT NULL,
+  `P_RCH_ALL_AMOUNT` double DEFAULT NULL,
+  KEY `customer` (`customer`,`DECILE`)
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -561,7 +1407,6 @@ CREATE TABLE `ets_tre_x_sell_pntl` (
   `X_INT_OUTGOING_SECS` double DEFAULT NULL,
   `X_INT_MOC_COUNTRIES` bigint(20) DEFAULT NULL,
   `X_INT_MTC_COUNTRIES` bigint(20) DEFAULT NULL,
-  `X_DATA_ALL_KB` double DEFAULT NULL,
   `X_RCH_ALL_AMOUNT` double DEFAULT NULL,
   `X_HIST_DATA_FLAG` varchar(200) DEFAULT NULL,
   `X_HIST_VOICE_MOC_INTL_FLAG` varchar(200) DEFAULT NULL,
@@ -573,6 +1418,104 @@ CREATE TABLE `ets_tre_x_sell_pntl` (
   `X_DECILE` bigint(20) DEFAULT NULL,
   `X_LAST_DATE_VCE_INT` varchar(200) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `ets_tre_x_sell_pntl14`
+--
+
+DROP TABLE IF EXISTS `ets_tre_x_sell_pntl14`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `ets_tre_x_sell_pntl14` (
+  `TIMEPERIOD` varchar(50) DEFAULT NULL,
+  `SEGMENTCOLNAME` varchar(50) DEFAULT NULL,
+  `CURRENTSEGMENT` varchar(50) DEFAULT NULL,
+  `X_STATUS` varchar(200) DEFAULT NULL,
+  `X_CUSTOMER_NATIONALITY` varchar(200) DEFAULT NULL,
+  `X_LAST_DATE_VCE_INT` varchar(200) DEFAULT NULL,
+  `X_LAST_DATE_DATA` varchar(200) DEFAULT NULL,
+  `X_TOTAL_BALANCE_INITIAL` double DEFAULT NULL,
+  `X_ARPU` double DEFAULT NULL,
+  `X_REV_VCE_ONNET` double DEFAULT NULL,
+  `X_REV_VCE_OFFNET` double DEFAULT NULL,
+  `X_REV_VCE_INT` double DEFAULT NULL,
+  `X_REV_DATA` double DEFAULT NULL,
+  `X_ON_NET_OUTGOING_SECS` double DEFAULT NULL,
+  `X_OFF_NET_OUTGOING_SECS` double DEFAULT NULL,
+  `X_INT_OUTGOING_SECS` double DEFAULT NULL,
+  `X_INT_MOC_COUNTRIES` bigint(20) DEFAULT NULL,
+  `X_INT_MTC_COUNTRIES` bigint(20) DEFAULT NULL,
+  `X_DATA_ALL_KB` double DEFAULT NULL,
+  `X_RCH_ALL_AMOUNT` double DEFAULT NULL,
+  `X_HIST_VOICE_MOC_INTL_FLAG` varchar(200) DEFAULT NULL,
+  `X_HIST_DATA_FLAG` varchar(200) DEFAULT NULL,
+  KEY `CURRENTSEGMENT` (`CURRENTSEGMENT`)
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `ets_tre_x_sell_pntl15`
+--
+
+DROP TABLE IF EXISTS `ets_tre_x_sell_pntl15`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `ets_tre_x_sell_pntl15` (
+  `TIMEPERIOD` varchar(50) DEFAULT NULL,
+  `SEGMENTCOLNAME` varchar(50) DEFAULT NULL,
+  `CURRENTSEGMENT` varchar(50) DEFAULT NULL,
+  `X_STATUS` varchar(200) DEFAULT NULL,
+  `X_CUSTOMER_NATIONALITY` varchar(200) DEFAULT NULL,
+  `X_LAST_DATE_VCE_INT` varchar(200) DEFAULT NULL,
+  `X_LAST_DATE_DATA` varchar(200) DEFAULT NULL,
+  `X_TOTAL_BALANCE_INITIAL` double DEFAULT NULL,
+  `X_ARPU` double DEFAULT NULL,
+  `X_REV_VCE_ONNET` double DEFAULT NULL,
+  `X_REV_VCE_OFFNET` double DEFAULT NULL,
+  `X_REV_VCE_INT` double DEFAULT NULL,
+  `X_REV_DATA` double DEFAULT NULL,
+  `X_ON_NET_OUTGOING_SECS` double DEFAULT NULL,
+  `X_OFF_NET_OUTGOING_SECS` double DEFAULT NULL,
+  `X_INT_OUTGOING_SECS` double DEFAULT NULL,
+  `X_INT_MOC_COUNTRIES` bigint(20) DEFAULT NULL,
+  `X_INT_MTC_COUNTRIES` bigint(20) DEFAULT NULL,
+  `X_DATA_ALL_KB` double DEFAULT NULL,
+  `X_RCH_ALL_AMOUNT` double DEFAULT NULL,
+  KEY `CURRENTSEGMENT` (`CURRENTSEGMENT`)
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `ets_tre_x_sell_pntl17`
+--
+
+DROP TABLE IF EXISTS `ets_tre_x_sell_pntl17`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `ets_tre_x_sell_pntl17` (
+  `TIMEPERIOD` varchar(50) DEFAULT NULL,
+  `SEGMENTCOLNAME` varchar(50) DEFAULT NULL,
+  `CURRENTSEGMENT` varchar(50) DEFAULT NULL,
+  `X_STATUS` varchar(200) DEFAULT NULL,
+  `X_HISTORICAL_VOICE_MOC_INTL_FLAG` varchar(200) DEFAULT NULL,
+  `X_CUSTOMER_NATIONALITY` varchar(200) DEFAULT NULL,
+  `X_TOTAL_BALANCE_INITIAL` double DEFAULT NULL,
+  `X_ARPU` double DEFAULT NULL,
+  `X_REV_VCE_ONNET` double DEFAULT NULL,
+  `X_REV_VCE_OFFNET` double DEFAULT NULL,
+  `X_REV_VCE_INT` double DEFAULT NULL,
+  `X_REV_DATA` double DEFAULT NULL,
+  `X_ON_NET_OUTGOING_SECS` double DEFAULT NULL,
+  `X_OFF_NET_OUTGOING_SECS` double DEFAULT NULL,
+  `X_INT_OUTGOING_SECS` double DEFAULT NULL,
+  `X_INT_MOC_COUNTRIES` bigint(20) DEFAULT NULL,
+  `X_INT_MTC_COUNTRIES` bigint(20) DEFAULT NULL,
+  `X_DATA_ALL_KB` double DEFAULT NULL,
+  `X_RCH_ALL_AMOUNT` double DEFAULT NULL,
+  `X_HISTORICAL_DATA_FLAG` varchar(200) DEFAULT NULL,
+  KEY `CURRENTSEGMENT` (`CURRENTSEGMENT`)
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -961,7 +1904,7 @@ CREATE TABLE `offers` (
   `CREATEDDATE` datetime DEFAULT NULL,
   `ISACTIVE` double DEFAULT '0',
   PRIMARY KEY (`OFFER_ID`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -986,7 +1929,7 @@ CREATE TABLE `opportunity` (
   `OPP_ACTION` varchar(100) DEFAULT NULL,
   PRIMARY KEY (`OPPORTUNITY_ID`),
   UNIQUE KEY `OPPORTUNITY_ID_UNIQUE` (`OPPORTUNITY_ID`)
-) ENGINE=InnoDB AUTO_INCREMENT=37 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=61 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -1060,7 +2003,7 @@ CREATE TABLE `projects` (
   `CREATEDBY` varchar(50) DEFAULT NULL,
   `CREATEDON` date DEFAULT NULL,
   PRIMARY KEY (`project_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -2673,13 +3616,13 @@ CREATE TABLE `tre_random` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Table structure for table `tre_random8`
+-- Table structure for table `tre_random14`
 --
 
-DROP TABLE IF EXISTS `tre_random8`;
+DROP TABLE IF EXISTS `tre_random14`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `tre_random8` (
+CREATE TABLE `tre_random14` (
   `YEAR` varchar(10) DEFAULT NULL,
   `WEEK` varchar(6) DEFAULT NULL,
   `customer` int(11) DEFAULT NULL,
@@ -2703,7 +3646,73 @@ CREATE TABLE `tre_random8` (
   `RCH_ALL_AMOUNT` decimal(24,6) DEFAULT NULL,
   `HIST_VOICE_MOC_INTL_FLAG` int(1) NOT NULL DEFAULT '0',
   `HIST_DATA_FLAG` int(1) NOT NULL DEFAULT '0',
-  KEY `ix_rankingcustomer` (`customer`)
+  KEY `idx_randomcust` (`customer`)
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `tre_random15`
+--
+
+DROP TABLE IF EXISTS `tre_random15`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `tre_random15` (
+  `YEAR` varchar(10) DEFAULT NULL,
+  `WEEK` varchar(6) DEFAULT NULL,
+  `customer` int(11) DEFAULT NULL,
+  `STATUS` varchar(20) DEFAULT NULL,
+  `DECILE` int(11) DEFAULT NULL,
+  `CUSTOMER_NATIONALITY` varchar(50) DEFAULT NULL,
+  `LAST_DATE_VCE_INT` varchar(50) DEFAULT NULL,
+  `LAST_DATE_DATA` varchar(50) DEFAULT NULL,
+  `TOTAL_BALANCE_INITIAL` decimal(24,6) DEFAULT NULL,
+  `ARPU` decimal(24,6) DEFAULT NULL,
+  `REV_VCE_ONNET` decimal(24,6) DEFAULT NULL,
+  `REV_VCE_OFFNET` decimal(24,6) DEFAULT NULL,
+  `REV_VCE_INT` decimal(24,6) DEFAULT NULL,
+  `REV_DATA` decimal(24,6) DEFAULT NULL,
+  `ON_NET_OUTGOING_SECS` decimal(36,18) DEFAULT NULL,
+  `OFF_NET_OUTGOING_SECS` decimal(36,18) DEFAULT NULL,
+  `INT_OUTGOING_SECS` decimal(36,18) DEFAULT NULL,
+  `INT_MOC_COUNTRIES` int(11) DEFAULT NULL,
+  `INT_MTC_COUNTRIES` int(11) DEFAULT NULL,
+  `DATA_ALL_KB` decimal(36,18) DEFAULT NULL,
+  `RCH_ALL_AMOUNT` decimal(24,6) DEFAULT NULL,
+  KEY `idx_randomcust` (`customer`)
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `tre_random17`
+--
+
+DROP TABLE IF EXISTS `tre_random17`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `tre_random17` (
+  `YEAR` varchar(10) DEFAULT NULL,
+  `WEEK` varchar(6) DEFAULT NULL,
+  `customer` int(11) DEFAULT NULL,
+  `STATUS` varchar(20) DEFAULT NULL,
+  `DECILE` int(11) DEFAULT NULL,
+  `CUSTOMER_NATIONALITY` varchar(50) DEFAULT NULL,
+  `TOTAL_BALANCE_INITIAL` decimal(24,6) DEFAULT NULL,
+  `ARPU` decimal(24,6) DEFAULT NULL,
+  `REV_VCE_ONNET` decimal(24,6) DEFAULT NULL,
+  `REV_VCE_OFFNET` decimal(24,6) DEFAULT NULL,
+  `REV_VCE_INT` decimal(24,6) DEFAULT NULL,
+  `REV_DATA` decimal(24,6) DEFAULT NULL,
+  `ON_NET_OUTGOING_SECS` decimal(36,18) DEFAULT NULL,
+  `OFF_NET_OUTGOING_SECS` decimal(36,18) DEFAULT NULL,
+  `INT_OUTGOING_SECS` decimal(36,18) DEFAULT NULL,
+  `INT_MOC_COUNTRIES` int(11) DEFAULT NULL,
+  `INT_MTC_COUNTRIES` int(11) DEFAULT NULL,
+  `DATA_ALL_KB` decimal(36,18) DEFAULT NULL,
+  `RCH_ALL_AMOUNT` decimal(24,6) DEFAULT NULL,
+  `HISTORICAL_VOICE_MOC_INTL_FLAG` int(1) NOT NULL DEFAULT '0',
+  `HISTORICAL_DATA_FLAG` int(1) NOT NULL DEFAULT '0',
+  KEY `idx_randomcust` (`customer`)
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -2748,13 +3757,13 @@ CREATE TABLE `tre_ranking0` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Table structure for table `tre_ranking8`
+-- Table structure for table `tre_ranking14`
 --
 
-DROP TABLE IF EXISTS `tre_ranking8`;
+DROP TABLE IF EXISTS `tre_ranking14`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `tre_ranking8` (
+CREATE TABLE `tre_ranking14` (
   `CUSTOMER` varchar(100) DEFAULT NULL,
   `RANK1_ACTION` varchar(100) DEFAULT NULL,
   `RANK2_ACTION` varchar(100) DEFAULT NULL,
@@ -2764,7 +3773,49 @@ CREATE TABLE `tre_ranking8` (
   `RANK2` int(11) DEFAULT NULL,
   `RANK3` int(11) DEFAULT NULL,
   `RANK4` int(11) DEFAULT NULL,
-  KEY `ix_rankingcustomer` (`CUSTOMER`)
+  KEY `idx_rankingcust` (`CUSTOMER`)
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `tre_ranking15`
+--
+
+DROP TABLE IF EXISTS `tre_ranking15`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `tre_ranking15` (
+  `CUSTOMER` varchar(100) DEFAULT NULL,
+  `RANK1_ACTION` varchar(100) DEFAULT NULL,
+  `RANK2_ACTION` varchar(100) DEFAULT NULL,
+  `RANK3_ACTION` varchar(100) DEFAULT NULL,
+  `RANK4_ACTION` varchar(100) DEFAULT NULL,
+  `RANK1` int(11) DEFAULT NULL,
+  `RANK2` int(11) DEFAULT NULL,
+  `RANK3` int(11) DEFAULT NULL,
+  `RANK4` int(11) DEFAULT NULL,
+  KEY `idx_rankingcust` (`CUSTOMER`)
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `tre_ranking17`
+--
+
+DROP TABLE IF EXISTS `tre_ranking17`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `tre_ranking17` (
+  `CUSTOMER` varchar(100) DEFAULT NULL,
+  `RANK1_ACTION` varchar(100) DEFAULT NULL,
+  `RANK2_ACTION` varchar(100) DEFAULT NULL,
+  `RANK3_ACTION` varchar(100) DEFAULT NULL,
+  `RANK4_ACTION` varchar(100) DEFAULT NULL,
+  `RANK1` int(11) DEFAULT NULL,
+  `RANK2` int(11) DEFAULT NULL,
+  `RANK3` int(11) DEFAULT NULL,
+  `RANK4` int(11) DEFAULT NULL,
+  KEY `idx_rankingcust` (`CUSTOMER`)
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -2781,7 +3832,7 @@ CREATE TABLE `tre_timeperiod` (
   `T2` varchar(50) DEFAULT NULL,
   PRIMARY KEY (`TIMEPERIOD_ID`),
   UNIQUE KEY `TIMEPERIOD_ID_UNIQUE` (`TIMEPERIOD_ID`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -2821,13 +3872,13 @@ CREATE TABLE `users` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Table structure for table `vmksa_reco_sample`
+-- Table structure for table `vmksa_tre_details`
 --
 
-DROP TABLE IF EXISTS `vmksa_reco_sample`;
+DROP TABLE IF EXISTS `vmksa_tre_details`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `vmksa_reco_sample` (
+CREATE TABLE `vmksa_tre_details` (
   `YEAR` varchar(10) DEFAULT NULL,
   `WEEK` varchar(6) DEFAULT NULL,
   `customer` int(11) DEFAULT NULL,
@@ -2853,13 +3904,13 @@ CREATE TABLE `vmksa_reco_sample` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Table structure for table `vmksa_reco_sample_v`
+-- Table structure for table `vmksa_tre_details_v`
 --
 
-DROP TABLE IF EXISTS `vmksa_reco_sample_v`;
+DROP TABLE IF EXISTS `vmksa_tre_details_v`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `vmksa_reco_sample_v` (
+CREATE TABLE `vmksa_tre_details_v` (
   `YEAR` varchar(10) DEFAULT NULL,
   `WEEK` varchar(6) DEFAULT NULL,
   `customer` int(11) DEFAULT NULL,
@@ -2881,9 +3932,10 @@ CREATE TABLE `vmksa_reco_sample_v` (
   `INT_MTC_COUNTRIES` int(11) DEFAULT NULL,
   `DATA_ALL_KB` decimal(36,18) DEFAULT NULL,
   `RCH_ALL_AMOUNT` decimal(24,6) DEFAULT NULL,
-  `HIST_VOICE_MOC_INTL_FLAG` int(1) NOT NULL DEFAULT '0',
+  `HISTORICAL_VOICE_MOC_INTL_FLAG` int(1) NOT NULL DEFAULT '0',
+  `HISTORICAL_DATA_FLAG` int(1) NOT NULL DEFAULT '0',
   `HIST_DATA_FLAG` int(1) NOT NULL DEFAULT '0',
-  KEY `VMKSA_RECO_SAMPLE_V_IX` (`customer`)
+  KEY `VMKSA_TRE_DETAILS_V_IX` (`customer`)
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -3535,16 +4587,11 @@ SET @sql:=CONCAT( 'TRUNCATE TABLE TRE_RANKING',ProjectId);
 EXECUTE dynamic_statement;
 
    SET @sql:=CONCAT( 'insert into recousr.tre_ranking',ProjectId,'(');
-   SET @sql:=CONCAT(@sql,' SELECT ed.customer,ed.Rankaction as Rank1_Action,emd.Rankaction as Rank2_Action,te.Rankaction as Rank3_Action,temp.Rankaction as Rank4_Action, emd.value as Rank2, te.value as Rank3, temp.value as Rank4, ed.value as Rank1 FROM recousr.Rank1Temp AS ed LEFT JOIN recousr.Rank2Temp AS emd ON emd.customer = ed.customer');
+   SET @sql:=CONCAT(@sql,' SELECT ed.customer,ed.Rankaction as Rank1_Action,emd.Rankaction as Rank2_Action,te.Rankaction as Rank3_Action,temp.Rankaction as Rank4_Action, ed.Value as Rank1, emd.Value as Rank2, te.Value as Rank3, temp.Value as Rank4 FROM recousr.Rank1Temp AS ed LEFT JOIN recousr.Rank2Temp AS emd ON emd.customer = ed.customer');
    SET @sql:=CONCAT(@sql,' LEFT JOIN recousr.Rank3Temp AS te ON te.customer = ed.customer');
     SET @sql:=CONCAT(@sql,' LEFT JOIN recousr.Rank4Temp AS temp ON temp.customer = ed.customer',')');
-  
-
-   
-   
-   PREPARE dynamic_statement FROM @sql;   
+PREPARE dynamic_statement FROM @sql;   
 EXECUTE dynamic_statement;
-
 drop table  TotalRankTemp;
 drop table  Rank1Temp;
 drop table  Rank2Temp;
@@ -4360,7 +5407,8 @@ DELIMITER ;
 DELIMITER ;;
 CREATE DEFINER=`root`@`localhost` PROCEDURE `TRE_GET_PTNL`(
 in MainTableName varchar(4000),
-in Week INTEGER
+in Week INTEGER,
+in ProjectId INTEGER
 )
 BEGIN
 DECLARE sql_b varchar(4000)  DEFAULT  CONCAT('create table TRE_OPPORTUNITYEXPORT  as select Distinct(a.customer),',Ifnull(Week, ''),' as Week ');
@@ -4388,13 +5436,11 @@ declare c2 cursor for
     elgbl_formula,
     ptnl_formula
     from
-    recousr.opportunity;
+    recousr.opportunity where project_id=ProjectId;
 
 
 DECLARE CONTINUE HANDLER FOR NOT FOUND SET NOT_FOUND = 1; 
-set  @sql:= 'drop table TRE_OPPORTUNITYEXPORT';
- PREPARE dynamic_statement FROM @sql;
-execute dynamic_statement;
+
 
    open c2;
    
@@ -4438,4 +5484,4 @@ DELIMITER ;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2020-01-03  8:08:45
+-- Dump completed on 2020-01-12  7:39:26

@@ -38,14 +38,6 @@ namespace RecoEngine
             this.pgExport = new Telerik.WinControls.UI.RadPageViewPage();
             this.pnlExport = new System.Windows.Forms.Panel();
             this.btnExport = new Telerik.WinControls.UI.RadButton();
-            this.pgUserManagement = new Telerik.WinControls.UI.RadPageViewPage();
-            this.pnlUsermngmnt = new System.Windows.Forms.Panel();
-            this.btnSetup = new Telerik.WinControls.UI.RadButton();
-            this.setupPanel = new Telerik.WinControls.UI.RadPanel();
-            this.pgReports = new Telerik.WinControls.UI.RadPageViewPage();
-            this.reportsPanel = new Telerik.WinControls.UI.RadPanel();
-            this.btnCampaignsReports = new Telerik.WinControls.UI.RadButton();
-            this.btnOppurtunityreports = new Telerik.WinControls.UI.RadButton();
             this.pgRecommendation = new Telerik.WinControls.UI.RadPageViewPage();
             this.recommendationPanel = new Telerik.WinControls.UI.RadPanel();
             this.btnOppurtunities = new Telerik.WinControls.UI.RadButton();
@@ -65,6 +57,8 @@ namespace RecoEngine
             this.bottomRightPanel = new Telerik.WinControls.UI.RadPanel();
             this.topRightpanel = new Telerik.WinControls.UI.RadPanel();
             this.lblOpportunities = new System.Windows.Forms.Label();
+            this.btnSetup = new Telerik.WinControls.UI.RadButton();
+            this.setupPanel = new Telerik.WinControls.UI.RadPanel();
             this.btnCampaignMapping = new Telerik.WinControls.UI.RadButton();
             this.rbViewUserInterface = new Telerik.WinControls.UI.RadRibbonBarGroup();
             this.ribbonTab1 = new Telerik.WinControls.UI.RibbonTab();
@@ -87,13 +81,12 @@ namespace RecoEngine
             this.rbBtnROpportunity = new Telerik.WinControls.UI.RadButtonElement();
             this.rbBtnRRnkng = new Telerik.WinControls.UI.RadButtonElement();
             this.rdBtnOpportunities = new Telerik.WinControls.UI.RadButtonElement();
-            this.rbBtnReports = new Telerik.WinControls.UI.RadRibbonBarGroup();
-            this.rbBtnrptOpportunity = new Telerik.WinControls.UI.RadButtonElement();
-            this.rbBtnrptCampaign = new Telerik.WinControls.UI.RadButtonElement();
             this.radbtnUsers = new Telerik.WinControls.UI.RadRibbonBarGroup();
             this.btnCampaign = new Telerik.WinControls.UI.RadButtonElement();
             this.radRibbonBarGroup1 = new Telerik.WinControls.UI.RadRibbonBarGroup();
             this.radButtonElement4 = new Telerik.WinControls.UI.RadButtonElement();
+            this.rbBtnrptOpportunity = new Telerik.WinControls.UI.RadButtonElement();
+            this.rbBtnrptCampaign = new Telerik.WinControls.UI.RadButtonElement();
             this.roundRectShape1 = new Telerik.WinControls.RoundRectShape(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.radStatusStrip1)).BeginInit();
             this.panel1.SuspendLayout();
@@ -103,14 +96,6 @@ namespace RecoEngine
             this.pgExport.SuspendLayout();
             this.pnlExport.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.btnExport)).BeginInit();
-            this.pgUserManagement.SuspendLayout();
-            this.pnlUsermngmnt.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.btnSetup)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.setupPanel)).BeginInit();
-            this.pgReports.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.reportsPanel)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.btnCampaignsReports)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.btnOppurtunityreports)).BeginInit();
             this.pgRecommendation.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.recommendationPanel)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.btnOppurtunities)).BeginInit();
@@ -126,6 +111,8 @@ namespace RecoEngine
             ((System.ComponentModel.ISupportInitialize)(this.splitPanel2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.bottomRightPanel)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.topRightpanel)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.btnSetup)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.setupPanel)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.btnCampaignMapping)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.rbTREDetails)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this)).BeginInit();
@@ -204,8 +191,6 @@ namespace RecoEngine
             this.radLeftMenu.AutoSize = true;
             this.radLeftMenu.BackColor = System.Drawing.SystemColors.ControlLightLight;
             this.radLeftMenu.Controls.Add(this.pgExport);
-            this.radLeftMenu.Controls.Add(this.pgUserManagement);
-            this.radLeftMenu.Controls.Add(this.pgReports);
             this.radLeftMenu.Controls.Add(this.pgRecommendation);
             this.radLeftMenu.Controls.Add(this.pgDataSource);
             this.radLeftMenu.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -264,129 +249,12 @@ namespace RecoEngine
             this.btnExport.Text = "Export";
             this.btnExport.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
             // 
-            // pgUserManagement
-            // 
-            this.pgUserManagement.AutoSize = true;
-            this.pgUserManagement.Controls.Add(this.pnlUsermngmnt);
-            this.pgUserManagement.Controls.Add(this.setupPanel);
-            this.pgUserManagement.Location = new System.Drawing.Point(4, 4);
-            this.pgUserManagement.Name = "pgUserManagement";
-            this.pgUserManagement.Size = new System.Drawing.Size(0, 24);
-            this.pgUserManagement.Tag = "UserManagement";
-            this.pgUserManagement.Text = "User Management";
-            // 
-            // pnlUsermngmnt
-            // 
-            this.pnlUsermngmnt.Controls.Add(this.btnSetup);
-            this.pnlUsermngmnt.Dock = System.Windows.Forms.DockStyle.Top;
-            this.pnlUsermngmnt.Location = new System.Drawing.Point(0, 0);
-            this.pnlUsermngmnt.Name = "pnlUsermngmnt";
-            this.pnlUsermngmnt.Size = new System.Drawing.Size(0, 24);
-            this.pnlUsermngmnt.TabIndex = 1;
-            // 
-            // btnSetup
-            // 
-            this.btnSetup.BackColor = System.Drawing.SystemColors.ControlLightLight;
-            this.btnSetup.Dock = System.Windows.Forms.DockStyle.Top;
-            this.btnSetup.Font = new System.Drawing.Font("Arial", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnSetup.Location = new System.Drawing.Point(0, 0);
-            this.btnSetup.Name = "btnSetup";
-            // 
-            // 
-            // 
-            this.btnSetup.RootElement.AccessibleDescription = null;
-            this.btnSetup.RootElement.AccessibleName = null;
-            this.btnSetup.RootElement.ControlBounds = new System.Drawing.Rectangle(0, 0, 130, 24);
-            this.btnSetup.Size = new System.Drawing.Size(0, 24);
-            this.btnSetup.TabIndex = 1;
-            this.btnSetup.Text = "Set Up";
-            this.btnSetup.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnSetup.Click += new System.EventHandler(this.btnSetup_Click);
-            // 
-            // setupPanel
-            // 
-            this.setupPanel.AllowDrop = true;
-            this.setupPanel.BackColor = System.Drawing.SystemColors.ControlLightLight;
-            this.setupPanel.Dock = System.Windows.Forms.DockStyle.Top;
-            this.setupPanel.Location = new System.Drawing.Point(0, 0);
-            this.setupPanel.Name = "setupPanel";
-            // 
-            // 
-            // 
-            this.setupPanel.RootElement.AccessibleDescription = null;
-            this.setupPanel.RootElement.AccessibleName = null;
-            this.setupPanel.RootElement.ControlBounds = new System.Drawing.Rectangle(0, 0, 200, 100);
-            this.setupPanel.Size = new System.Drawing.Size(0, 0);
-            this.setupPanel.TabIndex = 0;
-            // 
-            // pgReports
-            // 
-            this.pgReports.Controls.Add(this.reportsPanel);
-            this.pgReports.Location = new System.Drawing.Point(4, 4);
-            this.pgReports.Name = "pgReports";
-            this.pgReports.Size = new System.Drawing.Size(-8, -8);
-            this.pgReports.Tag = "Reports";
-            this.pgReports.Text = "Reports";
-            // 
-            // reportsPanel
-            // 
-            this.reportsPanel.BackColor = System.Drawing.SystemColors.ControlLightLight;
-            this.reportsPanel.Controls.Add(this.btnCampaignsReports);
-            this.reportsPanel.Controls.Add(this.btnOppurtunityreports);
-            this.reportsPanel.Dock = System.Windows.Forms.DockStyle.Top;
-            this.reportsPanel.Location = new System.Drawing.Point(0, 0);
-            this.reportsPanel.Name = "reportsPanel";
-            // 
-            // 
-            // 
-            this.reportsPanel.RootElement.AccessibleDescription = null;
-            this.reportsPanel.RootElement.AccessibleName = null;
-            this.reportsPanel.RootElement.ControlBounds = new System.Drawing.Rectangle(0, 0, 200, 100);
-            this.reportsPanel.Size = new System.Drawing.Size(-8, 48);
-            this.reportsPanel.TabIndex = 0;
-            // 
-            // btnCampaignsReports
-            // 
-            this.btnCampaignsReports.BackColor = System.Drawing.SystemColors.ControlLightLight;
-            this.btnCampaignsReports.Dock = System.Windows.Forms.DockStyle.Top;
-            this.btnCampaignsReports.Font = new System.Drawing.Font("Arial", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnCampaignsReports.Location = new System.Drawing.Point(0, 24);
-            this.btnCampaignsReports.Name = "btnCampaignsReports";
-            // 
-            // 
-            // 
-            this.btnCampaignsReports.RootElement.AccessibleDescription = null;
-            this.btnCampaignsReports.RootElement.AccessibleName = null;
-            this.btnCampaignsReports.RootElement.ControlBounds = new System.Drawing.Rectangle(0, 24, 130, 24);
-            this.btnCampaignsReports.Size = new System.Drawing.Size(-8, 24);
-            this.btnCampaignsReports.TabIndex = 1;
-            this.btnCampaignsReports.Text = "Campaigns";
-            this.btnCampaignsReports.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
-            // 
-            // btnOppurtunityreports
-            // 
-            this.btnOppurtunityreports.BackColor = System.Drawing.SystemColors.ControlLightLight;
-            this.btnOppurtunityreports.Dock = System.Windows.Forms.DockStyle.Top;
-            this.btnOppurtunityreports.Font = new System.Drawing.Font("Arial", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnOppurtunityreports.Location = new System.Drawing.Point(0, 0);
-            this.btnOppurtunityreports.Name = "btnOppurtunityreports";
-            // 
-            // 
-            // 
-            this.btnOppurtunityreports.RootElement.AccessibleDescription = null;
-            this.btnOppurtunityreports.RootElement.AccessibleName = null;
-            this.btnOppurtunityreports.RootElement.ControlBounds = new System.Drawing.Rectangle(0, 0, 130, 24);
-            this.btnOppurtunityreports.Size = new System.Drawing.Size(-8, 24);
-            this.btnOppurtunityreports.TabIndex = 0;
-            this.btnOppurtunityreports.Text = "Oppurtunity";
-            this.btnOppurtunityreports.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
-            // 
             // pgRecommendation
             // 
             this.pgRecommendation.Controls.Add(this.recommendationPanel);
             this.pgRecommendation.Location = new System.Drawing.Point(4, 4);
             this.pgRecommendation.Name = "pgRecommendation";
-            this.pgRecommendation.Size = new System.Drawing.Size(-8, -8);
+            this.pgRecommendation.Size = new System.Drawing.Size(0, 0);
             this.pgRecommendation.Tag = "Recommendation";
             this.pgRecommendation.Text = "Recommendation";
             // 
@@ -406,7 +274,7 @@ namespace RecoEngine
             this.recommendationPanel.RootElement.AccessibleDescription = null;
             this.recommendationPanel.RootElement.AccessibleName = null;
             this.recommendationPanel.RootElement.ControlBounds = new System.Drawing.Rectangle(0, 0, 200, 100);
-            this.recommendationPanel.Size = new System.Drawing.Size(-8, 96);
+            this.recommendationPanel.Size = new System.Drawing.Size(0, 96);
             this.recommendationPanel.TabIndex = 0;
             // 
             // btnOppurtunities
@@ -422,7 +290,7 @@ namespace RecoEngine
             this.btnOppurtunities.RootElement.AccessibleDescription = null;
             this.btnOppurtunities.RootElement.AccessibleName = null;
             this.btnOppurtunities.RootElement.ControlBounds = new System.Drawing.Rectangle(0, 72, 130, 24);
-            this.btnOppurtunities.Size = new System.Drawing.Size(-8, 24);
+            this.btnOppurtunities.Size = new System.Drawing.Size(0, 24);
             this.btnOppurtunities.TabIndex = 5;
             this.btnOppurtunities.Text = "Opportunities";
             this.btnOppurtunities.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
@@ -441,7 +309,7 @@ namespace RecoEngine
             this.btnThresholds.RootElement.AccessibleDescription = null;
             this.btnThresholds.RootElement.AccessibleName = null;
             this.btnThresholds.RootElement.ControlBounds = new System.Drawing.Rectangle(0, 48, 130, 24);
-            this.btnThresholds.Size = new System.Drawing.Size(-8, 24);
+            this.btnThresholds.Size = new System.Drawing.Size(0, 24);
             this.btnThresholds.TabIndex = 2;
             this.btnThresholds.Text = "Ranking";
             this.btnThresholds.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
@@ -463,7 +331,7 @@ namespace RecoEngine
             this.btnOppurtunityMapping.RootElement.AccessibleName = null;
             this.btnOppurtunityMapping.RootElement.ControlBounds = new System.Drawing.Rectangle(0, 24, 130, 24);
             this.btnOppurtunityMapping.RootElement.Padding = new System.Windows.Forms.Padding(0, 2, 0, 2);
-            this.btnOppurtunityMapping.Size = new System.Drawing.Size(-8, 24);
+            this.btnOppurtunityMapping.Size = new System.Drawing.Size(0, 24);
             this.btnOppurtunityMapping.TabIndex = 1;
             this.btnOppurtunityMapping.Text = "Oppurtunity Mapping";
             this.btnOppurtunityMapping.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
@@ -482,7 +350,7 @@ namespace RecoEngine
             this.btnMovementWindow.RootElement.AccessibleDescription = null;
             this.btnMovementWindow.RootElement.AccessibleName = null;
             this.btnMovementWindow.RootElement.ControlBounds = new System.Drawing.Rectangle(0, 0, 130, 24);
-            this.btnMovementWindow.Size = new System.Drawing.Size(-8, 24);
+            this.btnMovementWindow.Size = new System.Drawing.Size(0, 24);
             this.btnMovementWindow.TabIndex = 0;
             this.btnMovementWindow.Text = "Recommendation Settings";
             this.btnMovementWindow.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
@@ -686,11 +554,46 @@ namespace RecoEngine
             // 
             this.lblOpportunities.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.lblOpportunities.AutoSize = true;
-            this.lblOpportunities.Location = new System.Drawing.Point(4888, 6);
+            this.lblOpportunities.Location = new System.Drawing.Point(12856, 6);
             this.lblOpportunities.Name = "lblOpportunities";
             this.lblOpportunities.Size = new System.Drawing.Size(101, 16);
             this.lblOpportunities.TabIndex = 0;
             this.lblOpportunities.Text = "Opportunities :";
+            // 
+            // btnSetup
+            // 
+            this.btnSetup.BackColor = System.Drawing.SystemColors.ControlLightLight;
+            this.btnSetup.Dock = System.Windows.Forms.DockStyle.Top;
+            this.btnSetup.Font = new System.Drawing.Font("Arial", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnSetup.Location = new System.Drawing.Point(0, 0);
+            this.btnSetup.Name = "btnSetup";
+            // 
+            // 
+            // 
+            this.btnSetup.RootElement.AccessibleDescription = null;
+            this.btnSetup.RootElement.AccessibleName = null;
+            this.btnSetup.RootElement.ControlBounds = new System.Drawing.Rectangle(0, 0, 130, 24);
+            this.btnSetup.Size = new System.Drawing.Size(0, 24);
+            this.btnSetup.TabIndex = 1;
+            this.btnSetup.Text = "Set Up";
+            this.btnSetup.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnSetup.Click += new System.EventHandler(this.btnSetup_Click);
+            // 
+            // setupPanel
+            // 
+            this.setupPanel.AllowDrop = true;
+            this.setupPanel.BackColor = System.Drawing.SystemColors.ControlLightLight;
+            this.setupPanel.Dock = System.Windows.Forms.DockStyle.Top;
+            this.setupPanel.Location = new System.Drawing.Point(0, 0);
+            this.setupPanel.Name = "setupPanel";
+            // 
+            // 
+            // 
+            this.setupPanel.RootElement.AccessibleDescription = null;
+            this.setupPanel.RootElement.AccessibleName = null;
+            this.setupPanel.RootElement.ControlBounds = new System.Drawing.Rectangle(0, 0, 200, 100);
+            this.setupPanel.Size = new System.Drawing.Size(0, 0);
+            this.setupPanel.TabIndex = 0;
             // 
             // btnCampaignMapping
             // 
@@ -827,7 +730,6 @@ namespace RecoEngine
             this.radbtnPProjects,
             this.rbgDataSource,
             this.rbRecommendation,
-            this.rbBtnReports,
             this.radbtnUsers,
             this.radRibbonBarGroup1});
             this.rbTabMenu.Name = "rbTabMenu";
@@ -1048,63 +950,11 @@ namespace RecoEngine
             this.rdBtnOpportunities.Bounds = new System.Drawing.Rectangle(0, 0, 85, 65);
             this.rdBtnOpportunities.Class = "RibbonBarButtonElement";
             this.rdBtnOpportunities.DisplayStyle = Telerik.WinControls.DisplayStyle.Image;
-            this.rdBtnOpportunities.Image = global::RecoEngine.Properties.Resources.Segments;
             this.rdBtnOpportunities.ImageAlignment = System.Drawing.ContentAlignment.MiddleCenter;
             this.rdBtnOpportunities.Name = "rdBtnOpportunities";
             this.rdBtnOpportunities.Text = "Opportunities";
             this.rdBtnOpportunities.TextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
             this.rdBtnOpportunities.Visibility = Telerik.WinControls.ElementVisibility.Visible;
-            // 
-            // rbBtnReports
-            // 
-            this.rbBtnReports.AccessibleDescription = "Reports";
-            this.rbBtnReports.AccessibleName = "Reports";
-            this.rbBtnReports.AutoSize = false;
-            this.rbBtnReports.Bounds = new System.Drawing.Rectangle(0, 0, 198, 90);
-            this.rbBtnReports.Font = new System.Drawing.Font("Arial", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.rbBtnReports.Items.AddRange(new Telerik.WinControls.RadItem[] {
-            this.rbBtnrptOpportunity,
-            this.rbBtnrptCampaign});
-            this.rbBtnReports.Margin = new System.Windows.Forms.Padding(2, 2, 2, 10);
-            this.rbBtnReports.MaxSize = new System.Drawing.Size(0, 0);
-            this.rbBtnReports.MinSize = new System.Drawing.Size(20, 105);
-            this.rbBtnReports.Name = "rbBtnReports";
-            this.rbBtnReports.Text = "Reports";
-            this.rbBtnReports.Visibility = Telerik.WinControls.ElementVisibility.Collapsed;
-            // 
-            // rbBtnrptOpportunity
-            // 
-            this.rbBtnrptOpportunity.AccessibleDescription = "Opportunity";
-            this.rbBtnrptOpportunity.AccessibleName = "Opportunity";
-            this.rbBtnrptOpportunity.AutoSize = false;
-            this.rbBtnrptOpportunity.Bounds = new System.Drawing.Rectangle(0, 0, 95, 65);
-            this.rbBtnrptOpportunity.Class = "RibbonBarButtonElement";
-            this.rbBtnrptOpportunity.DisplayStyle = Telerik.WinControls.DisplayStyle.Image;
-            this.rbBtnrptOpportunity.Image = global::RecoEngine.Properties.Resources.Chart_Icon;
-            this.rbBtnrptOpportunity.ImageAlignment = System.Drawing.ContentAlignment.MiddleCenter;
-            this.rbBtnrptOpportunity.Margin = new System.Windows.Forms.Padding(3, 0, 3, 0);
-            this.rbBtnrptOpportunity.Name = "rbBtnrptOpportunity";
-            this.rbBtnrptOpportunity.Padding = new System.Windows.Forms.Padding(3, 0, 3, 0);
-            this.rbBtnrptOpportunity.Text = "Opportunity";
-            this.rbBtnrptOpportunity.TextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
-            this.rbBtnrptOpportunity.Visibility = Telerik.WinControls.ElementVisibility.Visible;
-            // 
-            // rbBtnrptCampaign
-            // 
-            this.rbBtnrptCampaign.AccessibleDescription = "rbBtnrptCampaign";
-            this.rbBtnrptCampaign.AccessibleName = "Campaign";
-            this.rbBtnrptCampaign.AutoSize = false;
-            this.rbBtnrptCampaign.Bounds = new System.Drawing.Rectangle(0, 0, 95, 65);
-            this.rbBtnrptCampaign.Class = "RibbonBarButtonElement";
-            this.rbBtnrptCampaign.DisplayStyle = Telerik.WinControls.DisplayStyle.Image;
-            this.rbBtnrptCampaign.Image = global::RecoEngine.Properties.Resources.campaign_reports;
-            this.rbBtnrptCampaign.ImageAlignment = System.Drawing.ContentAlignment.MiddleCenter;
-            this.rbBtnrptCampaign.Margin = new System.Windows.Forms.Padding(3, 0, 3, 0);
-            this.rbBtnrptCampaign.Name = "rbBtnrptCampaign";
-            this.rbBtnrptCampaign.Padding = new System.Windows.Forms.Padding(3, 0, 3, 0);
-            this.rbBtnrptCampaign.Text = "Campaign";
-            this.rbBtnrptCampaign.TextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
-            this.rbBtnrptCampaign.Visibility = Telerik.WinControls.ElementVisibility.Visible;
             // 
             // radbtnUsers
             // 
@@ -1145,7 +995,7 @@ namespace RecoEngine
             this.radRibbonBarGroup1.Items.AddRange(new Telerik.WinControls.RadItem[] {
             this.radButtonElement4});
             this.radRibbonBarGroup1.Name = "radRibbonBarGroup1";
-            this.radRibbonBarGroup1.Text = "Arrow Analytics";
+            this.radRibbonBarGroup1.Text = "Virgin Mobiles";
             this.radRibbonBarGroup1.Visibility = Telerik.WinControls.ElementVisibility.Visible;
             // 
             // radButtonElement4
@@ -1164,6 +1014,40 @@ namespace RecoEngine
             this.radButtonElement4.SmallImage = null;
             this.radButtonElement4.Text = "radButtonElement4";
             this.radButtonElement4.Visibility = Telerik.WinControls.ElementVisibility.Visible;
+            // 
+            // rbBtnrptOpportunity
+            // 
+            this.rbBtnrptOpportunity.AccessibleDescription = "Opportunity";
+            this.rbBtnrptOpportunity.AccessibleName = "Opportunity";
+            this.rbBtnrptOpportunity.AutoSize = false;
+            this.rbBtnrptOpportunity.Bounds = new System.Drawing.Rectangle(0, 0, 95, 65);
+            this.rbBtnrptOpportunity.Class = "RibbonBarButtonElement";
+            this.rbBtnrptOpportunity.DisplayStyle = Telerik.WinControls.DisplayStyle.Image;
+            this.rbBtnrptOpportunity.Image = global::RecoEngine.Properties.Resources.Chart_Icon;
+            this.rbBtnrptOpportunity.ImageAlignment = System.Drawing.ContentAlignment.MiddleCenter;
+            this.rbBtnrptOpportunity.Margin = new System.Windows.Forms.Padding(3, 0, 3, 0);
+            this.rbBtnrptOpportunity.Name = "rbBtnrptOpportunity";
+            this.rbBtnrptOpportunity.Padding = new System.Windows.Forms.Padding(3, 0, 3, 0);
+            this.rbBtnrptOpportunity.Text = "Opportunity";
+            this.rbBtnrptOpportunity.TextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
+            this.rbBtnrptOpportunity.Visibility = Telerik.WinControls.ElementVisibility.Visible;
+            // 
+            // rbBtnrptCampaign
+            // 
+            this.rbBtnrptCampaign.AccessibleDescription = "rbBtnrptCampaign";
+            this.rbBtnrptCampaign.AccessibleName = "Campaign";
+            this.rbBtnrptCampaign.AutoSize = false;
+            this.rbBtnrptCampaign.Bounds = new System.Drawing.Rectangle(0, 0, 95, 65);
+            this.rbBtnrptCampaign.Class = "RibbonBarButtonElement";
+            this.rbBtnrptCampaign.DisplayStyle = Telerik.WinControls.DisplayStyle.Image;
+            this.rbBtnrptCampaign.Image = global::RecoEngine.Properties.Resources.campaign_reports;
+            this.rbBtnrptCampaign.ImageAlignment = System.Drawing.ContentAlignment.MiddleCenter;
+            this.rbBtnrptCampaign.Margin = new System.Windows.Forms.Padding(3, 0, 3, 0);
+            this.rbBtnrptCampaign.Name = "rbBtnrptCampaign";
+            this.rbBtnrptCampaign.Padding = new System.Windows.Forms.Padding(3, 0, 3, 0);
+            this.rbBtnrptCampaign.Text = "Campaign";
+            this.rbBtnrptCampaign.TextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
+            this.rbBtnrptCampaign.Visibility = Telerik.WinControls.ElementVisibility.Visible;
             // 
             // frmOriginal
             // 
@@ -1193,14 +1077,6 @@ namespace RecoEngine
             this.pgExport.ResumeLayout(false);
             this.pnlExport.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.btnExport)).EndInit();
-            this.pgUserManagement.ResumeLayout(false);
-            this.pnlUsermngmnt.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.btnSetup)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.setupPanel)).EndInit();
-            this.pgReports.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.reportsPanel)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.btnCampaignsReports)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.btnOppurtunityreports)).EndInit();
             this.pgRecommendation.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.recommendationPanel)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.btnOppurtunities)).EndInit();
@@ -1216,6 +1092,8 @@ namespace RecoEngine
             ((System.ComponentModel.ISupportInitialize)(this.splitPanel2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.bottomRightPanel)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.topRightpanel)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.btnSetup)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.setupPanel)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.btnCampaignMapping)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.rbTREDetails)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this)).EndInit();
@@ -1239,7 +1117,7 @@ namespace RecoEngine
         private Telerik.WinControls.UI.RadPanel leftToppanel;
         private Telerik.WinControls.UI.RadPageView radLeftMenu;
         private Telerik.WinControls.UI.RadPageViewPage pgExport;
-        private Telerik.WinControls.UI.RadPageViewPage pgUserManagement;
+        //private Telerik.WinControls.UI.RadPageViewPage pgUserManagement;
         private Telerik.WinControls.UI.RadPanel setupPanel;
         private Telerik.WinControls.UI.RadPageViewPage pgReports;
         private Telerik.WinControls.UI.RadPanel reportsPanel;
@@ -1269,7 +1147,7 @@ namespace RecoEngine
         //private System.Windows.Forms.Panel pnlOfferLibrary;
         private Telerik.WinControls.UI.RadButton btnCampaignMapping;
        // private Telerik.WinControls.UI.RadButton btnOfferMapping;
-        private System.Windows.Forms.Panel pnlUsermngmnt;
+        //private System.Windows.Forms.Panel pnlUsermngmnt;
         private Telerik.WinControls.UI.RadButton btnSetup;
         private Telerik.WinControls.UI.RadPanel bottomRightPanel;
         private System.Windows.Forms.Panel pnlExport;

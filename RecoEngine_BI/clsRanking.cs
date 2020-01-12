@@ -378,6 +378,7 @@ namespace RecoEngine_BI
                 {
                     ((MySqlDBManager)Common.dbMgr).savepotentialRankingExport(iProjectid);
                 }
+
             }
             catch (Exception exception)
             {
