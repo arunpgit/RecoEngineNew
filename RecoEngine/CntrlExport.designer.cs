@@ -237,13 +237,14 @@
             this.btnRunPrjct.Size = new System.Drawing.Size(97, 32);
             this.btnRunPrjct.TabIndex = 98;
             this.btnRunPrjct.Text = "Run Project";
+            this.btnRunPrjct.Visible = false;
             this.btnRunPrjct.Click += new System.EventHandler(this.btnRunPrjct_Click);
             // 
             // lblProject
             // 
             this.lblProject.AutoSize = true;
             this.lblProject.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Bold);
-            this.lblProject.Location = new System.Drawing.Point(654, 13);
+            this.lblProject.Location = new System.Drawing.Point(656, 13);
             this.lblProject.Name = "lblProject";
             this.lblProject.Size = new System.Drawing.Size(132, 25);
             this.lblProject.TabIndex = 71;
@@ -681,7 +682,7 @@
             // 
             this.lblCampaign.AutoSize = true;
             this.lblCampaign.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblCampaign.Location = new System.Drawing.Point(682, 12);
+            this.lblCampaign.Location = new System.Drawing.Point(684, 14);
             this.lblCampaign.Name = "lblCampaign";
             this.lblCampaign.Size = new System.Drawing.Size(31, 28);
             this.lblCampaign.TabIndex = 35;
@@ -691,7 +692,7 @@
             // 
             this.lblSegment.AutoSize = true;
             this.lblSegment.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblSegment.Location = new System.Drawing.Point(392, 12);
+            this.lblSegment.Location = new System.Drawing.Point(394, 14);
             this.lblSegment.Name = "lblSegment";
             this.lblSegment.Size = new System.Drawing.Size(20, 28);
             this.lblSegment.TabIndex = 34;
@@ -701,7 +702,7 @@
             // 
             this.lblOffer.AutoSize = true;
             this.lblOffer.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblOffer.Location = new System.Drawing.Point(536, 12);
+            this.lblOffer.Location = new System.Drawing.Point(538, 14);
             this.lblOffer.Name = "lblOffer";
             this.lblOffer.Size = new System.Drawing.Size(23, 28);
             this.lblOffer.TabIndex = 33;
@@ -711,7 +712,7 @@
             // 
             this.lblCustomers.AutoSize = true;
             this.lblCustomers.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblCustomers.Location = new System.Drawing.Point(238, 12);
+            this.lblCustomers.Location = new System.Drawing.Point(240, 14);
             this.lblCustomers.Name = "lblCustomers";
             this.lblCustomers.Size = new System.Drawing.Size(31, 28);
             this.lblCustomers.TabIndex = 32;
@@ -722,7 +723,7 @@
             this.label11.AutoSize = true;
             this.label11.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.label11.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label11.Location = new System.Drawing.Point(664, 98);
+            this.label11.Location = new System.Drawing.Point(666, 100);
             this.label11.Name = "label11";
             this.label11.Size = new System.Drawing.Size(95, 23);
             this.label11.TabIndex = 31;
@@ -732,7 +733,7 @@
             // 
             this.label10.AutoSize = true;
             this.label10.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label10.Location = new System.Drawing.Point(527, 98);
+            this.label10.Location = new System.Drawing.Point(529, 100);
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(55, 23);
             this.label10.TabIndex = 30;
@@ -781,7 +782,7 @@
             // 
             this.label12.AutoSize = true;
             this.label12.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label12.Location = new System.Drawing.Point(221, 97);
+            this.label12.Location = new System.Drawing.Point(223, 99);
             this.label12.Name = "label12";
             this.label12.Size = new System.Drawing.Size(91, 23);
             this.label12.TabIndex = 25;
@@ -791,7 +792,7 @@
             // 
             this.label9.AutoSize = true;
             this.label9.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label9.Location = new System.Drawing.Point(371, 98);
+            this.label9.Location = new System.Drawing.Point(373, 100);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(85, 23);
             this.label9.TabIndex = 24;
