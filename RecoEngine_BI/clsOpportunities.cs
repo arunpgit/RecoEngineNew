@@ -220,7 +220,7 @@ namespace RecoEngine_BI
                     }
                     else if (Common.iDBType == (int)Enums.DBType.Mysql)
                     {
-                        strSql += "CREATEDDATE=currentdate() ,CREATEDBY=" + strLoginUserId + ",PROJECT_ID=" + iProjectId + ",ISACTIVE = " + iIsActive + ",ELGBL_FORMULA = '" + strElgblFormula.Replace("'", "''") + "',OPP_ACTION = '" + OppType + "'  where OPPORTUNITY_ID=" + iOpportunityId;
+                        strSql += "CREATEDDATE=CURRENT_DATE() ,CREATEDBY=" + strLoginUserId + ",PROJECT_ID=" + iProjectId + ",ISACTIVE = " + iIsActive + ",ELGBL_FORMULA = '" + strElgblFormula.Replace("'", "''") + "',OPP_ACTION = '" + OppType + "'  where OPPORTUNITY_ID=" + iOpportunityId;
 
                         ((MySqlDBManager)Common.dbMgr).ExecuteNonQuery(CommandType.Text, strSql);
                     }

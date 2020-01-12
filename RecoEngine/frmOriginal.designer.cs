@@ -30,7 +30,6 @@ namespace RecoEngine
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmOriginal));
             this.radStatusStrip1 = new Telerik.WinControls.UI.RadStatusStrip();
             this.panel1 = new System.Windows.Forms.Panel();
             this.rdMainSplit = new Telerik.WinControls.UI.RadSplitContainer();
@@ -687,7 +686,7 @@ namespace RecoEngine
             // 
             this.lblOpportunities.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.lblOpportunities.AutoSize = true;
-            this.lblOpportunities.Location = new System.Drawing.Point(2896, 6);
+            this.lblOpportunities.Location = new System.Drawing.Point(4888, 6);
             this.lblOpportunities.Name = "lblOpportunities";
             this.lblOpportunities.Size = new System.Drawing.Size(101, 16);
             this.lblOpportunities.TabIndex = 0;
@@ -810,7 +809,7 @@ namespace RecoEngine
             this.rbTREDetails.RootElement.StretchVertically = true;
             this.rbTREDetails.ShowExpandButton = false;
             this.rbTREDetails.Size = new System.Drawing.Size(1378, 150);
-            this.rbTREDetails.StartButtonImage = ((System.Drawing.Image)(resources.GetObject("rbTREDetails.StartButtonImage")));
+            this.rbTREDetails.StartButtonImage = null;
             this.rbTREDetails.StartMenuWidth = 205;
             this.rbTREDetails.TabIndex = 3;
             this.rbTREDetails.Text = "Recommendation Engine";
@@ -1071,7 +1070,7 @@ namespace RecoEngine
             this.rbBtnReports.MinSize = new System.Drawing.Size(20, 105);
             this.rbBtnReports.Name = "rbBtnReports";
             this.rbBtnReports.Text = "Reports";
-            this.rbBtnReports.Visibility = Telerik.WinControls.ElementVisibility.Visible;
+            this.rbBtnReports.Visibility = Telerik.WinControls.ElementVisibility.Collapsed;
             // 
             // rbBtnrptOpportunity
             // 
@@ -1120,7 +1119,7 @@ namespace RecoEngine
             this.radbtnUsers.MinSize = new System.Drawing.Size(20, 105);
             this.radbtnUsers.Name = "radbtnUsers";
             this.radbtnUsers.Text = "Library";
-            this.radbtnUsers.Visibility = Telerik.WinControls.ElementVisibility.Visible;
+            this.radbtnUsers.Visibility = Telerik.WinControls.ElementVisibility.Collapsed;
             // 
             // btnCampaign
             // 
@@ -1139,8 +1138,8 @@ namespace RecoEngine
             // 
             // radRibbonBarGroup1
             // 
-            this.radRibbonBarGroup1.AccessibleDescription = "Arrow Analytics";
-            this.radRibbonBarGroup1.AccessibleName = "Arrow Analytics";
+            this.radRibbonBarGroup1.AccessibleDescription = "Virgin Mobiles";
+            this.radRibbonBarGroup1.AccessibleName = "Virgin Mobiles";
             this.radRibbonBarGroup1.AutoSize = false;
             this.radRibbonBarGroup1.Bounds = new System.Drawing.Rectangle(0, 0, 280, 90);
             this.radRibbonBarGroup1.Items.AddRange(new Telerik.WinControls.RadItem[] {

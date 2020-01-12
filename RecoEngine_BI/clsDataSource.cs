@@ -30,7 +30,7 @@ namespace RecoEngine_BI
                 }
                 else if (Common.iDBType == 3) ;
                 {
-                    str = " Select count(1) FROM TRE_CALCULATED_COLUMNS c WHERE   colname = '" + strColName.ToUpper() + "'  ";
+                    str = " Select count(1) FROM TRE_CALCULATED_COLUMNS c WHERE   colname = '" + strColName.ToUpper() + "'  and project_id="+ProjectId;
 
                     num = int.Parse(((MySqlDBManager)Common.dbMgr).ExecuteScalar(CommandType.Text, str));
                 }

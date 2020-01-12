@@ -34,7 +34,6 @@
             Telerik.WinControls.UI.RadListDataItem radListDataItem2 = new Telerik.WinControls.UI.RadListDataItem();
             this.lblName = new System.Windows.Forms.Label();
             this.gbMain = new Telerik.WinControls.UI.RadGroupBox();
-            this.rbtnPreview = new Telerik.WinControls.UI.RadButton();
             this.btnNonusr = new Telerik.WinControls.UI.RadButton();
             this.btnNewusr = new Telerik.WinControls.UI.RadButton();
             this.btnFlat = new Telerik.WinControls.UI.RadButton();
@@ -67,8 +66,6 @@
             label5 = new System.Windows.Forms.Label();
             label1 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.gbMain)).BeginInit();
-            this.gbMain.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.rbtnPreview)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.btnNonusr)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.btnNewusr)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.btnFlat)).BeginInit();
@@ -82,7 +79,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.lstBoxItems)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.lstItemTypes)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.radPanel2)).BeginInit();
-            this.radPanel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.btnLessthanorEqual)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.btnLessthan)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.btnGreaterThanorEqual)).BeginInit();
@@ -104,7 +100,7 @@
             label5.AutoSize = true;
             label5.Location = new System.Drawing.Point(409, 159);
             label5.Name = "label5";
-            label5.Size = new System.Drawing.Size(40, 13);
+            label5.Size = new System.Drawing.Size(48, 19);
             label5.TabIndex = 24;
             label5.Text = "Errors:";
             label5.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -114,7 +110,7 @@
             label1.AutoSize = true;
             label1.Location = new System.Drawing.Point(409, 135);
             label1.Name = "label1";
-            label1.Size = new System.Drawing.Size(42, 13);
+            label1.Size = new System.Drawing.Size(49, 19);
             label1.TabIndex = 22;
             label1.Text = "Result:";
             label1.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -124,7 +120,7 @@
             this.lblName.AutoSize = true;
             this.lblName.Location = new System.Drawing.Point(41, 362);
             this.lblName.Name = "lblName";
-            this.lblName.Size = new System.Drawing.Size(42, 13);
+            this.lblName.Size = new System.Drawing.Size(52, 19);
             this.lblName.TabIndex = 30;
             this.lblName.Text = "Name :";
             this.lblName.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -133,13 +129,13 @@
             // gbMain
             // 
             this.gbMain.AccessibleRole = System.Windows.Forms.AccessibleRole.Grouping;
-            this.gbMain.Controls.Add(this.rbtnPreview);
-            this.gbMain.Controls.Add(this.btnNonusr);
-            this.gbMain.Controls.Add(this.btnNewusr);
-            this.gbMain.Controls.Add(this.btnFlat);
-            this.gbMain.Controls.Add(this.btnGrower);
-            this.gbMain.Controls.Add(this.btnDropper);
+            this.gbMain.BackColor = System.Drawing.SystemColors.ControlLightLight;
             this.gbMain.Controls.Add(this.btnStopper);
+            this.gbMain.Controls.Add(this.btnDropper);
+            this.gbMain.Controls.Add(this.btnGrower);
+            this.gbMain.Controls.Add(this.btnFlat);
+            this.gbMain.Controls.Add(this.btnNewusr);
+            this.gbMain.Controls.Add(this.btnNonusr);
             this.gbMain.Controls.Add(this.lblName);
             this.gbMain.Controls.Add(this.txtName);
             this.gbMain.Controls.Add(this.btnCancel);
@@ -168,26 +164,27 @@
             // 
             // 
             // 
+            this.gbMain.RootElement.AccessibleDescription = null;
+            this.gbMain.RootElement.AccessibleName = null;
+            this.gbMain.RootElement.ControlBounds = new System.Drawing.Rectangle(0, 0, 200, 100);
             this.gbMain.RootElement.Padding = new System.Windows.Forms.Padding(10, 10, 10, 2);
             this.gbMain.Size = new System.Drawing.Size(645, 383);
             this.gbMain.TabIndex = 9;
             // 
-            // rbtnPreview
-            // 
-            this.rbtnPreview.Font = new System.Drawing.Font("Arial", 8F);
-            this.rbtnPreview.Location = new System.Drawing.Point(494, 324);
-            this.rbtnPreview.Name = "rbtnPreview";
-            this.rbtnPreview.Size = new System.Drawing.Size(61, 24);
-            this.rbtnPreview.TabIndex = 37;
-            this.rbtnPreview.Text = "Preview";
-            this.rbtnPreview.Click += new System.EventHandler(this.rbtnPreview_Click);
-            // 
             // btnNonusr
             // 
+            this.btnNonusr.BackColor = System.Drawing.SystemColors.ControlLightLight;
             this.btnNonusr.Enabled = false;
             this.btnNonusr.Font = new System.Drawing.Font("Arial", 8F);
             this.btnNonusr.Location = new System.Drawing.Point(531, 289);
             this.btnNonusr.Name = "btnNonusr";
+            // 
+            // 
+            // 
+            this.btnNonusr.RootElement.AccessibleDescription = null;
+            this.btnNonusr.RootElement.AccessibleName = null;
+            this.btnNonusr.RootElement.ControlBounds = new System.Drawing.Rectangle(0, 0, 130, 24);
+            this.btnNonusr.RootElement.Enabled = false;
             this.btnNonusr.Size = new System.Drawing.Size(76, 24);
             this.btnNonusr.TabIndex = 36;
             this.btnNonusr.Text = "Non User";
@@ -196,10 +193,18 @@
             // 
             // btnNewusr
             // 
+            this.btnNewusr.BackColor = System.Drawing.SystemColors.ControlLightLight;
             this.btnNewusr.Enabled = false;
             this.btnNewusr.Font = new System.Drawing.Font("Arial", 8F);
             this.btnNewusr.Location = new System.Drawing.Point(433, 289);
             this.btnNewusr.Name = "btnNewusr";
+            // 
+            // 
+            // 
+            this.btnNewusr.RootElement.AccessibleDescription = null;
+            this.btnNewusr.RootElement.AccessibleName = null;
+            this.btnNewusr.RootElement.ControlBounds = new System.Drawing.Rectangle(0, 0, 130, 24);
+            this.btnNewusr.RootElement.Enabled = false;
             this.btnNewusr.Size = new System.Drawing.Size(76, 24);
             this.btnNewusr.TabIndex = 35;
             this.btnNewusr.Text = "New User";
@@ -208,10 +213,18 @@
             // 
             // btnFlat
             // 
+            this.btnFlat.BackColor = System.Drawing.SystemColors.ControlLightLight;
             this.btnFlat.Enabled = false;
             this.btnFlat.Font = new System.Drawing.Font("Arial", 8F);
             this.btnFlat.Location = new System.Drawing.Point(433, 257);
             this.btnFlat.Name = "btnFlat";
+            // 
+            // 
+            // 
+            this.btnFlat.RootElement.AccessibleDescription = null;
+            this.btnFlat.RootElement.AccessibleName = null;
+            this.btnFlat.RootElement.ControlBounds = new System.Drawing.Rectangle(0, 0, 130, 24);
+            this.btnFlat.RootElement.Enabled = false;
             this.btnFlat.Size = new System.Drawing.Size(76, 24);
             this.btnFlat.TabIndex = 34;
             this.btnFlat.Text = "Flat";
@@ -220,10 +233,18 @@
             // 
             // btnGrower
             // 
+            this.btnGrower.BackColor = System.Drawing.SystemColors.ControlLightLight;
             this.btnGrower.Enabled = false;
             this.btnGrower.Font = new System.Drawing.Font("Arial", 8F);
             this.btnGrower.Location = new System.Drawing.Point(531, 257);
             this.btnGrower.Name = "btnGrower";
+            // 
+            // 
+            // 
+            this.btnGrower.RootElement.AccessibleDescription = null;
+            this.btnGrower.RootElement.AccessibleName = null;
+            this.btnGrower.RootElement.ControlBounds = new System.Drawing.Rectangle(0, 0, 130, 24);
+            this.btnGrower.RootElement.Enabled = false;
             this.btnGrower.Size = new System.Drawing.Size(76, 24);
             this.btnGrower.TabIndex = 33;
             this.btnGrower.Text = "Grower";
@@ -232,10 +253,18 @@
             // 
             // btnDropper
             // 
+            this.btnDropper.BackColor = System.Drawing.SystemColors.ControlLightLight;
             this.btnDropper.Enabled = false;
             this.btnDropper.Font = new System.Drawing.Font("Arial", 8F);
             this.btnDropper.Location = new System.Drawing.Point(531, 222);
             this.btnDropper.Name = "btnDropper";
+            // 
+            // 
+            // 
+            this.btnDropper.RootElement.AccessibleDescription = null;
+            this.btnDropper.RootElement.AccessibleName = null;
+            this.btnDropper.RootElement.ControlBounds = new System.Drawing.Rectangle(0, 0, 130, 24);
+            this.btnDropper.RootElement.Enabled = false;
             this.btnDropper.Size = new System.Drawing.Size(76, 24);
             this.btnDropper.TabIndex = 32;
             this.btnDropper.Text = "Dropper";
@@ -244,10 +273,18 @@
             // 
             // btnStopper
             // 
+            this.btnStopper.BackColor = System.Drawing.SystemColors.ControlLightLight;
             this.btnStopper.Enabled = false;
             this.btnStopper.Font = new System.Drawing.Font("Arial", 8F);
             this.btnStopper.Location = new System.Drawing.Point(433, 222);
             this.btnStopper.Name = "btnStopper";
+            // 
+            // 
+            // 
+            this.btnStopper.RootElement.AccessibleDescription = null;
+            this.btnStopper.RootElement.AccessibleName = null;
+            this.btnStopper.RootElement.ControlBounds = new System.Drawing.Rectangle(0, 0, 130, 24);
+            this.btnStopper.RootElement.Enabled = false;
             this.btnStopper.Size = new System.Drawing.Size(76, 24);
             this.btnStopper.TabIndex = 31;
             this.btnStopper.Text = "Stopper";
@@ -256,9 +293,17 @@
             // 
             // txtName
             // 
+            this.txtName.BackColor = System.Drawing.SystemColors.ControlLightLight;
             this.txtName.Location = new System.Drawing.Point(92, 358);
             this.txtName.MaxLength = 30;
             this.txtName.Name = "txtName";
+            // 
+            // 
+            // 
+            this.txtName.RootElement.AccessibleDescription = null;
+            this.txtName.RootElement.AccessibleName = null;
+            this.txtName.RootElement.ControlBounds = new System.Drawing.Rectangle(0, 0, 100, 20);
+            this.txtName.RootElement.StretchVertically = true;
             this.txtName.Size = new System.Drawing.Size(310, 20);
             this.txtName.TabIndex = 29;
             this.txtName.TabStop = false;
@@ -268,9 +313,16 @@
             // 
             // btnCancel
             // 
+            this.btnCancel.BackColor = System.Drawing.SystemColors.ControlLightLight;
             this.btnCancel.Font = new System.Drawing.Font("Arial", 8F);
             this.btnCancel.Location = new System.Drawing.Point(570, 354);
             this.btnCancel.Name = "btnCancel";
+            // 
+            // 
+            // 
+            this.btnCancel.RootElement.AccessibleDescription = null;
+            this.btnCancel.RootElement.AccessibleName = null;
+            this.btnCancel.RootElement.ControlBounds = new System.Drawing.Rectangle(0, 0, 130, 24);
             this.btnCancel.Size = new System.Drawing.Size(61, 24);
             this.btnCancel.TabIndex = 28;
             this.btnCancel.Text = "Cancel";
@@ -278,9 +330,16 @@
             // 
             // btnTest
             // 
+            this.btnTest.BackColor = System.Drawing.SystemColors.ControlLightLight;
             this.btnTest.Font = new System.Drawing.Font("Arial", 8F);
             this.btnTest.Location = new System.Drawing.Point(494, 354);
             this.btnTest.Name = "btnTest";
+            // 
+            // 
+            // 
+            this.btnTest.RootElement.AccessibleDescription = null;
+            this.btnTest.RootElement.AccessibleName = null;
+            this.btnTest.RootElement.ControlBounds = new System.Drawing.Rectangle(0, 0, 130, 24);
             this.btnTest.Size = new System.Drawing.Size(61, 24);
             this.btnTest.TabIndex = 27;
             this.btnTest.Text = "Test";
@@ -288,9 +347,16 @@
             // 
             // btnOk
             // 
+            this.btnOk.BackColor = System.Drawing.SystemColors.ControlLightLight;
             this.btnOk.Font = new System.Drawing.Font("Arial", 8F);
             this.btnOk.Location = new System.Drawing.Point(417, 354);
             this.btnOk.Name = "btnOk";
+            // 
+            // 
+            // 
+            this.btnOk.RootElement.AccessibleDescription = null;
+            this.btnOk.RootElement.AccessibleName = null;
+            this.btnOk.RootElement.ControlBounds = new System.Drawing.Rectangle(0, 0, 130, 24);
             this.btnOk.Size = new System.Drawing.Size(61, 24);
             this.btnOk.TabIndex = 26;
             this.btnOk.Text = "Ok";
@@ -324,20 +390,27 @@
             // lstBoxItems
             // 
             this.lstBoxItems.AutoScroll = true;
+            this.lstBoxItems.BackColor = System.Drawing.SystemColors.ControlLightLight;
             this.lstBoxItems.CaseSensitiveSort = true;
             this.lstBoxItems.Font = new System.Drawing.Font("Arial", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lstBoxItems.ItemHeight = 18;
             this.lstBoxItems.Location = new System.Drawing.Point(89, 135);
             this.lstBoxItems.Name = "lstBoxItems";
+            // 
+            // 
+            // 
+            this.lstBoxItems.RootElement.AccessibleDescription = null;
+            this.lstBoxItems.RootElement.AccessibleName = null;
+            this.lstBoxItems.RootElement.ControlBounds = new System.Drawing.Rectangle(0, 0, 120, 95);
             this.lstBoxItems.Size = new System.Drawing.Size(313, 216);
             this.lstBoxItems.TabIndex = 16;
             this.lstBoxItems.Text = "radListControl1";
             this.lstBoxItems.SelectedIndexChanged += new Telerik.WinControls.UI.Data.PositionChangedEventHandler(this.lstBoxItems_SelectedIndexChanged);
-            //this.lstBoxItems.DoubleClick += new System.EventHandler(this.lstBoxItems_DoubleClick);
             this.lstBoxItems.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.lstBoxItems_MouseDoubleClick);
             // 
             // lstItemTypes
             // 
+            this.lstItemTypes.BackColor = System.Drawing.SystemColors.ControlLightLight;
             this.lstItemTypes.CaseSensitiveSort = true;
             this.lstItemTypes.Font = new System.Drawing.Font("Arial", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lstItemTypes.ItemHeight = 18;
@@ -349,6 +422,12 @@
             this.lstItemTypes.Items.Add(radListDataItem2);
             this.lstItemTypes.Location = new System.Drawing.Point(13, 135);
             this.lstItemTypes.Name = "lstItemTypes";
+            // 
+            // 
+            // 
+            this.lstItemTypes.RootElement.AccessibleDescription = null;
+            this.lstItemTypes.RootElement.AccessibleName = null;
+            this.lstItemTypes.RootElement.ControlBounds = new System.Drawing.Rectangle(0, 0, 120, 95);
             this.lstItemTypes.Size = new System.Drawing.Size(70, 216);
             this.lstItemTypes.TabIndex = 15;
             this.lstItemTypes.Text = "radListControl1";
@@ -356,6 +435,7 @@
             // 
             // radPanel2
             // 
+            this.radPanel2.BackColor = System.Drawing.SystemColors.ControlLightLight;
             this.radPanel2.Controls.Add(this.lblDteformat);
             this.radPanel2.Controls.Add(this.btnLessthanorEqual);
             this.radPanel2.Controls.Add(this.btnLessthan);
@@ -372,6 +452,12 @@
             this.radPanel2.Dock = System.Windows.Forms.DockStyle.Top;
             this.radPanel2.Location = new System.Drawing.Point(10, 73);
             this.radPanel2.Name = "radPanel2";
+            // 
+            // 
+            // 
+            this.radPanel2.RootElement.AccessibleDescription = null;
+            this.radPanel2.RootElement.AccessibleName = null;
+            this.radPanel2.RootElement.ControlBounds = new System.Drawing.Rectangle(0, 0, 200, 100);
             this.radPanel2.Size = new System.Drawing.Size(625, 37);
             this.radPanel2.TabIndex = 14;
             // 
@@ -381,15 +467,22 @@
             this.lblDteformat.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblDteformat.Location = new System.Drawing.Point(420, 11);
             this.lblDteformat.Name = "lblDteformat";
-            this.lblDteformat.Size = new System.Drawing.Size(195, 15);
+            this.lblDteformat.Size = new System.Drawing.Size(245, 20);
             this.lblDteformat.TabIndex = 26;
             this.lblDteformat.Text = "Date must be of format MM/DD/YY";
             // 
             // btnLessthanorEqual
             // 
+            this.btnLessthanorEqual.BackColor = System.Drawing.SystemColors.ControlLightLight;
             this.btnLessthanorEqual.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnLessthanorEqual.Location = new System.Drawing.Point(381, 6);
             this.btnLessthanorEqual.Name = "btnLessthanorEqual";
+            // 
+            // 
+            // 
+            this.btnLessthanorEqual.RootElement.AccessibleDescription = null;
+            this.btnLessthanorEqual.RootElement.AccessibleName = null;
+            this.btnLessthanorEqual.RootElement.ControlBounds = new System.Drawing.Rectangle(0, 0, 130, 24);
             this.btnLessthanorEqual.Size = new System.Drawing.Size(23, 24);
             this.btnLessthanorEqual.TabIndex = 25;
             this.btnLessthanorEqual.Text = "<=";
@@ -397,9 +490,16 @@
             // 
             // btnLessthan
             // 
+            this.btnLessthan.BackColor = System.Drawing.SystemColors.ControlLightLight;
             this.btnLessthan.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnLessthan.Location = new System.Drawing.Point(353, 6);
             this.btnLessthan.Name = "btnLessthan";
+            // 
+            // 
+            // 
+            this.btnLessthan.RootElement.AccessibleDescription = null;
+            this.btnLessthan.RootElement.AccessibleName = null;
+            this.btnLessthan.RootElement.ControlBounds = new System.Drawing.Rectangle(0, 0, 130, 24);
             this.btnLessthan.Size = new System.Drawing.Size(26, 24);
             this.btnLessthan.TabIndex = 24;
             this.btnLessthan.Text = "<";
@@ -407,9 +507,16 @@
             // 
             // btnGreaterThanorEqual
             // 
+            this.btnGreaterThanorEqual.BackColor = System.Drawing.SystemColors.ControlLightLight;
             this.btnGreaterThanorEqual.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnGreaterThanorEqual.Location = new System.Drawing.Point(327, 6);
             this.btnGreaterThanorEqual.Name = "btnGreaterThanorEqual";
+            // 
+            // 
+            // 
+            this.btnGreaterThanorEqual.RootElement.AccessibleDescription = null;
+            this.btnGreaterThanorEqual.RootElement.AccessibleName = null;
+            this.btnGreaterThanorEqual.RootElement.ControlBounds = new System.Drawing.Rectangle(0, 0, 130, 24);
             this.btnGreaterThanorEqual.Size = new System.Drawing.Size(26, 24);
             this.btnGreaterThanorEqual.TabIndex = 23;
             this.btnGreaterThanorEqual.Text = ">=";
@@ -417,9 +524,16 @@
             // 
             // btnGreaterthan
             // 
+            this.btnGreaterthan.BackColor = System.Drawing.SystemColors.ControlLightLight;
             this.btnGreaterthan.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnGreaterthan.Location = new System.Drawing.Point(300, 6);
             this.btnGreaterthan.Name = "btnGreaterthan";
+            // 
+            // 
+            // 
+            this.btnGreaterthan.RootElement.AccessibleDescription = null;
+            this.btnGreaterthan.RootElement.AccessibleName = null;
+            this.btnGreaterthan.RootElement.ControlBounds = new System.Drawing.Rectangle(0, 0, 130, 24);
             this.btnGreaterthan.Size = new System.Drawing.Size(26, 24);
             this.btnGreaterthan.TabIndex = 22;
             this.btnGreaterthan.Text = ">";
@@ -427,9 +541,16 @@
             // 
             // btnNotEqual
             // 
+            this.btnNotEqual.BackColor = System.Drawing.SystemColors.ControlLightLight;
             this.btnNotEqual.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnNotEqual.Location = new System.Drawing.Point(252, 6);
             this.btnNotEqual.Name = "btnNotEqual";
+            // 
+            // 
+            // 
+            this.btnNotEqual.RootElement.AccessibleDescription = null;
+            this.btnNotEqual.RootElement.AccessibleName = null;
+            this.btnNotEqual.RootElement.ControlBounds = new System.Drawing.Rectangle(0, 0, 130, 24);
             this.btnNotEqual.Size = new System.Drawing.Size(26, 24);
             this.btnNotEqual.TabIndex = 21;
             this.btnNotEqual.Text = "<>";
@@ -437,9 +558,16 @@
             // 
             // btnEqual
             // 
+            this.btnEqual.BackColor = System.Drawing.SystemColors.ControlLightLight;
             this.btnEqual.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnEqual.Location = new System.Drawing.Point(230, 6);
             this.btnEqual.Name = "btnEqual";
+            // 
+            // 
+            // 
+            this.btnEqual.RootElement.AccessibleDescription = null;
+            this.btnEqual.RootElement.AccessibleName = null;
+            this.btnEqual.RootElement.ControlBounds = new System.Drawing.Rectangle(0, 0, 130, 24);
             this.btnEqual.Size = new System.Drawing.Size(26, 24);
             this.btnEqual.TabIndex = 20;
             this.btnEqual.Text = "=";
@@ -447,9 +575,16 @@
             // 
             // btnEnd
             // 
+            this.btnEnd.BackColor = System.Drawing.SystemColors.ControlLightLight;
             this.btnEnd.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnEnd.Location = new System.Drawing.Point(177, 6);
             this.btnEnd.Name = "btnEnd";
+            // 
+            // 
+            // 
+            this.btnEnd.RootElement.AccessibleDescription = null;
+            this.btnEnd.RootElement.AccessibleName = null;
+            this.btnEnd.RootElement.ControlBounds = new System.Drawing.Rectangle(0, 0, 130, 24);
             this.btnEnd.Size = new System.Drawing.Size(26, 24);
             this.btnEnd.TabIndex = 19;
             this.btnEnd.Text = ")";
@@ -457,9 +592,16 @@
             // 
             // btnStart
             // 
+            this.btnStart.BackColor = System.Drawing.SystemColors.ControlLightLight;
             this.btnStart.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnStart.Location = new System.Drawing.Point(151, 6);
             this.btnStart.Name = "btnStart";
+            // 
+            // 
+            // 
+            this.btnStart.RootElement.AccessibleDescription = null;
+            this.btnStart.RootElement.AccessibleName = null;
+            this.btnStart.RootElement.ControlBounds = new System.Drawing.Rectangle(0, 0, 130, 24);
             this.btnStart.Size = new System.Drawing.Size(26, 24);
             this.btnStart.TabIndex = 18;
             this.btnStart.Text = "(";
@@ -467,9 +609,16 @@
             // 
             // btnDevide
             // 
+            this.btnDevide.BackColor = System.Drawing.SystemColors.ControlLightLight;
             this.btnDevide.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnDevide.Location = new System.Drawing.Point(125, 6);
             this.btnDevide.Name = "btnDevide";
+            // 
+            // 
+            // 
+            this.btnDevide.RootElement.AccessibleDescription = null;
+            this.btnDevide.RootElement.AccessibleName = null;
+            this.btnDevide.RootElement.ControlBounds = new System.Drawing.Rectangle(0, 0, 130, 24);
             this.btnDevide.Size = new System.Drawing.Size(26, 24);
             this.btnDevide.TabIndex = 17;
             this.btnDevide.Text = "/";
@@ -477,9 +626,16 @@
             // 
             // btnX
             // 
+            this.btnX.BackColor = System.Drawing.SystemColors.ControlLightLight;
             this.btnX.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnX.Location = new System.Drawing.Point(99, 6);
             this.btnX.Name = "btnX";
+            // 
+            // 
+            // 
+            this.btnX.RootElement.AccessibleDescription = null;
+            this.btnX.RootElement.AccessibleName = null;
+            this.btnX.RootElement.ControlBounds = new System.Drawing.Rectangle(0, 0, 130, 24);
             this.btnX.Size = new System.Drawing.Size(26, 24);
             this.btnX.TabIndex = 16;
             this.btnX.Text = "*";
@@ -487,9 +643,16 @@
             // 
             // btnSub
             // 
+            this.btnSub.BackColor = System.Drawing.SystemColors.ControlLightLight;
             this.btnSub.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnSub.Location = new System.Drawing.Point(73, 6);
             this.btnSub.Name = "btnSub";
+            // 
+            // 
+            // 
+            this.btnSub.RootElement.AccessibleDescription = null;
+            this.btnSub.RootElement.AccessibleName = null;
+            this.btnSub.RootElement.ControlBounds = new System.Drawing.Rectangle(0, 0, 130, 24);
             this.btnSub.Size = new System.Drawing.Size(26, 24);
             this.btnSub.TabIndex = 15;
             this.btnSub.Text = "-";
@@ -497,9 +660,16 @@
             // 
             // btnAdd
             // 
+            this.btnAdd.BackColor = System.Drawing.SystemColors.ControlLightLight;
             this.btnAdd.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnAdd.Location = new System.Drawing.Point(46, 6);
             this.btnAdd.Name = "btnAdd";
+            // 
+            // 
+            // 
+            this.btnAdd.RootElement.AccessibleDescription = null;
+            this.btnAdd.RootElement.AccessibleName = null;
+            this.btnAdd.RootElement.ControlBounds = new System.Drawing.Rectangle(0, 0, 130, 24);
             this.btnAdd.Size = new System.Drawing.Size(26, 24);
             this.btnAdd.TabIndex = 14;
             this.btnAdd.Text = "+";
@@ -508,11 +678,18 @@
             // txtExpression
             // 
             this.txtExpression.AcceptsReturn = true;
+            this.txtExpression.BackColor = System.Drawing.SystemColors.ControlLightLight;
             this.txtExpression.Dock = System.Windows.Forms.DockStyle.Top;
             this.txtExpression.Location = new System.Drawing.Point(10, 10);
             this.txtExpression.MaxLength = 1000;
             this.txtExpression.Multiline = true;
             this.txtExpression.Name = "txtExpression";
+            // 
+            // 
+            // 
+            this.txtExpression.RootElement.AccessibleDescription = null;
+            this.txtExpression.RootElement.AccessibleName = null;
+            this.txtExpression.RootElement.ControlBounds = new System.Drawing.Rectangle(0, 0, 108, 20);
             this.txtExpression.Size = new System.Drawing.Size(625, 63);
             this.txtExpression.TabIndex = 12;
             // 
@@ -532,9 +709,6 @@
             this.ThemeName = "ControlDefault";
             this.Load += new System.EventHandler(this.frmExpressEditor_Load);
             ((System.ComponentModel.ISupportInitialize)(this.gbMain)).EndInit();
-            this.gbMain.ResumeLayout(false);
-            this.gbMain.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.rbtnPreview)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.btnNonusr)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.btnNewusr)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.btnFlat)).EndInit();
@@ -548,8 +722,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.lstBoxItems)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.lstItemTypes)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.radPanel2)).EndInit();
-            this.radPanel2.ResumeLayout(false);
-            this.radPanel2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.btnLessthanorEqual)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.btnLessthan)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.btnGreaterThanorEqual)).EndInit();
@@ -601,7 +773,6 @@
         private Telerik.WinControls.UI.RadButton btnStopper;
         private Telerik.WinControls.UI.RadButton btnNewusr;
         private Telerik.WinControls.UI.RadButton btnNonusr;
-        private Telerik.WinControls.UI.RadButton rbtnPreview;
 
     }
 }

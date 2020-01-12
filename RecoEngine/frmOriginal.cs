@@ -99,7 +99,7 @@ namespace RecoEngine
             pgExport.Enabled = bIsEnable;
             pgUserManagement.Enabled = bIsEnable;
            // pgOfferLibrary.Enabled = bIsEnable;
-            pgReports.Enabled = bIsEnable;
+            //pgReports.Enabled = bIsEnable;
             btnPreview.Enabled = bIsEnable;
 
         }
@@ -174,7 +174,7 @@ namespace RecoEngine
             pgExport.Enabled = true;
             pgUserManagement.Enabled = true;
             //pgOfferLibrary.Enabled = true;
-            pgReports.Enabled = true;
+            //pgReports.Enabled = true;
             btnPreview.Enabled = true;
 
             radLeftMenu.SelectedPage = radLeftMenu.Pages["pgRecommendation"];

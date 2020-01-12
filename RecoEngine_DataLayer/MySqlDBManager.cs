@@ -5,6 +5,7 @@ using System.Text;
 using MySql.Data.MySqlClient;
 using System.Data;
 using System.Threading.Tasks;
+using System.Configuration;
 
 namespace RecoEngine_DataLayer
 {
@@ -265,36 +266,6 @@ namespace RecoEngine_DataLayer
 
         }
 
-        //public int ExecuteNonQueryprocedure(CommandType CmdType, string CmdText, MySqlParameter[] Params,MySqlCommand cmd,string sql)
-        //{
-
-        //    if (bDebugOn == true)
-        //        System.Windows.Forms.MessageBox.Show(CmdText, strProductName, System.Windows.Forms.MessageBoxButtons.OK, System.Windows.Forms.MessageBoxIcon.Information);
-
-        //    try
-        //    {
-              
-        //        int retVal;
-        //         if (!bInTransaction)
-        //            OpenConnection();
-        //        PrepareCommand(ref cmd, CmdType, CmdText, Params);
-
-        //        if (bInTransaction)
-        //            cmd.Transaction = _Transaction;
-
-        //        retVal = cmd.ExecuteNonQuery();
-
-        //        if (!bInTransaction)
-        //            CloseConnection();
-
-        //        cmd.Parameters.Clear();
-        //        return retVal;
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        throw ex;
-        //    }
-        //}
 
         public int ExecuteNonQuery(CommandType CmdType, string CmdText, MySqlParameter[] Params)
         {
@@ -550,38 +521,13 @@ namespace RecoEngine_DataLayer
             CloseConnection();
             return Convert.ToInt32(cmd.Parameters["RETURN_VALUE"].Value);
         }
-        public  void savepotentialRanking(int ProjectId)
-        {
-            try {
-                MySqlCommand cmd = new MySqlCommand();
-                MySqlConnection con = new MySqlConnection("server=localhost; user id=root; password=Password@123;port=3308; database=recousr; pooling=false;");
-                con.Open();
-                cmd.Connection = con;
-                cmd.CommandText = "recousr.InsertTreRanking";
-                cmd.CommandType = CommandType.StoredProcedure;
-                MySqlParameter par;
-
-                par = new MySqlParameter("ProjectId", MySqlDbType.Int16);
-                par.Value = ProjectId;
-                par.Direction = ParameterDirection.Input;
-                cmd.Parameters.Add(par);
-
-                cmd.ExecuteNonQuery();
-                con.Close();
-            }
-            catch(Exception ex)
-            {
-                throw ex;
-            
-            }
-        }
         public void savepotentialRankingExport(int ProjectId)
         {
 
             try
             {
                 MySqlCommand cmd = new MySqlCommand();
-                MySqlConnection con = new MySqlConnection(@"server=localhost; user id=root; password=Password@123;port=3308; database=recousr; pooling=false;Allow User Variables=True");
+                MySqlConnection con = new MySqlConnection(ConfigurationManager.AppSettings["MysqlConnectionString"].ToString());
                 con.Open();
                 cmd.Connection = con;
                 cmd.CommandText = "recousr.Inserttreranking_base";

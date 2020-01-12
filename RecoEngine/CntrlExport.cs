@@ -297,7 +297,7 @@ namespace RecoEngine
         {
             try
             {
-                Common.iProjectID = Convert.ToInt16(this.cmbProject.SelectedValue);
+               // Common.iProjectID = Convert.ToInt16(this.cmbProject.SelectedValue);
                 DataTable dataTable = this.objExport.fnGetCountValues(Common.iProjectID, Common.strTableName);
                 this.lblCustomers.Text = "";
                 this.lblSegment.Text = "";
@@ -354,6 +354,21 @@ namespace RecoEngine
                 this.cmbProject.DisplayMember = "Name";
                 this.cmbProject.ValueMember = "Project_Id";
                 this.cmbProject.DataSource = dataTable1;
+               
+                int i = 0;
+                for (int j = 0; j < dataTable1.Rows.Count; j++)
+                {
+                    if (Common.iProjectID == Convert.ToInt16(dataTable1.Rows[j]["Project_Id"]))
+                    {
+
+                        i = j;
+                        break;
+                    }
+                }
+                cmbProject.SelectedIndex = i;
+
+           
+               
             }
             catch (Exception exception1)
             {
@@ -508,7 +523,8 @@ namespace RecoEngine
 
         private void btnRankingsExport_Click(object sender, EventArgs e)
         {
-
+            
+            Common.iProjectID = Convert.ToInt16(cmbProject.SelectedValue);
             string str = this.chkddlTP1.m_TextBox.Text.ToString();
             char[] chrArray = new char[] { ';' };
             Common.timePeriods.strtp1 = str.Split(chrArray).ToArray<string>();

@@ -117,58 +117,106 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <metadata name="setupPanel.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>490, 146</value>
+  <metadata name="radStatusStrip1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>17, 17</value>
   </metadata>
-  <metadata name="recommendationPanel.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>740, 146</value>
+  <metadata name="rdMainSplit.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>287, 146</value>
   </metadata>
-  <metadata name="dataSourcePanel.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>488, 60</value>
+  <metadata name="splitPanel1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>161, 146</value>
+  </metadata>
+  <metadata name="radLeftMenu.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>17, 146</value>
+  </metadata>
+  <metadata name="pgExport.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>1457, 103</value>
   </metadata>
   <metadata name="btnExport.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>950, 146</value>
+    <value>1334, 103</value>
+  </metadata>
+  <metadata name="pgUserManagement.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>1142, 103</value>
   </metadata>
   <metadata name="btnSetup.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>621, 146</value>
+    <value>1023, 103</value>
+  </metadata>
+  <metadata name="setupPanel.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>892, 103</value>
+  </metadata>
+  <metadata name="pgReports.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>769, 103</value>
+  </metadata>
+  <metadata name="reportsPanel.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>627, 103</value>
+  </metadata>
+  <metadata name="btnCampaignsReports.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>419, 103</value>
+  </metadata>
+  <metadata name="btnOppurtunityreports.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>208, 103</value>
+  </metadata>
+  <metadata name="pgRecommendation.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>17, 103</value>
+  </metadata>
+  <metadata name="recommendationPanel.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>1352, 60</value>
+  </metadata>
+  <metadata name="btnOppurtunities.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>422, 146</value>
+  </metadata>
+  <metadata name="btnThresholds.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>1198, 60</value>
+  </metadata>
+  <metadata name="btnOppurtunityMapping.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>828, 60</value>
+  </metadata>
+  <metadata name="btnMovementWindow.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>618, 60</value>
+  </metadata>
+  <metadata name="pgDataSource.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>469, 60</value>
+  </metadata>
+  <metadata name="dataSourcePanel.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>299, 60</value>
+  </metadata>
+  <metadata name="btnPreview.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>167, 60</value>
+  </metadata>
+  <metadata name="btnDataFields.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>17, 60</value>
+  </metadata>
+  <metadata name="btnDataConnection.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>1344, 17</value>
+  </metadata>
+  <metadata name="leftToppanel.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>1202, 17</value>
+  </metadata>
+  <metadata name="splitPanel2.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>1076, 17</value>
+  </metadata>
+  <metadata name="bottomRightPanel.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>895, 17</value>
+  </metadata>
+  <metadata name="topRightpanel.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>742, 17</value>
+  </metadata>
+  <metadata name="btnCampaignMapping.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>532, 17</value>
   </metadata>
   <metadata name="office2010BlueTheme1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>422, 189</value>
+    <value>320, 17</value>
   </metadata>
-  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
-  <data name="rbTREDetails.StartButtonImage" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
-    <value>
-        iVBORw0KGgoAAAANSUhEUgAAABkAAAAZCAYAAADE6YVjAAAABGdBTUEAALGPC/xhBQAAABl0RVh0U29m
-        dHdhcmUAQWRvYmUgSW1hZ2VSZWFkeXHJZTwAAASCSURBVEhLnZV7UFR1FMcPiID0AI0EeaQh4myrgaDt
-        BlKK4hBkTU6IjYGKTc2ATBbjDDsVRjYZIqCCTfEmZMqcapqcJkotIx4J8RCQsXzACgu7LLIgOCjKt3Pv
-        wrLP0v74zO/u7957Puf87vn9lgCItN4qpOG3dxN8NxGkmwnLppBuDkLQ1u+wans5Vm0rs0IpguOPQxJ3
-        hvllatSzNLYe8sSiGQmKqHX8U9Jt3ULwXEuYv4bgzfhGSOEWpoTDSsAxbAKOoda4w/eE+zPMFnga8Ijq
-        N0jOo4BaUEjNKKWrtVk0kaAgvJhGiE8nxKWtx4MyLexlgHM4s/remB0KeEb3mEhap2hGMbWPF1P/qc9o
-        ck8eYftBQkTyDsyRj3LWgMsz1pnDCRgjVLQgRmlVItDC/MmVXWrKp5Hd++nu83vtsTQ+A7SCnw5khFEg
-        mAliluszN5aZS9o5+/NmtDEtKBGvO68XUM/xbAfNu2/u1CQlZGiSE0XUyTsyBlLeyLidoDgIr5hG8TvY
-        kjQgJ7YRua8wceY0iByKq0X+pjqUhNehUlaHCrlADUrD6nFy1Y3qWoJkiwIUMlONuSQT8zTZ8BzLxYIR
-        23gyXrpceA9Nk8VzhxGu7P/orQDYSdLEwLYk3yD2xPt8uZ/5+D74kDkA/2FV+utSkF8anLirjCVeMd0G
-        yQiUj36Ll6v4yyIL9jiIWSJZ/4GQVDYk2r69SRKQv6nEiSUeUSqDRC/qeuxLRFULoumKMo04ADsObG8h
-        yYVUo96bEgBarLCQPBKpNRJ0001oSINmaSUiG7MwF4fgzgHckANX5mEO6ijKzCWHEdinVSQvAvkoxE1o
-        KhkwSIbRJSLILuLEkmMI3fYF1rxajuDEMqzYWQC/1wqxJLUCYS1CYFOJpF/z1ZHH4RLyjtjCgsi25CoN
-        4S/qQAV9DhlVYjWVIpCK8QQVIID+QCZVIaXsA1GiXzZBkgdfde/NhqCJF1IXwk7+s0EkLN29SIohpRIs
-        491/mNRocq5CUvE+C4mX5ho6Zbf2HSU+ATzgHvmjePwIh6R75OC/Siog50qWi4Je1FAPfnOqwq5CS4m3
-        phf1shvqNppcGE3ctu5YEPU9HOXAvPU6m5IyhHAlodSEIyyopi5UseSs80/YVWRdUiMbhpbGc/IJrusI
-        fi/NxwNhGzE3YoNVSRsf9+VYyedZGXdbC6lQK8KdN+s0UvMtv4leMgIVDV/nap7kPzufjcQSYgkZSa4y
-        V+g6OukCKrmaY6TDZRpAmwH+bXcGe/LSbUqUnGSfvpqHuBpzifCA0L5atHOwK3QbI7xvBkwQ5npRu+4o
-        /Lv1J4OlRMfJ6kb/pjtxqdwEIaaSSdyd4g4zOTUvjOaAruHX6KMIuCIsm6XkMlejotFzpwkuciZ8RnKv
-        CIkI4zWcfe4TLFa+x9N58NGojCR6UR+Nnfya4Lb2/0sEVDi3Nh8BXZlwHeNKnhpBj7jU0wxBTaNnf7h/
-        iTk9+H1DJZ7t6MapdTpcokFuHGO0LLP64n3icBHHY1Wokw7iAgftMKOD/gGoJBmhTYqOxgAAAABJRU5E
-        rkJggg==
-</value>
-  </data>
+  <metadata name="rbTREDetails.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>178, 17</value>
+  </metadata>
   <metadata name="ellipseShape1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>808, 189</value>
+    <value>1052, 60</value>
   </metadata>
   <metadata name="roundRectShape1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>634, 189</value>
+    <value>596, 146</value>
   </metadata>
   <metadata name="$this.TrayHeight" type="System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>207</value>
+    <value>211</value>
   </metadata>
 </root>

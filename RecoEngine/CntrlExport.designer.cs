@@ -21,8 +21,8 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(CntrlExport));
             System.Windows.Forms.Button btnRankingsExport;
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(CntrlExport));
             this.gbMain = new Telerik.WinControls.UI.RadGroupBox();
             this.panel1 = new System.Windows.Forms.Panel();
             this.radLabel1 = new Telerik.WinControls.UI.RadLabel();
@@ -97,6 +97,18 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
+            // 
+            // btnRankingsExport
+            // 
+            btnRankingsExport.BackColor = System.Drawing.SystemColors.ActiveCaption;
+            btnRankingsExport.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
+            btnRankingsExport.Location = new System.Drawing.Point(726, 107);
+            btnRankingsExport.Name = "btnRankingsExport";
+            btnRankingsExport.Size = new System.Drawing.Size(170, 36);
+            btnRankingsExport.TabIndex = 104;
+            btnRankingsExport.Text = "RunRankings";
+            btnRankingsExport.UseVisualStyleBackColor = false;
+            btnRankingsExport.Click += new System.EventHandler(this.btnRankingsExport_Click);
             // 
             // gbMain
             // 
@@ -221,7 +233,7 @@
             // 
             this.btnRunPrjct.RootElement.AccessibleDescription = null;
             this.btnRunPrjct.RootElement.AccessibleName = null;
-            this.btnRunPrjct.RootElement.ControlBounds = new System.Drawing.Rectangle(0, 0, 130, 24);
+            this.btnRunPrjct.RootElement.ControlBounds = new System.Drawing.Rectangle(799, 54, 130, 24);
             this.btnRunPrjct.Size = new System.Drawing.Size(97, 32);
             this.btnRunPrjct.TabIndex = 98;
             this.btnRunPrjct.Text = "Run Project";
@@ -231,7 +243,7 @@
             // 
             this.lblProject.AutoSize = true;
             this.lblProject.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Bold);
-            this.lblProject.Location = new System.Drawing.Point(652, 13);
+            this.lblProject.Location = new System.Drawing.Point(654, 13);
             this.lblProject.Name = "lblProject";
             this.lblProject.Size = new System.Drawing.Size(132, 25);
             this.lblProject.TabIndex = 71;
@@ -287,6 +299,7 @@
             this.pnBottom.Name = "pnBottom";
             this.pnBottom.Size = new System.Drawing.Size(920, 234);
             this.pnBottom.TabIndex = 1;
+            this.pnBottom.Visible = false;
             // 
             // chkMaxRanking
             // 
@@ -622,7 +635,7 @@
             // 
             this.rbtnRunProject.RootElement.AccessibleDescription = null;
             this.rbtnRunProject.RootElement.AccessibleName = null;
-            this.rbtnRunProject.RootElement.ControlBounds = new System.Drawing.Rectangle(0, 0, 130, 24);
+            this.rbtnRunProject.RootElement.ControlBounds = new System.Drawing.Rectangle(799, 170, 130, 24);
             this.rbtnRunProject.Size = new System.Drawing.Size(97, 32);
             this.rbtnRunProject.TabIndex = 13;
             this.rbtnRunProject.Text = "Save";
@@ -659,7 +672,7 @@
             // 
             this.gbTop.RootElement.AccessibleDescription = null;
             this.gbTop.RootElement.AccessibleName = null;
-            this.gbTop.RootElement.ControlBounds = new System.Drawing.Rectangle(0, 0, 200, 100);
+            this.gbTop.RootElement.ControlBounds = new System.Drawing.Rectangle(2, 41, 200, 100);
             this.gbTop.RootElement.Padding = new System.Windows.Forms.Padding(2);
             this.gbTop.Size = new System.Drawing.Size(920, 130);
             this.gbTop.TabIndex = 2;
@@ -668,7 +681,7 @@
             // 
             this.lblCampaign.AutoSize = true;
             this.lblCampaign.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblCampaign.Location = new System.Drawing.Point(680, 10);
+            this.lblCampaign.Location = new System.Drawing.Point(682, 12);
             this.lblCampaign.Name = "lblCampaign";
             this.lblCampaign.Size = new System.Drawing.Size(31, 28);
             this.lblCampaign.TabIndex = 35;
@@ -678,7 +691,7 @@
             // 
             this.lblSegment.AutoSize = true;
             this.lblSegment.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblSegment.Location = new System.Drawing.Point(390, 10);
+            this.lblSegment.Location = new System.Drawing.Point(392, 12);
             this.lblSegment.Name = "lblSegment";
             this.lblSegment.Size = new System.Drawing.Size(20, 28);
             this.lblSegment.TabIndex = 34;
@@ -688,7 +701,7 @@
             // 
             this.lblOffer.AutoSize = true;
             this.lblOffer.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblOffer.Location = new System.Drawing.Point(534, 10);
+            this.lblOffer.Location = new System.Drawing.Point(536, 12);
             this.lblOffer.Name = "lblOffer";
             this.lblOffer.Size = new System.Drawing.Size(23, 28);
             this.lblOffer.TabIndex = 33;
@@ -698,7 +711,7 @@
             // 
             this.lblCustomers.AutoSize = true;
             this.lblCustomers.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblCustomers.Location = new System.Drawing.Point(236, 10);
+            this.lblCustomers.Location = new System.Drawing.Point(238, 12);
             this.lblCustomers.Name = "lblCustomers";
             this.lblCustomers.Size = new System.Drawing.Size(31, 28);
             this.lblCustomers.TabIndex = 32;
@@ -709,7 +722,7 @@
             this.label11.AutoSize = true;
             this.label11.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.label11.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label11.Location = new System.Drawing.Point(662, 96);
+            this.label11.Location = new System.Drawing.Point(664, 98);
             this.label11.Name = "label11";
             this.label11.Size = new System.Drawing.Size(95, 23);
             this.label11.TabIndex = 31;
@@ -719,7 +732,7 @@
             // 
             this.label10.AutoSize = true;
             this.label10.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label10.Location = new System.Drawing.Point(525, 96);
+            this.label10.Location = new System.Drawing.Point(527, 98);
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(55, 23);
             this.label10.TabIndex = 30;
@@ -768,7 +781,7 @@
             // 
             this.label12.AutoSize = true;
             this.label12.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label12.Location = new System.Drawing.Point(219, 95);
+            this.label12.Location = new System.Drawing.Point(221, 97);
             this.label12.Name = "label12";
             this.label12.Size = new System.Drawing.Size(91, 23);
             this.label12.TabIndex = 25;
@@ -778,7 +791,7 @@
             // 
             this.label9.AutoSize = true;
             this.label9.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label9.Location = new System.Drawing.Point(369, 96);
+            this.label9.Location = new System.Drawing.Point(371, 98);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(85, 23);
             this.label9.TabIndex = 24;
@@ -795,18 +808,6 @@
             this.label13.TabIndex = 3;
             this.label13.Text = "Control Panel";
             this.label13.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            // 
-            // btnRankingsExport
-            // 
-            btnRankingsExport.BackColor = System.Drawing.SystemColors.ActiveCaption;
-            btnRankingsExport.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
-            btnRankingsExport.Location = new System.Drawing.Point(726, 107);
-            btnRankingsExport.Name = "btnRankingsExport";
-            btnRankingsExport.Size = new System.Drawing.Size(170, 36);
-            btnRankingsExport.TabIndex = 104;
-            btnRankingsExport.Text = "RunRankings";
-            btnRankingsExport.UseVisualStyleBackColor = false;
-            btnRankingsExport.Click += new System.EventHandler(this.btnRankingsExport_Click);
             // 
             // CntrlExport
             // 
