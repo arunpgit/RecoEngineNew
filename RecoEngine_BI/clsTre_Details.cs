@@ -1444,7 +1444,7 @@ namespace RecoEngine_BI
             try
             {
                 string strSql = "";
-                strSql = " SELECT Max(WEEK) FROM  " + strTableName;
+                strSql = " SELECT Max(WEEK) FROM  " + strTableName+ "  WHERE  Year =(SELECT Max(year) FROM  " + strTableName+ ")";
                 if (Common.iDBType == (int)Enums.DBType.Oracle)
                     return int.Parse(((OraDBManager)Common.dbMgr).ExecuteScalar(CommandType.Text, strSql));
                 else if (Common.iDBType == (int)Enums.DBType.Mysql)
