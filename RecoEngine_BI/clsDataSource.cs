@@ -1351,7 +1351,7 @@ namespace RecoEngine_BI
                             }
                             else
                             {
-                                object[] projectId = new object[] { "select COMBINE_COLUMNS FROM TRE_CALCULATED_COLUMNS WHERE Project_Id = ", ProjectId, "  AND COLNAME='", dataRow[0].ToString(), "'" };
+                                object[] projectId = new object[] { "SELECT COMBINE_COLUMNS FROM TRE_CALCULATED_COLUMNS WHERE Project_Id = ", ProjectId, "  AND COLNAME='", dataRow[0].ToString(), "'" };
                                 str = string.Concat(projectId);
                                
                                     DataTable dataTable1 = ((MySqlDBManager)Common.dbMgr).ExecuteDataTable(CommandType.Text, str);

@@ -11,3 +11,6 @@
 /RecoEngine_BI/bin/Debug
 /RecoEngine_DataLayer/obj/Debug
 /RecoEngine_DataLayer/bin/Debug
+/RecoEngine/bin/Release
+/RecoEngine_BI/bin/Release
+/RecoEngine_DataLayer/obj/Release

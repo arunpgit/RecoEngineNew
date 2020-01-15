@@ -94,7 +94,7 @@ namespace RecoEngine
             rbbtnDataPreview.Enabled = bIsEnable;
             radbtnPProjects.Enabled = bIsEnable;
             rbRecommendation.Enabled = bIsEnable;
-            rbBtnReports.Enabled = bIsEnable;
+            //rbBtnReports.Enabled = bIsEnable;
             pgRecommendation.Enabled = bIsEnable;
             pgExport.Enabled = bIsEnable;
            // pgUserManagement.Enabled = bIsEnable;
@@ -169,7 +169,7 @@ namespace RecoEngine
             rbbtnDataPreview.Enabled = true;
             radbtnPProjects.Enabled = true;
             rbRecommendation.Enabled = true;
-            rbBtnReports.Enabled = true;
+            //rbBtnReports.Enabled = true;
             pgRecommendation.Enabled = true;
             pgExport.Enabled = true;
             //pgUserManagement.Enabled = true;

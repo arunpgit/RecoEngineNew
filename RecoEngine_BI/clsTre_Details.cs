@@ -631,7 +631,61 @@ namespace RecoEngine_BI
                     dtTab = ((DBManager)Common.dbMgr).ExecuteDataTable(CommandType.Text, strSql);
                 string strMainfilter = "";
                 if (!bIsONMain)
-                    strTabName = "TRE_RANDOM"+ iProjectId;
+                {
+
+                    strSql = "select Max(week) as Week from tre_random"+iProjectId+ " where Week = (select Max(week) as Week from "+strTabName+" where year=(select Max(year) from " + strTabName+"))";
+                    String str15 = "";
+                    string strFilerCondition = "";
+                    DataTable dt = new DataTable();
+                    dt = ((MySqlDBManager)Common.dbMgr).ExecuteDataTable(CommandType.Text, strSql);
+                    if (dt.Rows.Count == 0 || dt.Rows[0][0].ToString()=="")
+                    {
+
+                        strSql = "DROP TABLE TRE_RANDOM" + iProjectId ;
+                        ((MySqlDBManager)Common.dbMgr).ExecuteNonQuery(CommandType.Text, strSql);
+
+
+                        strSql = " select m.colname,combine_columns from tre_mapping m left join TRE_CALCULATED_COLUMNS t on m.ProjectId = t.Project_Id and m.colname = t.colname  where m.ProjectId  = " + iProjectId;
+
+                        dt = ((MySqlDBManager)Common.dbMgr).ExecuteDataTable(CommandType.Text, strSql);
+                        foreach (DataRow dr in dt.Rows)
+                        {
+                            if (dr["combine_columns"]==null|| dr["combine_columns"].ToString() == "")
+                            {
+                                str15 = string.Concat(str15, dr["colname"].ToString());
+                            }
+                            else
+                            {
+
+                                str15 = string.Concat(str15, dr["combine_columns"].ToString(), " ", dr["colname"].ToString());
+
+                            }
+                            str15 = string.Concat(str15, ",");
+
+                        }
+
+                        str15 = str15.Substring(0, str15.Length - 1);
+                        strSql = "Select FILTER FROM FILTER_MAIN WHERE PROJECT_ID=" + iProjectId;
+                        
+                            dt = ((MySqlDBManager)Common.dbMgr).ExecuteDataTable(CommandType.Text, strSql);
+                        if (dt.Rows.Count > 0)
+                        {
+                            strFilerCondition = dt.Rows[0]["FILTER"].ToString();
+                        }
+                        string[] strArrays4 = new string[] { "CREATE TABLE TRE_RANDOM" + iProjectId + " AS SELECT ", str15, "   from ", strTabName, " C , " };
+                            strSql = string.Concat(strArrays4);
+                            strSql = string.Concat(strSql, " ( SELECT RNDMCUSTOMER FROM   ( SELECT Distinct CUSTOMER as RNDMCUSTOMER FROM ", strTabName);
+                            if (strFilerCondition != "")
+                            {
+                                strSql = string.Concat(strSql, " Where ", strFilerCondition);
+                            }
+                            strSql = string.Concat(strSql, " ORDER BY Rand() Limit 5000)R)K WHERE C.CUSTOMER=K.RNDMCUSTOMER ");
+                            ((MySqlDBManager)Common.dbMgr).ExecuteNonQuery(CommandType.Text, strSql);
+                        
+
+                    }
+                    strTabName = "TRE_RANDOM" + iProjectId;
+                }
                 if (strTabName.ToUpperInvariant() != "TRE_RANDOM"+ iProjectId)
                 {
                     strTabName = strTabName + "_V";
