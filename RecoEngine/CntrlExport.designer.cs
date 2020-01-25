@@ -244,9 +244,9 @@
             // 
             this.lblProject.AutoSize = true;
             this.lblProject.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Bold);
-            this.lblProject.Location = new System.Drawing.Point(656, 13);
+            this.lblProject.Location = new System.Drawing.Point(658, 13);
             this.lblProject.Name = "lblProject";
-            this.lblProject.Size = new System.Drawing.Size(132, 25);
+            this.lblProject.Size = new System.Drawing.Size(104, 20);
             this.lblProject.TabIndex = 71;
             this.lblProject.Text = "Project Name";
             // 
@@ -308,7 +308,7 @@
             this.chkMaxRanking.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.chkMaxRanking.Location = new System.Drawing.Point(579, 90);
             this.chkMaxRanking.Name = "chkMaxRanking";
-            this.chkMaxRanking.Size = new System.Drawing.Size(18, 17);
+            this.chkMaxRanking.Size = new System.Drawing.Size(15, 14);
             this.chkMaxRanking.TabIndex = 110;
             this.chkMaxRanking.UseVisualStyleBackColor = true;
             this.chkMaxRanking.CheckedChanged += new System.EventHandler(this.chkMaxRanking_CheckedChanged);
@@ -319,7 +319,7 @@
             this.chkMinRanking.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.chkMinRanking.Location = new System.Drawing.Point(579, 68);
             this.chkMinRanking.Name = "chkMinRanking";
-            this.chkMinRanking.Size = new System.Drawing.Size(18, 17);
+            this.chkMinRanking.Size = new System.Drawing.Size(15, 14);
             this.chkMinRanking.TabIndex = 109;
             this.chkMinRanking.UseVisualStyleBackColor = true;
             this.chkMinRanking.CheckedChanged += new System.EventHandler(this.chkMinRanking_CheckedChanged);
@@ -330,7 +330,7 @@
             this.label22.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label22.Location = new System.Drawing.Point(474, 89);
             this.label22.Name = "label22";
-            this.label22.Size = new System.Drawing.Size(49, 20);
+            this.label22.Size = new System.Drawing.Size(40, 16);
             this.label22.TabIndex = 108;
             this.label22.Text = "Max#";
             // 
@@ -340,7 +340,7 @@
             this.label23.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label23.Location = new System.Drawing.Point(474, 69);
             this.label23.Name = "label23";
-            this.label23.Size = new System.Drawing.Size(50, 20);
+            this.label23.Size = new System.Drawing.Size(39, 16);
             this.label23.TabIndex = 107;
             this.label23.Text = "Min #";
             // 
@@ -350,7 +350,7 @@
             this.label21.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label21.Location = new System.Drawing.Point(474, 45);
             this.label21.Name = "label21";
-            this.label21.Size = new System.Drawing.Size(86, 25);
+            this.label21.Size = new System.Drawing.Size(66, 20);
             this.label21.TabIndex = 106;
             this.label21.Text = "Ranking";
             // 
@@ -360,7 +360,7 @@
             this.txtMaximum.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtMaximum.Location = new System.Drawing.Point(579, 162);
             this.txtMaximum.Name = "txtMaximum";
-            this.txtMaximum.Size = new System.Drawing.Size(90, 26);
+            this.txtMaximum.Size = new System.Drawing.Size(90, 22);
             this.txtMaximum.TabIndex = 105;
             // 
             // txtMinimum
@@ -369,7 +369,7 @@
             this.txtMinimum.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtMinimum.Location = new System.Drawing.Point(579, 125);
             this.txtMinimum.Name = "txtMinimum";
-            this.txtMinimum.Size = new System.Drawing.Size(90, 26);
+            this.txtMinimum.Size = new System.Drawing.Size(90, 22);
             this.txtMinimum.TabIndex = 104;
             // 
             // label19
@@ -378,7 +378,7 @@
             this.label19.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label19.Location = new System.Drawing.Point(474, 160);
             this.label19.Name = "label19";
-            this.label19.Size = new System.Drawing.Size(89, 20);
+            this.label19.Size = new System.Drawing.Size(70, 16);
             this.label19.TabIndex = 103;
             this.label19.Text = "Max Count";
             // 
@@ -388,7 +388,7 @@
             this.label20.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label20.Location = new System.Drawing.Point(474, 128);
             this.label20.Name = "label20";
-            this.label20.Size = new System.Drawing.Size(85, 20);
+            this.label20.Size = new System.Drawing.Size(66, 16);
             this.label20.TabIndex = 102;
             this.label20.Text = "Min Count";
             // 
@@ -413,7 +413,7 @@
             this.chkFileExport.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.chkFileExport.Location = new System.Drawing.Point(856, 105);
             this.chkFileExport.Name = "chkFileExport";
-            this.chkFileExport.Size = new System.Drawing.Size(18, 17);
+            this.chkFileExport.Size = new System.Drawing.Size(15, 14);
             this.chkFileExport.TabIndex = 101;
             this.chkFileExport.UseVisualStyleBackColor = true;
             // 
@@ -423,7 +423,7 @@
             this.label8.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label8.Location = new System.Drawing.Point(752, 105);
             this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(36, 20);
+            this.label8.Size = new System.Drawing.Size(30, 16);
             this.label8.TabIndex = 100;
             this.label8.Text = "File";
             // 
@@ -433,7 +433,7 @@
             this.chkDbExport.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.chkDbExport.Location = new System.Drawing.Point(856, 82);
             this.chkDbExport.Name = "chkDbExport";
-            this.chkDbExport.Size = new System.Drawing.Size(18, 17);
+            this.chkDbExport.Size = new System.Drawing.Size(15, 14);
             this.chkDbExport.TabIndex = 99;
             this.chkDbExport.UseVisualStyleBackColor = true;
             // 
@@ -443,7 +443,7 @@
             this.label6.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label6.Location = new System.Drawing.Point(751, 82);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(84, 20);
+            this.label6.Size = new System.Drawing.Size(69, 16);
             this.label6.TabIndex = 98;
             this.label6.Text = "DataBase";
             // 
@@ -453,7 +453,7 @@
             this.label7.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label7.Location = new System.Drawing.Point(751, 43);
             this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(73, 25);
+            this.label7.Size = new System.Drawing.Size(55, 20);
             this.label7.TabIndex = 97;
             this.label7.Text = "Export";
             // 
@@ -463,7 +463,7 @@
             this.chkRanking2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.chkRanking2.Location = new System.Drawing.Point(414, 96);
             this.chkRanking2.Name = "chkRanking2";
-            this.chkRanking2.Size = new System.Drawing.Size(18, 17);
+            this.chkRanking2.Size = new System.Drawing.Size(15, 14);
             this.chkRanking2.TabIndex = 96;
             this.chkRanking2.UseVisualStyleBackColor = true;
             // 
@@ -473,7 +473,7 @@
             this.chkRanking1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.chkRanking1.Location = new System.Drawing.Point(414, 74);
             this.chkRanking1.Name = "chkRanking1";
-            this.chkRanking1.Size = new System.Drawing.Size(18, 17);
+            this.chkRanking1.Size = new System.Drawing.Size(15, 14);
             this.chkRanking1.TabIndex = 95;
             this.chkRanking1.UseVisualStyleBackColor = true;
             // 
@@ -483,7 +483,7 @@
             this.chkRanking4.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.chkRanking4.Location = new System.Drawing.Point(414, 143);
             this.chkRanking4.Name = "chkRanking4";
-            this.chkRanking4.Size = new System.Drawing.Size(18, 17);
+            this.chkRanking4.Size = new System.Drawing.Size(15, 14);
             this.chkRanking4.TabIndex = 94;
             this.chkRanking4.UseVisualStyleBackColor = true;
             // 
@@ -493,7 +493,7 @@
             this.label14.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label14.Location = new System.Drawing.Point(309, 143);
             this.label14.Name = "label14";
-            this.label14.Size = new System.Drawing.Size(83, 20);
+            this.label14.Size = new System.Drawing.Size(68, 16);
             this.label14.TabIndex = 93;
             this.label14.Text = "Ranking 4";
             // 
@@ -503,7 +503,7 @@
             this.chkRanking3.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.chkRanking3.Location = new System.Drawing.Point(414, 120);
             this.chkRanking3.Name = "chkRanking3";
-            this.chkRanking3.Size = new System.Drawing.Size(18, 17);
+            this.chkRanking3.Size = new System.Drawing.Size(15, 14);
             this.chkRanking3.TabIndex = 92;
             this.chkRanking3.UseVisualStyleBackColor = true;
             // 
@@ -513,7 +513,7 @@
             this.label17.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label17.Location = new System.Drawing.Point(309, 120);
             this.label17.Name = "label17";
-            this.label17.Size = new System.Drawing.Size(83, 20);
+            this.label17.Size = new System.Drawing.Size(68, 16);
             this.label17.TabIndex = 91;
             this.label17.Text = "Ranking 3";
             // 
@@ -523,7 +523,7 @@
             this.label18.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label18.Location = new System.Drawing.Point(309, 98);
             this.label18.Name = "label18";
-            this.label18.Size = new System.Drawing.Size(83, 20);
+            this.label18.Size = new System.Drawing.Size(68, 16);
             this.label18.TabIndex = 90;
             this.label18.Text = "Ranking 2";
             // 
@@ -533,7 +533,7 @@
             this.label15.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label15.Location = new System.Drawing.Point(309, 75);
             this.label15.Name = "label15";
-            this.label15.Size = new System.Drawing.Size(83, 20);
+            this.label15.Size = new System.Drawing.Size(68, 16);
             this.label15.TabIndex = 89;
             this.label15.Text = "Ranking 1";
             // 
@@ -543,7 +543,7 @@
             this.label16.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label16.Location = new System.Drawing.Point(304, 45);
             this.label16.Name = "label16";
-            this.label16.Size = new System.Drawing.Size(86, 25);
+            this.label16.Size = new System.Drawing.Size(66, 20);
             this.label16.TabIndex = 88;
             this.label16.Text = "Ranking";
             // 
@@ -553,7 +553,7 @@
             this.txtFixedCustomers.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtFixedCustomers.Location = new System.Drawing.Point(180, 181);
             this.txtFixedCustomers.Name = "txtFixedCustomers";
-            this.txtFixedCustomers.Size = new System.Drawing.Size(90, 26);
+            this.txtFixedCustomers.Size = new System.Drawing.Size(90, 22);
             this.txtFixedCustomers.TabIndex = 87;
             // 
             // txtBasePercent
@@ -562,7 +562,7 @@
             this.txtBasePercent.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtBasePercent.Location = new System.Drawing.Point(180, 144);
             this.txtBasePercent.Name = "txtBasePercent";
-            this.txtBasePercent.Size = new System.Drawing.Size(90, 26);
+            this.txtBasePercent.Size = new System.Drawing.Size(90, 22);
             this.txtBasePercent.TabIndex = 86;
             // 
             // label5
@@ -571,7 +571,7 @@
             this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label5.Location = new System.Drawing.Point(34, 179);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(136, 20);
+            this.label5.Size = new System.Drawing.Size(108, 16);
             this.label5.TabIndex = 85;
             this.label5.Text = "Fixed Customers";
             // 
@@ -581,7 +581,7 @@
             this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label3.Location = new System.Drawing.Point(34, 147);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(167, 20);
+            this.label3.Size = new System.Drawing.Size(134, 16);
             this.label3.TabIndex = 84;
             this.label3.Text = "% of Campaign Base";
             // 
@@ -591,7 +591,7 @@
             this.label4.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label4.Location = new System.Drawing.Point(34, 114);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(77, 25);
+            this.label4.Size = new System.Drawing.Size(60, 20);
             this.label4.TabIndex = 83;
             this.label4.Text = "Criteria";
             // 
@@ -601,7 +601,7 @@
             this.chkControlGroup.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.chkControlGroup.Location = new System.Drawing.Point(180, 87);
             this.chkControlGroup.Name = "chkControlGroup";
-            this.chkControlGroup.Size = new System.Drawing.Size(18, 17);
+            this.chkControlGroup.Size = new System.Drawing.Size(15, 14);
             this.chkControlGroup.TabIndex = 82;
             this.chkControlGroup.UseVisualStyleBackColor = true;
             this.chkControlGroup.CheckedChanged += new System.EventHandler(this.chkControlGroup_CheckedChanged);
@@ -612,7 +612,7 @@
             this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label2.Location = new System.Drawing.Point(34, 83);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(174, 20);
+            this.label2.Size = new System.Drawing.Size(136, 16);
             this.label2.TabIndex = 81;
             this.label2.Text = "Create  Control Group";
             // 
@@ -622,7 +622,7 @@
             this.label1.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label1.Location = new System.Drawing.Point(31, 47);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(143, 25);
+            this.label1.Size = new System.Drawing.Size(109, 20);
             this.label1.TabIndex = 80;
             this.label1.Text = "Control Group";
             // 
@@ -682,19 +682,20 @@
             // 
             this.lblCampaign.AutoSize = true;
             this.lblCampaign.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblCampaign.Location = new System.Drawing.Point(684, 14);
+            this.lblCampaign.Location = new System.Drawing.Point(686, 16);
             this.lblCampaign.Name = "lblCampaign";
-            this.lblCampaign.Size = new System.Drawing.Size(31, 28);
+            this.lblCampaign.Size = new System.Drawing.Size(25, 21);
             this.lblCampaign.TabIndex = 35;
             this.lblCampaign.Text = "10";
+            this.lblCampaign.Visible = false;
             // 
             // lblSegment
             // 
             this.lblSegment.AutoSize = true;
             this.lblSegment.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblSegment.Location = new System.Drawing.Point(394, 14);
+            this.lblSegment.Location = new System.Drawing.Point(396, 16);
             this.lblSegment.Name = "lblSegment";
-            this.lblSegment.Size = new System.Drawing.Size(20, 28);
+            this.lblSegment.Size = new System.Drawing.Size(16, 21);
             this.lblSegment.TabIndex = 34;
             this.lblSegment.Text = "1";
             // 
@@ -702,19 +703,20 @@
             // 
             this.lblOffer.AutoSize = true;
             this.lblOffer.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblOffer.Location = new System.Drawing.Point(538, 14);
+            this.lblOffer.Location = new System.Drawing.Point(540, 16);
             this.lblOffer.Name = "lblOffer";
-            this.lblOffer.Size = new System.Drawing.Size(23, 28);
+            this.lblOffer.Size = new System.Drawing.Size(19, 21);
             this.lblOffer.TabIndex = 33;
             this.lblOffer.Text = "0";
+            this.lblOffer.Visible = false;
             // 
             // lblCustomers
             // 
             this.lblCustomers.AutoSize = true;
             this.lblCustomers.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblCustomers.Location = new System.Drawing.Point(240, 14);
+            this.lblCustomers.Location = new System.Drawing.Point(242, 16);
             this.lblCustomers.Name = "lblCustomers";
-            this.lblCustomers.Size = new System.Drawing.Size(31, 28);
+            this.lblCustomers.Size = new System.Drawing.Size(25, 21);
             this.lblCustomers.TabIndex = 32;
             this.lblCustomers.Text = "10";
             // 
@@ -723,21 +725,23 @@
             this.label11.AutoSize = true;
             this.label11.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.label11.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label11.Location = new System.Drawing.Point(666, 100);
+            this.label11.Location = new System.Drawing.Point(668, 102);
             this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(95, 23);
+            this.label11.Size = new System.Drawing.Size(77, 19);
             this.label11.TabIndex = 31;
             this.label11.Text = "Campaigns";
+            this.label11.Visible = false;
             // 
             // label10
             // 
             this.label10.AutoSize = true;
             this.label10.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label10.Location = new System.Drawing.Point(529, 100);
+            this.label10.Location = new System.Drawing.Point(531, 102);
             this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(55, 23);
+            this.label10.Size = new System.Drawing.Size(46, 19);
             this.label10.TabIndex = 30;
             this.label10.Text = "Offers";
+            this.label10.Visible = false;
             // 
             // pictureBox4
             // 
@@ -758,6 +762,7 @@
             this.pictureBox3.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pictureBox3.TabIndex = 28;
             this.pictureBox3.TabStop = false;
+            this.pictureBox3.Visible = false;
             // 
             // pictureBox2
             // 
@@ -768,6 +773,7 @@
             this.pictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pictureBox2.TabIndex = 27;
             this.pictureBox2.TabStop = false;
+            this.pictureBox2.Visible = false;
             // 
             // pictureBox1
             // 
@@ -782,9 +788,9 @@
             // 
             this.label12.AutoSize = true;
             this.label12.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label12.Location = new System.Drawing.Point(223, 99);
+            this.label12.Location = new System.Drawing.Point(225, 101);
             this.label12.Name = "label12";
-            this.label12.Size = new System.Drawing.Size(91, 23);
+            this.label12.Size = new System.Drawing.Size(75, 19);
             this.label12.TabIndex = 25;
             this.label12.Text = "Customers";
             // 
@@ -792,11 +798,11 @@
             // 
             this.label9.AutoSize = true;
             this.label9.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label9.Location = new System.Drawing.Point(373, 100);
+            this.label9.Location = new System.Drawing.Point(375, 102);
             this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(85, 23);
+            this.label9.Size = new System.Drawing.Size(106, 19);
             this.label9.TabIndex = 24;
-            this.label9.Text = "Segments";
+            this.label9.Text = "# Opportunities";
             // 
             // label13
             // 

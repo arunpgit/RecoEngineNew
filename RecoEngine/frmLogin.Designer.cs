@@ -65,8 +65,15 @@
             // 
             // btnCancel
             // 
+            this.btnCancel.BackColor = System.Drawing.SystemColors.ControlLightLight;
             this.btnCancel.Location = new System.Drawing.Point(199, 129);
             this.btnCancel.Name = "btnCancel";
+            // 
+            // 
+            // 
+            this.btnCancel.RootElement.AccessibleDescription = null;
+            this.btnCancel.RootElement.AccessibleName = null;
+            this.btnCancel.RootElement.ControlBounds = new System.Drawing.Rectangle(0, 0, 130, 24);
             this.btnCancel.Size = new System.Drawing.Size(65, 24);
             this.btnCancel.TabIndex = 8;
             this.btnCancel.Text = "Cancel";
@@ -74,8 +81,15 @@
             // 
             // btnOk
             // 
+            this.btnOk.BackColor = System.Drawing.SystemColors.ControlLightLight;
             this.btnOk.Location = new System.Drawing.Point(109, 129);
             this.btnOk.Name = "btnOk";
+            // 
+            // 
+            // 
+            this.btnOk.RootElement.AccessibleDescription = null;
+            this.btnOk.RootElement.AccessibleName = null;
+            this.btnOk.RootElement.ControlBounds = new System.Drawing.Rectangle(0, 0, 130, 24);
             this.btnOk.Size = new System.Drawing.Size(65, 24);
             this.btnOk.TabIndex = 7;
             this.btnOk.Text = "Ok";
@@ -83,10 +97,18 @@
             // 
             // txtPassword
             // 
+            this.txtPassword.BackColor = System.Drawing.SystemColors.ControlLightLight;
             this.txtPassword.Location = new System.Drawing.Point(109, 90);
             this.txtPassword.MaxLength = 10;
             this.txtPassword.Name = "txtPassword";
             this.txtPassword.PasswordChar = '*';
+            // 
+            // 
+            // 
+            this.txtPassword.RootElement.AccessibleDescription = null;
+            this.txtPassword.RootElement.AccessibleName = null;
+            this.txtPassword.RootElement.ControlBounds = new System.Drawing.Rectangle(0, 0, 100, 20);
+            this.txtPassword.RootElement.StretchVertically = true;
             this.txtPassword.Size = new System.Drawing.Size(158, 20);
             this.txtPassword.TabIndex = 6;
             this.txtPassword.TabStop = false;
@@ -95,9 +117,17 @@
             // 
             // txtUserName
             // 
+            this.txtUserName.BackColor = System.Drawing.SystemColors.ControlLightLight;
             this.txtUserName.Location = new System.Drawing.Point(109, 58);
             this.txtUserName.MaxLength = 15;
             this.txtUserName.Name = "txtUserName";
+            // 
+            // 
+            // 
+            this.txtUserName.RootElement.AccessibleDescription = null;
+            this.txtUserName.RootElement.AccessibleName = null;
+            this.txtUserName.RootElement.ControlBounds = new System.Drawing.Rectangle(0, 0, 100, 20);
+            this.txtUserName.RootElement.StretchVertically = true;
             this.txtUserName.Size = new System.Drawing.Size(158, 20);
             this.txtUserName.TabIndex = 5;
             this.txtUserName.TabStop = false;
@@ -109,9 +139,9 @@
             this.lblHeader.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblHeader.Location = new System.Drawing.Point(81, 9);
             this.lblHeader.Name = "lblHeader";
-            this.lblHeader.Size = new System.Drawing.Size(160, 20);
+            this.lblHeader.Size = new System.Drawing.Size(210, 20);
             this.lblHeader.TabIndex = 2;
-            this.lblHeader.Text = "Recommender tool";
+            this.lblHeader.Text = "Recommendation Engine";
             // 
             // lblPassword
             // 

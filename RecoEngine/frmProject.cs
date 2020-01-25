@@ -56,6 +56,9 @@ namespace RecoEngine
                 {
                     dt.Rows[i]["Select"] = false;
                 }
+                dt.Columns["CREATEDON"].ColumnName = "Creation Date";
+                dt.Columns["UName"].ColumnName = "User";
+                dt.AcceptChanges();
                 grdProject.DataSource = dt;
                 grdProject.AllowAddNewRow = false;
                 grdProject.ShowRowHeaderColumn = false;
@@ -133,8 +136,8 @@ namespace RecoEngine
             {
                 iProjectId = int.Parse(grdProject.CurrentRow.Cells["Project_Id"].Value.ToString());
                 strProjectName = grdProject.CurrentRow.Cells["Name"].Value.ToString();
-                strProjectCreatedBy = grdProject.CurrentRow.Cells["UName"].Value.ToString();
-                strProjectCReatedDate = Convert.ToDateTime(grdProject.CurrentRow.Cells["CREATEDON"].Value.ToString()).ToShortDateString();
+                strProjectCreatedBy = grdProject.CurrentRow.Cells["User"].Value.ToString();
+                strProjectCReatedDate = Convert.ToDateTime(grdProject.CurrentRow.Cells["Creation Date"].Value.ToString()).ToShortDateString();
             }
             this.DialogResult = System.Windows.Forms.DialogResult.OK;
             this.Close();

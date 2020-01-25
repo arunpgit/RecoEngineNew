@@ -123,7 +123,14 @@ namespace RecoEngine_BI
                     ((MySqlDBManager)Common.dbMgr).ExecuteScalar(CommandType.Text, strSql);
                 else
                   ((DBManager)Common.dbMgr).ExecuteScalar(CommandType.Text, strSql);
-              strSql = "DELETE FROM OPPORTUNITY WHERE PROJECT_ID=" + iProjectId;
+
+                strSql = "delete  s FROM status_breakdown s join OPPORTUNITY o on s.opportunity_id = o.opportunity_id WHERE PROJECT_ID = " + iProjectId;
+                if (Common.iDBType == (int)Enums.DBType.Oracle)
+                    ((OraDBManager)Common.dbMgr).ExecuteScalar(CommandType.Text, strSql);
+
+                else if (Common.iDBType == (int)Enums.DBType.Mysql)
+                    ((MySqlDBManager)Common.dbMgr).ExecuteScalar(CommandType.Text, strSql);
+                strSql = "DELETE FROM OPPORTUNITY WHERE PROJECT_ID=" + iProjectId;
               if (Common.iDBType == (int)Enums.DBType.Oracle)
                   ((OraDBManager)Common.dbMgr).ExecuteScalar(CommandType.Text, strSql);
 
@@ -167,7 +174,7 @@ namespace RecoEngine_BI
                     {
                         strSql = "drop table tre_random" + iProjectId;
                         if (Common.iDBType == (int)Enums.DBType.Mysql)
-                            ((MySqlDBManager)Common.dbMgr).ExecuteScalar(CommandType.Text, strSql);
+                            ((MySqlDBManager)Common.dbMgr).ExecuteNonQuery(CommandType.Text, strSql);
                     }
                 }
                 if (Common.iDBType == 3)
@@ -180,7 +187,7 @@ namespace RecoEngine_BI
                     {
                         strSql = "drop table tre_ranking" + iProjectId;
                         if (Common.iDBType == (int)Enums.DBType.Mysql)
-                            ((MySqlDBManager)Common.dbMgr).ExecuteScalar(CommandType.Text, strSql);
+                            ((MySqlDBManager)Common.dbMgr).ExecuteNonQuery(CommandType.Text, strSql);
                     }
 
                     strSql = " SELECT count(1) FROM information_schema.columns c WHERE c.table_name = 'ETS_TRE_X_SELL_PNTL" + iProjectId + "' AND c.table_schema  = 'recousr' ";
@@ -191,7 +198,7 @@ namespace RecoEngine_BI
                     {
                         strSql = "drop table ETS_TRE_X_SELL_PNTL" + iProjectId;
                         if (Common.iDBType == (int)Enums.DBType.Mysql)
-                            ((MySqlDBManager)Common.dbMgr).ExecuteScalar(CommandType.Text, strSql);
+                            ((MySqlDBManager)Common.dbMgr).ExecuteNonQuery(CommandType.Text, strSql);
                     }
                     strSql = " SELECT count(1) FROM information_schema.columns c WHERE c.table_name = 'ETS_TRE_ADM_WEEKLY_A" + iProjectId + "' AND c.table_schema  = 'recousr' ";
 
@@ -201,7 +208,7 @@ namespace RecoEngine_BI
                     {
                         strSql = "drop table ETS_TRE_ADM_WEEKLY_A" + iProjectId;
                         if (Common.iDBType == (int)Enums.DBType.Mysql)
-                            ((MySqlDBManager)Common.dbMgr).ExecuteScalar(CommandType.Text, strSql);
+                            ((MySqlDBManager)Common.dbMgr).ExecuteNonQuery(CommandType.Text, strSql);
                     }
                     strSql = " SELECT count(1) FROM information_schema.columns c WHERE c.table_name = 'ETS_TRE_ADM_WEEKLY_B" + iProjectId + "' AND c.table_schema  = 'recousr' ";
 
@@ -211,7 +218,7 @@ namespace RecoEngine_BI
                     {
                         strSql = "drop table ETS_TRE_ADM_WEEKLY_B" + iProjectId;
                         if (Common.iDBType == (int)Enums.DBType.Mysql)
-                            ((MySqlDBManager)Common.dbMgr).ExecuteScalar(CommandType.Text, strSql);
+                            ((MySqlDBManager)Common.dbMgr).ExecuteNonQuery(CommandType.Text, strSql);
                     }
                     strSql = " SELECT count(1) FROM information_schema.columns c WHERE c.table_name = 'ETS_TRE_BASE" + iProjectId + "' AND c.table_schema  = 'recousr' ";
 
@@ -221,7 +228,7 @@ namespace RecoEngine_BI
                     {
                         strSql = "drop table ETS_TRE_BASE" + iProjectId;
                         if (Common.iDBType == (int)Enums.DBType.Mysql)
-                            ((MySqlDBManager)Common.dbMgr).ExecuteScalar(CommandType.Text, strSql);
+                            ((MySqlDBManager)Common.dbMgr).ExecuteNonQuery(CommandType.Text, strSql);
                     }
                     strSql = " SELECT count(1) FROM information_schema.columns c WHERE c.table_name = 'ETS_TRE_BASED" + iProjectId + "' AND c.table_schema  = 'recousr' ";
 
@@ -231,7 +238,7 @@ namespace RecoEngine_BI
                     {
                         strSql = "drop table ETS_TRE_BASED" + iProjectId;
                         if (Common.iDBType == (int)Enums.DBType.Mysql)
-                            ((MySqlDBManager)Common.dbMgr).ExecuteScalar(CommandType.Text, strSql);
+                            ((MySqlDBManager)Common.dbMgr).ExecuteNonQuery(CommandType.Text, strSql);
                     }
                     strSql = " SELECT count(1) FROM information_schema.columns c WHERE c.table_name = 'ETS_TRE_BASEP" + iProjectId + "' AND c.table_schema  = 'recousr' ";
 
@@ -241,7 +248,7 @@ namespace RecoEngine_BI
                     {
                         strSql = "drop table ETS_TRE_BASEP" + iProjectId;
                         if (Common.iDBType == (int)Enums.DBType.Mysql)
-                            ((MySqlDBManager)Common.dbMgr).ExecuteScalar(CommandType.Text, strSql);
+                            ((MySqlDBManager)Common.dbMgr).ExecuteNonQuery(CommandType.Text, strSql);
                     }
 
 

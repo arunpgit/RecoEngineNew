@@ -132,7 +132,7 @@ namespace RecoEngine
             this.radStatusStrip1.RootElement.AccessibleName = null;
             this.radStatusStrip1.RootElement.ControlBounds = new System.Drawing.Rectangle(0, 641, 300, 24);
             this.radStatusStrip1.RootElement.StretchVertically = true;
-            this.radStatusStrip1.Size = new System.Drawing.Size(1378, 24);
+            this.radStatusStrip1.Size = new System.Drawing.Size(1370, 24);
             this.radStatusStrip1.TabIndex = 3;
             // 
             // panel1
@@ -141,7 +141,7 @@ namespace RecoEngine
             this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel1.Location = new System.Drawing.Point(0, 150);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(1378, 491);
+            this.panel1.Size = new System.Drawing.Size(1370, 491);
             this.panel1.TabIndex = 2;
             // 
             // rdMainSplit
@@ -159,7 +159,7 @@ namespace RecoEngine
             this.rdMainSplit.RootElement.AccessibleName = null;
             this.rdMainSplit.RootElement.ControlBounds = new System.Drawing.Rectangle(0, 0, 200, 200);
             this.rdMainSplit.RootElement.MinSize = new System.Drawing.Size(25, 25);
-            this.rdMainSplit.Size = new System.Drawing.Size(1378, 491);
+            this.rdMainSplit.Size = new System.Drawing.Size(1370, 491);
             this.rdMainSplit.TabIndex = 14;
             this.rdMainSplit.TabStop = false;
             this.rdMainSplit.Text = "radSplitContainer1";
@@ -179,7 +179,7 @@ namespace RecoEngine
             this.splitPanel1.RootElement.AccessibleName = null;
             this.splitPanel1.RootElement.ControlBounds = new System.Drawing.Rectangle(0, 0, 200, 200);
             this.splitPanel1.RootElement.MinSize = new System.Drawing.Size(25, 25);
-            this.splitPanel1.Size = new System.Drawing.Size(179, 491);
+            this.splitPanel1.Size = new System.Drawing.Size(178, 491);
             this.splitPanel1.SizeInfo.AutoSizeScale = new System.Drawing.SizeF(-0.3700361F, 0F);
             this.splitPanel1.SizeInfo.SplitterCorrection = new System.Drawing.Size(-403, 0);
             this.splitPanel1.TabIndex = 0;
@@ -205,7 +205,7 @@ namespace RecoEngine
             this.radLeftMenu.RootElement.AutoSizeMode = Telerik.WinControls.RadAutoSizeMode.WrapAroundChildren;
             this.radLeftMenu.RootElement.ControlBounds = new System.Drawing.Rectangle(0, 70, 400, 300);
             this.radLeftMenu.SelectedPage = this.pgDataSource;
-            this.radLeftMenu.Size = new System.Drawing.Size(179, 421);
+            this.radLeftMenu.Size = new System.Drawing.Size(178, 421);
             this.radLeftMenu.TabIndex = 2;
             this.radLeftMenu.ViewMode = Telerik.WinControls.UI.PageViewMode.ExplorerBar;
             this.radLeftMenu.PageExpanded += new System.EventHandler<Telerik.WinControls.UI.RadPageViewEventArgs>(this.radLeftMenu_PageExpanded);
@@ -254,7 +254,7 @@ namespace RecoEngine
             this.pgRecommendation.Controls.Add(this.recommendationPanel);
             this.pgRecommendation.Location = new System.Drawing.Point(4, 4);
             this.pgRecommendation.Name = "pgRecommendation";
-            this.pgRecommendation.Size = new System.Drawing.Size(0, 0);
+            this.pgRecommendation.Size = new System.Drawing.Size(-8, -8);
             this.pgRecommendation.Tag = "Recommendation";
             this.pgRecommendation.Text = "Recommendation";
             // 
@@ -274,7 +274,7 @@ namespace RecoEngine
             this.recommendationPanel.RootElement.AccessibleDescription = null;
             this.recommendationPanel.RootElement.AccessibleName = null;
             this.recommendationPanel.RootElement.ControlBounds = new System.Drawing.Rectangle(0, 0, 200, 100);
-            this.recommendationPanel.Size = new System.Drawing.Size(0, 96);
+            this.recommendationPanel.Size = new System.Drawing.Size(-8, 96);
             this.recommendationPanel.TabIndex = 0;
             // 
             // btnOppurtunities
@@ -292,7 +292,7 @@ namespace RecoEngine
             this.btnOppurtunities.RootElement.ControlBounds = new System.Drawing.Rectangle(0, 72, 130, 24);
             this.btnOppurtunities.Size = new System.Drawing.Size(0, 24);
             this.btnOppurtunities.TabIndex = 5;
-            this.btnOppurtunities.Text = "Opportunities";
+            this.btnOppurtunities.Text = "Output";
             this.btnOppurtunities.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnOppurtunities.Click += new System.EventHandler(this.btnOppurtunities_Click);
             // 
@@ -309,7 +309,7 @@ namespace RecoEngine
             this.btnThresholds.RootElement.AccessibleDescription = null;
             this.btnThresholds.RootElement.AccessibleName = null;
             this.btnThresholds.RootElement.ControlBounds = new System.Drawing.Rectangle(0, 48, 130, 24);
-            this.btnThresholds.Size = new System.Drawing.Size(0, 24);
+            this.btnThresholds.Size = new System.Drawing.Size(-8, 24);
             this.btnThresholds.TabIndex = 2;
             this.btnThresholds.Text = "Ranking";
             this.btnThresholds.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
@@ -331,9 +331,9 @@ namespace RecoEngine
             this.btnOppurtunityMapping.RootElement.AccessibleName = null;
             this.btnOppurtunityMapping.RootElement.ControlBounds = new System.Drawing.Rectangle(0, 24, 130, 24);
             this.btnOppurtunityMapping.RootElement.Padding = new System.Windows.Forms.Padding(0, 2, 0, 2);
-            this.btnOppurtunityMapping.Size = new System.Drawing.Size(0, 24);
+            this.btnOppurtunityMapping.Size = new System.Drawing.Size(-8, 24);
             this.btnOppurtunityMapping.TabIndex = 1;
-            this.btnOppurtunityMapping.Text = "Oppurtunity Mapping";
+            this.btnOppurtunityMapping.Text = "Opportunity Mapping";
             this.btnOppurtunityMapping.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnOppurtunityMapping.Click += new System.EventHandler(this.btnOppurtunityMapping_Click);
             // 
@@ -350,7 +350,7 @@ namespace RecoEngine
             this.btnMovementWindow.RootElement.AccessibleDescription = null;
             this.btnMovementWindow.RootElement.AccessibleName = null;
             this.btnMovementWindow.RootElement.ControlBounds = new System.Drawing.Rectangle(0, 0, 130, 24);
-            this.btnMovementWindow.Size = new System.Drawing.Size(0, 24);
+            this.btnMovementWindow.Size = new System.Drawing.Size(-8, 24);
             this.btnMovementWindow.TabIndex = 0;
             this.btnMovementWindow.Text = "Recommendation Settings";
             this.btnMovementWindow.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
@@ -461,7 +461,7 @@ namespace RecoEngine
             this.leftToppanel.RootElement.AccessibleName = null;
             this.leftToppanel.RootElement.ControlBounds = new System.Drawing.Rectangle(0, 0, 200, 100);
             this.leftToppanel.RootElement.MinSize = new System.Drawing.Size(0, 70);
-            this.leftToppanel.Size = new System.Drawing.Size(179, 70);
+            this.leftToppanel.Size = new System.Drawing.Size(178, 70);
             this.leftToppanel.TabIndex = 1;
             // 
             // lblCreatedBy
@@ -470,7 +470,7 @@ namespace RecoEngine
             this.lblCreatedBy.Font = new System.Drawing.Font("Arial", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblCreatedBy.Location = new System.Drawing.Point(12, 49);
             this.lblCreatedBy.Name = "lblCreatedBy";
-            this.lblCreatedBy.Size = new System.Drawing.Size(97, 16);
+            this.lblCreatedBy.Size = new System.Drawing.Size(76, 14);
             this.lblCreatedBy.TabIndex = 12;
             this.lblCreatedBy.Text = "Creation By :";
             // 
@@ -480,7 +480,7 @@ namespace RecoEngine
             this.lblCreatedDate.Font = new System.Drawing.Font("Arial", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblCreatedDate.Location = new System.Drawing.Point(12, 28);
             this.lblCreatedDate.Name = "lblCreatedDate";
-            this.lblCreatedDate.Size = new System.Drawing.Size(112, 16);
+            this.lblCreatedDate.Size = new System.Drawing.Size(87, 14);
             this.lblCreatedDate.TabIndex = 11;
             this.lblCreatedDate.Text = "Creation Date :";
             // 
@@ -490,7 +490,7 @@ namespace RecoEngine
             this.lblProjectName.Font = new System.Drawing.Font("Arial", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblProjectName.Location = new System.Drawing.Point(12, 6);
             this.lblProjectName.Name = "lblProjectName";
-            this.lblProjectName.Size = new System.Drawing.Size(105, 16);
+            this.lblProjectName.Size = new System.Drawing.Size(83, 14);
             this.lblProjectName.TabIndex = 10;
             this.lblProjectName.Text = "Project Name:";
             // 
@@ -499,16 +499,16 @@ namespace RecoEngine
             this.splitPanel2.BackColor = System.Drawing.SystemColors.ControlLightLight;
             this.splitPanel2.Controls.Add(this.bottomRightPanel);
             this.splitPanel2.Controls.Add(this.topRightpanel);
-            this.splitPanel2.Location = new System.Drawing.Point(182, 0);
+            this.splitPanel2.Location = new System.Drawing.Point(181, 0);
             this.splitPanel2.Name = "splitPanel2";
             // 
             // 
             // 
             this.splitPanel2.RootElement.AccessibleDescription = null;
             this.splitPanel2.RootElement.AccessibleName = null;
-            this.splitPanel2.RootElement.ControlBounds = new System.Drawing.Rectangle(182, 0, 200, 200);
+            this.splitPanel2.RootElement.ControlBounds = new System.Drawing.Rectangle(181, 0, 200, 200);
             this.splitPanel2.RootElement.MinSize = new System.Drawing.Size(25, 25);
-            this.splitPanel2.Size = new System.Drawing.Size(1196, 491);
+            this.splitPanel2.Size = new System.Drawing.Size(1189, 491);
             this.splitPanel2.SizeInfo.AutoSizeScale = new System.Drawing.SizeF(0.3700361F, 0F);
             this.splitPanel2.SizeInfo.SplitterCorrection = new System.Drawing.Size(403, 0);
             this.splitPanel2.TabIndex = 1;
@@ -528,7 +528,7 @@ namespace RecoEngine
             this.bottomRightPanel.RootElement.AccessibleDescription = null;
             this.bottomRightPanel.RootElement.AccessibleName = null;
             this.bottomRightPanel.RootElement.ControlBounds = new System.Drawing.Rectangle(0, 70, 200, 100);
-            this.bottomRightPanel.Size = new System.Drawing.Size(1196, 421);
+            this.bottomRightPanel.Size = new System.Drawing.Size(1189, 421);
             this.bottomRightPanel.TabIndex = 2;
             // 
             // topRightpanel
@@ -547,16 +547,16 @@ namespace RecoEngine
             this.topRightpanel.RootElement.AccessibleName = null;
             this.topRightpanel.RootElement.ControlBounds = new System.Drawing.Rectangle(0, 0, 200, 100);
             this.topRightpanel.RootElement.MinSize = new System.Drawing.Size(0, 70);
-            this.topRightpanel.Size = new System.Drawing.Size(1196, 70);
+            this.topRightpanel.Size = new System.Drawing.Size(1189, 70);
             this.topRightpanel.TabIndex = 1;
             // 
             // lblOpportunities
             // 
             this.lblOpportunities.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.lblOpportunities.AutoSize = true;
-            this.lblOpportunities.Location = new System.Drawing.Point(12856, 6);
+            this.lblOpportunities.Location = new System.Drawing.Point(14834, 6);
             this.lblOpportunities.Name = "lblOpportunities";
-            this.lblOpportunities.Size = new System.Drawing.Size(101, 16);
+            this.lblOpportunities.Size = new System.Drawing.Size(77, 14);
             this.lblOpportunities.TabIndex = 0;
             this.lblOpportunities.Text = "Opportunities :";
             // 
@@ -711,7 +711,7 @@ namespace RecoEngine
             this.rbTREDetails.RootElement.Padding = new System.Windows.Forms.Padding(0, 0, 0, 5);
             this.rbTREDetails.RootElement.StretchVertically = true;
             this.rbTREDetails.ShowExpandButton = false;
-            this.rbTREDetails.Size = new System.Drawing.Size(1378, 150);
+            this.rbTREDetails.Size = new System.Drawing.Size(1370, 150);
             this.rbTREDetails.StartButtonImage = null;
             this.rbTREDetails.StartMenuWidth = 205;
             this.rbTREDetails.TabIndex = 3;
@@ -952,7 +952,7 @@ namespace RecoEngine
             this.rdBtnOpportunities.DisplayStyle = Telerik.WinControls.DisplayStyle.Image;
             this.rdBtnOpportunities.ImageAlignment = System.Drawing.ContentAlignment.MiddleCenter;
             this.rdBtnOpportunities.Name = "rdBtnOpportunities";
-            this.rdBtnOpportunities.Text = "Opportunities";
+            this.rdBtnOpportunities.Text = "Output";
             this.rdBtnOpportunities.TextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
             this.rdBtnOpportunities.Visibility = Telerik.WinControls.ElementVisibility.Visible;
             // 
@@ -995,7 +995,7 @@ namespace RecoEngine
             this.radRibbonBarGroup1.Items.AddRange(new Telerik.WinControls.RadItem[] {
             this.radButtonElement4});
             this.radRibbonBarGroup1.Name = "radRibbonBarGroup1";
-            this.radRibbonBarGroup1.Text = "Virgin Mobiles";
+            this.radRibbonBarGroup1.Text = "";
             this.radRibbonBarGroup1.Visibility = Telerik.WinControls.ElementVisibility.Visible;
             // 
             // radButtonElement4
@@ -1053,7 +1053,7 @@ namespace RecoEngine
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1378, 665);
+            this.ClientSize = new System.Drawing.Size(1370, 665);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.radStatusStrip1);
             this.Controls.Add(this.rbTREDetails);

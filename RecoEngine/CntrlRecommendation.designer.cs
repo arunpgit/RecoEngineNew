@@ -1245,7 +1245,7 @@
             this.label13.Name = "label13";
             this.label13.Size = new System.Drawing.Size(764, 36);
             this.label13.TabIndex = 0;
-            this.label13.Text = "New Ranking";
+            this.label13.Text = "Ranking";
             this.label13.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // pgOppDetails
@@ -1255,7 +1255,7 @@
             this.pgOppDetails.Name = "pgOppDetails";
             this.pgOppDetails.Size = new System.Drawing.Size(768, 551);
             this.pgOppDetails.Tag = "Opportunities";
-            this.pgOppDetails.Text = "Opportunities";
+            this.pgOppDetails.Text = "Output";
             // 
             // radGroupBox1
             // 
@@ -1341,7 +1341,7 @@
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(764, 36);
             this.label9.TabIndex = 0;
-            this.label9.Text = "Opportunity Details";
+            this.label9.Text = "Preview";
             this.label9.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // radTextBox2
