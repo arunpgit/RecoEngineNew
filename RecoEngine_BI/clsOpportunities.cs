@@ -12,29 +12,6 @@ namespace RecoEngine_BI
     {
         clsTre_Details objclsTreDetails = new clsTre_Details();
 
-        //public DataTable fnGetOpportunityDetails(int iOpportunityID)
-        //{
-        //    try
-        //    {
-
-        //        DataTable dt;
-        //        string strSql = "select A.*, B.OPP_Name,B.Description,B.Formula,B.CreatedDate,B.CreatedBy from ";
-        //       strSql+= " OPPORTUNITY B Inner join Status_BreakDown A ON A.Opportunity_ID=B.Opportunity_ID ";
-        //       strSql+=" and A.Opportunity_ID= " + iOpportunityID;                                
-
-        //        if (Common.iDBType == (int)Enums.DBType.Oracle)
-        //            dt = ((OraDBManager)Common.dbMgr).ExecuteDataTable(CommandType.Text, strSql);
-        //        else
-        //            dt = ((DBManager)Common.dbMgr).ExecuteDataTable(CommandType.Text, strSql);
-
-        //        return dt;
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        throw ex;
-        //    }
-        //}
-
         public DataTable fnGetOpportunity(int iProjectId, int iUserId, bool bIsOppList)
         {
             try
@@ -908,6 +885,31 @@ namespace RecoEngine_BI
                 {
                     ((MySqlDBManager)Common.dbMgr).RollbackTrans();
                 }
+                throw ex;
+            }
+        }
+
+        //No two opportunty can have same build formulae
+        public bool fncheckOpportunityExists(string formulaeExpression, int iProjectId)
+        {
+            try
+            {
+                string strSql = "Select nvl(count(1),0) from OPPORTUNITY where project_id= " + iProjectId + " AND formula='" + formulaeExpression + "'";
+
+                if (Common.iDBType == (int)Enums.DBType.Oracle)
+                {
+                    return int.Parse(((OraDBManager)Common.dbMgr).ExecuteScalar(CommandType.Text, strSql)) > 0;
+                }
+                else if (Common.iDBType == (int)Enums.DBType.Mysql)
+                {
+                    strSql = "Select count(1) from OPPORTUNITY where project_id= " + iProjectId + " AND formula ='" + formulaeExpression+ "'";
+
+                    return int.Parse(((MySqlDBManager)Common.dbMgr).ExecuteScalar(CommandType.Text, strSql)) > 0;
+                }
+                return false;
+            }
+            catch (Exception ex)
+            {
                 throw ex;
             }
         }

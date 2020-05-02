@@ -302,6 +302,12 @@ namespace RecoEngine
                         this.ddlSource.Focus();
                         return;
                     }
+                    if (ClsObj.fncheckOpportunityExists(strExpression, Common.iProjectID) && iOpportunityId==0)
+                    {
+
+                            RadMessageBox.Show("Formula cannot be same for any two opportunities.", "Validation", MessageBoxButtons.OK, RadMessageIcon.Info, MessageBoxDefaultButton.Button1);
+                        return;
+                    }
                     else if (this.strCurrentSegmentColumn != "")
                     {
                         Common.strFormula = this.strExpression;
@@ -313,7 +319,7 @@ namespace RecoEngine
                         {
                             num = 1;
                         }
-                        this.iOpportunityId = this.ClsObj.fnSaveOpportunity(this.iOpportunityId, this.txtName.Text.ToString(), this.txtDesc.Text.ToString(), this.strExpression, Common.strPtnlFilter, Common.iUserID, Common.iProjectID, Common.strTableName, Common.strKeyName, Common.timePeriods.strtp1, Common.timePeriods.strtp2, num, ddlOpportunityType.SelectedItem.Text.ToLowerInvariant()=="stimulation"?"STIMULATION": ddlOpportunityType.SelectedItem.Text.Split('-')[1].ToString());
+                        this.iOpportunityId = this.ClsObj.fnSaveOpportunity(this.iOpportunityId, this.txtName.Text.ToString(), this.txtDesc.Text.ToString(), this.strExpression, Common.strPtnlFilter, Common.iUserID, Common.iProjectID, Common.strTableName, Common.strKeyName, Common.timePeriods.strtp1, Common.timePeriods.strtp2, num, ddlOpportunityType.SelectedItem.Text.ToLowerInvariant() == "stimulation" ? "STIMULATION" : ddlOpportunityType.SelectedItem.Text.Split('-')[1].ToString());
                         Common.WriteLog("New Opportunity is added to the OPPORTUNITY table");
                         this.fnSaveThresholdAndPotential(this.iOpportunityId);
                         Common.strPtnlFilter = "";

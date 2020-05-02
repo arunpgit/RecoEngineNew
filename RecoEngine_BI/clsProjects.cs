@@ -297,10 +297,10 @@ namespace RecoEngine_BI
                     strSql += "   RANK2_ACTION varchar(100) DEFAULT NULL, ";
                     strSql += "   RANK3_ACTION varchar(100) DEFAULT NULL, ";
                     strSql += "   RANK4_ACTION varchar(100) DEFAULT NULL, ";
-                    strSql += "   RANK1 int(11) DEFAULT NULL, ";
-                    strSql += "   RANK2 int(11) DEFAULT NULL, ";
-                    strSql += "   RANK3 int(11) DEFAULT NULL, ";
-                    strSql += "   RANK4 int(11) DEFAULT NULL )  ";
+                    strSql += "   RANK1 double DEFAULT NULL, ";
+                    strSql += "   RANK2 double DEFAULT NULL, ";
+                    strSql += "   RANK3 double DEFAULT NULL, ";
+                    strSql += "   RANK4 double DEFAULT NULL )  ";
                     if (Common.iDBType == (int)Enums.DBType.Mysql)
                         ((MySqlDBManager)Common.dbMgr).ExecuteScalar(CommandType.Text, strSql);
                     strSql = " CREATE INDEX idx_rankingcust ON tre_ranking" + newProjectId + " (Customer)";

@@ -1390,7 +1390,7 @@ namespace RecoEngine_BI
                             {
                                 str17 = " varchar(200)";
                             }
-                            else if (dataRow["dataType"].ToString() != "System.Decimal")
+                            else if (dataRow["dataType"].ToString() != "System.Decimal" && dataRow["dataType"].ToString().ToLower() != "system.single")
                             {
                                 str17 = (dataRow["dataType"].ToString() != "System.DateTime" ? " bigint" : " Date ");
                             }
