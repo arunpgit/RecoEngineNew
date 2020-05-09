@@ -1178,14 +1178,14 @@ namespace RecoEngine_BI
                         str = " DROP TABLE ETS_TRE_BASEP" + ProjectId;
                         ((MySqlDBManager)Common.dbMgr).ExecuteNonQuery(CommandType.Text, str);
                     }
-                    str = " Select count(1) FROM information_schema.columns c WHERE c.table_name = 'ETS_TRE_X_SELL_PTNL" + ProjectId + "' AND c.table_schema  = 'recousr'";
+                    str = " Select count(1) FROM information_schema.columns c WHERE c.table_name = 'ETS_TRE_X_SELL_PNTL" + ProjectId + "' AND c.table_schema  = 'recousr'";
                     if (Common.iDBType == 3)
                     {
                         num3 = int.Parse(((MySqlDBManager)Common.dbMgr).ExecuteScalar(CommandType.Text, str));
                     }
                     if (num3 >= 1)
                     {
-                        str = " DROP TABLE ETS_TRE_X_SELL_PTNL" + ProjectId;
+                        str = " DROP TABLE ETS_TRE_X_SELL_PNTL" + ProjectId;
                         ((MySqlDBManager)Common.dbMgr).ExecuteNonQuery(CommandType.Text, str);
                     }
                     str = " Select count(1) FROM information_schema.columns c WHERE c.table_name = 'TRE_OPPORTUNITY' AND c.table_schema  = 'recousr'";

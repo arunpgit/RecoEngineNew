@@ -440,21 +440,23 @@ namespace RecoEngine
                 {
                     if (i != new decimal(1))
                     {
-                        count = (double)list.Where((p) => {
-                            if (Convert.ToDecimal(p.onnet) < i)
-                            {
-                                return false;
-                            }
-                            return Convert.ToDecimal(p.onnet) < (i + Convert.ToDecimal(0.1));
-                        }).Select((p) => p.onnet).ToList<string>().Count;
+
+                        count = (double)list.Where(x=> (x.onnet!="" && Convert.ToDecimal(x.onnet)>i && (Convert.ToDecimal(x.onnet) < (i + Convert.ToDecimal(0.1))))).Select(x => x.onnet).ToList().Count;
+
+                        //count = (double)list.Where((p) => {
+                        //    if (Convert.ToDecimal(p.onnet) < i)
+                        //    {
+                        //        return false;
+                        //    }
+                        //    return Convert.ToDecimal(p.onnet) < (i + Convert.ToDecimal(0.1));
+                        //}).Select((p) => p.onnet).ToList<string>().Count;
                         count = Convert.ToDouble(count) / Convert.ToDouble(list.Count()) * 100;
                     }
                     else
                     {
-                        count = (double)(
-                            from p in list
-                            where Convert.ToDecimal(p.onnet) >= i
-                            select p.onnet).ToList<string>().Count;
+                        count = list.Where(x => (x.onnet != "" && (Convert.ToDecimal(x.onnet) >= i))).ToList().Count;
+                            //where Convert.ToDecimal(p.onnet) >= i
+                            //select p.onnet).ToList<string>().Count;
                         count = Convert.ToDouble(count) / Convert.ToDouble(list.Count()) * 100;
                     }
                     DataRowCollection rows = this.tblchart.Rows;
