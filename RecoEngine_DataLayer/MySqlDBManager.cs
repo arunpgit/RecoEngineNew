@@ -551,6 +551,29 @@ namespace RecoEngine_DataLayer
               
         }
 
+        public void savecustomRankingExport(int ProjectId)
+        {
+
+            try
+            {
+                MySqlCommand cmd = new MySqlCommand();
+                MySqlConnection con = new MySqlConnection(ConfigurationManager.AppSettings["MysqlConnectionString"].ToString());
+                con.Open();
+                cmd.Connection = con;
+                cmd.CommandText = "recousr.CustomRanking_Base";
+                cmd.CommandTimeout = 6000;
+                cmd.CommandType = CommandType.StoredProcedure;               
+                cmd.Parameters.AddWithValue("@ProjectId", ProjectId);
+                cmd.ExecuteNonQuery();
+                con.Close();
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+
+        }
         public int GetInsertedProjectMilestone(int p_project_id, int p_epm_milestone_id, string p_milestone_code, string p_milestone_desc, int p_milestone_amount, int p_currency_id, int p_exchange_rate)
         {
             MySqlCommand cmd = new MySqlCommand();

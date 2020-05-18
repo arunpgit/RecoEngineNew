@@ -302,6 +302,9 @@ namespace RecoEngine
         {
             try
             {
+
+                string strTimperiod = this.clstreDetails.fnBuildTimePeriod(Common.timePeriods.strtp1);
+                string strTimperiod1 = this.clstreDetails.fnBuildTimePeriod(Common.timePeriods.strtp2);
                 if (!this.objRanking.fnCheckOpportunityExists(Common.iProjectID))
                 {
                     RadMessageBox.Show(this, "There are no Opportunities to do ranking ", "Opportunity Ranking", MessageBoxButtons.OK, RadMessageIcon.Info, MessageBoxDefaultButton.Button1);
@@ -314,8 +317,6 @@ namespace RecoEngine
                     string str3 = "NULL";
                     this.ClsObj.fnSaveOPPRanking("Potential", Common.iProjectID, str, str1, str2, str3);
 
-                    string strTimperiod = this.clstreDetails.fnBuildTimePeriod(Common.timePeriods.strtp1);
-                    string strTimperiod1 = this.clstreDetails.fnBuildTimePeriod(Common.timePeriods.strtp2);
                     if (this.ClsObj.fnRunOPoortunitiesfrmProcedure(Common.iProjectID, Common.strTableName, strTimperiod, strTimperiod1, true))
                     {
                         this.objRanking.fnPotentialRanking(Common.iProjectID);
@@ -377,9 +378,13 @@ namespace RecoEngine
                             this.ddlOppRank4.Focus();
                             return;
                         }
-                        this.ClsObj.fnSaveOPPRanking("Custom", Common.iProjectID, this.ddlOppRank1.SelectedItem.ToString(), str4, str5, str6);
-                        this.objRanking.fnCustomRanking(Common.iProjectID, this.ddlOppRank1.SelectedItem.ToString(), str4, str5, str6);
-                        this.fnBindRanking();
+                        if (this.ClsObj.fnRunOPoortunitiesfrmProcedure(Common.iProjectID, Common.strTableName, strTimperiod, strTimperiod1, true))
+                        {
+                            this.ClsObj.fnSaveOPPRanking("Custom", Common.iProjectID, this.ddlOppRank1.SelectedItem.ToString(), str4, str5, str6);
+                            this.objRanking.fnCustomRanking(Common.iProjectID, this.ddlOppRank1.SelectedItem.ToString(), str4, str5, str6);
+                            this.fnBindRanking();
+                        }
+                       
                     }
                     else
                     {
